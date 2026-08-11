@@ -1,466 +1,743 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin Bottle</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    min-height: 100vh;
-    background: #151515;
-    font-family: Arial, sans-serif;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.game {
-    width: 100%;
-    max-width: 700px;
-    text-align: center;
-}
-
-.title {
-    font-size: 30px;
-    margin-bottom: 25px;
-    font-weight: bold;
-}
-
-/* STOL */
-.table {
-    position: relative;
-    width: min(88vw, 600px);
-    height: min(88vw, 600px);
-    margin: auto;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #b96d35 0%,
-            #8b4b23 55%,
-            #542a14 100%
-        );
-
-    border: 18px solid #28130a;
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.65),
-        inset 0 0 35px rgba(0,0,0,.5);
-}
-
-/* stol ichidagi doira */
-.table::before {
-    content: "";
-    position: absolute;
-    inset: 35px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,.12);
-}
-
-/* O'YINCHILAR */
-.player {
-    position: absolute;
-    width: 88px;
-    height: 88px;
-
-    border-radius: 50%;
-
-    background: #202938;
-    border: 4px solid #718096;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 14px;
-    font-weight: bold;
-
-    z-index: 20;
-
-    box-shadow:
-        0 8px 18px rgba(0,0,0,.5);
-
-    transition:
-        transform .3s,
-        background .3s,
-        box-shadow .3s;
-}
-
-.player.active {
-    background: #16a34a;
-    border-color: #bbf7d0;
-
-    box-shadow:
-        0 0 15px #22c55e,
-        0 0 35px #22c55e;
-
-    transform: scale(1.2);
-}
-
-/* joylashuv */
-.player1 {
-    left: 50%;
-    top: -25px;
-    transform: translateX(-50%);
-}
-
-.player2 {
-    right: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.player3 {
-    left: 50%;
-    bottom: -25px;
-    transform: translateX(-50%);
-}
-
-.player4 {
-    left: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* markaz */
-.center {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 250px;
-    height: 250px;
-
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* BUTILKA */
-.bottle {
-    position: relative;
-
-    width: 210px;
-    height: 70px;
-
-    cursor: pointer;
-
-    transform-origin: center;
-
-    z-index: 10;
-
-    filter: drop-shadow(0 8px 7px rgba(0,0,0,.5));
-
-    transition: filter .2s;
-}
-
-.bottle:hover {
-    filter:
-        drop-shadow(0 8px 7px rgba(0,0,0,.5))
-        brightness(1.08);
-}
-
-/* shisha tanasi */
-.body {
-    position: absolute;
-
-    right: 15px;
-    top: 12px;
-
-    width: 125px;
-    height: 46px;
-
-    border-radius: 24px 16px 16px 24px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #e5e7eb,
-            #94a3b8 45%,
-            #475569 52%,
-            #dbeafe
-        );
-
-    border: 3px solid #263445;
-}
-
-/* butilka bo'yni */
-.neck {
-    position: absolute;
-
-    left: 42px;
-    top: 22px;
-
-    width: 70px;
-    height: 26px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #f1f5f9,
-            #94a3b8
-        );
-
-    border: 3px solid #263445;
-    border-right: none;
-}
-
-/* butilka og'zi */
-.mouth {
-    position: absolute;
-
-    left: 22px;
-    top: 18px;
-
-    width: 30px;
-    height: 34px;
-
-    border-radius: 7px;
-
-    background: #e2e8f0;
-
-    border: 4px solid #263445;
-}
-
-/* markazdagi belgi */
-.bottle::after {
-    content: "🍾";
-
-    position: absolute;
-
-    right: 55px;
-    top: 19px;
-
-    font-size: 28px;
-
-    pointer-events: none;
-}
-
-/* aylanish */
-.bottle.spin {
-    animation: bottleSpin 3.5s cubic-bezier(.08,.7,.18,1);
-}
-
-@keyframes bottleSpin {
-
-    0% {
-        transform: rotate(0deg);
-    }
-
-    20% {
-        transform: rotate(900deg);
-    }
-
-    45% {
-        transform: rotate(1800deg);
-    }
-
-    70% {
-        transform: rotate(2700deg);
-    }
-
-    88% {
-        transform: rotate(3150deg);
-    }
-
-    100% {
-        transform: rotate(3240deg);
-    }
-}
-
-/* natija */
-.result {
-    margin-top: 25px;
-
-    font-size: 23px;
-    font-weight: bold;
-
-    min-height: 32px;
-}
-
-.hint {
-    margin-top: 8px;
-
-    color: #a3a3a3;
-
-    font-size: 14px;
-}
-
-/* telefon */
-@media (max-width: 500px) {
-
-    .title {
-        font-size: 24px;
-        margin-bottom: 15px;
-    }
-
-    .table {
-        width: 86vw;
-        height: 86vw;
-        border-width: 12px;
-    }
-
-    .player {
-        width: 67px;
-        height: 67px;
-        font-size: 11px;
-    }
-
-    .player1 {
-        top: -20px;
-    }
-
-    .player2 {
-        right: -20px;
-    }
-
-    .player3 {
-        bottom: -20px;
-    }
-
-    .player4 {
-        left: -20px;
-    }
-
-    .center {
-        width: 190px;
-        height: 190px;
-    }
-
-    .bottle {
-        transform: scale(.72);
-    }
-
-    .result {
-        font-size: 19px;
-    }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin the Bottle</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="game">
+<div class="phone">
 
-    <div class="title">
-        🍾 SPIN BOTTLE
-    </div>
+  <header>
+    <div class="title">SPIN THE BOTTLE</div>
+    <button id="addBtn">＋</button>
+  </header>
 
-    <div class="table">
+  <main>
 
-        <div class="player player1" data-player="1">
-            PLAYER 1
+    <div class="game-area">
+
+      <div id="table">
+
+        <div id="bottle">
+          🍾
         </div>
 
-        <div class="player player2" data-player="2">
-            PLAYER 2
-        </div>
+        <button id="spinBtn">
+          AYLANtirish
+        </button>
 
-        <div class="player player3" data-player="3">
-            PLAYER 3
-        </div>
+        <div id="players"></div>
 
-        <div class="player player4" data-player="4">
-            PLAYER 4
-        </div>
-
-        <div class="center">
-
-            <div class="bottle" id="bottle">
-
-                <div class="mouth"></div>
-                <div class="neck"></div>
-                <div class="body"></div>
-
-            </div>
-
-        </div>
+      </div>
 
     </div>
 
-    <div class="result" id="result">
-        🍾 Butilkaga bosing
+    <div class="chat">
+
+      <div class="chat-title">
+        CHAT
+      </div>
+
+      <div id="messages">
+        <div class="message">
+          O'yinchilarni qo'shing va butilkani aylantiring!
+        </div>
+      </div>
+
+      <form id="chatForm">
+        <input
+          id="chatInput"
+          type="text"
+          placeholder="Xabar yozing..."
+          autocomplete="off"
+        >
+
+        <button type="submit">➤</button>
+      </form>
+
     </div>
 
-    <div class="hint">
-        Butilka o'ziga bosib aylantiring
-    </div>
+  </main>
 
 </div>
 
-<script>
 
-const bottle = document.getElementById("bottle");
+<div id="modal" class="modal hidden">
 
-const players =
-    document.querySelectorAll(".player");
+  <div class="modal-box">
 
-const result =
-    document.getElementById("result");
+    <h2>O'yinchi qo'shish</h2>
 
-let spinning = false;
+    <input
+      id="nameInput"
+      maxlength="16"
+      placeholder="O'yinchi ismi"
+    >
 
-bottle.addEventListener("click", function () {
+    <div class="buttons">
 
-    if (spinning) return;
+      <button id="cancelBtn">
+        Bekor qilish
+      </button>
 
-    spinning = true;
+      <button id="saveBtn">
+        Qo'shish
+      </button>
 
-    players.forEach(function(player) {
-        player.classList.remove("active");
-    });
+    </div>
 
-    result.textContent = "🔄 Butilka aylanmoqda...";
+  </div>
 
-    bottle.classList.remove("spin");
+</div>
 
-    void bottle.offsetWidth;
 
-    bottle.classList.add("spin");
-
-    /*
-       4 o'yinchidan bittasini
-       tasodifiy tanlaymiz
-    */
-
-    const winner =
-        Math.floor(Math.random() * 4) + 1;
-
-    setTimeout(function () {
-
-        bottle.classList.remove("spin");
-
-        const player =
-            document.querySelector(
-                '[data-player="' + winner + '"]'
-            );
-
-        player.classList.add("active");
-
-        result.textContent =
-            "🎯 PLAYER " + winner + " TANLANDI!";
-
-        spinning = false;
-
-    }, 3500);
-
-});
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #080808;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.phone {
+  width: min(100vw, 520px);
+  height: 100dvh;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* TOP */
+
+header {
+  height: 58px;
+  background: #171717;
+  border-bottom: 1px solid #292929;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+header button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #292929;
+  color: white;
+
+  font-size: 25px;
+}
+
+
+/* MAIN */
+
+main {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* O'YIN */
+
+.game-area {
+  flex: 1;
+  min-height: 0;
+
+  padding: 14px;
+
+  background: #0d0d0d;
+}
+
+#table {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 330px;
+
+  overflow: hidden;
+
+  border-radius: 45px;
+
+  background:
+    radial-gradient(
+      circle,
+      #285b32 0%,
+      #193b21 58%,
+      #0d2113 100%
+    );
+
+  border: 8px solid #3b2415;
+
+  box-shadow:
+    inset 0 0 0 2px #684329,
+    inset 0 0 50px #000;
+}
+
+
+/* BUTILKA */
+
+#bottle {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  font-size: 65px;
+
+  z-index: 5;
+
+  transition:
+    transform 3.2s
+    cubic-bezier(.12,.72,.12,1);
+
+  filter: drop-shadow(0 5px 5px #000);
+}
+
+
+/* SPIN BUTTON */
+
+#spinBtn {
+  position: absolute;
+
+  left: 50%;
+  top: calc(50% + 70px);
+
+  transform: translateX(-50%);
+
+  z-index: 10;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: white;
+  color: #111;
+
+  padding: 12px 20px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  box-shadow: 0 4px 12px #0008;
+}
+
+#spinBtn:disabled {
+  opacity: .5;
+}
+
+
+/* O'YINCHILAR */
+
+.player {
+  position: absolute;
+
+  width: 82px;
+  min-height: 52px;
+
+  padding: 7px 5px;
+
+  border-radius: 22px;
+
+  background: #dcdcdc;
+  color: #111;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  box-shadow: 0 4px 8px #0008;
+
+  transform: translate(-50%, -50%);
+
+  transition: .25s;
+}
+
+.player.active {
+  background: #ffd84d;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.12);
+
+  box-shadow:
+    0 0 18px #ffd84d;
+}
+
+
+/* CHAT */
+
+.chat {
+  height: 200px;
+
+  background: #050505;
+
+  border-top: 1px solid #252525;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-title {
+  padding: 9px 13px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  color: #aaa;
+
+  border-bottom: 1px solid #1e1e1e;
+}
+
+#messages {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 8px 12px;
+
+  font-size: 13px;
+}
+
+.message {
+  background: #191919;
+
+  border-radius: 10px;
+
+  padding: 8px 10px;
+
+  margin-bottom: 6px;
+
+  width: max-content;
+  max-width: 90%;
+}
+
+
+/* CHAT INPUT */
+
+#chatForm {
+  display: flex;
+
+  gap: 7px;
+
+  padding: 8px;
+
+  border-top: 1px solid #1c1c1c;
+}
+
+#chatInput {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  border-radius: 11px;
+
+  background: #191919;
+
+  color: white;
+
+  padding: 11px;
+}
+
+#chatForm button {
+  width: 44px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: white;
+  color: #111;
+
+  font-size: 18px;
+}
+
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+
+  inset: 0;
+
+  background: #000b;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-box {
+  width: min(92vw, 360px);
+
+  background: #181818;
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+}
+
+.modal-box h2 {
+  margin: 0 0 14px;
+
+  font-size: 19px;
+}
+
+#nameInput {
+  width: 100%;
+
+  padding: 13px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 11px;
+
+  background: #292929;
+
+  color: white;
+}
+
+.buttons {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 14px;
+}
+
+.buttons button {
+  flex: 1;
+
+  padding: 11px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  font-weight: 700;
+}
+
+#cancelBtn {
+  background: #292929;
+  color: white;
+}
+
+#saveBtn {
+  background: white;
+  color: #111;
+const players = [];
+
+const table = document.getElementById("table");
+const playerBox = document.getElementById("players");
+
+const bottle = document.getElementById("bottle");
+const spinBtn = document.getElementById("spinBtn");
+
+const modal = document.getElementById("modal");
+const nameInput = document.getElementById("nameInput");
+
+const addBtn = document.getElementById("addBtn");
+const saveBtn = document.getElementById("saveBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+
+
+/* O'YINCHI QO'SHISH */
+
+addBtn.onclick = () => {
+
+  modal.classList.remove("hidden");
+
+  nameInput.value = "";
+
+  nameInput.focus();
+};
+
+
+cancelBtn.onclick = () => {
+
+  modal.classList.add("hidden");
+
+};
+
+
+saveBtn.onclick = addPlayer;
+
+
+nameInput.addEventListener("keydown", (e) => {
+
+  if (e.key === "Enter") {
+
+    addPlayer();
+
+  }
+
+});
+
+
+function addPlayer() {
+
+  const name = nameInput.value.trim();
+
+  if (!name) return;
+
+
+  if (players.length >= 10) {
+
+    alert("Maksimal 10 ta o'yinchi qo'shish mumkin.");
+
+    return;
+
+  }
+
+
+  players.push(name);
+
+  nameInput.value = "";
+
+  modal.classList.add("hidden");
+
+  renderPlayers();
+
+}
+
+
+/* O'YINCHILARNI JOYLASHTIRISH */
+
+function renderPlayers() {
+
+  playerBox.innerHTML = "";
+
+  const rect = table.getBoundingClientRect();
+
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+
+  const radiusX =
+    Math.max(90, rect.width / 2 - 58);
+
+  const radiusY =
+    Math.max(105, rect.height / 2 - 50);
+
+
+  players.forEach((name, index) => {
+
+    const player = document.createElement("div");
+
+    player.className = "player";
+
+    player.textContent = name;
+
+    const angle =
+      (Math.PI * 2 * index / players.length)
+      - Math.PI / 2;
+
+
+    player.style.left =
+      (centerX + radiusX * Math.cos(angle)) + "px";
+
+
+    player.style.top =
+      (centerY + radiusY * Math.sin(angle)) + "px";
+
+
+    player.dataset.index = index;
+
+
+    playerBox.appendChild(player);
+
+  });
+
+}
+
+
+window.addEventListener("resize", renderPlayers);
+
+
+/* BUTILKANI AYLANtirish */
+
+let rotation = 0;
+
+let spinning = false;
+
+
+spinBtn.onclick = () => {
+
+  if (spinning) return;
+
+
+  if (players.length < 2) {
+
+    alert("Kamida 2 ta o'yinchi qo'shing.");
+
+    return;
+
+  }
+
+
+  spinning = true;
+
+  spinBtn.disabled = true;
+
+
+  document
+    .querySelectorAll(".player")
+    .forEach(player => {
+
+      player.classList.remove("active");
+
+    });
+
+
+  const selected =
+    Math.floor(Math.random() * players.length);
+
+
+  const extraRotation =
+    1440 + Math.random() * 720;
+
+
+  rotation += extraRotation;
+
+
+  bottle.style.transform =
+    `translate(-50%, -50%) rotate(${rotation}deg)`;
+
+
+  setTimeout(() => {
+
+    const selectedPlayer =
+      document.querySelector(
+        `.player[data-index="${selected}"]`
+      );
+
+
+    if (selectedPlayer) {
+
+      selectedPlayer.classList.add("active");
+
+    }
+
+
+    addMessage(
+      `🎯 Butilka ${players[selected]} ni tanladi!`
+    );
+
+
+    spinning = false;
+
+    spinBtn.disabled = false;
+
+  }, 3300);
+
+};
+
+
+/* CHAT */
+
+function addMessage(text) {
+
+  const messages =
+    document.getElementById("messages");
+
+
+  const message =
+    document.createElement("div");
+
+
+  message.className = "message";
+
+  message.textContent = text;
+
+
+  messages.appendChild(message);
+
+
+  messages.scrollTop =
+    messages.scrollHeight;
+
+}
+
+
+document
+  .getElementById("chatForm")
+  .onsubmit = (e) => {
+
+    e.preventDefault();
+
+
+    const input =
+      document.getElementById("chatInput");
+
+
+    const text =
+      input.value.trim();
+
+
+    if (!text) return;
+
+
+    addMessage(text);
+
+
+    input.value = "";
+
+  };
+}
