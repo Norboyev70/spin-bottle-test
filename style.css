@@ -25,13 +25,11 @@ body {
 ========================= */
 
 .table {
+.table {
   position: relative;
 
-  width: min(90vw, 520px);
-  height: min(90vw, 520px);
-
-  min-width: 280px;
-  min-height: 280px;
+  width: min(96vw, 600px);
+  height: min(96vw, 600px);
 
   margin: auto;
 
@@ -39,9 +37,9 @@ body {
 
   background:
     radial-gradient(
-      circle at center,
+      circle,
       #176b38 0%,
-      #12602f 55%,
+      #12602f 60%,
       #0c4925 100%
     );
 
@@ -49,11 +47,10 @@ body {
 
   box-shadow:
     0 0 0 5px #24150e,
-    0 15px 35px rgba(0,0,0,0.7);
+    0 10px 30px rgba(0,0,0,0.7);
 
   flex-shrink: 0;
 }
-
 /* Stol ichidagi markaz */
 .table-center {
   position: absolute;
@@ -272,29 +269,25 @@ body {
    TELEFON
 ========================= */
 
-@media (max-width: 600px) {
+@@media (max-width: 600px) {
 
-  .game {
-    height: 100vh;
+  .table {
+    width: 98vw;
+    height: 98vw;
+
+    max-width: none;
+    max-height: none;
+
+    margin: 1vw auto;
   }
 
-  /* Telefonning yuqori 50% qismi */
-  .table {
-    width: 92vw;
-    height: 92vw;
-
-    max-width: 430px;
-    max-height: 430px;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
+  .chat {
+    height: 50vh;
   }
 
   .player {
     width: 62px;
     height: 62px;
-
-    border-radius: 20px;
   }
 
   .player .avatar {
@@ -304,8 +297,4 @@ body {
   .bottle {
     font-size: 48px;
   }
-
-  .chat {
-    height: 50vh;
   }
-}
