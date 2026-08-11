@@ -1,4 +1,9 @@
-box-sizing: border-box;
+/* =========================
+   ASOSIY
+========================= */
+
+* {
+    box-sizing: border-box;
 }
 
 html,
@@ -21,7 +26,9 @@ body {
 }
 
 
-/* TELEFON EKRANI */
+/* =========================
+   TELEFON
+========================= */
 
 .app {
     width: 100%;
@@ -40,29 +47,31 @@ body {
 }
 
 
-/* YUQORI PANEL */
+/* =========================
+   HEADER
+========================= */
 
-.top {
+.header {
     height: 58px;
 
     flex-shrink: 0;
 
-    background: #171717;
-
-    border-bottom: 1px solid #292929;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     padding: 0 15px;
+
+    background: #171717;
+
+    border-bottom: 1px solid #292929;
 }
 
 .logo {
     font-size: 17px;
-    font-weight: bold;
+
+    font-weight: 800;
+
     letter-spacing: 1px;
 }
 
@@ -70,24 +79,26 @@ body {
     width: 40px;
     height: 40px;
 
-    border: none;
+    border: 0;
+
     border-radius: 12px;
 
     background: #292929;
+
     color: white;
 
     font-size: 26px;
 }
 
 
-/* O'YIN STOLI */
+/* =========================
+   O'YIN QISMI
+========================= */
 
-.game {
+.game-section {
     flex: 1;
 
     min-height: 0;
-
-    width: 100%;
 
     padding: 10px;
 
@@ -95,7 +106,9 @@ body {
 }
 
 
-/* STOL TELEFON KENGligidan OShMASIN */
+/* =========================
+   STOL
+========================= */
 
 .table {
     position: relative;
@@ -123,7 +136,9 @@ body {
 }
 
 
-/* MARKAZ */
+/* =========================
+   MARKAZ
+========================= */
 
 .center {
     position: absolute;
@@ -139,36 +154,40 @@ body {
 
     align-items: center;
 
-    gap: 16px;
+    gap: 15px;
 
-    z-index: 5;
+    z-index: 10;
 }
 
 
-/* BUTILKA */
+/* =========================
+   BUTILKA
+========================= */
 
 .bottle {
-    font-size: 60px;
+    font-size: 58px;
 
     line-height: 1;
 
     transition:
         transform 3.5s
-        cubic-bezier(.12,.72,.12,1);
+        cubic-bezier(.12, .72, .12, 1);
 
     filter:
         drop-shadow(0 5px 5px #000);
 }
 
 
-/* AYLANtirish */
+/* =========================
+   AYLANtirish
+========================= */
 
 .spin-btn {
-    border: none;
-
-    padding: 11px 20px;
+    border: 0;
 
     border-radius: 13px;
+
+    padding: 11px 20px;
 
     background: white;
 
@@ -176,7 +195,10 @@ body {
 
     font-size: 13px;
 
-    font-weight: bold;
+    font-weight: 800;
+
+    box-shadow:
+        0 4px 10px #0008;
 }
 
 .spin-btn:disabled {
@@ -184,36 +206,37 @@ body {
 }
 
 
-/* O'YINCHILAR */
+/* =========================
+   O'YINCHILAR
+========================= */
 
 .player {
     position: absolute;
 
-    width: 76px;
-
-    min-height: 48px;
+    width: 74px;
+    min-height: 46px;
 
     padding: 6px;
 
     border-radius: 20px;
 
-    background: #dedede;
-
-    color: #111;
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 
+    background: #dedede;
+
+    color: #111;
+
     font-size: 11px;
 
-    font-weight: bold;
+    font-weight: 700;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     box-shadow:
         0 4px 8px #0008;
@@ -233,25 +256,25 @@ body {
 }
 
 
-/* CHAT */
+/* =========================
+   CHAT
+========================= */
 
 .chat {
     height: 230px;
 
     flex-shrink: 0;
 
-    width: 100%;
+    display: flex;
+
+    flex-direction: column;
 
     background: #050505;
 
     border-top: 1px solid #292929;
-
-    display: flex;
-
-    flex-direction: column;
 }
 
-.chat-title {
+.chat-header {
     height: 35px;
 
     flex-shrink: 0;
@@ -260,12 +283,17 @@ body {
 
     font-size: 11px;
 
-    font-weight: bold;
+    font-weight: 800;
 
     color: #aaa;
 
     border-bottom: 1px solid #222;
 }
+
+
+/* =========================
+   XABARLAR
+========================= */
 
 .messages {
     flex: 1;
@@ -294,7 +322,9 @@ body {
 }
 
 
-/* CHAT INPUT */
+/* =========================
+   CHAT INPUT
+========================= */
 
 .chat-form {
     display: flex;
@@ -313,23 +343,29 @@ body {
 
     min-width: 0;
 
-    border: none;
+    padding: 11px;
 
-    outline: none;
+    border: 0;
+
+    outline: 0;
 
     border-radius: 11px;
-
-    padding: 11px;
 
     background: #191919;
 
     color: white;
+
+    font-size: 13px;
+}
+
+.chat-form input::placeholder {
+    color: #777;
 }
 
 .chat-form button {
     width: 44px;
 
-    border: none;
+    border: 0;
 
     border-radius: 11px;
 
@@ -341,24 +377,25 @@ body {
 }
 
 
-/* O'YINCHI QO'SHISH OYNASI */
+/* =========================
+   MODAL
+========================= */
 
 .modal {
     position: fixed;
 
     inset: 0;
 
-    background: #000b;
+    z-index: 100;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
 
-    z-index: 100;
+    background: #000b;
 }
 
 .hidden {
@@ -368,19 +405,21 @@ body {
 .modal-box {
     width: 100%;
 
-    max-width: 360px;
+    max-width: 350px;
+
+    padding: 20px;
+
+    border-radius: 18px;
 
     background: #181818;
 
     border: 1px solid #333;
-
-    border-radius: 18px;
-
-    padding: 20px;
 }
 
 .modal-box h2 {
-    margin-top: 0;
+    margin: 0 0 15px;
+
+    font-size: 19px;
 }
 
 .modal-box input {
@@ -388,15 +427,17 @@ body {
 
     padding: 13px;
 
-    border: none;
+    border: 0;
 
-    outline: none;
+    outline: 0;
 
     border-radius: 11px;
 
     background: #292929;
 
     color: white;
+
+    font-size: 14px;
 }
 
 .modal-buttons {
@@ -412,20 +453,21 @@ body {
 
     padding: 11px;
 
-    border: none;
+    border: 0;
 
     border-radius: 11px;
 
-    font-weight: bold;
+    font-weight: 700;
 }
 
-#closeModal {
+#cancelBtn {
     background: #292929;
 
     color: white;
 }
 
-#savePlayer {
+#saveBtn {
     background: white;
 
     color: #111;
+}
