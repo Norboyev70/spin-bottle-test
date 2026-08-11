@@ -87,18 +87,17 @@ body {
 }
 
 
-/* O'YIN */
+//* O'YIN QISMI — ekraning 50% */
 
 .game {
-    flex: 1;
-
-    min-height: 0;
-
-    padding: 12px;
-
+    height: 50dvh;
+    flex: none;
+    padding: 10px;
     background: #0d0d0d;
 }
 
+
+/* STOL */
 
 .table {
     position: relative;
@@ -108,9 +107,9 @@ body {
 
     overflow: hidden;
 
-    border-radius: 45px;
+    border-radius: 35px;
 
-    border: 8px solid #3b2415;
+    border: 7px solid #3b2415;
 
     background:
         radial-gradient(
@@ -122,51 +121,23 @@ body {
 
     box-shadow:
         inset 0 0 0 2px #684329,
-        inset 0 0 50px #000;
+        inset 0 0 40px #000;
 }
 
 
-/* MARKAZ */
+/* CHAT — qolgan 50% */
 
-.center {
-    position: absolute;
+.chat {
+    height: 50dvh;
+    flex: none;
 
-    left: 50%;
-    top: 50%;
+    background: #050505;
 
-    transform: translate(-50%, -50%);
+    border-top: 1px solid #292929;
 
     display: flex;
-
     flex-direction: column;
-
-    align-items: center;
-
-    gap: 18px;
-
-    z-index: 5;
-}
-
-
-/* BUTILKA */
-
-.bottle {
-    font-size: 65px;
-
-    line-height: 1;
-
-    transition:
-        transform 3.5s
-        cubic-bezier(.12,.72,.12,1);
-
-    filter:
-        drop-shadow(0 5px 5px #000);
-}
-
-
-/* AYLANtirish */
-
-.spin-btn {
+}.spin-btn {
     border: none;
 
     padding: 12px 22px;
