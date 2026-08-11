@@ -96,9 +96,10 @@ body {
 ========================= */
 
 .game-section {
-    flex: 1;
+    height: 50dvh;
+    flex: none;
 
-    min-height: 0;
+    width: 100%;
 
     padding: 10px;
 
@@ -261,12 +262,12 @@ body {
 ========================= */
 
 .chat {
-    height: 230px;
+    height: 50dvh;
+    flex: none;
 
-    flex-shrink: 0;
+    width: 100%;
 
     display: flex;
-
     flex-direction: column;
 
     background: #050505;
