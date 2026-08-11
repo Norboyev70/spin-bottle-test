@@ -8,30 +8,15 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-}
-
-body {
-  background: #111;
-  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #c58a52 !important;
 }
 
 .game {
   width: 100%;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
+  background: #c58a52 !important;
 }
-
-/* =========================
-   YUQORIDAGI STOL QISMI
-========================= */
-
-/* =========================
-   DUMALOQ YOG'OCH STOL
-========================= */
-
-/* ===== DUMALOQ STOL ===== */
 
 .table {
   position: relative;
@@ -39,26 +24,20 @@ body {
   width: 100vw;
   height: 50dvh;
 
-  flex-shrink: 0;
-
-  /* BUTUN STOL BIR XIL RANG */
   background: #c58a52 !important;
 
   border: none !important;
   outline: none !important;
-
-  border-radius: 50%;
-
   box-shadow: none !important;
 
+  border-radius: 50%;
   overflow: hidden;
 }
 
-/* Hech qanday qo'shimcha chet bo'lmaydi */
 .table::before,
 .table::after {
-  content: none !important;
   display: none !important;
+  content: none !important;
 }
 
 /* Stol markazi ham rangni o'zgartirmaydi */
