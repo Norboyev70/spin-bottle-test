@@ -59,17 +59,22 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 50%;
+  top: 53%;
 
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
 
   transform: translate(-50%, -50%);
 
-  background: transparent !important;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.12) 0%,
+      rgba(255,255,255,0.05) 45%,
+      transparent 70%
+    );
 
-  border: none !important;
-  box-shadow: none !important;
+  border-radius: 50%;
 
   display: flex;
   align-items: center;
@@ -79,13 +84,17 @@ body {
 }
 
 .bottle {
+  position: relative;
+  z-index: 3;
+
   font-size: 50px;
+
   cursor: pointer;
   user-select: none;
 
-  transition: transform 2s cubic-bezier(.17,.67,.16,1);
+  transition:
+    transform 2s cubic-bezier(.17,.67,.16,1);
 }
-
 /* =========================
    O'YINCHILAR
 ========================= */
