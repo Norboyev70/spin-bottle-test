@@ -1,130 +1,57 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin The Bottle</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="app">
+  <div class="game">
 
-    <!-- HEADER -->
-    <header class="header">
+    <!-- O'yin stoli -->
+    <div class="table">
 
-        <div class="logo">
-            SPIN THE BOTTLE
-        </div>
+      <div class="table-center">
+        <div class="bottle" id="bottle">🍾</div>
+      </div>
 
-        <button id="addPlayerBtn" class="add-btn">
-            +
-        </button>
-
-    </header>
-
-
-    <!-- GAME -->
-    <section class="game-section">
-
-        <div id="table" class="table">
-
-            <!-- PLAYERS -->
-            <div id="players"></div>
-
-
-            <!-- CENTER -->
-            <div class="center">
-
-                <div id="bottle" class="bottle">
-                    🍾
-                </div>
-
-                <button id="spinBtn" class="spin-btn">
-                    AYLANtirish
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CHAT -->
-    <section class="chat">
-
-        <div class="chat-header">
-            CHAT
-        </div>
-
-
-        <div id="messages" class="messages">
-
-            <div class="message">
-                O'yinchilarni qo'shing va butilkani aylantiring!
-            </div>
-
-        </div>
-
-
-        <form id="chatForm" class="chat-form">
-
-            <input
-                id="chatInput"
-                type="text"
-                placeholder="Xabar yozing..."
-                autocomplete="off"
-            >
-
-            <button type="submit">
-                ➤
-            </button>
-
-        </form>
-
-    </section>
-
-</div>
-
-
-<!-- ADD PLAYER MODAL -->
-
-<div id="modal" class="modal hidden">
-
-    <div class="modal-box">
-
-        <h2>
-            O'yinchi qo'shish
-        </h2>
-
-        <input
-            id="playerName"
-            type="text"
-            maxlength="15"
-            placeholder="O'yinchi ismi"
-        >
-
-        <div class="modal-buttons">
-
-            <button id="cancelBtn">
-                Bekor qilish
-            </button>
-
-            <button id="saveBtn">
-                Qo'shish
-            </button>
-
-        </div>
+      <!-- O'yinchilar shu yerga chiqadi -->
+      <div id="players"></div>
 
     </div>
 
-</div>
+    <!-- Pastdagi chat -->
+    <div class="chat">
 
+      <div class="chat-header">
+        Chat
+      </div>
 
-<script src="script.js"></script>
+      <div class="messages" id="messages">
+        <div class="message system">
+          O'yinga xush kelibsiz!
+        </div>
+      </div>
 
+      <div class="chat-input">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Xabar yozing..."
+        >
+
+        <button id="sendButton">
+          ➤
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
