@@ -1,5 +1,4 @@
-* {
-    box-sizing: border-box;
+box-sizing: border-box;
 }
 
 html,
@@ -430,4 +429,3 @@ body {
     background: white;
 
     color: #111;
-}
