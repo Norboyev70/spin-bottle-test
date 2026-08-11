@@ -1,3 +1,7 @@
+/* =========================
+   O'YIN MA'LUMOTLARI
+========================= */
+
 const players = [];
 
 let rotation = 0;
@@ -5,7 +9,9 @@ let rotation = 0;
 let spinning = false;
 
 
-/* ELEMENTLAR */
+/* =========================
+   ELEMENTLAR
+========================= */
 
 const table =
     document.getElementById("table");
@@ -28,47 +34,75 @@ const modal =
 const playerName =
     document.getElementById("playerName");
 
-const savePlayer =
-    document.getElementById("savePlayer");
+const saveBtn =
+    document.getElementById("saveBtn");
 
-const closeModal =
-    document.getElementById("closeModal");
-
-
-/* O'YINCHI QO'SHISH OYNASI */
-
-addPlayerBtn.addEventListener("click", () => {
-
-    modal.classList.remove("hidden");
-
-    playerName.value = "";
-
-    playerName.focus();
-
-});
+const cancelBtn =
+    document.getElementById("cancelBtn");
 
 
-closeModal.addEventListener("click", () => {
+/* =========================
+   O'YINCHI OYNASINI OCHISH
+========================= */
 
-    modal.classList.add("hidden");
+addPlayerBtn.addEventListener(
+    "click",
+    function () {
 
-});
+        modal.classList.remove(
+            "hidden"
+        );
 
+        playerName.value = "";
 
-/* O'YINCHI SAQLASH */
+        setTimeout(function () {
 
-savePlayer.addEventListener("click", addPlayer);
+            playerName.focus();
 
-
-playerName.addEventListener("keydown", (event) => {
-
-    if (event.key === "Enter") {
-
-        addPlayer();
+        }, 100);
 
     }
+);
 
-});
+
+/* =========================
+   OYNANI YOPISH
+========================= */
+
+cancelBtn.addEventListener(
+    "click",
+    function () {
+
+        modal.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================
+   O'YINCHI QO'SHISH
+========================= */
+
+saveBtn.addEventListener(
+    "click",
+    addPlayer
+);
+
+
+playerName.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Enter") {
+
+            addPlayer();
+
+        }
+
+    }
+);
 
 
 function addPlayer() {
@@ -87,7 +121,7 @@ function addPlayer() {
     if (players.length >= 10) {
 
         alert(
-            "Maksimal 10 ta o'yinchi qo'shish mumkin."
+            "Maksimal 10 ta o'yinchi."
         );
 
         return;
@@ -101,7 +135,9 @@ function addPlayer() {
     playerName.value = "";
 
 
-    modal.classList.add("hidden");
+    modal.classList.add(
+        "hidden"
+    );
 
 
     drawPlayers();
@@ -109,7 +145,9 @@ function addPlayer() {
 }
 
 
-/* O'YINCHILARNI STOLGA JOYLASHTIRISH */
+/* =========================
+   O'YINCHILARNI JOYLASHTIRISH
+========================= */
 
 function drawPlayers() {
 
@@ -139,69 +177,80 @@ function drawPlayers() {
 
     const radiusX =
         Math.max(
-            90,
-            width / 2 - 58
+            80,
+            width / 2 - 50
         );
 
 
     const radiusY =
         Math.max(
-            90,
-            height / 2 - 50
+            70,
+            height / 2 - 45
         );
 
 
-    players.forEach((name, index) => {
+    players.forEach(
+        function (name, index) {
 
-        const player =
-            document.createElement("div");
-
-
-        player.className =
-            "player";
-
-
-        player.textContent =
-            name;
+            const player =
+                document.createElement(
+                    "div"
+                );
 
 
-        const angle =
-            (Math.PI * 2 * index / players.length)
-            - Math.PI / 2;
+            player.className =
+                "player";
 
 
-        const x =
-            centerX +
-            radiusX *
-            Math.cos(angle);
+            player.textContent =
+                name;
 
 
-        const y =
-            centerY +
-            radiusY *
-            Math.sin(angle);
+            const angle =
+                (
+                    Math.PI * 2 *
+                    index /
+                    players.length
+                )
+                -
+                Math.PI / 2;
 
 
-        player.style.left =
-            x + "px";
+            const x =
+                centerX +
+                radiusX *
+                Math.cos(angle);
 
 
-        player.style.top =
-            y + "px";
+            const y =
+                centerY +
+                radiusY *
+                Math.sin(angle);
 
 
-        player.dataset.index =
-            index;
+            player.style.left =
+                x + "px";
 
 
-        playersBox.appendChild(player);
+            player.style.top =
+                y + "px";
 
-    });
+
+            player.dataset.index =
+                index;
+
+
+            playersBox.appendChild(
+                player
+            );
+
+        }
+    );
 
 }
 
 
-/* EKRAN O'ZGARSA */
+/* EKRAN O'ZGARISHI */
 
 window.addEventListener(
     "resize",
@@ -209,7 +258,9 @@ window.addEventListener(
 );
 
 
-/* BUTILKANI AYLANtirish */
+/* =========================
+   BUTILKANI AYLANtirish
+========================= */
 
 spinBtn.addEventListener(
     "click",
@@ -229,7 +280,7 @@ function spinBottle() {
     if (players.length < 2) {
 
         alert(
-            "Avval kamida 2 ta o'yinchi qo'shing."
+            "Kamida 2 ta o'yinchi qo'shing."
         );
 
         return;
@@ -246,13 +297,15 @@ function spinBottle() {
 
     document
         .querySelectorAll(".player")
-        .forEach(player => {
+        .forEach(
+            function (player) {
 
-            player.classList.remove(
-                "selected"
-            );
+                player.classList.remove(
+                    "selected"
+                );
 
-        });
+            }
+        );
 
 
     /* Tasodifiy o'yinchi */
@@ -264,10 +317,11 @@ function spinBottle() {
         );
 
 
-    /* Aylanish */
+    /* Tasodifiy aylanish */
 
     const turns =
-        5 + Math.random() * 3;
+        5 +
+        Math.random() * 3;
 
 
     rotation +=
@@ -275,61 +329,74 @@ function spinBottle() {
 
 
     bottle.style.transform =
-        `rotate(${rotation}deg)`;
+        "rotate(" +
+        rotation +
+        "deg)";
 
 
-    /* Natija */
+    /* 3.6 soniyadan keyin natija */
 
-    setTimeout(() => {
+    setTimeout(
+        function () {
 
-        const winner =
-            document.querySelector(
-                `.player[data-index="${selected}"]`
+            const winner =
+                document.querySelector(
+                    '.player[data-index="' +
+                    selected +
+                    '"]'
+                );
+
+
+            if (winner) {
+
+                winner.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            addMessage(
+                "🎯 Butilka " +
+                players[selected] +
+                " ni tanladi!"
             );
 
 
-        if (winner) {
+            spinning = false;
 
-            winner.classList.add(
-                "selected"
-            );
+            spinBtn.disabled = false;
 
-        }
-
-
-        addMessage(
-            "🎯 Butilka " +
-            players[selected] +
-            " ni tanladi!"
-        );
-
-
-        spinning = false;
-
-        spinBtn.disabled = false;
-
-    }, 3600);
+        },
+        3600
+    );
 
 }
 
 
-/* CHAT */
+/* =========================
+   CHAT
+========================= */
 
 const chatForm =
-    document.getElementById("chatForm");
-
+    document.getElementById(
+        "chatForm"
+    );
 
 const chatInput =
-    document.getElementById("chatInput");
-
+    document.getElementById(
+        "chatInput"
+    );
 
 const messages =
-    document.getElementById("messages");
+    document.getElementById(
+        "messages"
+    );
 
 
 chatForm.addEventListener(
     "submit",
-    function(event) {
+    function (event) {
 
         event.preventDefault();
 
@@ -354,10 +421,16 @@ chatForm.addEventListener(
 );
 
 
+/* =========================
+   XABAR QO'SHISH
+========================= */
+
 function addMessage(text) {
 
     const message =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     message.className =
