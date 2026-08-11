@@ -1,6 +1,6 @@
-   box-sizing: border-box;
+* {
+    box-sizing: border-box;
 }
-
 
 html,
 body {
@@ -17,16 +17,12 @@ body {
     color: white;
 }
 
-
 body {
-    display: flex;
-    justify-content: center;
-
     overflow: hidden;
 }
 
 
-/* TELEFON */
+/* TELEFON EKRANI */
 
 .app {
     width: 100%;
@@ -34,17 +30,21 @@ body {
 
     height: 100dvh;
 
+    margin: 0 auto;
+
     background: #111;
 
     display: flex;
     flex-direction: column;
+
+    overflow: hidden;
 }
 
 
 /* YUQORI PANEL */
 
 .top {
-    height: 60px;
+    height: 58px;
 
     flex-shrink: 0;
 
@@ -61,46 +61,48 @@ body {
     padding: 0 15px;
 }
 
-
 .logo {
     font-size: 17px;
-
     font-weight: bold;
-
     letter-spacing: 1px;
 }
-
 
 .add-btn {
     width: 40px;
     height: 40px;
 
     border: none;
-
     border-radius: 12px;
 
     background: #292929;
-
     color: white;
 
     font-size: 26px;
 }
 
 
+/* O'YIN STOLI */
+
 .game {
     flex: 1;
+
     min-height: 0;
+
+    width: 100%;
+
     padding: 10px;
+
     background: #0d0d0d;
 }
+
+
+/* STOL TELEFON KENGligidan OShMASIN */
 
 .table {
     position: relative;
 
     width: 100%;
     height: 100%;
-
-    min-height: 0;
 
     overflow: hidden;
 
@@ -120,9 +122,54 @@ body {
         inset 0 0 0 2px #684329,
         inset 0 0 40px #000;
 }
-    padding: 12px 22px;
 
-    border-radius: 14px;
+
+/* MARKAZ */
+
+.center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+
+    z-index: 5;
+}
+
+
+/* BUTILKA */
+
+.bottle {
+    font-size: 60px;
+
+    line-height: 1;
+
+    transition:
+        transform 3.5s
+        cubic-bezier(.12,.72,.12,1);
+
+    filter:
+        drop-shadow(0 5px 5px #000);
+}
+
+
+/* AYLANtirish */
+
+.spin-btn {
+    border: none;
+
+    padding: 11px 20px;
+
+    border-radius: 13px;
 
     background: white;
 
@@ -133,24 +180,23 @@ body {
     font-weight: bold;
 }
 
-
 .spin-btn:disabled {
     opacity: .5;
 }
 
 
-/* O'YINCHI */
+/* O'YINCHILAR */
 
 .player {
     position: absolute;
 
-    width: 82px;
+    width: 76px;
 
-    min-height: 52px;
+    min-height: 48px;
 
-    padding: 7px;
+    padding: 6px;
 
-    border-radius: 22px;
+    border-radius: 20px;
 
     background: #dedede;
 
@@ -164,7 +210,7 @@ body {
 
     text-align: center;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: bold;
 
@@ -176,25 +222,26 @@ body {
     transition: .25s;
 }
 
-
 .player.selected {
     background: #ffd84d;
 
     transform:
         translate(-50%, -50%)
-        scale(1.15);
+        scale(1.12);
 
     box-shadow:
-        0 0 20px #ffd84d;
+        0 0 18px #ffd84d;
 }
 
 
 /* CHAT */
 
 .chat {
-    height: 200px;
+    height: 230px;
 
     flex-shrink: 0;
+
+    width: 100%;
 
     background: #050505;
 
@@ -205,9 +252,10 @@ body {
     flex-direction: column;
 }
 
-
 .chat-title {
     height: 35px;
+
+    flex-shrink: 0;
 
     padding: 10px 13px;
 
@@ -220,9 +268,10 @@ body {
     border-bottom: 1px solid #222;
 }
 
-
 .messages {
     flex: 1;
+
+    min-height: 0;
 
     overflow-y: auto;
 
@@ -230,7 +279,6 @@ body {
 
     font-size: 13px;
 }
-
 
 .message {
     width: max-content;
@@ -256,9 +304,10 @@ body {
 
     padding: 8px;
 
+    flex-shrink: 0;
+
     border-top: 1px solid #222;
 }
-
 
 .chat-form input {
     flex: 1;
@@ -278,7 +327,6 @@ body {
     color: white;
 }
 
-
 .chat-form button {
     width: 44px;
 
@@ -294,7 +342,7 @@ body {
 }
 
 
-/* MODAL */
+/* O'YINCHI QO'SHISH OYNASI */
 
 .modal {
     position: fixed;
@@ -314,11 +362,9 @@ body {
     z-index: 100;
 }
 
-
 .hidden {
     display: none;
 }
-
 
 .modal-box {
     width: 100%;
@@ -334,11 +380,9 @@ body {
     padding: 20px;
 }
 
-
 .modal-box h2 {
     margin-top: 0;
 }
-
 
 .modal-box input {
     width: 100%;
@@ -356,7 +400,6 @@ body {
     color: white;
 }
 
-
 .modal-buttons {
     display: flex;
 
@@ -364,7 +407,6 @@ body {
 
     margin-top: 14px;
 }
-
 
 .modal-buttons button {
     flex: 1;
@@ -378,15 +420,14 @@ body {
     font-weight: bold;
 }
 
-
 #closeModal {
     background: #292929;
 
     color: white;
 }
 
-
 #savePlayer {
     background: white;
 
     color: #111;
+}
