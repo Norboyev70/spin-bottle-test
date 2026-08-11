@@ -60,19 +60,18 @@ body {
 
   border-radius: 50%;
 
+  border: none;
+
   background:
     radial-gradient(
-      circle at center,
-      #19743d 0%,
-      #12602f 60%,
-      #0b4523 100%
+      circle,
+      #b97843 0%,
+      #a96838 55%,
+      #965a30 100%
     );
 
-  border: 8px solid #55331f;
-
   box-shadow:
-    0 0 0 4px #24150e,
-    0 8px 25px rgba(0, 0, 0, .7);
+    0 8px 25px rgba(0, 0, 0, 0.45);
 }
 
 /* =========================
