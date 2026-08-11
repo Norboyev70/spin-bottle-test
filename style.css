@@ -29,15 +29,22 @@ body {
 
 .table {
   position: relative;
-
+.table {
+  position: relative;
   width: 100vw;
   height: 50dvh;
 
-  flex-shrink: 0;
+  background: #c58a52;
 
-  background: #55331f;
+  border: 0;
+  border-radius: 50%;
 
+  box-shadow: none;
   overflow: hidden;
+}
+
+.table::before {
+  display: none;
 }
 
 /* HAQIQIY DUMALOQ STOL */
