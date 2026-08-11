@@ -27,58 +27,35 @@ body {
    YUQORIDAGI STOL QISMI
 ========================= */
 
+/* =========================
+   DUMALOQ YOG'OCH STOL
+========================= */
+
 .table {
   position: relative;
-.table {
-  position: relative;
+
   width: 100vw;
   height: 50dvh;
 
+  flex-shrink: 0;
+
+  /* Stolning hamma joyi bir xil rang */
   background: #c58a52;
 
-  border: 0;
+  /* Chet ham shu rangda */
+  border: none;
+
   border-radius: 50%;
 
-  box-shadow: none;
+  /* Faqat yengil soya */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
   overflow: hidden;
 }
 
+/* Alohida chet/halqa yo'q */
 .table::before {
   display: none;
-}
-
-/* HAQIQIY DUMALOQ STOL */
-
-.table::before {
-  content: "";
-
-  position: absolute;
-
-  width: 100vw;
-  height: 100vw;
-
-  max-width: 100vw;
-  max-height: 50dvh;
-
-  left: 50%;
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  border: none;
-
-  background:
-    radial-gradient(
-      circle,
-      #b97843 0%,
-      #a96838 55%,
-      #965a30 100%
-    );
-
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.45);
 }
 
 /* =========================
