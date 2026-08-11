@@ -73,7 +73,7 @@ function createPlayers() {
       (angleStep * index - 90) *
       Math.PI / 180;
 
-    const radius = 43;
+    const radius = 37;
 
     const x =
       50 + Math.cos(angle) * radius;
