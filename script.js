@@ -1,186 +1,163 @@
-const playersContainer = document.getElementById("players");
 const bottle = document.getElementById("bottle");
+const timerElement = document.getElementById("timer");
+const turnText = document.getElementById("turnText");
+const players = [...document.querySelectorAll(".player")];
 
+const messages = document.getElementById("messages");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
-const messages = document.getElementById("messages");
 
-/* =========================
-   O'YINCHILAR
-========================= */
+/*
+  O'yinchilar stol atrofida SOAT STRELKASI bo'yicha:
 
-const players = [
-  {
-    name: "Ali",
-    avatar: "😎"
-  },
-  {
-    name: "Vali",
-    avatar: "😈"
-  },
-  {
-    name: "Sardor",
-    avatar: "🤠"
-  },
-  {
-    name: "Jasur",
-    avatar: "😎"
-  },
-  {
-    name: "Bek",
-    avatar: "🤑"
-  },
-  {
-    name: "Aziz",
-    avatar: "🤓"
-  }
-];
+  0 = tepa
+  1 = o'ng
+  2 = past
+  3 = chap
 
+  Navbat shu tartibda davom etadi.
+*/
 
-/* =========================
-   O'YINCHILARNI AYLANA
-   BO'YLAB JOYLASHTIRISH
-========================= */
-
-function createPlayers() {
-
-  playersContainer.innerHTML = "";
-
-  const total = players.length;
-
-  const angleStep = 360 / total;
-
-  players.forEach((player, index) => {
-
-    const element = document.createElement("div");
-
-    element.className = "player";
-
-    element.innerHTML = `
-      <div class="avatar">${player.avatar}</div>
-      <div class="name">${player.name}</div>
-    `;
-
-    /*
-      50% = stol markazi
-
-      radius foizda beriladi.
-      Shu sababli o'yinchilar
-      dumaloq stol atrofida turadi.
-    */
-
-    const angle =
-      (angleStep * index - 90) *
-      Math.PI / 180;
-
-    const radius = 37;
-
-    const x =
-      50 + Math.cos(angle) * radius;
-
-    const y =
-      50 + Math.sin(angle) * radius;
-
-    element.style.left = `${x}%`;
-    element.style.top = `${y}%`;
-
-    playersContainer.appendChild(element);
-  });
-}
-
-
-/* =========================
-   BUTILKANI AYLANtirish
-========================= */
-
+let currentPlayer = 0;
+let countdown = 5;
+let countdownInterval = null;
+let isSpinning = false;
 let rotation = 0;
 
-bottle.addEventListener("click", () => {
+const WAIT_SECONDS = 5;
+const SPIN_TIME = 2800;
 
-  const randomRotation =
-    720 + Math.floor(Math.random() * 720);
+function updatePlayer() {
+  players.forEach((player, index) => {
+    player.classList.toggle("active", index === currentPlayer);
+  });
 
-  rotation += randomRotation;
+  turnText.textContent =
+    "Navbat: " + players[currentPlayer].innerText;
+}
 
-  bottle.style.transform =
-    `rotate(${rotation}deg)`;
+function addSystemMessage(text) {
+  const message = document.createElement("div");
+
+  message.className = "message system-message";
+  message.textContent = text;
+
+  messages.appendChild(message);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function resetTimer() {
+  clearInterval(countdownInterval);
+
+  countdown = WAIT_SECONDS;
+  timerElement.textContent = countdown;
+
+  countdownInterval = setInterval(() => {
+    if (isSpinning) return;
+
+    countdown--;
+    timerElement.textContent = countdown;
+
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+
+      // 5 soniya ichida tegilmasa avtomatik aylantirish
+      spinBottle(true);
+    }
+  }, 1000);
+}
+
+function nextPlayer() {
+  /*
+    Soat strelkasi bo'yicha keyingi o'yinchi.
+  */
+  currentPlayer = (currentPlayer + 1) % players.length;
+
+  updatePlayer();
+  resetTimer();
+}
+
+function spinBottle(autoSpin = false) {
+  if (isSpinning) return;
+
+  isSpinning = true;
+  clearInterval(countdownInterval);
+
+  timerElement.textContent = "🍾";
+
+  if (autoSpin) {
+    addSystemMessage(
+      players[currentPlayer].innerText +
+      " 5 soniya ichida aylantirmadi — butilka avtomatik aylandi."
+    );
+  } else {
+    addSystemMessage(
+      players[currentPlayer].innerText +
+      " butilkani aylantirdi."
+    );
+  }
+
+  /*
+    Har safar oldingi aylanishga yangi aylanish qo'shiladi.
+    Shu sababli butilka doim tabiiy tarzda aylanadi.
+  */
+  rotation += 1080 + Math.floor(Math.random() * 720);
+
+  bottle.style.transition =
+    `transform ${SPIN_TIME}ms cubic-bezier(0.15, 0.75, 0.25, 1)`;
+
+  bottle.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
+    isSpinning = false;
 
-    addSystemMessage(
-      "🍾 Butilka aylantirildi!"
-    );
+    /*
+      Butilka to'xtadi.
+      Keyingi navbat soat strelkasi bo'yicha o'tadi.
+    */
+    nextPlayer();
 
-  }, 2000);
+  }, SPIN_TIME);
+}
+
+/*
+  Faqat navbati kelgan o'yinchi butilkani bosishi mumkin.
+  Mobil telefonda touch ham ishlaydi.
+*/
+bottle.addEventListener("click", () => {
+  if (isSpinning) return;
+
+  spinBottle(false);
 });
-
 
 /* =========================
    CHAT
 ========================= */
 
 function sendMessage() {
+  const text = messageInput.value.trim();
 
-  const text =
-    messageInput.value.trim();
+  if (!text) return;
 
-  if (text === "") {
-    return;
-  }
-
-  const message =
-    document.createElement("div");
-
+  const message = document.createElement("div");
   message.className = "message";
-
   message.textContent = text;
 
   messages.appendChild(message);
+  messages.scrollTop = messages.scrollHeight;
 
   messageInput.value = "";
-
-  messages.scrollTop =
-    messages.scrollHeight;
+  messageInput.focus();
 }
 
+sendButton.addEventListener("click", sendMessage);
 
-function addSystemMessage(text) {
-
-  const message =
-    document.createElement("div");
-
-  message.className =
-    "message system";
-
-  message.textContent = text;
-
-  messages.appendChild(message);
-
-  messages.scrollTop =
-    messages.scrollHeight;
-}
-
-
-sendButton.addEventListener(
-  "click",
-  sendMessage
-);
-
-
-messageInput.addEventListener(
-  "keydown",
-  (event) => {
-
-    if (event.key === "Enter") {
-      sendMessage();
-    }
-
+messageInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    sendMessage();
   }
-);
+});
 
-
-/* =========================
-   BOSHLASH
-========================= */
-
-createPlayers();
+/* O'yinni boshlash */
+updatePlayer();
+resetTimer();
