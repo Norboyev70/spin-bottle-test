@@ -1,163 +1,289 @@
 const bottle = document.getElementById("bottle");
-const timerElement = document.getElementById("timer");
+
+const timer = document.getElementById("timer");
+
 const turnText = document.getElementById("turnText");
-const players = [...document.querySelectorAll(".player")];
+
+const players = Array.from(
+  document.querySelectorAll(".player")
+);
 
 const messages = document.getElementById("messages");
-const messageInput = document.getElementById("messageInput");
-const sendButton = document.getElementById("sendButton");
+
+const messageInput =
+  document.getElementById("messageInput");
+
+const sendButton =
+  document.getElementById("sendButton");
+
+
+/* =====================================
+   O'YIN SOZLAMALARI
+===================================== */
+
+const WAIT_TIME = 5;
+
+const SPIN_TIME = 3000;
+
 
 /*
-  O'yinchilar stol atrofida SOAT STRELKASI bo'yicha:
+   O'yinchilar joylashuvi:
 
-  0 = tepa
-  1 = o'ng
-  2 = past
-  3 = chap
+   0 = Tepa
+   1 = O'ng
+   2 = Past
+   3 = Chap
 
-  Navbat shu tartibda davom etadi.
+   Bu aynan SOAT STRELKASI bo'yicha.
 */
 
 let currentPlayer = 0;
-let countdown = 5;
-let countdownInterval = null;
-let isSpinning = false;
+
+let seconds = WAIT_TIME;
+
+let timerInterval = null;
+
+let spinning = false;
+
 let rotation = 0;
 
-const WAIT_SECONDS = 5;
-const SPIN_TIME = 2800;
 
-function updatePlayer() {
+/* =====================================
+   NAVBATNI KO'RSATISH
+===================================== */
+
+function updateTurn() {
+
   players.forEach((player, index) => {
-    player.classList.toggle("active", index === currentPlayer);
+
+    player.classList.toggle(
+      "active",
+      index === currentPlayer
+    );
+
   });
 
-  turnText.textContent =
-    "Navbat: " + players[currentPlayer].innerText;
+  const name =
+    players[currentPlayer].innerText;
+
+  turnText.innerText =
+    "Navbat: " + name;
 }
 
-function addSystemMessage(text) {
-  const message = document.createElement("div");
 
-  message.className = "message system-message";
-  message.textContent = text;
+/* =====================================
+   CHATGA SYSTEM XABAR
+===================================== */
 
-  messages.appendChild(message);
-  messages.scrollTop = messages.scrollHeight;
+function systemMessage(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "system-message";
+
+  div.innerText = text;
+
+  messages.appendChild(div);
+
+  messages.scrollTop =
+    messages.scrollHeight;
 }
 
-function resetTimer() {
-  clearInterval(countdownInterval);
 
-  countdown = WAIT_SECONDS;
-  timerElement.textContent = countdown;
+/* =====================================
+   5 SONIYALIK TAYMER
+===================================== */
 
-  countdownInterval = setInterval(() => {
-    if (isSpinning) return;
+function startTimer() {
 
-    countdown--;
-    timerElement.textContent = countdown;
+  clearInterval(timerInterval);
 
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
+  seconds = WAIT_TIME;
 
-      // 5 soniya ichida tegilmasa avtomatik aylantirish
+  timer.innerText = seconds;
+
+  timerInterval = setInterval(() => {
+
+    if (spinning) {
+      return;
+    }
+
+    seconds--;
+
+    timer.innerText = seconds;
+
+
+    if (seconds <= 0) {
+
+      clearInterval(timerInterval);
+
+      systemMessage(
+        players[currentPlayer].innerText +
+        " vaqtida aylantirmadi. Butilka avtomatik aylanmoqda."
+      );
+
       spinBottle(true);
     }
+
   }, 1000);
 }
 
-function nextPlayer() {
-  /*
-    Soat strelkasi bo'yicha keyingi o'yinchi.
-  */
-  currentPlayer = (currentPlayer + 1) % players.length;
 
-  updatePlayer();
-  resetTimer();
-}
+/* =====================================
+   BUTILKANI AYLANISHI
+===================================== */
 
-function spinBottle(autoSpin = false) {
-  if (isSpinning) return;
+function spinBottle(auto = false) {
 
-  isSpinning = true;
-  clearInterval(countdownInterval);
+  if (spinning) {
+    return;
+  }
 
-  timerElement.textContent = "🍾";
+  spinning = true;
 
-  if (autoSpin) {
-    addSystemMessage(
-      players[currentPlayer].innerText +
-      " 5 soniya ichida aylantirmadi — butilka avtomatik aylandi."
-    );
-  } else {
-    addSystemMessage(
+  clearInterval(timerInterval);
+
+  timer.innerText = "🍾";
+
+
+  if (!auto) {
+
+    systemMessage(
       players[currentPlayer].innerText +
       " butilkani aylantirdi."
     );
+
   }
 
+
   /*
-    Har safar oldingi aylanishga yangi aylanish qo'shiladi.
-    Shu sababli butilka doim tabiiy tarzda aylanadi.
+     Har aylanishda tasodifiy qo'shimcha
+     aylanish qo'shamiz.
   */
-  rotation += 1080 + Math.floor(Math.random() * 720);
 
-  bottle.style.transition =
-    `transform ${SPIN_TIME}ms cubic-bezier(0.15, 0.75, 0.25, 1)`;
+  const extra =
+    Math.floor(
+      Math.random() * 720
+    );
 
-  bottle.style.transform = `rotate(${rotation}deg)`;
+  rotation += 1080 + extra;
+
+
+  /*
+     Butilka markazidan aylanadi.
+  */
+
+  bottle.style.transform =
+    `rotate(${rotation}deg)`;
+
+
+  /*
+     3 soniya kutamiz.
+  */
 
   setTimeout(() => {
-    isSpinning = false;
+
+    spinning = false;
+
 
     /*
-      Butilka to'xtadi.
-      Keyingi navbat soat strelkasi bo'yicha o'tadi.
+       Keyingi o'yinchi:
+       Tepa → O'ng → Past → Chap → Tepa
     */
-    nextPlayer();
+
+    currentPlayer =
+      (currentPlayer + 1)
+      % players.length;
+
+
+    updateTurn();
+
+    startTimer();
 
   }, SPIN_TIME);
 }
 
-/*
-  Faqat navbati kelgan o'yinchi butilkani bosishi mumkin.
-  Mobil telefonda touch ham ishlaydi.
-*/
-bottle.addEventListener("click", () => {
-  if (isSpinning) return;
 
-  spinBottle(false);
-});
+/* =====================================
+   BUTILKAGA BOSISH
+===================================== */
 
-/* =========================
+bottle.addEventListener(
+  "click",
+  () => {
+
+    /*
+       Faqat navbatdagi aylanish paytida
+       bosish mumkin.
+    */
+
+    if (spinning) {
+      return;
+    }
+
+    spinBottle(false);
+
+  }
+);
+
+
+/* =====================================
    CHAT
-========================= */
+===================================== */
 
 function sendMessage() {
-  const text = messageInput.value.trim();
 
-  if (!text) return;
+  const text =
+    messageInput.value.trim();
 
-  const message = document.createElement("div");
-  message.className = "message";
-  message.textContent = text;
+  if (!text) {
+    return;
+  }
 
-  messages.appendChild(message);
-  messages.scrollTop = messages.scrollHeight;
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "message";
+
+  div.innerText = text;
+
+  messages.appendChild(div);
+
+  messages.scrollTop =
+    messages.scrollHeight;
 
   messageInput.value = "";
+
   messageInput.focus();
 }
 
-sendButton.addEventListener("click", sendMessage);
 
-messageInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    sendMessage();
+sendButton.addEventListener(
+  "click",
+  sendMessage
+);
+
+
+messageInput.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+
   }
-});
+);
 
-/* O'yinni boshlash */
-updatePlayer();
-resetTimer();
+
+/* =====================================
+   O'YINNI BOSHLASH
+===================================== */
+
+updateTurn();
+
+startTimer();
