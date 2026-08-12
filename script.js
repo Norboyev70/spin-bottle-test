@@ -1,544 +1,682 @@
-const bottle = document.getElementById("bottle");
-const bottleTimer = document.getElementById("bottleTimer");
-
-const kissScreen = document.getElementById("kissScreen");
-const choiceTimer = document.getElementById("choiceTimer");
-
-const chosenOne = document.getElementById("chosenOne");
-const chosenTwo = document.getElementById("chosenTwo");
-
-const refuseBtn = document.getElementById("refuseBtn");
-const kissBtn = document.getElementById("kissBtn");
-
-const players = Array.from(
-  document.querySelectorAll(".player")
-);
-
-const turnText = document.getElementById("turnText");
-
-const messages = document.getElementById("messages");
-
-const messageInput =
-  document.getElementById("messageInput");
-
-const sendBtn =
-  document.getElementById("sendBtn");
-
-const refreshBtn =
-  document.getElementById("refreshBtn");
+/* =====================================================
+   SPIN THE BOTTLE
+   ===================================================== */
 
 
-/* =====================================
-   SOZLAMALAR
-===================================== */
+/* =========================
+   O'YINCHILAR
+========================= */
 
-const BOTTLE_WAIT = 10;
-const CHOICE_WAIT = 10;
-const SPIN_TIME = 3000;
+let players = [
+  {
+    id: 1,
+    name: "Ali",
+    x: 50,
+    y: 12,
+    status: ""
+  },
+  {
+    id: 2,
+    name: "Vali",
+    x: 88,
+    y: 50,
+    status: ""
+  },
+  {
+    id: 3,
+    name: "Sardor",
+    x: 50,
+    y: 88,
+    status: ""
+  },
+  {
+    id: 4,
+    name: "Jasur",
+    x: 12,
+    y: 50,
+    status: ""
+  }
+];
 
 
-/*
-  Stol bo'yicha navbat:
+/* =========================
+   ELEMENTLAR
+========================= */
 
-  0 → 1 → 2 → 3 → 4 → 5 → 0
+const playersContainer =
+  document.getElementById("players");
 
-  Ya'ni soat strelkasi bo'yicha.
-*/
+const bottle =
+  document.getElementById("bottle");
 
-let currentPlayer = 0;
+const spinButton =
+  document.getElementById("spinButton");
 
-let bottleSeconds = BOTTLE_WAIT;
+const addPlayerButton =
+  document.getElementById("addPlayerButton");
 
-let choiceSeconds = CHOICE_WAIT;
+const playerCount =
+  document.getElementById("playerCount");
 
-let bottleTimerInterval = null;
+const messages =
+  document.getElementById("messages");
 
-let choiceTimerInterval = null;
+const chatForm =
+  document.getElementById("chatForm");
+
+const chatInput =
+  document.getElementById("chatInput");
+
+
+/* =========================
+   HOLATLAR
+========================= */
+
+let bottleRotation = 0;
 
 let spinning = false;
 
-let choosing = false;
-
-let rotation = 0;
+let nextPlayerId = 5;
 
 
-/* =====================================
-   O'YINCHILAR
-===================================== */
+/*
+  Muhim:
 
-const playerNames = [
-  "Anna",
-  "Alex",
-  "Maria",
-  "John",
-  "Sara",
-  "Mike"
-];
+  0 qiymati ko'rsatilmaydi.
 
-const playerFaces = [
-  "👩",
-  "👨",
-  "👩",
-  "👨",
-  "👩",
-  "👨"
-];
+  Agar playerning holati hali bo'lmasa:
+  status = ""
+
+  Shuning uchun ekranda "0" chiqmaydi.
+*/
 
 
-/* =====================================
-   NAVBAT
-===================================== */
+/* =========================
+   O'YINCHILARNI CHIZISH
+========================= */
 
-function updateTurn() {
+function renderPlayers() {
 
-  players.forEach((player, index) => {
+  playersContainer.innerHTML = "";
 
-    player.classList.toggle(
-      "active",
-      index === currentPlayer
-    );
+  players.forEach(player => {
 
-  });
+    const element =
+      document.createElement("div");
 
-  turnText.textContent =
-    "Navbat: " +
-    playerNames[currentPlayer];
-}
+    element.className = "player";
 
+    element.dataset.id = player.id;
 
-/* =====================================
-   CHAT SYSTEM XABARI
-===================================== */
+    element.style.left =
+      player.x + "%";
 
-function systemMessage(text) {
-
-  const div =
-    document.createElement("div");
-
-  div.className =
-    "system-message";
-
-  div.textContent = text;
-
-  messages.appendChild(div);
-
-  messages.scrollTop =
-    messages.scrollHeight;
-}
+    element.style.top =
+      player.y + "%";
 
 
-/* =====================================
-   BUTILKA TAYMERI
-===================================== */
+    const name =
+      document.createElement("div");
 
-function startBottleTimer() {
+    name.className =
+      "player-name";
 
-  clearInterval(bottleTimerInterval);
-
-  bottleSeconds = BOTTLE_WAIT;
-
-  bottleTimer.textContent =
-    bottleSeconds;
-
-  bottleTimerInterval =
-    setInterval(() => {
-
-      if (spinning || choosing) {
-        return;
-      }
-
-      bottleSeconds--;
-
-      bottleTimer.textContent =
-        bottleSeconds;
-
-      if (bottleSeconds <= 0) {
-
-        clearInterval(
-          bottleTimerInterval
-        );
-
-        systemMessage(
-          playerNames[currentPlayer] +
-          " 10 soniyada aylantirmadi. Avtomatik aylantirilmoqda."
-        );
-
-        spinBottle(true);
-      }
-
-    }, 1000);
-}
+    name.textContent =
+      player.name;
 
 
-/* =====================================
-   BUTILKANI AYLANISHI
-===================================== */
+    const status =
+      document.createElement("div");
 
-function spinBottle(auto = false) {
-
-  if (spinning || choosing) {
-    return;
-  }
-
-  spinning = true;
-
-  clearInterval(
-    bottleTimerInterval
-  );
-
-  bottleTimer.textContent = "🍾";
-
-  if (!auto) {
-
-    systemMessage(
-      playerNames[currentPlayer] +
-      " butilkani aylantirdi."
-    );
-
-  }
-
-
-  /*
-    Har safar kamida 3 marta aylanadi.
-    Qo'shimcha aylanish tasodifiy.
-  */
-
-  const extra =
-    Math.floor(
-      Math.random() * 720
-    );
-
-  rotation +=
-    1080 + extra;
-
-  bottle.style.transform =
-    `rotate(${rotation}deg)`;
-
-
-  setTimeout(() => {
-
-    spinning = false;
+    status.className =
+      "player-status";
 
     /*
-      Butilka qaysi o'yinchiga tushganini
-      tasodifiy tanlaymiz.
-
-      O'ziga tushib qolmasligi uchun
-      aylantirgan o'yinchi chiqarib tashlanadi.
+      0 ni hech qachon chiqarma
     */
 
-    let target;
+    if (
+      player.status !== "" &&
+      player.status !== 0 &&
+      player.status !== "0"
+    ) {
 
-    do {
-
-      target =
-        Math.floor(
-          Math.random() * players.length
-        );
-
-    } while (
-      target === currentPlayer
-    );
-
-
-    showKissScreen(
-      currentPlayer,
-      target
-    );
-
-  }, SPIN_TIME);
-}
-
-
-/* =====================================
-   O'PISHISH EKRANI
-===================================== */
-
-function showKissScreen(
-  first,
-  second
-) {
-
-  choosing = true;
-
-  /*
-    Butilka yo'qoladi.
-  */
-
-  bottle.classList.add("hidden");
-
-  bottleTimer.style.display =
-    "none";
-
-
-  /*
-    Tanlangan 2 o'yinchi markazga chiqadi.
-  */
-
-  chosenOne.innerHTML =
-    `<span style="font-size:30px">
-      ${playerFaces[first]}
-    </span>
-    <small>${playerNames[first]}</small>`;
-
-  chosenTwo.innerHTML =
-    `<span style="font-size:30px">
-      ${playerFaces[second]}
-    </span>
-    <small>${playerNames[second]}</small>`;
-
-
-  kissScreen.classList.add(
-    "show"
-  );
-
-
-  systemMessage(
-    playerNames[first] +
-    " ❤️ " +
-    playerNames[second]
-  );
-
-
-  startChoiceTimer();
-}
-
-
-/* =====================================
-   10 SONIYALIK TANLOV
-===================================== */
-
-function startChoiceTimer() {
-
-  clearInterval(
-    choiceTimerInterval
-  );
-
-  choiceSeconds =
-    CHOICE_WAIT;
-
-  choiceTimer.textContent =
-    choiceSeconds;
-
-
-  choiceTimerInterval =
-    setInterval(() => {
-
-      choiceSeconds--;
-
-      choiceTimer.textContent =
-        choiceSeconds;
-
-
-      if (choiceSeconds <= 0) {
-
-        clearInterval(
-          choiceTimerInterval
-        );
-
-        /*
-          Vaqt tugasa avtomatik Refuse.
-        */
-
-        finishChoice(
-          "Refuse",
-          true
-        );
-      }
-
-    }, 1000);
-}
-
-
-/* =====================================
-   KISS / REFUSE
-===================================== */
-
-kissBtn.addEventListener(
-  "click",
-  () => {
-
-    if (!choosing) {
-      return;
-    }
-
-    finishChoice(
-      "Kiss",
-      false
-    );
-
-  }
-);
-
-
-refuseBtn.addEventListener(
-  "click",
-  () => {
-
-    if (!choosing) {
-      return;
-    }
-
-    finishChoice(
-      "Refuse",
-      false
-    );
-
-  }
-);
-
-
-/* =====================================
-   TANLOVNI YAKUNLASH
-===================================== */
-
-function finishChoice(
-  result,
-  automatic
-) {
-
-  if (!choosing) {
-    return;
-  }
-
-  clearInterval(
-    choiceTimerInterval
-  );
-
-  choosing = false;
-
-
-  if (automatic) {
-
-    systemMessage(
-      "10 soniya tugadi — Refuse."
-    );
-
-  } else {
-
-    if (result === "Kiss") {
-
-      systemMessage(
-        "💋 Kiss tanlandi!"
-      );
+      status.textContent =
+        player.status;
 
     } else {
 
-      systemMessage(
-        "✕ Refuse tanlandi."
-      );
+      status.textContent =
+        "";
 
     }
 
-  }
+
+    element.appendChild(name);
+
+    element.appendChild(status);
+
+    playersContainer.appendChild(element);
+
+  });
 
 
-  /*
-    Bir oz natijani ko'rsatib turadi.
-  */
-
-  setTimeout(() => {
-
-    kissScreen.classList.remove(
-      "show"
-    );
-
-    bottle.classList.remove(
-      "hidden"
-    );
-
-    bottleTimer.style.display =
-      "flex";
-
-
-    /*
-      Keyingi navbat soat strelkasi bo'yicha.
-    */
-
-    currentPlayer =
-      (currentPlayer + 1)
-      % players.length;
-
-    updateTurn();
-
-    startBottleTimer();
-
-  }, 1000);
+  playerCount.textContent =
+    players.length + " o'yinchi";
 }
 
 
-/* =====================================
-   CHAT
-===================================== */
+/* =========================
+   FAOL O'YINCHINI BELGILASH
+========================= */
 
-function sendMessage() {
+function setActivePlayer(id) {
 
-  const text =
-    messageInput.value.trim();
+  document
+    .querySelectorAll(".player")
+    .forEach(element => {
 
-  if (!text) {
-    return;
+      element.classList.remove("active");
+
+    });
+
+
+  const selected =
+    document.querySelector(
+      `.player[data-id="${id}"]`
+    );
+
+
+  if (selected) {
+
+    selected.classList.add("active");
+
   }
 
+}
+
+
+/* =========================
+   CHATGA SYSTEM XABAR
+========================= */
+
+function addSystemMessage(text) {
 
   const message =
     document.createElement("div");
 
   message.className =
-    "message";
+    "message system";
 
   message.textContent =
     text;
 
-  messages.appendChild(
-    message
-  );
+  messages.appendChild(message);
 
   messages.scrollTop =
     messages.scrollHeight;
-
-  messageInput.value = "";
-
-  messageInput.focus();
 }
 
 
-sendBtn.addEventListener(
-  "click",
-  sendMessage
-);
+/* =========================
+   SHISHA AYLANTIRISH
+========================= */
+
+function spinBottle() {
+
+  if (spinning) {
+    return;
+  }
+
+  if (players.length < 2) {
+
+    addSystemMessage(
+      "Kamida 2 ta o'yinchi kerak."
+    );
+
+    return;
+  }
 
 
-messageInput.addEventListener(
-  "keydown",
-  event => {
+  spinning = true;
 
-    if (event.key === "Enter") {
-      sendMessage();
+  spinButton.disabled = true;
+
+
+  /*
+    Oldingi active holatni olib tashlash
+  */
+
+  document
+    .querySelectorAll(".player")
+    .forEach(element => {
+
+      element.classList.remove("active");
+
+    });
+
+
+  /*
+    Tasodifiy o'yinchi
+  */
+
+  const selectedIndex =
+    Math.floor(
+      Math.random() * players.length
+    );
+
+  const selectedPlayer =
+    players[selectedIndex];
+
+
+  /*
+    Shishani bir necha marta aylantirish.
+  */
+
+  const extraRotation =
+    720 +
+    Math.floor(Math.random() * 720);
+
+
+  bottleRotation +=
+    extraRotation;
+
+
+  /*
+    Tanlangan o'yinchining stol markazidan
+    yo'nalishini hisoblash.
+
+    x/y foizlari orqali burchak topamiz.
+  */
+
+  const dx =
+    selectedPlayer.x - 50;
+
+  const dy =
+    selectedPlayer.y - 50;
+
+
+  let angle =
+    Math.atan2(dy, dx) *
+    180 /
+    Math.PI;
+
+
+  /*
+    Shisha emoji yuqoriga qarab turadi.
+    Shuning uchun +90.
+  */
+
+  angle += 90;
+
+
+  /*
+    Yakuniy aylanish
+  */
+
+  const finalRotation =
+    bottleRotation + angle;
+
+
+  bottle.style.transform =
+    `translate(-50%, -50%) rotate(${finalRotation}deg)`;
+
+
+  /*
+    Animatsiya tugagach
+    natijani chiqaramiz.
+  */
+
+  setTimeout(() => {
+
+    setActivePlayer(
+      selectedPlayer.id
+    );
+
+
+    addSystemMessage(
+      "Shisha " +
+      selectedPlayer.name +
+      " ni tanladi."
+    );
+
+
+    /*
+      Bu yerda 0 qo'yilmaydi.
+
+      Agar yangi hisob kerak bo'lsa,
+      status bo'sh qoladi.
+    */
+
+    selectedPlayer.status = "";
+
+
+    renderPlayers();
+
+    setActivePlayer(
+      selectedPlayer.id
+    );
+
+
+    spinning = false;
+
+    spinButton.disabled = false;
+
+  }, 3100);
+}
+
+
+/* =========================
+   O'YINCHI QO'SHISH
+========================= */
+
+function addPlayer() {
+
+  const name =
+    prompt("O'yinchi ismini kiriting:");
+
+  if (!name) {
+    return;
+  }
+
+
+  const cleanName =
+    name.trim();
+
+
+  if (!cleanName) {
+    return;
+  }
+
+
+  /*
+    Yangi o'yinchini stolga
+    taxminan bo'sh joyga qo'yish.
+  */
+
+  const positions = [
+
+    { x: 50, y: 12 },
+    { x: 88, y: 28 },
+    { x: 88, y: 72 },
+    { x: 50, y: 88 },
+    { x: 12, y: 72 },
+    { x: 12, y: 28 },
+    { x: 28, y: 12 },
+    { x: 72, y: 12 }
+
+  ];
+
+
+  const position =
+    positions[
+      (players.length - 4) %
+      positions.length
+    ];
+
+
+  players.push({
+
+    id: nextPlayerId++,
+
+    name: cleanName,
+
+    x: position.x,
+
+    y: position.y,
+
+    status: ""
+
+  });
+
+
+  renderPlayers();
+
+
+  addSystemMessage(
+    cleanName +
+    " o'yinga qo'shildi."
+  );
+}
+
+
+/* =========================
+   O'YINCHI JOYINI ALMASHTIRISH
+========================= */
+
+/*
+  Player ustiga bosib turganda
+  boshqa joyga ko'chirish mumkin.
+
+  Joyi o'zgarsa status yangidan boshlanadi.
+*/
+
+let movingPlayer = null;
+
+let startX = 0;
+let startY = 0;
+
+let moved = false;
+
+
+playersContainer.addEventListener(
+  "pointerdown",
+  function(event) {
+
+    const playerElement =
+      event.target.closest(".player");
+
+    if (!playerElement) {
+      return;
     }
 
+
+    const id =
+      Number(playerElement.dataset.id);
+
+
+    movingPlayer =
+      players.find(
+        player => player.id === id
+      );
+
+
+    if (!movingPlayer) {
+      return;
+    }
+
+
+    startX =
+      event.clientX;
+
+    startY =
+      event.clientY;
+
+    moved = false;
+
+
+    playerElement.setPointerCapture?.(
+      event.pointerId
+    );
+
   }
 );
 
 
-/* =====================================
-   REFRESH
-===================================== */
+playersContainer.addEventListener(
+  "pointermove",
+  function(event) {
 
-refreshBtn.addEventListener(
+    if (!movingPlayer) {
+      return;
+    }
+
+
+    const dx =
+      event.clientX - startX;
+
+    const dy =
+      event.clientY - startY;
+
+
+    if (
+      Math.abs(dx) > 5 ||
+      Math.abs(dy) > 5
+    ) {
+
+      moved = true;
+
+    }
+
+
+    if (!moved) {
+      return;
+    }
+
+
+    const table =
+      document.querySelector(".game-table");
+
+
+    const rect =
+      table.getBoundingClientRect();
+
+
+    let x =
+      ((event.clientX - rect.left) /
+        rect.width) *
+      100;
+
+
+    let y =
+      ((event.clientY - rect.top) /
+        rect.height) *
+      100;
+
+
+    /*
+      Stol chegarasidan chiqib ketmasin.
+    */
+
+    x =
+      Math.max(
+        8,
+        Math.min(92, x)
+      );
+
+    y =
+      Math.max(
+        8,
+        Math.min(92, y)
+      );
+
+
+    movingPlayer.x = x;
+
+    movingPlayer.y = y;
+
+
+    /*
+      JOY ALMASHGANDA HISOB YANGIDAN.
+      0 yozilmaydi.
+    */
+
+    movingPlayer.status = "";
+
+
+    renderPlayers();
+
+  }
+);
+
+
+playersContainer.addEventListener(
+  "pointerup",
+  function() {
+
+    if (
+      movingPlayer &&
+      moved
+    ) {
+
+      addSystemMessage(
+        movingPlayer.name +
+        " joyini almashtirdi — hisob yangidan boshlandi."
+      );
+
+    }
+
+
+    movingPlayer = null;
+
+  }
+);
+
+
+/* =========================
+   CHAT
+========================= */
+
+chatForm.addEventListener(
+  "submit",
+  function(event) {
+
+    event.preventDefault();
+
+
+    const text =
+      chatInput.value.trim();
+
+
+    if (!text) {
+      return;
+    }
+
+
+    const message =
+      document.createElement("div");
+
+    message.className =
+      "message";
+
+    message.textContent =
+      text;
+
+
+    messages.appendChild(message);
+
+
+    chatInput.value = "";
+
+
+    messages.scrollTop =
+      messages.scrollHeight;
+  }
+);
+
+
+/* =========================
+   TUGMALAR
+========================= */
+
+spinButton.addEventListener(
   "click",
-  () => {
-
-    location.reload();
-
-  }
+  spinBottle
 );
 
 
-/* =====================================
-   BOSHLASH
-===================================== */
+addPlayerButton.addEventListener(
+  "click",
+  addPlayer
+);
 
-updateTurn();
 
-startBottleTimer();
+/* =========================
+   BOSHLANG'ICH HOLAT
+========================= */
+
+renderPlayers();
+
+addSystemMessage(
+  "O'yin boshlandi. Shishani aylantiring."
+);
