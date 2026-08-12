@@ -6,78 +6,102 @@
   <title>Spin the Bottle</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <main class="game">
+  <div class="game">
 
-    <!-- Stol -->
-    <section class="table-area">
+    <!-- ================= STOL ================= -->
+    <div class="table-area">
+
       <div class="table">
 
-        <!-- Markazdagi naqsh -->
-        <div class="center-decoration">
-          <div class="decoration-ring"></div>
-          <div class="decoration-ring inner"></div>
-          <div class="flower flower-1">✦</div>
-          <div class="flower flower-2">✦</div>
-          <div class="flower flower-3">✦</div>
-          <div class="flower flower-4">✦</div>
+        <!-- Markaz -->
+        <div class="center">
+
+          <div class="ornament">
+            <div class="ornament-line"></div>
+
+            <span class="orn top">✦</span>
+            <span class="orn right">✦</span>
+            <span class="orn bottom">✦</span>
+            <span class="orn left">✦</span>
+          </div>
 
           <!-- Butilka -->
-          <button class="bottle" id="bottle" aria-label="Butilkani aylantirish">
+          <button id="bottle" class="bottle">
             🍾
           </button>
+
         </div>
 
         <!-- O'yinchilar -->
-        <div class="player player-top" data-index="0">
+
+        <div class="player player-top" data-player="0">
           <span>O‘yinchi 1</span>
         </div>
 
-        <div class="player player-right" data-index="1">
+        <div class="player player-right" data-player="1">
           <span>O‘yinchi 2</span>
         </div>
 
-        <div class="player player-bottom" data-index="2">
+        <div class="player player-bottom" data-player="2">
           <span>O‘yinchi 3</span>
         </div>
 
-        <div class="player player-left" data-index="3">
+        <div class="player player-left" data-player="3">
           <span>O‘yinchi 4</span>
         </div>
 
         <!-- Taymer -->
-        <div class="timer" id="timer">5</div>
+        <div id="timer" class="timer">
+          5
+        </div>
 
       </div>
-    </section>
 
-    <!-- Chat -->
-    <section class="chat-area">
+    </div>
+
+
+    <!-- ================= CHAT ================= -->
+
+    <div class="chat-area">
+
       <div class="chat-header">
-        <b>Chat</b>
-        <span id="turnText">Navbat: O‘yinchi 1</span>
+        <strong>Chat</strong>
+
+        <span id="turnText">
+          Navbat: O‘yinchi 1
+        </span>
       </div>
 
-      <div class="messages" id="messages">
-        <div class="message system-message">
+      <div id="messages" class="messages">
+
+        <div class="system-message">
           O‘yin boshlandi. Navbat O‘yinchi 1 da.
         </div>
+
       </div>
 
       <div class="chat-input">
-        <input
-          type="text"
-          id="messageInput"
-          placeholder="Xabar yozing..."
-          maxlength="200"
-        >
-        <button id="sendButton">➤</button>
-      </div>
-    </section>
 
-  </main>
+        <input
+          id="messageInput"
+          type="text"
+          placeholder="Xabar yozing..."
+        >
+
+        <button id="sendButton">
+          ➤
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
   <script src="script.js"></script>
+
 </body>
 </html>
