@@ -1,55 +1,92 @@
 const bottle = document.getElementById("bottle");
+const bottleTimer = document.getElementById("bottleTimer");
 
-const timer = document.getElementById("timer");
+const kissScreen = document.getElementById("kissScreen");
+const choiceTimer = document.getElementById("choiceTimer");
 
-const turnText = document.getElementById("turnText");
+const chosenOne = document.getElementById("chosenOne");
+const chosenTwo = document.getElementById("chosenTwo");
+
+const refuseBtn = document.getElementById("refuseBtn");
+const kissBtn = document.getElementById("kissBtn");
 
 const players = Array.from(
   document.querySelectorAll(".player")
 );
+
+const turnText = document.getElementById("turnText");
 
 const messages = document.getElementById("messages");
 
 const messageInput =
   document.getElementById("messageInput");
 
-const sendButton =
-  document.getElementById("sendButton");
+const sendBtn =
+  document.getElementById("sendBtn");
+
+const refreshBtn =
+  document.getElementById("refreshBtn");
 
 
 /* =====================================
-   O'YIN SOZLAMALARI
+   SOZLAMALAR
 ===================================== */
 
-const WAIT_TIME = 5;
-
+const BOTTLE_WAIT = 10;
+const CHOICE_WAIT = 10;
 const SPIN_TIME = 3000;
 
 
 /*
-   O'yinchilar joylashuvi:
+  Stol bo'yicha navbat:
 
-   0 = Tepa
-   1 = O'ng
-   2 = Past
-   3 = Chap
+  0 → 1 → 2 → 3 → 4 → 5 → 0
 
-   Bu aynan SOAT STRELKASI bo'yicha.
+  Ya'ni soat strelkasi bo'yicha.
 */
 
 let currentPlayer = 0;
 
-let seconds = WAIT_TIME;
+let bottleSeconds = BOTTLE_WAIT;
 
-let timerInterval = null;
+let choiceSeconds = CHOICE_WAIT;
+
+let bottleTimerInterval = null;
+
+let choiceTimerInterval = null;
 
 let spinning = false;
+
+let choosing = false;
 
 let rotation = 0;
 
 
 /* =====================================
-   NAVBATNI KO'RSATISH
+   O'YINCHILAR
+===================================== */
+
+const playerNames = [
+  "Anna",
+  "Alex",
+  "Maria",
+  "John",
+  "Sara",
+  "Mike"
+];
+
+const playerFaces = [
+  "👩",
+  "👨",
+  "👩",
+  "👨",
+  "👩",
+  "👨"
+];
+
+
+/* =====================================
+   NAVBAT
 ===================================== */
 
 function updateTurn() {
@@ -63,16 +100,14 @@ function updateTurn() {
 
   });
 
-  const name =
-    players[currentPlayer].innerText;
-
-  turnText.innerText =
-    "Navbat: " + name;
+  turnText.textContent =
+    "Navbat: " +
+    playerNames[currentPlayer];
 }
 
 
 /* =====================================
-   CHATGA SYSTEM XABAR
+   CHAT SYSTEM XABARI
 ===================================== */
 
 function systemMessage(text) {
@@ -83,7 +118,7 @@ function systemMessage(text) {
   div.className =
     "system-message";
 
-  div.innerText = text;
+  div.textContent = text;
 
   messages.appendChild(div);
 
@@ -93,41 +128,45 @@ function systemMessage(text) {
 
 
 /* =====================================
-   5 SONIYALIK TAYMER
+   BUTILKA TAYMERI
 ===================================== */
 
-function startTimer() {
+function startBottleTimer() {
 
-  clearInterval(timerInterval);
+  clearInterval(bottleTimerInterval);
 
-  seconds = WAIT_TIME;
+  bottleSeconds = BOTTLE_WAIT;
 
-  timer.innerText = seconds;
+  bottleTimer.textContent =
+    bottleSeconds;
 
-  timerInterval = setInterval(() => {
+  bottleTimerInterval =
+    setInterval(() => {
 
-    if (spinning) {
-      return;
-    }
+      if (spinning || choosing) {
+        return;
+      }
 
-    seconds--;
+      bottleSeconds--;
 
-    timer.innerText = seconds;
+      bottleTimer.textContent =
+        bottleSeconds;
 
+      if (bottleSeconds <= 0) {
 
-    if (seconds <= 0) {
+        clearInterval(
+          bottleTimerInterval
+        );
 
-      clearInterval(timerInterval);
+        systemMessage(
+          playerNames[currentPlayer] +
+          " 10 soniyada aylantirmadi. Avtomatik aylantirilmoqda."
+        );
 
-      systemMessage(
-        players[currentPlayer].innerText +
-        " vaqtida aylantirmadi. Butilka avtomatik aylanmoqda."
-      );
+        spinBottle(true);
+      }
 
-      spinBottle(true);
-    }
-
-  }, 1000);
+    }, 1000);
 }
 
 
@@ -137,21 +176,22 @@ function startTimer() {
 
 function spinBottle(auto = false) {
 
-  if (spinning) {
+  if (spinning || choosing) {
     return;
   }
 
   spinning = true;
 
-  clearInterval(timerInterval);
+  clearInterval(
+    bottleTimerInterval
+  );
 
-  timer.innerText = "🍾";
-
+  bottleTimer.textContent = "🍾";
 
   if (!auto) {
 
     systemMessage(
-      players[currentPlayer].innerText +
+      playerNames[currentPlayer] +
       " butilkani aylantirdi."
     );
 
@@ -159,8 +199,8 @@ function spinBottle(auto = false) {
 
 
   /*
-     Har aylanishda tasodifiy qo'shimcha
-     aylanish qo'shamiz.
+    Har safar kamida 3 marta aylanadi.
+    Qo'shimcha aylanish tasodifiy.
   */
 
   const extra =
@@ -168,65 +208,263 @@ function spinBottle(auto = false) {
       Math.random() * 720
     );
 
-  rotation += 1080 + extra;
-
-
-  /*
-     Butilka markazidan aylanadi.
-  */
+  rotation +=
+    1080 + extra;
 
   bottle.style.transform =
     `rotate(${rotation}deg)`;
 
 
-  /*
-     3 soniya kutamiz.
-  */
-
   setTimeout(() => {
 
     spinning = false;
 
-
     /*
-       Keyingi o'yinchi:
-       Tepa → O'ng → Past → Chap → Tepa
+      Butilka qaysi o'yinchiga tushganini
+      tasodifiy tanlaymiz.
+
+      O'ziga tushib qolmasligi uchun
+      aylantirgan o'yinchi chiqarib tashlanadi.
     */
 
-    currentPlayer =
-      (currentPlayer + 1)
-      % players.length;
+    let target;
+
+    do {
+
+      target =
+        Math.floor(
+          Math.random() * players.length
+        );
+
+    } while (
+      target === currentPlayer
+    );
 
 
-    updateTurn();
-
-    startTimer();
+    showKissScreen(
+      currentPlayer,
+      target
+    );
 
   }, SPIN_TIME);
 }
 
 
 /* =====================================
-   BUTILKAGA BOSISH
+   O'PISHISH EKRANI
 ===================================== */
 
-bottle.addEventListener(
+function showKissScreen(
+  first,
+  second
+) {
+
+  choosing = true;
+
+  /*
+    Butilka yo'qoladi.
+  */
+
+  bottle.classList.add("hidden");
+
+  bottleTimer.style.display =
+    "none";
+
+
+  /*
+    Tanlangan 2 o'yinchi markazga chiqadi.
+  */
+
+  chosenOne.innerHTML =
+    `<span style="font-size:30px">
+      ${playerFaces[first]}
+    </span>
+    <small>${playerNames[first]}</small>`;
+
+  chosenTwo.innerHTML =
+    `<span style="font-size:30px">
+      ${playerFaces[second]}
+    </span>
+    <small>${playerNames[second]}</small>`;
+
+
+  kissScreen.classList.add(
+    "show"
+  );
+
+
+  systemMessage(
+    playerNames[first] +
+    " ❤️ " +
+    playerNames[second]
+  );
+
+
+  startChoiceTimer();
+}
+
+
+/* =====================================
+   10 SONIYALIK TANLOV
+===================================== */
+
+function startChoiceTimer() {
+
+  clearInterval(
+    choiceTimerInterval
+  );
+
+  choiceSeconds =
+    CHOICE_WAIT;
+
+  choiceTimer.textContent =
+    choiceSeconds;
+
+
+  choiceTimerInterval =
+    setInterval(() => {
+
+      choiceSeconds--;
+
+      choiceTimer.textContent =
+        choiceSeconds;
+
+
+      if (choiceSeconds <= 0) {
+
+        clearInterval(
+          choiceTimerInterval
+        );
+
+        /*
+          Vaqt tugasa avtomatik Refuse.
+        */
+
+        finishChoice(
+          "Refuse",
+          true
+        );
+      }
+
+    }, 1000);
+}
+
+
+/* =====================================
+   KISS / REFUSE
+===================================== */
+
+kissBtn.addEventListener(
   "click",
   () => {
 
-    /*
-       Faqat navbatdagi aylanish paytida
-       bosish mumkin.
-    */
-
-    if (spinning) {
+    if (!choosing) {
       return;
     }
 
-    spinBottle(false);
+    finishChoice(
+      "Kiss",
+      false
+    );
 
   }
 );
+
+
+refuseBtn.addEventListener(
+  "click",
+  () => {
+
+    if (!choosing) {
+      return;
+    }
+
+    finishChoice(
+      "Refuse",
+      false
+    );
+
+  }
+);
+
+
+/* =====================================
+   TANLOVNI YAKUNLASH
+===================================== */
+
+function finishChoice(
+  result,
+  automatic
+) {
+
+  if (!choosing) {
+    return;
+  }
+
+  clearInterval(
+    choiceTimerInterval
+  );
+
+  choosing = false;
+
+
+  if (automatic) {
+
+    systemMessage(
+      "10 soniya tugadi — Refuse."
+    );
+
+  } else {
+
+    if (result === "Kiss") {
+
+      systemMessage(
+        "💋 Kiss tanlandi!"
+      );
+
+    } else {
+
+      systemMessage(
+        "✕ Refuse tanlandi."
+      );
+
+    }
+
+  }
+
+
+  /*
+    Bir oz natijani ko'rsatib turadi.
+  */
+
+  setTimeout(() => {
+
+    kissScreen.classList.remove(
+      "show"
+    );
+
+    bottle.classList.remove(
+      "hidden"
+    );
+
+    bottleTimer.style.display =
+      "flex";
+
+
+    /*
+      Keyingi navbat soat strelkasi bo'yicha.
+    */
+
+    currentPlayer =
+      (currentPlayer + 1)
+      % players.length;
+
+    updateTurn();
+
+    startBottleTimer();
+
+  }, 1000);
+}
 
 
 /* =====================================
@@ -243,15 +481,18 @@ function sendMessage() {
   }
 
 
-  const div =
+  const message =
     document.createElement("div");
 
-  div.className =
+  message.className =
     "message";
 
-  div.innerText = text;
+  message.textContent =
+    text;
 
-  messages.appendChild(div);
+  messages.appendChild(
+    message
+  );
 
   messages.scrollTop =
     messages.scrollHeight;
@@ -262,7 +503,7 @@ function sendMessage() {
 }
 
 
-sendButton.addEventListener(
+sendBtn.addEventListener(
   "click",
   sendMessage
 );
@@ -270,7 +511,7 @@ sendButton.addEventListener(
 
 messageInput.addEventListener(
   "keydown",
-  (event) => {
+  event => {
 
     if (event.key === "Enter") {
       sendMessage();
@@ -281,9 +522,23 @@ messageInput.addEventListener(
 
 
 /* =====================================
-   O'YINNI BOSHLASH
+   REFRESH
+===================================== */
+
+refreshBtn.addEventListener(
+  "click",
+  () => {
+
+    location.reload();
+
+  }
+);
+
+
+/* =====================================
+   BOSHLASH
 ===================================== */
 
 updateTurn();
 
-startTimer();
+startBottleTimer();
