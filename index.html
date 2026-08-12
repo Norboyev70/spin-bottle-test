@@ -2,176 +2,63 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spin the Bottle</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app">
+  <main class="app">
 
-  <!-- TOP PANEL -->
-  <header class="top-panel">
-    <div class="top-left">
-      <span class="heart">♥</span>
-      <span>11560</span>
-    </div>
+    <!-- O'YIN QISMI -->
+    <section class="game-area">
 
-    <div class="top-icons">
-      <span>⚔</span>
-      <span>🏆</span>
-      <span>☰</span>
-      <span>⚙</span>
-    </div>
+      <div class="game-table">
 
-    <div class="table-name">
-      <span>Table 3002</span>
-      <button id="refreshBtn">↻</button>
-    </div>
-  </header>
+        <div class="table-decoration"></div>
 
-  <!-- GAME -->
-  <section class="game-area">
-
-    <div class="wood-table" id="table">
-
-      <!-- Players -->
-      <div class="player p1" data-id="0">
-        <div class="avatar">👩</div>
-        <div class="player-info">
-          <b>Anna</b>
-          <small>21</small>
-        </div>
-      </div>
-
-      <div class="player p2" data-id="1">
-        <div class="avatar">👨</div>
-        <div class="player-info">
-          <b>Alex</b>
-          <small>23</small>
-        </div>
-      </div>
-
-      <div class="player p3" data-id="2">
-        <div class="avatar">👩</div>
-        <div class="player-info">
-          <b>Maria</b>
-          <small>20</small>
-        </div>
-      </div>
-
-      <div class="player p4" data-id="3">
-        <div class="avatar">👨</div>
-        <div class="player-info">
-          <b>John</b>
-          <small>24</small>
-        </div>
-      </div>
-
-      <div class="player p5" data-id="4">
-        <div class="avatar">👩</div>
-        <div class="player-info">
-          <b>Sara</b>
-          <small>22</small>
-        </div>
-      </div>
-
-      <div class="player p6" data-id="5">
-        <div class="avatar">👨</div>
-        <div class="player-info">
-          <b>Mike</b>
-          <small>25</small>
-        </div>
-      </div>
-
-      <!-- Center -->
-      <div class="center-area" id="centerArea">
-
-        <div class="center-decoration"></div>
-
-        <button id="bottle" class="bottle">
+        <div class="bottle" id="bottle">
           🍾
-        </button>
-
-        <!-- Kiss screen -->
-        <div id="kissScreen" class="kiss-screen">
-
-          <div class="chosen-players">
-
-            <div id="chosenOne" class="chosen-player"></div>
-
-            <div class="kiss-symbol">
-              <div class="kiss-ring">
-                ↻
-              </div>
-              <div class="kiss-heart">♥</div>
-            </div>
-
-            <div id="chosenTwo" class="chosen-player"></div>
-
-          </div>
-
-          <div class="choice-title">
-            Your choice
-          </div>
-
-          <div id="choiceTimer" class="choice-timer">
-            10
-          </div>
-
-          <div class="choice-buttons">
-
-            <button id="refuseBtn" class="refuse">
-              ✕ Refuse
-            </button>
-
-            <button id="kissBtn" class="kiss">
-              ♥ Kiss
-            </button>
-
-          </div>
-
         </div>
 
+        <!-- O'yinchilar shu yerga JS orqali chiqadi -->
+        <div id="players"></div>
+
       </div>
 
-      <!-- Bottle timer -->
-      <div id="bottleTimer" class="bottle-timer">
-        10
+      <div class="controls">
+        <button id="spinButton">AYLANTIRISH</button>
+        <button id="addPlayerButton">+ O'YINCHI</button>
       </div>
 
-    </div>
+    </section>
 
-  </section>
 
-  <!-- CHAT -->
-  <section class="chat-area">
+    <!-- CHAT QISMI -->
+    <section class="chat-area">
 
-    <div class="chat-title">
-      <b>Chat</b>
-      <span id="turnText">Navbat: Anna</span>
-    </div>
-
-    <div id="messages" class="messages">
-      <div class="system-message">
-        O‘yin boshlandi. Navbat Anna da.
+      <div class="chat-header">
+        <span>Chat</span>
+        <span id="playerCount">0 o'yinchi</span>
       </div>
-    </div>
 
-    <div class="chat-input">
-      <input
-        id="messageInput"
-        type="text"
-        placeholder="Xabar yozing..."
-      >
-      <button id="sendBtn">➤</button>
-    </div>
+      <div class="messages" id="messages"></div>
 
-  </section>
+      <form class="chat-form" id="chatForm">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Xabar yozing..."
+          autocomplete="off"
+        >
+        <button type="submit">➤</button>
+      </form>
 
-</div>
+    </section>
 
-<script src="script.js"></script>
+  </main>
 
+  <script src="script.js"></script>
 </body>
-  </html>
+</html>
