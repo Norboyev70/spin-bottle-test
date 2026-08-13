@@ -9,56 +9,52 @@
 
 <body>
 
-  <main class="app">
+  <main class="game">
 
-    <!-- O'YIN QISMI -->
-    <section class="game-area">
+    <section class="table-area">
 
-      <div class="game-table">
+      <div class="table">
 
-        <div class="table-decoration"></div>
+        <div class="center-decoration">
+          <div class="circle circle1"></div>
+          <div class="circle circle2"></div>
+          <div class="circle circle3"></div>
 
-        <div class="bottle" id="bottle">
-          🍾
+          <div id="bottle" class="bottle">
+            🍾
+          </div>
         </div>
 
-        <!-- O'yinchilar shu yerga JS orqali chiqadi -->
         <div id="players"></div>
 
       </div>
 
-      <div class="controls">
-        <button id="spinButton">AYLANTIRISH</button>
-        <button id="addPlayerButton">+ O'YINCHI</button>
-      </div>
-
     </section>
 
+    <section class="chat">
 
-    <!-- CHAT QISMI -->
-    <section class="chat-area">
-
-      <div class="chat-header">
-        <span>Chat</span>
-        <span id="playerCount">0 o'yinchi</span>
+      <div id="messages" class="messages">
+        <div class="message">
+          <b>System:</b> O‘yin boshlandi
+        </div>
       </div>
 
-      <div class="messages" id="messages"></div>
-
-      <form class="chat-form" id="chatForm">
+      <div class="chat-input">
         <input
-          type="text"
           id="chatInput"
+          type="text"
           placeholder="Xabar yozing..."
-          autocomplete="off"
+          maxlength="150"
         >
-        <button type="submit">➤</button>
-      </form>
+
+        <button id="sendBtn">➤</button>
+      </div>
 
     </section>
 
   </main>
 
   <script src="script.js"></script>
+
 </body>
 </html>
