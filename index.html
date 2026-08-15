@@ -1,258 +1,246 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin Bottle</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Spin Bottle</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="game">
+<div class="app">
 
-    <!-- TOP BAR -->
-    <header class="topbar">
+    <!-- ================= TOP GAME ================= -->
+    <section class="game">
 
-        <div class="heart-balance">
-            <span class="big-heart">♡</span>
-            <span>143</span>
+        <div class="topbar">
+
+            <div class="balance">
+                <span>♡</span>
+                <b>143</b>
+            </div>
+
+            <div class="topBtn">
+                <strong>✦</strong>
+                <small>8 d.</small>
+            </div>
+
+            <div class="topBtn">
+                <strong>◎</strong>
+                <small>1 hr.</small>
+            </div>
+
+            <div class="topBtn">
+                <strong>☰</strong>
+            </div>
+
+            <div class="topBtn">
+                <strong>⚙</strong>
+            </div>
+
+            <div class="refresh">↻</div>
         </div>
 
-        <div class="top-item ticket">
-            <div class="circle-icon">✦</div>
-            <small>8 d.</small>
+
+        <!-- PREMIUM -->
+        <div class="premium">
+            <span class="premium-crown">♛</span>
         </div>
 
-        <div class="top-item ranking">
-            <div class="circle-icon">◉</div>
-            <small>1 hr.</small>
+        <!-- SMALL TROPHY -->
+        <div class="trophy">🏆</div>
+
+
+        <!-- ================= PLAYERS ================= -->
+
+        <div class="player player1">
+            <div class="likes">♥ 342</div>
+            <div class="avatar gold">
+                <img src="https://i.pravatar.cc/180?img=47">
+            </div>
+            <div class="name">Aziza</div>
         </div>
 
-        <div class="top-item menu">
-            <div class="circle-icon">☰</div>
+        <div class="player player2">
+            <div class="likes">♥ 215</div>
+            <div class="avatar blue">
+                <img src="https://i.pravatar.cc/180?img=12">
+            </div>
+            <div class="name">Bekzod</div>
         </div>
 
-        <div class="top-item settings">
-            <div class="circle-icon">⚙</div>
+        <div class="player player3">
+            <div class="likes">♥ 298</div>
+            <div class="avatar pink">
+                <img src="https://i.pravatar.cc/180?img=44">
+            </div>
+            <div class="name">Malika</div>
         </div>
 
-        <div class="table-number">
-            <span>Table</span>
-            <b>229</b>
+        <div class="player player4">
+            <div class="likes">♥ 187</div>
+            <div class="avatar pink">
+                <img src="https://i.pravatar.cc/180?img=32">
+            </div>
+            <div class="name">Zarina</div>
         </div>
 
-        <button class="refresh">↻</button>
-
-    </header>
-
-
-    <!-- TABLE -->
-    <main class="table-area">
-
-        <div class="wood-table">
-
-            <!-- DECORATIVE RING -->
-            <div class="table-ring"></div>
-
-            <!-- PLAYERS -->
-
-            <div class="player p1">
-                <div class="heart-count">♥ 342</div>
-                <div class="avatar premium-frame">
-                    <img src="https://i.pravatar.cc/300?img=47">
-                </div>
-                <div class="player-name">Aziza</div>
+        <div class="player player5">
+            <div class="likes">♥ 254</div>
+            <div class="avatar pink">
+                <img src="https://i.pravatar.cc/180?img=49">
             </div>
+            <div class="name">Sevinch</div>
+        </div>
 
-            <div class="player p2">
-                <div class="heart-count">♥ 215</div>
-                <div class="avatar blue-frame">
-                    <img src="https://i.pravatar.cc/300?img=12">
-                </div>
-                <div class="player-name">Bekzod</div>
+        <div class="player player6">
+            <div class="likes">♥ 132</div>
+            <div class="avatar blue">
+                <img src="https://i.pravatar.cc/180?img=11">
             </div>
+            <div class="name">Jasur</div>
+        </div>
 
-            <div class="player p3">
-                <div class="heart-count">♥ 298</div>
-                <div class="avatar pink-frame">
-                    <img src="https://i.pravatar.cc/300?img=44">
-                </div>
-                <div class="player-name">Malika</div>
+        <div class="player player7">
+            <div class="likes">♥ 176</div>
+            <div class="avatar pink">
+                <img src="https://i.pravatar.cc/180?img=48">
             </div>
+            <div class="name">Gulnoza</div>
+        </div>
 
-            <div class="player p4">
-                <div class="heart-count">♥ 187</div>
-                <div class="avatar pink-frame">
-                    <img src="https://i.pravatar.cc/300?img=32">
-                </div>
-                <div class="player-name">Zarina</div>
+        <div class="player player8">
+            <div class="likes">♥ 321</div>
+            <div class="avatar gold">
+                <img src="https://i.pravatar.cc/180?img=45">
             </div>
+            <div class="name">Madina</div>
+        </div>
 
-            <div class="player p5">
-                <div class="heart-count">♥ 254</div>
-                <div class="avatar pink-frame">
-                    <img src="https://i.pravatar.cc/300?img=49">
-                </div>
-                <div class="player-name">Sevinch</div>
+        <div class="player player9">
+            <div class="likes">♥ 203</div>
+            <div class="avatar pink">
+                <img src="https://i.pravatar.cc/180?img=25">
             </div>
+            <div class="name">Nilufar</div>
+        </div>
 
-            <div class="player p6">
-                <div class="heart-count">♥ 132</div>
-                <div class="avatar blue-frame">
-                    <img src="https://i.pravatar.cc/300?img=11">
-                </div>
-                <div class="player-name">Jasur</div>
+        <div class="player player10">
+            <div class="likes">♥ 149</div>
+            <div class="avatar blue">
+                <img src="https://i.pravatar.cc/180?img=13">
             </div>
+            <div class="name">Sardor</div>
+        </div>
 
-            <div class="player p7">
-                <div class="heart-count">♥ 176</div>
-                <div class="avatar pink-frame">
-                    <img src="https://i.pravatar.cc/300?img=48">
-                </div>
-                <div class="player-name">Gulnoza</div>
+        <div class="player player11">
+            <div class="likes">♥ 267</div>
+            <div class="avatar pink">
+                <img src="https://i.pravatar.cc/180?img=43">
             </div>
+            <div class="name">Dildora</div>
+        </div>
 
-            <div class="player p8">
-                <div class="heart-count">♥ 321</div>
-                <div class="avatar premium-frame">
-                    <img src="https://i.pravatar.cc/300?img=45">
-                </div>
-                <div class="player-name">Madina</div>
+        <div class="player player12">
+            <div class="likes">♥ 190</div>
+            <div class="avatar blue">
+                <img src="https://i.pravatar.cc/180?img=14">
             </div>
+            <div class="name">Fazliddin</div>
+        </div>
 
-            <div class="player p9">
-                <div class="heart-count">♥ 203</div>
-                <div class="avatar pink-frame">
-                    <img src="https://i.pravatar.cc/300?img=25">
-                </div>
-                <div class="player-name">Nilufar</div>
-            </div>
 
-            <div class="player p10">
-                <div class="heart-count">♥ 149</div>
-                <div class="avatar blue-frame">
-                    <img src="https://i.pravatar.cc/300?img=13">
-                </div>
-                <div class="player-name">Sardor</div>
-            </div>
+        <!-- ================= CENTER ================= -->
 
-            <div class="player p11">
-                <div class="heart-count">♥ 267</div>
-                <div class="avatar pink-frame">
-                    <img src="https://i.pravatar.cc/300?img=43">
-                </div>
-                <div class="player-name">Dildora</div>
-            </div>
+        <div class="center">
 
-            <div class="player p12">
-                <div class="heart-count">♥ 190</div>
-                <div class="avatar blue-frame">
-                    <img src="https://i.pravatar.cc/300?img=14">
-                </div>
-                <div class="player-name">Fazliddin</div>
-            </div>
-
+            <div class="ornament"></div>
 
             <!-- BOTTLE -->
-            <div class="bottle-zone">
-                <div class="bottle-decoration"></div>
+            <div class="bottle" id="bottle">
 
-                <div class="bottle" id="bottle">
-                    <div class="bottle-neck"></div>
-                    <div class="bottle-body"></div>
+                <div class="bottle-neck"></div>
+
+                <div class="bottle-body">
+                    <div class="glass-light"></div>
                 </div>
+
             </div>
 
         </div>
 
-    </main>
+    </section>
 
 
-    <!-- CHAT -->
+    <!-- ================= CHAT ================= -->
+
     <section class="chat">
 
-        <div class="chat-header">
+        <div class="chatHead">
 
-            <div class="chat-title">
-                <span class="chat-icon">💬</span>
+            <div class="chatTitle">
+                <span>💬</span>
                 <b>Chat</b>
             </div>
 
-            <div class="chat-tabs">
+            <div class="tabs">
                 <button class="active">Barchasi</button>
                 <button>Stol</button>
                 <button>Do‘stlar</button>
             </div>
 
-            <div class="players-count">
-                ♡ 12/12
-            </div>
+            <div class="count">♡ 12/12</div>
 
         </div>
 
 
         <div class="messages" id="messages">
 
-            <div class="message">
+            <div class="msg">
                 <img src="https://i.pravatar.cc/80?img=47">
                 <div>
-                    <strong>Aziza 👑</strong>
-                    <div class="bubble">
-                        Salom hammaga! 👋
-                        <span>21:48</span>
-                    </div>
+                    <b>Aziza 👑</b>
+                    <p>Salom hammaga! 👋 <time>21:48</time></p>
                 </div>
             </div>
 
-            <div class="message">
+            <div class="msg">
                 <img src="https://i.pravatar.cc/80?img=12">
                 <div>
-                    <strong>Bekzod ✓</strong>
-                    <div class="bubble">
-                        O‘yin boshlaymizmi? 🔥
-                        <span>21:48</span>
-                    </div>
+                    <b>Bekzod ✓</b>
+                    <p>O‘yin boshlaymizmi? 🔥 <time>21:48</time></p>
                 </div>
             </div>
 
-            <div class="message">
+            <div class="msg">
                 <img src="https://i.pravatar.cc/80?img=44">
                 <div>
-                    <strong>Malika 👑</strong>
-                    <div class="bubble">
-                        Lets go 😍
-                        <span>21:49</span>
-                    </div>
+                    <b>Malika 👑</b>
+                    <p>Lets go 😍 <time>21:49</time></p>
                 </div>
             </div>
 
-            <div class="message">
+            <div class="msg">
                 <img src="https://i.pravatar.cc/80?img=11">
                 <div>
-                    <strong>Jasur ✓</strong>
-                    <div class="bubble">
-                        Aziza navbat senikiку 😉
-                        <span>21:49</span>
-                    </div>
+                    <b>Jasur ✓</b>
+                    <p>Aziza navbat seniki 😉 <time>21:49</time></p>
                 </div>
             </div>
 
-            <div class="message">
+            <div class="msg">
                 <img src="https://i.pravatar.cc/80?img=43">
                 <div>
-                    <strong>Dildora ❤️</strong>
-                    <div class="bubble">
-                        Hayajonli 😍
-                        <span>21:49</span>
-                    </div>
+                    <b>Dildora ❤️</b>
+                    <p>Hayajonli 😍 <time>21:49</time></p>
                 </div>
             </div>
 
         </div>
 
 
-        <div class="chat-input">
+        <div class="inputBox">
 
             <button>☺</button>
 
@@ -268,9 +256,7 @@
             <button
                 class="send"
                 id="sendButton"
-            >
-                ➤
-            </button>
+            >➤</button>
 
         </div>
 
@@ -279,6 +265,9 @@
 </div>
 
 <script src="script.js"></script>
+
+</body>
+</html>
 
 </body>
 </html>
