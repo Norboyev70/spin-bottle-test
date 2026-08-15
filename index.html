@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Spin Elite VIP</title>
+  <title>Spin the Bottle Classic</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     * {
@@ -11,11 +11,12 @@
       margin: 0;
       padding: 0;
       user-select: none;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background: #08050c;
+      background: #111;
       color: #fff;
       height: 100vh;
       display: flex;
@@ -24,307 +25,310 @@
       overflow: hidden;
     }
 
-    /* TOP BAR */
+    /* 1. TOP BAR PANEL */
     .top-bar {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 10px 12px;
-      background: rgba(15, 10, 25, 0.8);
-      backdrop-filter: blur(10px);
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.4);
     }
 
-    .logo-section {
+    .heart-box {
+      background: linear-gradient(135deg, #ff6b35, #d63031);
+      padding: 6px 12px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       gap: 6px;
-      font-weight: 900;
-      font-size: 18px;
-      color: #ffd700;
-    }
-
-    .table-badge {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .currency-group {
-      display: flex;
-      gap: 6px;
-    }
-
-    .chip {
-      background: rgba(20, 15, 30, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 4px 8px;
-      border-radius: 14px;
-      font-size: 11px;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
 
-    /* STOL ZONASI */
-    .game-area {
+    .top-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
       position: relative;
-      width: 360px;
-      height: 360px;
-      margin: 0 auto;
+    }
+
+    .badge-sub {
+      position: absolute;
+      bottom: -10px;
+      font-size: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .table-info {
+      font-size: 10px;
+      text-align: center;
+      color: #ccc;
+    }
+
+    /* 2. YOG'OCH STOL ZONASI */
+    .table-area {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: #c28245 url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      background-size: cover;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .wooden-table {
+    /* O'rtadagi Oltin Quyosh Naqshi */
+    .sun-pattern {
       position: absolute;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #834f26 0%, #47260e 70%, #200f04 100%);
-      box-shadow: 0 0 0 8px #140902, 0 10px 30px rgba(0,0,0,0.9), inset 0 0 25px rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mandala-pattern {
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,182,193,0.1) 0%, transparent 75%);
-      border: 1.5px dashed rgba(255, 215, 0, 0.25);
+      width: 210px;
+      height: 210px;
+      background: url('https://img.icons8.com/ios-filled/250/d79a4b/sun.png') no-repeat center/contain;
+      opacity: 0.4;
       pointer-events: none;
     }
 
-    /* VIP BUTILKA */
+    /* Yashil Shisha Butilka */
     .bottle {
-      width: 65px;
-      height: 155px;
-      background: url('https://img.icons8.com/plasticine/200/wine-bottle.png') no-repeat center/contain;
-      filter: drop-shadow(0 0 12px #9b59b6) drop-shadow(0 10px 15px rgba(0,0,0,0.8));
+      width: 50px;
+      height: 140px;
+      background: url('https://img.icons8.com/color/160/glass-bottle.png') no-repeat center/contain;
       transition: transform 3.8s cubic-bezier(0.15, 0.85, 0.2, 1);
       cursor: pointer;
       z-index: 50;
       touch-action: manipulation;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
     }
 
-    /* 12 TA O'YINCHI KARTASI */
+    .spins-text {
+      position: absolute;
+      left: 32%;
+      top: 52%;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      pointer-events: none;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* O'YINCHILAR PROFILI (KVADRAT VA VIP FRAME) */
     .player-slot {
       position: absolute;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      border-radius: 10px;
       background-size: cover;
       background-position: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      pointer-events: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
     }
 
-    .player-slot.female { border: 2px solid #ff4757; }
-    .player-slot.male { border: 2px solid #2e86de; }
-
-    .gender-badge {
+    .player-frame {
       position: absolute;
-      right: -2px;
-      bottom: -2px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
+      inset: -5px;
+      border: 2px solid #ffd700;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .badge-gift {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ff4757;
+      color: #fff;
       font-size: 9px;
+      font-weight: bold;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      border: 1px solid #fff;
     }
-    .female .gender-badge { background: #ff4757; }
-    .male .gender-badge { background: #2e86de; }
 
-    .seat-number {
+    .player-name-tag {
       position: absolute;
-      top: -12px;
-      background: rgba(0, 0, 0, 0.8);
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 9px;
-      padding: 1px 5px;
-      border-radius: 6px;
-      color: #aaa;
-    }
-
-    .player-info {
-      position: absolute;
-      bottom: -22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .player-name {
-      font-size: 9px;
-      font-weight: bold;
       white-space: nowrap;
       text-shadow: 0 1px 3px #000;
+      color: #fff;
+      font-weight: 500;
     }
 
-    .player-likes {
-      font-size: 8px;
-      color: #ff6b81;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .player-slot.active {
-      transform: scale(1.3);
-      box-shadow: 0 0 20px #e056fd;
-      border-color: #e056fd !important;
-      z-index: 30;
-    }
-
-    /* PASTKI PANEL (CHAT VA MUSIQA) */
-    .bottom-section {
-      height: 190px;
-      background: #0f0a15;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 8px;
-      padding: 10px;
-    }
-
-    /* CHAT OYNASI */
-    .chat-box {
-      background: rgba(20, 15, 30, 0.6);
-      border-radius: 12px;
-      padding: 8px;
+    /* 3. PASTKI CHAT VA MAGNITOFON */
+    .bottom-panel {
+      background: #181818;
+      height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 8px 10px;
+      border-top: 1px solid #333;
     }
 
-    .chat-messages {
-      font-size: 10px;
+    .chat-and-music {
+      display: flex;
+      gap: 10px;
+      height: 145px;
+    }
+
+    .chat-container {
+      flex: 1;
+      font-size: 11px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       overflow-y: auto;
-      max-height: 120px;
     }
 
-    .chat-msg span { font-weight: bold; }
-    .msg-female { color: #ff788e; }
-    .msg-male { color: #54a0ff; }
-
-    .chat-input-area {
-      display: flex;
-      gap: 4px;
-      margin-top: 4px;
+    .chat-line {
+      line-height: 1.3;
     }
+    .user-gold { color: #f1c40f; font-weight: bold; }
+    .user-pink { color: #ff788e; font-weight: bold; }
+    .user-blue { color: #54a0ff; font-weight: bold; }
+    .sub-text { font-size: 9px; color: #888; display: block; }
 
-    .chat-input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.07);
-      border: none;
+    /* BOOMBOX MUSIC PLAYER */
+    .boombox-card {
+      width: 140px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 10px;
-      padding: 6px 10px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .boombox-img {
+      width: 100px;
+      height: 45px;
+      background: url('https://img.icons8.com/color/96/boombox.png') no-repeat center/contain;
+    }
+
+    .volume-slider {
+      width: 100%;
+      accent-color: #ddd;
+    }
+
+    /* INPUT CHAT */
+    .chat-input-box {
+      display: flex;
+      align-items: center;
+      background: #252525;
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+
+    .chat-input-box input {
+      background: transparent;
+      border: none;
       color: #fff;
-      font-size: 10px;
+      font-size: 11px;
+      width: 100%;
       outline: none;
     }
 
-    /* MUSIQA PLAYER */
-    .music-box {
-      background: rgba(20, 15, 30, 0.6);
-      border-radius: 12px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .track-card {
+    .send-btn {
+      background: #ff9f43;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #fff;
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 6px;
-      border-radius: 8px;
+      justify-content: center;
+      font-size: 10px;
+      cursor: pointer;
     }
-
-    .track-img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      background-size: cover;
-    }
-
-    .track-details {
-      flex: 1;
-    }
-
-    .track-title { font-size: 10px; font-weight: bold; }
-    .track-artist { font-size: 8px; color: #888; }
   </style>
 </head>
 <body>
 
   <!-- TOP BAR -->
   <div class="top-bar">
-    <div class="logo-section">👑 SPIN</div>
-    <div class="table-badge">Elite Table #12<br><small style="color:#2ed573;">● 12/12</small></div>
-    <div class="currency-group">
-      <div class="chip">💎 1,250</div>
-      <div class="chip">❤️ 11,000</div>
+    <div class="heart-box">
+      <span>❤️</span> 143
+    </div>
+
+    <div class="top-icons">
+      <div class="icon-btn">🎟️ <span class="badge-sub">8 d.</span></div>
+      <div class="icon-btn">⚙️</div>
+      <div class="icon-btn">#6 <span class="badge-sub">1 hr.</span></div>
+      <div class="icon-btn">☰</div>
+      <div class="icon-btn">⚙️</div>
+    </div>
+
+    <div class="table-info">
+      Table<br><b>229</b> 🔄
     </div>
   </div>
 
-  <!-- STOL VA BUTILKA -->
-  <div class="game-area">
-    <div class="wooden-table">
-      <div class="mandala-pattern"></div>
-      <div class="bottle" id="bottle"></div>
-    </div>
+  <!-- YOG'OCH STOL -->
+  <div class="table-area" id="tableArea">
+    <div class="sun-pattern"></div>
+    <div class="bottle" id="bottle"></div>
+    <div class="spins-text">← Spins the bottle</div>
   </div>
 
-  <!-- CHAT VA MUSIQA -->
-  <div class="bottom-section">
-    <div class="chat-box">
-      <div class="chat-messages">
-        <div class="chat-msg"><span class="msg-female">Malika:</span> Hammaga salom 💕</div>
-        <div class="chat-msg"><span class="msg-male">Sardor:</span> Salom Malika 🖐️</div>
-        <div class="chat-msg"><span class="msg-female">Zarina:</span> Qani kim aylantiradi? 😁</div>
-        <div class="chat-msg"><span class="msg-male">Bekzod:</span> Men aylantiraman 😉</div>
+  <!-- PASTKI CHAT VA BOOMBOX -->
+  <div class="bottom-panel">
+    <div class="chat-and-music">
+      <!-- CHAT -->
+      <div class="chat-container">
+        <div class="chat-line">
+          <span class="user-gold">👑 Mr SKROMNIY:</span> ANAKONDA 😂
+          <span class="sub-text">Show translation</span>
+        </div>
+        <div class="chat-line">
+          <span class="user-pink">🌸 ANAKONDA:</span> Mr SKROMNIY, koramz
+          <span class="sub-text">Show translation</span>
+        </div>
+        <div class="chat-line">
+          <span class="user-blue">🛑 ФВО:</span> ANAKONDA, xow nma qlay man eni
+          <span class="sub-text">Show translation</span>
+        </div>
+        <div class="chat-line">
+          <span class="user-blue">Norboyev70:</span> ANAKONDA, kelurdm sekn
+          <span class="sub-text">Show translation</span>
+        </div>
       </div>
-      <div class="chat-input-area">
-        <input type="text" class="chat-input" placeholder="Xabar yozing...">
+
+      <!-- BOOMBOX MAGNITOFON -->
+      <div class="boombox-card">
+        <div class="boombox-img"></div>
+        <input type="range" class="volume-slider" min="0" max="100" value="70">
       </div>
     </div>
 
-    <div class="music-box">
-      <div style="font-size: 10px; font-weight: bold; color: #a29bfe;">🎵 MUZIKA</div>
-      <div class="track-card">
-        <div class="track-img" style="background-image: url('https://i.pravatar.cc/100?img=60');"></div>
-        <div class="track-details">
-          <div class="track-title">Dunyo</div>
-          <div class="track-artist">Ozoda</div>
-        </div>
-        <div style="font-size: 12px; cursor: pointer;">▶️</div>
-      </div>
-      <div class="track-card">
-        <div class="track-img" style="background-image: url('https://i.pravatar.cc/100?img=47');"></div>
-        <div class="track-details">
-          <div class="track-title">Sevgi bu...</div>
-          <div class="track-artist">Shahzoda</div>
-        </div>
-        <div style="font-size: 12px; cursor: pointer;">▶️</div>
-      </div>
+    <!-- INPUT -->
+    <div class="chat-input-box">
+      <input type="text" placeholder="Write a message here">
+      <button class="send-btn">➤</button>
     </div>
   </div>
 
@@ -332,78 +336,72 @@
     const tg = window.Telegram.WebApp;
     if (tg) tg.expand();
 
-    const gameArea = document.querySelector('.game-area');
+    const tableArea = document.getElementById('tableArea');
     const bottle = document.getElementById('bottle');
     let currentRotation = 0;
     let isSpinning = false;
 
-    // Rasmdagi 12 ta o'yinchi ro'yxati
+    // RASMDAGI 8 TA O'YINCHI
     const players = [
-      { name: 'Malika', gender: 'female', likes: '2.3K', avatar: 'https://i.pravatar.cc/100?img=32' },
-      { name: 'Bekzod', gender: 'male', likes: '1.9K', avatar: 'https://i.pravatar.cc/100?img=12' },
-      { name: 'Gulnoza', gender: 'female', likes: '2.6K', avatar: 'https://i.pravatar.cc/100?img=44' },
-      { name: 'Diyor', gender: 'male', likes: '1.3K', avatar: 'https://i.pravatar.cc/100?img=68' },
-      { name: 'Shahnoza', gender: 'female', likes: '2.2K', avatar: 'https://i.pravatar.cc/100?img=49' },
-      { name: 'Javohir', gender: 'male', likes: '1.4K', avatar: 'https://i.pravatar.cc/100?img=53' },
-      { name: 'Zarina', gender: 'female', likes: '2.7K', avatar: 'https://i.pravatar.cc/100?img=26' },
-      { name: 'Asilbek', gender: 'male', likes: '1.6K', avatar: 'https://i.pravatar.cc/100?img=11' },
-      { name: 'Sevinch', gender: 'female', likes: '2.0K', avatar: 'https://i.pravatar.cc/100?img=23' },
-      { name: 'Sardor', gender: 'male', likes: '1.2K', avatar: 'https://i.pravatar.cc/100?img=59' },
-      { name: 'Dildora', gender: 'female', likes: '3.1K', avatar: 'https://i.pravatar.cc/100?img=25' },
-      { name: 'Nurbek', gender: 'male', likes: '1.8K', avatar: 'https://i.pravatar.cc/100?img=33' }
+      { name: 'ANAKONDA, 21', gift: '6', avatar: 'https://i.pravatar.cc/100?img=32' },
+      { name: 'Ubaydulla, 24', gift: '1', avatar: 'https://i.pravatar.cc/100?img=12' },
+      { name: 'Luna, 27', gift: '18', avatar: 'https://i.pravatar.cc/100?img=44' },
+      { name: 'No name [1], 27', gift: null, avatar: 'https://i.pravatar.cc/100?img=68' },
+      { name: 'No name, 31', gift: '1', avatar: 'https://i.pravatar.cc/100?img=49' },
+      { name: 'Mr SKROM, 23', gift: '5', avatar: 'https://i.pravatar.cc/100?img=53' },
+      { name: 'CCCR, 22', gift: null, avatar: 'https://i.pravatar.cc/100?img=11' },
+      { name: 'ФВО', gift: '3', avatar: 'https://i.pravatar.cc/100?img=25' }
     ];
 
-    // 12 ta o'yinchini stol atrofida aylanaga joylashtirish
     function renderPlayers() {
-      const radius = 145;
+      const width = tableArea.clientWidth;
+      const height = tableArea.clientHeight;
+      const radiusX = width * 0.38;
+      const radiusY = height * 0.38;
       const total = players.length;
 
       players.forEach((player, index) => {
         const angle = (index / total) * (2 * Math.PI) - (Math.PI / 2);
-        const x = radius * Math.cos(angle) + 158; 
-        const y = radius * Math.sin(angle) + 158;
+        const x = radiusX * Math.cos(angle) + (width / 2) - 29;
+        const y = radiusY * Math.sin(angle) + (height / 2) - 29;
 
         const slot = document.createElement('div');
-        slot.className = `player-slot ${player.gender}`;
+        slot.className = 'player-slot';
         slot.id = `player-${index}`;
         slot.style.left = `${x}px`;
         slot.style.top = `${y}px`;
         slot.style.backgroundImage = `url('${player.avatar}')`;
 
-        // O'rin raqami
-        const num = document.createElement('div');
-        num.className = 'seat-number';
-        num.innerText = index + 1;
-        slot.appendChild(num);
+        // VIP Ramka
+        const frame = document.createElement('div');
+        frame.className = 'player-frame';
+        slot.appendChild(frame);
 
-        // Jins belgisi (♀ / ♂)
-        const gBadge = document.createElement('div');
-        gBadge.className = 'gender-badge';
-        gBadge.innerText = player.gender === 'female' ? '♀' : '♂';
-        slot.appendChild(gBadge);
+        // Sovg'a raqami
+        if (player.gift) {
+          const giftBadge = document.createElement('div');
+          giftBadge.className = 'badge-gift';
+          giftBadge.innerText = player.gift;
+          slot.appendChild(giftBadge);
+        }
 
-        // Ism va Yuraklar
-        const info = document.createElement('div');
-        info.className = 'player-info';
-        info.innerHTML = `
-          <div class="player-name">${player.name}</div>
-          <div class="player-likes">❤️ ${player.likes}</div>
-        `;
-        slot.appendChild(info);
+        // Ism
+        const nameTag = document.createElement('div');
+        nameTag.className = 'player-name-tag';
+        nameTag.innerText = player.name;
+        slot.appendChild(nameTag);
 
-        gameArea.appendChild(slot);
+        tableArea.appendChild(slot);
       });
     }
 
-    // Butilkani aylantirish
+    // BUTILKANI AYLANISHI
     function spinBottle() {
       if (isSpinning) return;
       isSpinning = true;
 
-      document.querySelectorAll('.player-slot').forEach(el => el.classList.remove('active'));
-
       const randomDegree = Math.floor(Math.random() * 360);
-      const totalSpins = 360 * 7 + randomDegree;
+      const totalSpins = 360 * 6 + randomDegree;
       currentRotation += totalSpins;
 
       bottle.style.transform = `rotate(${currentRotation}deg)`;
@@ -414,20 +412,16 @@
         const playerIndex = Math.floor((normalizedDegree / 360) * players.length);
         
         const selectedPlayer = players[playerIndex];
-        const playerEl = document.getElementById(`player-${playerIndex}`);
-        if (playerEl) playerEl.classList.add('active');
-
         if (tg && tg.showAlert) {
           tg.showAlert(`🍾 Butilka ${selectedPlayer.name} ga to'xtadi!`);
         }
       }, 3800);
     }
 
-    // TEGINISH HODISALARI (TOUCH & CLICK)
     bottle.addEventListener('click', spinBottle);
     bottle.addEventListener('pointerdown', spinBottle);
 
-    renderPlayers();
+    window.onload = renderPlayers;
   </script>
 </body>
 </html>
