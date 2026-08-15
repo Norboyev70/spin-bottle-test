@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Spin the Bottle Mini App</title>
+  <title>Spin the Bottle HD</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      user-select: none;
     }
 
     body {
-      background-color: #1a0f07;
-      font-family: Arial, sans-serif;
+      background: #0f0a06;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -24,75 +25,118 @@
       color: white;
     }
 
-    /* Sarlavha */
-    .header {
+    /* Tepadagi menyu bari */
+    .top-bar {
       width: 100%;
-      padding: 15px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.4);
-      font-size: 20px;
+      padding: 12px 20px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
       font-weight: bold;
     }
 
-    /* O'yin stoli */
+    .heart-counter {
+      color: #ff4757;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+    }
+
+    /* Yog'och Stol Dizayni */
     .table-container {
       position: relative;
-      width: 340px;
-      height: 340px;
+      width: 350px;
+      height: 350px;
       border-radius: 50%;
-      background: radial-gradient(circle, #8b5a2b 0%, #4a2e12 100%);
-      box-shadow: inset 0 0 20px #000, 0 10px 25px rgba(0,0,0,0.8);
+      background: radial-gradient(circle, #8a5327 0%, #4a2b13 70%, #241205 100%);
+      box-shadow: 0 0 0 10px #361c0a, 0 15px 35px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.8);
       display: flex;
       align-items: center;
       justify-content: center;
       margin: auto;
     }
 
-    /* O'yinchilar profillari (Aylana bo'ylab) */
+    /* Stol o'rtasidagi oltin naqsh (Pattern) */
+    .table-center-pattern {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 215, 0, 0.25);
+      background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* O'yinchilar Ramkasi va Kartochkasi */
     .player-slot {
       position: absolute;
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
       border: 2px solid #ffd700;
       background-size: cover;
       background-position: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-      transition: transform 0.3s, border-color 0.3s;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.6);
+      transition: all 0.3s ease;
+    }
+
+    .player-name {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: #fff;
+      border: 0.5px solid rgba(255,215,0,0.4);
     }
 
     .player-slot.active {
       border-color: #00ffcc;
-      transform: scale(1.2);
-      box-shadow: 0 0 15px #00ffcc;
+      box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+      transform: scale(1.25);
+      z-index: 20;
     }
 
-    /* Butilka */
+    /* Yozuvli va shaffof Shisha Butilka */
     .bottle {
-      width: 60px;
+      width: 55px;
       height: 140px;
       background: url('https://img.icons8.com/color/160/wine-bottle.png') no-repeat center/contain;
-      transition: transform 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transition: transform 3.5s cubic-bezier(0.15, 0.9, 0.2, 1);
       cursor: pointer;
       z-index: 10;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.7));
     }
 
-    /* Boshqaruv tugmasi */
+    /* Pastki Boshqaruv Tugmasi */
     .controls {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
     }
 
     .spin-btn {
-      background: linear-gradient(135deg, #ff8c00, #e52d27);
+      background: linear-gradient(180deg, #ff9f43 0%, #ee5253 100%);
       color: #fff;
       border: none;
-      padding: 14px 40px;
+      padding: 16px 50px;
       font-size: 18px;
       font-weight: bold;
-      border-radius: 30px;
-      box-shadow: 0 5px 15px rgba(229, 45, 39, 0.4);
+      border-radius: 35px;
+      box-shadow: 0 8px 25px rgba(238, 82, 83, 0.5), inset 0 2px 3px rgba(255,255,255,0.4);
       cursor: pointer;
-      transition: active 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.1s;
     }
 
     .spin-btn:active {
@@ -102,47 +146,49 @@
 </head>
 <body>
 
-  <div class="header">🍾 Spin the Bottle</div>
+  <div class="top-bar">
+    <div class="heart-counter">❤️ 143</div>
+    <div>Table #229</div>
+  </div>
 
   <div class="table-container" id="table">
+    <div class="table-center-pattern"></div>
     <div class="bottle" id="bottle"></div>
   </div>
 
   <div class="controls">
-    <button class="spin-btn" onclick="spinBottle()">Aylantirish 🔄</button>
+    <button class="spin-btn" onclick="spinBottle()">Aylantirish 🍾</button>
   </div>
 
   <script>
-    // Telegram Web App init
     const tg = window.Telegram.WebApp;
-    tg.expand();
+    if(tg) tg.expand();
 
     const table = document.getElementById('table');
     const bottle = document.getElementById('bottle');
     let currentRotation = 0;
     let isSpinning = false;
 
-    // Namunaviy o'yinchilar
+    // Rasmdagidek ismlar va profillar
     const players = [
-      { name: 'Anakonda', avatar: 'https://i.pravatar.cc/100?img=1' },
-      { name: 'Ubaydulla', avatar: 'https://i.pravatar.cc/100?img=3' },
-      { name: 'Luna', avatar: 'https://i.pravatar.cc/100?img=5' },
-      { name: 'No name', avatar: 'https://i.pravatar.cc/100?img=8' },
-      { name: 'CCCR', avatar: 'https://i.pravatar.cc/100?img=11' },
-      { name: 'Skromniy', avatar: 'https://i.pravatar.cc/100?img=12' },
-      { name: 'FBO', avatar: 'https://i.pravatar.cc/100?img=15' },
+      { name: 'ANAKONDA, 21', avatar: 'https://i.pravatar.cc/100?img=1' },
+      { name: 'Ubaydulla, 24', avatar: 'https://i.pravatar.cc/100?img=3' },
+      { name: 'Luna, 27', avatar: 'https://i.pravatar.cc/100?img=5' },
+      { name: 'No name, 27', avatar: 'https://i.pravatar.cc/100?img=8' },
+      { name: 'CCCR, 22', avatar: 'https://i.pravatar.cc/100?img=11' },
+      { name: 'Mr SKROM, 23', avatar: 'https://i.pravatar.cc/100?img=12' },
+      { name: 'ФВО', avatar: 'https://i.pravatar.cc/100?img=15' },
       { name: 'Norboyev', avatar: 'https://i.pravatar.cc/100?img=18' }
     ];
 
-    // O'yinchilarni stol atrofida aylanaga joylashtirish
     function renderPlayers() {
-      const radius = 125; // Markazdan masofa
+      const radius = 130;
       const total = players.length;
 
       players.forEach((player, index) => {
-        const angle = (index / total) * (2 * Math.PI);
-        const x = radius * Math.cos(angle) + 145; // 145px - markazlashtirish uchun
-        const y = radius * Math.sin(angle) + 145;
+        const angle = (index / total) * (2 * Math.PI) - (Math.PI / 2);
+        const x = radius * Math.cos(angle) + 149;
+        const y = radius * Math.sin(angle) + 149;
 
         const div = document.createElement('div');
         div.className = 'player-slot';
@@ -150,30 +196,30 @@
         div.style.left = `${x}px`;
         div.style.top = `${y}px`;
         div.style.backgroundImage = `url('${player.avatar}')`;
-        
+
+        const nameTag = document.createElement('div');
+        nameTag.className = 'player-name';
+        nameTag.innerText = player.name;
+        div.appendChild(nameTag);
+
         table.appendChild(div);
       });
     }
 
-    // Butilkani aylantirish
     function spinBottle() {
       if (isSpinning) return;
       isSpinning = true;
 
-      // Oldingi faol belgilashlarni olib tashlash
       document.querySelectorAll('.player-slot').forEach(el => el.classList.remove('active'));
 
-      // Kamida 4-8 marta to'liq aylanish + random burchak
       const randomDegree = Math.floor(Math.random() * 360);
-      const totalSpins = 360 * 5 + randomDegree;
+      const totalSpins = 360 * 6 + randomDegree;
       currentRotation += totalSpins;
 
       bottle.style.transform = `rotate(${currentRotation}deg)`;
 
       setTimeout(() => {
         isSpinning = false;
-        
-        // Qaysi o'yinchiga tushganini hisoblash
         const normalizedDegree = (currentRotation % 360 + 360) % 360;
         const playerIndex = Math.floor((normalizedDegree / 360) * players.length);
         
@@ -181,9 +227,10 @@
         const playerEl = document.getElementById(`player-${playerIndex}`);
         if (playerEl) playerEl.classList.add('active');
 
-        // Telegram xabarnomasi chiqarish
-        tg.showAlert(`🍾 Butilka ${selectedPlayer.name} ga to'xtadi!`);
-      }, 3000);
+        if (tg && tg.showAlert) {
+          tg.showAlert(`🍾 Butilka ${selectedPlayer.name} ga to'xtadi!`);
+        }
+      }, 3500);
     }
 
     renderPlayers();
