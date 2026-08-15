@@ -1,31 +1,36 @@
 const bottle = document.getElementById("bottle");
-const messageInput = document.getElementById("messageInput");
-const sendButton = document.getElementById("sendButton");
+
+const input = document.getElementById("messageInput");
+const send = document.getElementById("sendButton");
 const messages = document.getElementById("messages");
 
-let rotation = 0;
+let angle = 28;
 let spinning = false;
 
 
 /* =========================
-   BOTTLE SPIN
+   BUTILKA
 ========================= */
 
-bottle.addEventListener("click", () => {
+bottle.addEventListener("click", function () {
 
     if (spinning) return;
 
     spinning = true;
 
-    // Har bosganda soat strelkasi bo'yicha
-    rotation += 720 + Math.floor(Math.random() * 360);
+    // Faqat o'yinchi bosganda aylanadi
+    const extra =
+        720 +
+        Math.floor(Math.random() * 360);
+
+    angle += extra;
 
     bottle.style.transform =
-        `rotate(${rotation}deg)`;
+        `rotate(${angle}deg)`;
 
     setTimeout(() => {
         spinning = false;
-    }, 3000);
+    }, 2900);
 });
 
 
@@ -33,56 +38,62 @@ bottle.addEventListener("click", () => {
    CHAT
 ========================= */
 
-function sendMessage() {
+function sendMessage(){
 
-    const text = messageInput.value.trim();
+    const text = input.value.trim();
 
-    if (!text) return;
+    if(!text) return;
 
-    const message = document.createElement("div");
+    const item = document.createElement("div");
 
-    message.className = "message";
+    item.className = "msg";
 
-    message.innerHTML = `
+    item.innerHTML = `
         <img src="https://i.pravatar.cc/80?img=47">
 
         <div>
-            <strong>Aziza 👑</strong>
+            <b>Aziza 👑</b>
 
-            <div class="bubble">
-                ${escapeHTML(text)}
-                <span>Hozir</span>
-            </div>
+            <p>
+                ${escapeText(text)}
+                <time>Hozir</time>
+            </p>
         </div>
     `;
 
-    messages.appendChild(message);
+    messages.appendChild(item);
 
-    messages.scrollTop = messages.scrollHeight;
+    messages.scrollTop =
+        messages.scrollHeight;
 
-    messageInput.value = "";
+    input.value = "";
 }
 
 
-sendButton.addEventListener("click", sendMessage);
+send.addEventListener(
+    "click",
+    sendMessage
+);
 
 
-messageInput.addEventListener("keydown", (event) => {
+input.addEventListener(
+    "keydown",
+    function(e){
 
-    if (event.key === "Enter") {
-        sendMessage();
+        if(e.key === "Enter"){
+            sendMessage();
+        }
+
     }
+);
 
-});
 
+/* xavfsiz yozuv */
 
-/* =========================
-   SECURITY
-========================= */
+function escapeText(text){
 
-function escapeHTML(text) {
-
-    const div = document.createElement("div");
+    const div =
+        document.createElement("div");
 
     div.textContent = text;
 
