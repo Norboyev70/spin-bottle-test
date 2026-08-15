@@ -1,273 +1,193 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Spin Bottle</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Spin the Bottle</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="app">
+  <main class="app">
 
-    <!-- ================= TOP GAME ================= -->
-    <section class="game">
+    <!-- O'YIN QISMI -->
+    <section class="game-area">
 
-        <div class="topbar">
-
-            <div class="balance">
-                <span>♡</span>
-                <b>143</b>
-            </div>
-
-            <div class="topBtn">
-                <strong>✦</strong>
-                <small>8 d.</small>
-            </div>
-
-            <div class="topBtn">
-                <strong>◎</strong>
-                <small>1 hr.</small>
-            </div>
-
-            <div class="topBtn">
-                <strong>☰</strong>
-            </div>
-
-            <div class="topBtn">
-                <strong>⚙</strong>
-            </div>
-
-            <div class="refresh">↻</div>
+      <div class="top-bar">
+        <div class="room-name">
+          <span class="room-dot"></span>
+          Stol #001
         </div>
 
-
-        <!-- PREMIUM -->
-        <div class="premium">
-            <span class="premium-crown">♛</span>
+        <div class="players-count">
+          <span id="playerCount">0</span>/12
         </div>
+      </div>
 
-        <!-- SMALL TROPHY -->
-        <div class="trophy">🏆</div>
+      <div class="table-wrap">
 
+        <div class="table">
 
-        <!-- ================= PLAYERS ================= -->
+          <div class="table-decoration decoration-1"></div>
+          <div class="table-decoration decoration-2"></div>
+          <div class="table-decoration decoration-3"></div>
+          <div class="table-decoration decoration-4"></div>
 
-        <div class="player player1">
-            <div class="likes">♥ 342</div>
-            <div class="avatar gold">
-                <img src="https://i.pravatar.cc/180?img=47">
-            </div>
-            <div class="name">Aziza</div>
-        </div>
+          <!-- MARKAZ -->
+          <div class="table-center">
 
-        <div class="player player2">
-            <div class="likes">♥ 215</div>
-            <div class="avatar blue">
-                <img src="https://i.pravatar.cc/180?img=12">
-            </div>
-            <div class="name">Bekzod</div>
-        </div>
+            <div class="center-pattern"></div>
 
-        <div class="player player3">
-            <div class="likes">♥ 298</div>
-            <div class="avatar pink">
-                <img src="https://i.pravatar.cc/180?img=44">
-            </div>
-            <div class="name">Malika</div>
-        </div>
-
-        <div class="player player4">
-            <div class="likes">♥ 187</div>
-            <div class="avatar pink">
-                <img src="https://i.pravatar.cc/180?img=32">
-            </div>
-            <div class="name">Zarina</div>
-        </div>
-
-        <div class="player player5">
-            <div class="likes">♥ 254</div>
-            <div class="avatar pink">
-                <img src="https://i.pravatar.cc/180?img=49">
-            </div>
-            <div class="name">Sevinch</div>
-        </div>
-
-        <div class="player player6">
-            <div class="likes">♥ 132</div>
-            <div class="avatar blue">
-                <img src="https://i.pravatar.cc/180?img=11">
-            </div>
-            <div class="name">Jasur</div>
-        </div>
-
-        <div class="player player7">
-            <div class="likes">♥ 176</div>
-            <div class="avatar pink">
-                <img src="https://i.pravatar.cc/180?img=48">
-            </div>
-            <div class="name">Gulnoza</div>
-        </div>
-
-        <div class="player player8">
-            <div class="likes">♥ 321</div>
-            <div class="avatar gold">
-                <img src="https://i.pravatar.cc/180?img=45">
-            </div>
-            <div class="name">Madina</div>
-        </div>
-
-        <div class="player player9">
-            <div class="likes">♥ 203</div>
-            <div class="avatar pink">
-                <img src="https://i.pravatar.cc/180?img=25">
-            </div>
-            <div class="name">Nilufar</div>
-        </div>
-
-        <div class="player player10">
-            <div class="likes">♥ 149</div>
-            <div class="avatar blue">
-                <img src="https://i.pravatar.cc/180?img=13">
-            </div>
-            <div class="name">Sardor</div>
-        </div>
-
-        <div class="player player11">
-            <div class="likes">♥ 267</div>
-            <div class="avatar pink">
-                <img src="https://i.pravatar.cc/180?img=43">
-            </div>
-            <div class="name">Dildora</div>
-        </div>
-
-        <div class="player player12">
-            <div class="likes">♥ 190</div>
-            <div class="avatar blue">
-                <img src="https://i.pravatar.cc/180?img=14">
-            </div>
-            <div class="name">Fazliddin</div>
-        </div>
-
-
-        <!-- ================= CENTER ================= -->
-
-        <div class="center">
-
-            <div class="ornament"></div>
-
-            <!-- BOTTLE -->
-            <div class="bottle" id="bottle">
-
-                <div class="bottle-neck"></div>
-
-                <div class="bottle-body">
-                    <div class="glass-light"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= CHAT ================= -->
-
-    <section class="chat">
-
-        <div class="chatHead">
-
-            <div class="chatTitle">
-                <span>💬</span>
-                <b>Chat</b>
-            </div>
-
-            <div class="tabs">
-                <button class="active">Barchasi</button>
-                <button>Stol</button>
-                <button>Do‘stlar</button>
-            </div>
-
-            <div class="count">♡ 12/12</div>
-
-        </div>
-
-
-        <div class="messages" id="messages">
-
-            <div class="msg">
-                <img src="https://i.pravatar.cc/80?img=47">
-                <div>
-                    <b>Aziza 👑</b>
-                    <p>Salom hammaga! 👋 <time>21:48</time></p>
-                </div>
-            </div>
-
-            <div class="msg">
-                <img src="https://i.pravatar.cc/80?img=12">
-                <div>
-                    <b>Bekzod ✓</b>
-                    <p>O‘yin boshlaymizmi? 🔥 <time>21:48</time></p>
-                </div>
-            </div>
-
-            <div class="msg">
-                <img src="https://i.pravatar.cc/80?img=44">
-                <div>
-                    <b>Malika 👑</b>
-                    <p>Lets go 😍 <time>21:49</time></p>
-                </div>
-            </div>
-
-            <div class="msg">
-                <img src="https://i.pravatar.cc/80?img=11">
-                <div>
-                    <b>Jasur ✓</b>
-                    <p>Aziza navbat seniki 😉 <time>21:49</time></p>
-                </div>
-            </div>
-
-            <div class="msg">
-                <img src="https://i.pravatar.cc/80?img=43">
-                <div>
-                    <b>Dildora ❤️</b>
-                    <p>Hayajonli 😍 <time>21:49</time></p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="inputBox">
-
-            <button>☺</button>
-
-            <input
-                id="messageInput"
-                type="text"
-                placeholder="Xabar yozing..."
+            <div
+              id="bottle"
+              class="bottle"
+              title="Butilkani aylantirish"
             >
+              <div class="bottle-neck"></div>
+              <div class="bottle-body">
+                <div class="bottle-shine"></div>
+              </div>
+            </div>
 
-            <button>▧</button>
-            <button>🎁</button>
+          </div>
 
-            <button
-                class="send"
-                id="sendButton"
-            >➤</button>
+          <!-- O'YINCHILAR -->
+          <div class="seat seat-1">
+            <div class="player empty" data-seat="0">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-2">
+            <div class="player empty" data-seat="1">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-3">
+            <div class="player empty" data-seat="2">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-4">
+            <div class="player empty" data-seat="3">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-5">
+            <div class="player empty" data-seat="4">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-6">
+            <div class="player empty" data-seat="5">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-7">
+            <div class="player empty" data-seat="6">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-8">
+            <div class="player empty" data-seat="7">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-9">
+            <div class="player empty" data-seat="8">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-10">
+            <div class="player empty" data-seat="9">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-11">
+            <div class="player empty" data-seat="10">
+              <div class="avatar">+</div>
+            </div>
+          </div>
+
+          <div class="seat seat-12">
+            <div class="player empty" data-seat="11">
+              <div class="avatar">+</div>
+            </div>
+          </div>
 
         </div>
 
+      </div>
+
     </section>
 
-</div>
 
-<script src="script.js"></script>
+    <!-- CHAT -->
+    <section class="chat-area">
 
-</body>
-</html>
+      <div class="chat-header">
+        <div>
+          <strong>Chat</strong>
+          <span class="online-dot"></span>
+        </div>
+
+        <span class="chat-info">Stol suhbati</span>
+      </div>
+
+      <div id="messages" class="messages">
+
+        <div class="system-message">
+          Stolga xush kelibsiz 👋
+        </div>
+
+      </div>
+
+      <div class="quick-messages">
+        <button data-message="Salom 👋">Salom 👋</button>
+        <button data-message="Omad 😏">Omad 😏</button>
+        <button data-message="Aylantir 🔥">Aylantir 🔥</button>
+        <button data-message="😂">😂</button>
+      </div>
+
+      <form id="chatForm" class="chat-input">
+
+        <input
+          id="messageInput"
+          type="text"
+          maxlength="100"
+          placeholder="Xabar yozing..."
+          autocomplete="off"
+        >
+
+        <button type="submit">
+          ➤
+        </button>
+
+      </form>
+
+    </section>
+
+  </main>
+
+  <div id="resultPopup" class="result-popup">
+    <div class="result-card">
+      <div class="result-title">Butilka tanladi</div>
+      <div id="resultName" class="result-name">—</div>
+      <button id="closeResult">Davom etish</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
