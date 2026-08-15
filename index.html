@@ -1,162 +1,149 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Spin Bottle</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spin Bottle</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="app">
+    <main class="game">
 
-  <!-- ================= TOP ================= -->
-  <header class="topbar">
+        <!-- GAME AREA -->
+        <section class="game-area">
 
-    <div class="room">
-      <div class="room-icon">♟</div>
-      <div>
-        <strong>ROOM</strong>
-        <span>#2481</span>
-      </div>
-    </div>
+            <header class="top-bar">
+                <div class="room-info">
+                    <span class="room-icon">♟</span>
+                    <div>
+                        <b>ROOM</b>
+                        <small>#2481</small>
+                    </div>
+                </div>
 
-    <div class="balance">
-      <span class="heart">♥</span>
-      <span class="balance-number">11250</span>
-    </div>
+                <div class="players-count">
+                    <span>●</span>
+                    <b id="playerCount">6</b>
+                </div>
 
-    <div class="online">
-      <span class="online-dot"></span>
-      <b id="onlineCount">6</b>
-    </div>
+                <button class="menu-btn">☰</button>
+            </header>
 
-    <button class="menu">☰</button>
+            <!-- TABLE -->
+            <div class="table-zone">
 
-  </header>
+                <div class="table">
 
+                    <div class="table-decoration decoration-1"></div>
+                    <div class="table-decoration decoration-2"></div>
+                    <div class="table-decoration decoration-3"></div>
+                    <div class="table-decoration decoration-4"></div>
 
-  <!-- ================= GAME ================= -->
-  <section class="game">
+                    <!-- PLAYERS -->
+                    <div class="players" id="players"></div>
 
-    <div class="arena">
+                    <!-- CENTER -->
+                    <div class="table-center">
 
-      <!-- premium table -->
-      <div class="table">
+                        <div class="center-glow"></div>
 
-        <div class="table-light"></div>
+                        <div class="bottle-area" id="bottle">
+                            <div class="bottle-shadow"></div>
 
-        <div class="inner-ring"></div>
+                            <div class="bottle">
+                                <div class="bottle-neck"></div>
+                                <div class="bottle-body"></div>
+                            </div>
+                        </div>
 
-        <!-- center -->
-        <div class="center">
+                        <div class="tap-text">
+                            <span>TAP</span>
+                            <small>TO SPIN</small>
+                        </div>
 
-          <div class="center-circle">
-            <div class="center-pattern"></div>
+                    </div>
 
-            <div class="bottle-wrap" id="bottle">
-
-              <div class="bottle-shadow"></div>
-
-              <div class="bottle">
-                <div class="bottle-cap"></div>
-                <div class="bottle-neck"></div>
-                <div class="bottle-body"></div>
-                <div class="bottle-label">SPIN</div>
-              </div>
+                </div>
 
             </div>
 
-            <div class="tap">
-              <b>TAP TO SPIN</b>
+        </section>
+
+
+        <!-- CHAT -->
+        <section class="chat-area">
+
+            <div class="chat-header">
+                <div>
+                    <b>Chat</b>
+                    <span>•</span>
+                    <small id="onlineCount">6 online</small>
+                </div>
+
+                <button class="chat-more">•••</button>
             </div>
 
-          </div>
+            <div class="messages" id="messages">
+
+                <div class="message">
+                    <div class="message-avatar">👩</div>
+                    <div class="message-content">
+                        <b>Madina</b>
+                        <p>Kimga tusharkin? 😏</p>
+                    </div>
+                </div>
+
+                <div class="message">
+                    <div class="message-avatar">👨</div>
+                    <div class="message-content">
+                        <b>Aziz</b>
+                        <p>Men tayyorman 😂</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="quick-messages">
+                <button>😂</button>
+                <button>😏</button>
+                <button>❤️</button>
+                <button>🔥</button>
+                <button>Voy 😳</button>
+            </div>
+
+            <div class="chat-input">
+                <input
+                    id="chatInput"
+                    type="text"
+                    placeholder="Xabar yozing..."
+                    maxlength="120"
+                >
+
+                <button id="sendMessage">➤</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div class="result-modal" id="resultModal">
+        <div class="result-box">
+
+            <div class="result-title">Butilka tanladi</div>
+
+            <div class="result-avatar" id="resultAvatar">👩</div>
+
+            <h2 id="resultName">Madina</h2>
+
+            <p>Endi navbat sizda ❤️</p>
+
+            <button id="closeResult">DAVOM ETISH</button>
 
         </div>
-
-        <!-- players -->
-        <div id="players"></div>
-
-      </div>
-
     </div>
 
-  </section>
-
-
-  <!-- ================= CHAT ================= -->
-  <section class="chat">
-
-    <div class="chat-top">
-      <div>
-        <strong>Chat</strong>
-        <span>•</span>
-        <small id="chatOnline">6 online</small>
-      </div>
-
-      <button>•••</button>
-    </div>
-
-    <div class="messages" id="messages">
-
-      <div class="message">
-        <div class="avatar mini">👩🏻</div>
-        <div>
-          <b>Madina</b>
-          <p>Kimga tusharkin? 😏</p>
-        </div>
-      </div>
-
-      <div class="message">
-        <div class="avatar mini">👨🏻</div>
-        <div>
-          <b>Aziz</b>
-          <p>Men tayyorman 😂</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="quick">
-      <button>😂</button>
-      <button>😏</button>
-      <button>❤️</button>
-      <button>🔥</button>
-      <button>Voy 😳</button>
-    </div>
-
-    <div class="input-row">
-      <input id="messageInput" type="text" placeholder="Xabar yozing..." maxlength="120">
-      <button id="send">➤</button>
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- RESULT -->
-<div class="modal" id="modal">
-
-  <div class="modal-box">
-
-    <span class="modal-label">BUTILKA TANLADI</span>
-
-    <div class="winner-avatar" id="winnerAvatar">👩🏻</div>
-
-    <h2 id="winnerName">Madina</h2>
-
-    <p>Endi navbat sizda ❤️</p>
-
-    <button id="continue">DAVOM ETISH</button>
-
-  </div>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
