@@ -2,192 +2,194 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Spin the Bottle</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Spin the Bottle Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      background-color: #1a0f07;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+
+    /* Sarlavha */
+    .header {
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* O'yin stoli */
+    .table-container {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #8b5a2b 0%, #4a2e12 100%);
+      box-shadow: inset 0 0 20px #000, 0 10px 25px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    /* O'yinchilar profillari (Aylana bo'ylab) */
+    .player-slot {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      border: 2px solid #ffd700;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .player-slot.active {
+      border-color: #00ffcc;
+      transform: scale(1.2);
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    /* Butilka */
+    .bottle {
+      width: 60px;
+      height: 140px;
+      background: url('https://img.icons8.com/color/160/wine-bottle.png') no-repeat center/contain;
+      transition: transform 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Boshqaruv tugmasi */
+    .controls {
+      margin-bottom: 25px;
+    }
+
+    .spin-btn {
+      background: linear-gradient(135deg, #ff8c00, #e52d27);
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(229, 45, 39, 0.4);
+      cursor: pointer;
+      transition: active 0.2s;
+    }
+
+    .spin-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
 <body>
 
-  <main class="app">
+  <div class="header">🍾 Spin the Bottle</div>
 
-    <!-- O'YIN QISMI -->
-    <section class="game-area">
-
-      <div class="top-bar">
-        <div class="room-name">
-          <span class="room-dot"></span>
-          Stol #001
-        </div>
-
-        <div class="players-count">
-          <span id="playerCount">0</span>/12
-        </div>
-      </div>
-
-      <div class="table-wrap">
-
-        <div class="table">
-
-          <div class="table-decoration decoration-1"></div>
-          <div class="table-decoration decoration-2"></div>
-          <div class="table-decoration decoration-3"></div>
-          <div class="table-decoration decoration-4"></div>
-
-          <!-- MARKAZ -->
-          <div class="table-center">
-
-            <div class="center-pattern"></div>
-
-            <div
-              id="bottle"
-              class="bottle"
-              title="Butilkani aylantirish"
-            >
-              <div class="bottle-neck"></div>
-              <div class="bottle-body">
-                <div class="bottle-shine"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- O'YINCHILAR -->
-          <div class="seat seat-1">
-            <div class="player empty" data-seat="0">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-2">
-            <div class="player empty" data-seat="1">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-3">
-            <div class="player empty" data-seat="2">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-4">
-            <div class="player empty" data-seat="3">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-5">
-            <div class="player empty" data-seat="4">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-6">
-            <div class="player empty" data-seat="5">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-7">
-            <div class="player empty" data-seat="6">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-8">
-            <div class="player empty" data-seat="7">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-9">
-            <div class="player empty" data-seat="8">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-10">
-            <div class="player empty" data-seat="9">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-11">
-            <div class="player empty" data-seat="10">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-          <div class="seat seat-12">
-            <div class="player empty" data-seat="11">
-              <div class="avatar">+</div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CHAT -->
-    <section class="chat-area">
-
-      <div class="chat-header">
-        <div>
-          <strong>Chat</strong>
-          <span class="online-dot"></span>
-        </div>
-
-        <span class="chat-info">Stol suhbati</span>
-      </div>
-
-      <div id="messages" class="messages">
-
-        <div class="system-message">
-          Stolga xush kelibsiz 👋
-        </div>
-
-      </div>
-
-      <div class="quick-messages">
-        <button data-message="Salom 👋">Salom 👋</button>
-        <button data-message="Omad 😏">Omad 😏</button>
-        <button data-message="Aylantir 🔥">Aylantir 🔥</button>
-        <button data-message="😂">😂</button>
-      </div>
-
-      <form id="chatForm" class="chat-input">
-
-        <input
-          id="messageInput"
-          type="text"
-          maxlength="100"
-          placeholder="Xabar yozing..."
-          autocomplete="off"
-        >
-
-        <button type="submit">
-          ➤
-        </button>
-
-      </form>
-
-    </section>
-
-  </main>
-
-  <div id="resultPopup" class="result-popup">
-    <div class="result-card">
-      <div class="result-title">Butilka tanladi</div>
-      <div id="resultName" class="result-name">—</div>
-      <button id="closeResult">Davom etish</button>
-    </div>
+  <div class="table-container" id="table">
+    <div class="bottle" id="bottle"></div>
   </div>
 
-  <script src="script.js"></script>
+  <div class="controls">
+    <button class="spin-btn" onclick="spinBottle()">Aylantirish 🔄</button>
+  </div>
+
+  <script>
+    // Telegram Web App init
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    const table = document.getElementById('table');
+    const bottle = document.getElementById('bottle');
+    let currentRotation = 0;
+    let isSpinning = false;
+
+    // Namunaviy o'yinchilar
+    const players = [
+      { name: 'Anakonda', avatar: 'https://i.pravatar.cc/100?img=1' },
+      { name: 'Ubaydulla', avatar: 'https://i.pravatar.cc/100?img=3' },
+      { name: 'Luna', avatar: 'https://i.pravatar.cc/100?img=5' },
+      { name: 'No name', avatar: 'https://i.pravatar.cc/100?img=8' },
+      { name: 'CCCR', avatar: 'https://i.pravatar.cc/100?img=11' },
+      { name: 'Skromniy', avatar: 'https://i.pravatar.cc/100?img=12' },
+      { name: 'FBO', avatar: 'https://i.pravatar.cc/100?img=15' },
+      { name: 'Norboyev', avatar: 'https://i.pravatar.cc/100?img=18' }
+    ];
+
+    // O'yinchilarni stol atrofida aylanaga joylashtirish
+    function renderPlayers() {
+      const radius = 125; // Markazdan masofa
+      const total = players.length;
+
+      players.forEach((player, index) => {
+        const angle = (index / total) * (2 * Math.PI);
+        const x = radius * Math.cos(angle) + 145; // 145px - markazlashtirish uchun
+        const y = radius * Math.sin(angle) + 145;
+
+        const div = document.createElement('div');
+        div.className = 'player-slot';
+        div.id = `player-${index}`;
+        div.style.left = `${x}px`;
+        div.style.top = `${y}px`;
+        div.style.backgroundImage = `url('${player.avatar}')`;
+        
+        table.appendChild(div);
+      });
+    }
+
+    // Butilkani aylantirish
+    function spinBottle() {
+      if (isSpinning) return;
+      isSpinning = true;
+
+      // Oldingi faol belgilashlarni olib tashlash
+      document.querySelectorAll('.player-slot').forEach(el => el.classList.remove('active'));
+
+      // Kamida 4-8 marta to'liq aylanish + random burchak
+      const randomDegree = Math.floor(Math.random() * 360);
+      const totalSpins = 360 * 5 + randomDegree;
+      currentRotation += totalSpins;
+
+      bottle.style.transform = `rotate(${currentRotation}deg)`;
+
+      setTimeout(() => {
+        isSpinning = false;
+        
+        // Qaysi o'yinchiga tushganini hisoblash
+        const normalizedDegree = (currentRotation % 360 + 360) % 360;
+        const playerIndex = Math.floor((normalizedDegree / 360) * players.length);
+        
+        const selectedPlayer = players[playerIndex];
+        const playerEl = document.getElementById(`player-${playerIndex}`);
+        if (playerEl) playerEl.classList.add('active');
+
+        // Telegram xabarnomasi chiqarish
+        tg.showAlert(`🍾 Butilka ${selectedPlayer.name} ga to'xtadi!`);
+      }, 3000);
+    }
+
+    renderPlayers();
+  </script>
+</body>
+</html>
 
 </body>
 </html>
