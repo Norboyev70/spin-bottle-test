@@ -1,23 +1,162 @@
-<header class="top-bar">
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Spin Bottle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-    <div class="room-info">
-        <span class="room-icon">♟</span>
-        <div>
-            <b>ROOM</b>
-            <small>#2481</small>
+<body>
+
+<div class="app">
+
+  <!-- ================= TOP ================= -->
+  <header class="topbar">
+
+    <div class="room">
+      <div class="room-icon">♟</div>
+      <div>
+        <strong>ROOM</strong>
+        <span>#2481</span>
+      </div>
+    </div>
+
+    <div class="balance">
+      <span class="heart">♥</span>
+      <span class="balance-number">11250</span>
+    </div>
+
+    <div class="online">
+      <span class="online-dot"></span>
+      <b id="onlineCount">6</b>
+    </div>
+
+    <button class="menu">☰</button>
+
+  </header>
+
+
+  <!-- ================= GAME ================= -->
+  <section class="game">
+
+    <div class="arena">
+
+      <!-- premium table -->
+      <div class="table">
+
+        <div class="table-light"></div>
+
+        <div class="inner-ring"></div>
+
+        <!-- center -->
+        <div class="center">
+
+          <div class="center-circle">
+            <div class="center-pattern"></div>
+
+            <div class="bottle-wrap" id="bottle">
+
+              <div class="bottle-shadow"></div>
+
+              <div class="bottle">
+                <div class="bottle-cap"></div>
+                <div class="bottle-neck"></div>
+                <div class="bottle-body"></div>
+                <div class="bottle-label">SPIN</div>
+              </div>
+
+            </div>
+
+            <div class="tap">
+              <b>TAP TO SPIN</b>
+            </div>
+
+          </div>
+
         </div>
+
+        <!-- players -->
+        <div id="players"></div>
+
+      </div>
+
     </div>
 
-    <div class="heart-balance">
-        <span class="heart-icon">♥</span>
-        <span class="heart-number">11250</span>
+  </section>
+
+
+  <!-- ================= CHAT ================= -->
+  <section class="chat">
+
+    <div class="chat-top">
+      <div>
+        <strong>Chat</strong>
+        <span>•</span>
+        <small id="chatOnline">6 online</small>
+      </div>
+
+      <button>•••</button>
     </div>
 
-    <div class="players-count">
-        <span>●</span>
-        <b id="playerCount">6</b>
+    <div class="messages" id="messages">
+
+      <div class="message">
+        <div class="avatar mini">👩🏻</div>
+        <div>
+          <b>Madina</b>
+          <p>Kimga tusharkin? 😏</p>
+        </div>
+      </div>
+
+      <div class="message">
+        <div class="avatar mini">👨🏻</div>
+        <div>
+          <b>Aziz</b>
+          <p>Men tayyorman 😂</p>
+        </div>
+      </div>
+
     </div>
 
-    <button class="menu-btn">☰</button>
+    <div class="quick">
+      <button>😂</button>
+      <button>😏</button>
+      <button>❤️</button>
+      <button>🔥</button>
+      <button>Voy 😳</button>
+    </div>
 
-</header>
+    <div class="input-row">
+      <input id="messageInput" type="text" placeholder="Xabar yozing..." maxlength="120">
+      <button id="send">➤</button>
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- RESULT -->
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <span class="modal-label">BUTILKA TANLADI</span>
+
+    <div class="winner-avatar" id="winnerAvatar">👩🏻</div>
+
+    <h2 id="winnerName">Madina</h2>
+
+    <p>Endi navbat sizda ❤️</p>
+
+    <button id="continue">DAVOM ETISH</button>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
