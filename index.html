@@ -2,426 +2,457 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Spin the Bottle Classic</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-      -webkit-user-select: none;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    body {
-      background: #111;
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-    }
+  <title>Spin the Bottle</title>
 
-    /* 1. TOP BAR PANEL */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    .heart-box {
-      background: linear-gradient(135deg, #ff6b35, #d63031);
-      padding: 6px 12px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: bold;
-      font-size: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-
-    .top-icons {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      position: relative;
-    }
-
-    .badge-sub {
-      position: absolute;
-      bottom: -10px;
-      font-size: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1px 4px;
-      border-radius: 4px;
-    }
-
-    .table-info {
-      font-size: 10px;
-      text-align: center;
-      color: #ccc;
-    }
-
-    /* 2. YOG'OCH STOL ZONASI */
-    .table-area {
-      position: relative;
-      width: 100%;
-      height: 380px;
-      background: #c28245 url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-      background-size: cover;
-      box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* O'rtadagi Oltin Quyosh Naqshi */
-    .sun-pattern {
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      background: url('https://img.icons8.com/ios-filled/250/d79a4b/sun.png') no-repeat center/contain;
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    /* Yashil Shisha Butilka */
-    .bottle {
-      width: 50px;
-      height: 140px;
-      background: url('https://img.icons8.com/color/160/glass-bottle.png') no-repeat center/contain;
-      transition: transform 3.8s cubic-bezier(0.15, 0.85, 0.2, 1);
-      cursor: pointer;
-      z-index: 50;
-      touch-action: manipulation;
-      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
-    }
-
-    .spins-text {
-      position: absolute;
-      left: 32%;
-      top: 52%;
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.7);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      pointer-events: none;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    }
-
-    /* O'YINCHILAR PROFILI (KVADRAT VA VIP FRAME) */
-    .player-slot {
-      position: absolute;
-      width: 58px;
-      height: 58px;
-      border-radius: 10px;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-    }
-
-    .player-frame {
-      position: absolute;
-      inset: -5px;
-      border: 2px solid #ffd700;
-      border-radius: 12px;
-      pointer-events: none;
-    }
-
-    .badge-gift {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      background: #ff4757;
-      color: #fff;
-      font-size: 9px;
-      font-weight: bold;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #fff;
-    }
-
-    .player-name-tag {
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 9px;
-      white-space: nowrap;
-      text-shadow: 0 1px 3px #000;
-      color: #fff;
-      font-weight: 500;
-    }
-
-    /* 3. PASTKI CHAT VA MAGNITOFON */
-    .bottom-panel {
-      background: #181818;
-      height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 8px 10px;
-      border-top: 1px solid #333;
-    }
-
-    .chat-and-music {
-      display: flex;
-      gap: 10px;
-      height: 145px;
-    }
-
-    .chat-container {
-      flex: 1;
-      font-size: 11px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow-y: auto;
-    }
-
-    .chat-line {
-      line-height: 1.3;
-    }
-    .user-gold { color: #f1c40f; font-weight: bold; }
-    .user-pink { color: #ff788e; font-weight: bold; }
-    .user-blue { color: #54a0ff; font-weight: bold; }
-    .sub-text { font-size: 9px; color: #888; display: block; }
-
-    /* BOOMBOX MUSIC PLAYER */
-    .boombox-card {
-      width: 140px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .boombox-img {
-      width: 100px;
-      height: 45px;
-      background: url('https://img.icons8.com/color/96/boombox.png') no-repeat center/contain;
-    }
-
-    .volume-slider {
-      width: 100%;
-      accent-color: #ddd;
-    }
-
-    /* INPUT CHAT */
-    .chat-input-box {
-      display: flex;
-      align-items: center;
-      background: #252525;
-      border-radius: 20px;
-      padding: 4px 12px;
-    }
-
-    .chat-input-box input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 11px;
-      width: 100%;
-      outline: none;
-    }
-
-    .send-btn {
-      background: #ff9f43;
-      border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <!-- TOP BAR -->
-  <div class="top-bar">
-    <div class="heart-box">
-      <span>❤️</span> 143
-    </div>
+  <main id="app">
 
-    <div class="top-icons">
-      <div class="icon-btn">🎟️ <span class="badge-sub">8 d.</span></div>
-      <div class="icon-btn">⚙️</div>
-      <div class="icon-btn">#6 <span class="badge-sub">1 hr.</span></div>
-      <div class="icon-btn">☰</div>
-      <div class="icon-btn">⚙️</div>
-    </div>
+    <!-- =========================
+         GAME AREA
+    ========================== -->
+    <section class="game-area">
 
-    <div class="table-info">
-      Table<br><b>229</b> 🔄
-    </div>
-  </div>
+      <!-- Top bar -->
+      <header class="top-bar">
 
-  <!-- YOG'OCH STOL -->
-  <div class="table-area" id="tableArea">
-    <div class="sun-pattern"></div>
-    <div class="bottle" id="bottle"></div>
-    <div class="spins-text">← Spins the bottle</div>
-  </div>
-
-  <!-- PASTKI CHAT VA BOOMBOX -->
-  <div class="bottom-panel">
-    <div class="chat-and-music">
-      <!-- CHAT -->
-      <div class="chat-container">
-        <div class="chat-line">
-          <span class="user-gold">👑 Mr SKROMNIY:</span> ANAKONDA 😂
-          <span class="sub-text">Show translation</span>
+        <div class="room-info">
+          <div class="room-dot"></div>
+          <span>TABLE 01</span>
         </div>
-        <div class="chat-line">
-          <span class="user-pink">🌸 ANAKONDA:</span> Mr SKROMNIY, koramz
-          <span class="sub-text">Show translation</span>
+
+        <div class="balance">
+          <span class="heart-icon">♥</span>
+          <strong id="heartCount">11250</strong>
         </div>
-        <div class="chat-line">
-          <span class="user-blue">🛑 ФВО:</span> ANAKONDA, xow nma qlay man eni
-          <span class="sub-text">Show translation</span>
-        </div>
-        <div class="chat-line">
-          <span class="user-blue">Norboyev70:</span> ANAKONDA, kelurdm sekn
-          <span class="sub-text">Show translation</span>
+
+      </header>
+
+
+      <!-- =========================
+           TABLE
+      ========================== -->
+      <div class="table-wrapper">
+
+        <div class="table-shadow"></div>
+
+        <div class="game-table">
+
+          <!-- decorative inner surface -->
+          <div class="table-surface">
+
+            <!-- SVG decorative pattern -->
+            <svg class="table-pattern"
+                 viewBox="0 0 600 600"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <defs>
+
+                <radialGradient id="patternGlow">
+                  <stop offset="0%" stop-opacity=".35"/>
+                  <stop offset="100%" stop-opacity="0"/>
+                </radialGradient>
+
+                <linearGradient id="goldLine"
+                                x1="0"
+                                y1="0"
+                                x2="1"
+                                y2="1">
+
+                  <stop offset="0%" stop-opacity=".05"/>
+                  <stop offset="50%" stop-opacity=".35"/>
+                  <stop offset="100%" stop-opacity=".05"/>
+
+                </linearGradient>
+
+              </defs>
+
+              <circle
+                cx="300"
+                cy="300"
+                r="220"
+                fill="none"
+                stroke="url(#goldLine)"
+                stroke-width="1"
+              />
+
+              <circle
+                cx="300"
+                cy="300"
+                r="170"
+                fill="none"
+                stroke="url(#goldLine)"
+                stroke-width="1"
+              />
+
+              <circle
+                cx="300"
+                cy="300"
+                r="110"
+                fill="url(#patternGlow)"
+              />
+
+              <path
+                d="M300 75
+                   C425 75 525 175 525 300
+                   C525 425 425 525 300 525
+                   C175 525 75 425 75 300
+                   C75 175 175 75 300 75Z"
+                fill="none"
+                stroke="url(#goldLine)"
+                stroke-width="1"
+              />
+
+            </svg>
+
+
+            <!-- =========================
+                 PLAYERS
+            ========================== -->
+
+            <div class="player player-1" data-player="1">
+              <div class="avatar-frame">
+                <div class="avatar">A</div>
+              </div>
+              <div class="player-name">Alex</div>
+              <div class="kiss-count">♥ 24</div>
+            </div>
+
+
+            <div class="player player-2" data-player="2">
+              <div class="avatar-frame">
+                <div class="avatar">S</div>
+              </div>
+              <div class="player-name">Sara</div>
+              <div class="kiss-count">♥ 18</div>
+            </div>
+
+
+            <div class="player player-3" data-player="3">
+              <div class="avatar-frame">
+                <div class="avatar">M</div>
+              </div>
+              <div class="player-name">Mika</div>
+              <div class="kiss-count">♥ 31</div>
+            </div>
+
+
+            <div class="player player-4" data-player="4">
+              <div class="avatar-frame">
+                <div class="avatar">N</div>
+              </div>
+              <div class="player-name">Nora</div>
+              <div class="kiss-count">♥ 12</div>
+            </div>
+
+
+            <div class="player player-5" data-player="5">
+              <div class="avatar-frame">
+                <div class="avatar">J</div>
+              </div>
+              <div class="player-name">James</div>
+              <div class="kiss-count">♥ 27</div>
+            </div>
+
+
+            <div class="player player-6" data-player="6">
+              <div class="avatar-frame">
+                <div class="avatar">L</div>
+              </div>
+              <div class="player-name">Lina</div>
+              <div class="kiss-count">♥ 20</div>
+            </div>
+
+
+            <div class="player player-7" data-player="7">
+              <div class="avatar-frame">
+                <div class="avatar">D</div>
+              </div>
+              <div class="player-name">Daniel</div>
+              <div class="kiss-count">♥ 15</div>
+            </div>
+
+
+            <div class="player player-8" data-player="8">
+              <div class="avatar-frame">
+                <div class="avatar">E</div>
+              </div>
+              <div class="player-name">Emma</div>
+              <div class="kiss-count">♥ 42</div>
+            </div>
+
+
+            <div class="player player-9" data-player="9">
+              <div class="avatar-frame">
+                <div class="avatar">K</div>
+              </div>
+              <div class="player-name">Kevin</div>
+              <div class="kiss-count">♥ 11</div>
+            </div>
+
+
+            <div class="player player-10" data-player="10">
+              <div class="avatar-frame">
+                <div class="avatar">R</div>
+              </div>
+              <div class="player-name">Ruby</div>
+              <div class="kiss-count">♥ 36</div>
+            </div>
+
+
+            <div class="player player-11" data-player="11">
+              <div class="avatar-frame">
+                <div class="avatar">T</div>
+              </div>
+              <div class="player-name">Tom</div>
+              <div class="kiss-count">♥ 9</div>
+            </div>
+
+
+            <div class="player player-12" data-player="12">
+              <div class="avatar-frame">
+                <div class="avatar">V</div>
+              </div>
+              <div class="player-name">Vera</div>
+              <div class="kiss-count">♥ 29</div>
+            </div>
+
+
+            <!-- =========================
+                 BOTTLE
+            ========================== -->
+
+            <button
+              id="bottle"
+              class="bottle"
+              aria-label="Spin the bottle">
+
+              <div class="bottle-glow"></div>
+
+              <svg viewBox="0 0 120 260"
+                   xmlns="http://www.w3.org/2000/svg">
+
+                <defs>
+
+                  <linearGradient
+                    id="glass"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="0">
+
+                    <stop offset="0%" stop-opacity=".35"/>
+                    <stop offset="25%" stop-opacity=".05"/>
+                    <stop offset="65%" stop-opacity=".25"/>
+                    <stop offset="100%" stop-opacity=".03"/>
+
+                  </linearGradient>
+
+                  <linearGradient
+                    id="bottleBody"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1">
+
+                    <stop offset="0%" stop-color="#183b2b"/>
+                    <stop offset="45%" stop-color="#32634a"/>
+                    <stop offset="100%" stop-color="#10291f"/>
+
+                  </linearGradient>
+
+                </defs>
+
+
+                <!-- neck -->
+                <path
+                  d="M48 20
+                     L72 20
+                     L72 55
+                     C72 62 84 72 87 85
+                     L95 210
+                     C96 228 84 242 60 244
+                     C36 242 24 228 25 210
+                     L33 85
+                     C36 72 48 62 48 55Z"
+                  fill="url(#bottleBody)"
+                  stroke="#101813"
+                  stroke-width="2"
+                />
+
+                <!-- glass shine -->
+                <path
+                  d="M43 74
+                     C38 110 37 170 39 210
+                     C40 225 46 233 52 236"
+                  fill="none"
+                  stroke="url(#glass)"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                />
+
+                <!-- neck shine -->
+                <path
+                  d="M53 28 L53 62"
+                  stroke="#ffffff"
+                  stroke-opacity=".28"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+
+                <!-- label -->
+                <rect
+                  x="34"
+                  y="128"
+                  width="52"
+                  height="55"
+                  rx="5"
+                  fill="#e7dcc0"
+                  opacity=".94"
+                />
+
+                <text
+                  x="60"
+                  y="151"
+                  text-anchor="middle"
+                  font-size="8"
+                  font-weight="700"
+                  fill="#17231b">
+                  SPIN
+                </text>
+
+                <text
+                  x="60"
+                  y="165"
+                  text-anchor="middle"
+                  font-size="6"
+                  fill="#17231b">
+                  THE
+                </text>
+
+                <text
+                  x="60"
+                  y="176"
+                  text-anchor="middle"
+                  font-size="8"
+                  font-weight="700"
+                  fill="#17231b">
+                  BOTTLE
+                </text>
+
+              </svg>
+
+            </button>
+
+          </div>
         </div>
       </div>
 
-      <!-- BOOMBOX MAGNITOFON -->
-      <div class="boombox-card">
-        <div class="boombox-img"></div>
-        <input type="range" class="volume-slider" min="0" max="100" value="70">
+
+      <!-- Current player -->
+      <div class="current-player">
+        <div class="current-avatar">Y</div>
+
+        <div class="current-info">
+          <strong>You</strong>
+          <span>Your turn — tap the bottle</span>
+        </div>
+
+        <div class="turn-indicator"></div>
       </div>
-    </div>
 
-    <!-- INPUT -->
-    <div class="chat-input-box">
-      <input type="text" placeholder="Write a message here">
-      <button class="send-btn">➤</button>
-    </div>
-  </div>
+    </section>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    if (tg) tg.expand();
 
-    const tableArea = document.getElementById('tableArea');
-    const bottle = document.getElementById('bottle');
-    let currentRotation = 0;
-    let isSpinning = false;
+    <!-- =========================
+         CHAT
+    ========================== -->
 
-    // RASMDAGI 8 TA O'YINCHI
-    const players = [
-      { name: 'ANAKONDA, 21', gift: '6', avatar: 'https://i.pravatar.cc/100?img=32' },
-      { name: 'Ubaydulla, 24', gift: '1', avatar: 'https://i.pravatar.cc/100?img=12' },
-      { name: 'Luna, 27', gift: '18', avatar: 'https://i.pravatar.cc/100?img=44' },
-      { name: 'No name [1], 27', gift: null, avatar: 'https://i.pravatar.cc/100?img=68' },
-      { name: 'No name, 31', gift: '1', avatar: 'https://i.pravatar.cc/100?img=49' },
-      { name: 'Mr SKROM, 23', gift: '5', avatar: 'https://i.pravatar.cc/100?img=53' },
-      { name: 'CCCR, 22', gift: null, avatar: 'https://i.pravatar.cc/100?img=11' },
-      { name: 'ФВО', gift: '3', avatar: 'https://i.pravatar.cc/100?img=25' }
-    ];
+    <section class="chat-area">
 
-    function renderPlayers() {
-      const width = tableArea.clientWidth;
-      const height = tableArea.clientHeight;
-      const radiusX = width * 0.38;
-      const radiusY = height * 0.38;
-      const total = players.length;
+      <header class="chat-header">
 
-      players.forEach((player, index) => {
-        const angle = (index / total) * (2 * Math.PI) - (Math.PI / 2);
-        const x = radiusX * Math.cos(angle) + (width / 2) - 29;
-        const y = radiusY * Math.sin(angle) + (height / 2) - 29;
+        <div>
+          <strong>Table Chat</strong>
+          <span>12 players</span>
+        </div>
 
-        const slot = document.createElement('div');
-        slot.className = 'player-slot';
-        slot.id = `player-${index}`;
-        slot.style.left = `${x}px`;
-        slot.style.top = `${y}px`;
-        slot.style.backgroundImage = `url('${player.avatar}')`;
+        <button class="chat-menu">•••</button>
 
-        // VIP Ramka
-        const frame = document.createElement('div');
-        frame.className = 'player-frame';
-        slot.appendChild(frame);
+      </header>
 
-        // Sovg'a raqami
-        if (player.gift) {
-          const giftBadge = document.createElement('div');
-          giftBadge.className = 'badge-gift';
-          giftBadge.innerText = player.gift;
-          slot.appendChild(giftBadge);
-        }
 
-        // Ism
-        const nameTag = document.createElement('div');
-        nameTag.className = 'player-name-tag';
-        nameTag.innerText = player.name;
-        slot.appendChild(nameTag);
+      <div id="messages" class="messages">
 
-        tableArea.appendChild(slot);
-      });
-    }
+        <div class="message">
+          <div class="message-avatar">S</div>
 
-    // BUTILKANI AYLANISHI
-    function spinBottle() {
-      if (isSpinning) return;
-      isSpinning = true;
+          <div class="message-content">
+            <strong>Sara</strong>
+            <p>Kim boshlaydi? 👀</p>
+          </div>
+        </div>
 
-      const randomDegree = Math.floor(Math.random() * 360);
-      const totalSpins = 360 * 6 + randomDegree;
-      currentRotation += totalSpins;
 
-      bottle.style.transform = `rotate(${currentRotation}deg)`;
+        <div class="message">
+          <div class="message-avatar">M</div>
 
-      setTimeout(() => {
-        isSpinning = false;
-        const normalizedDegree = (currentRotation % 360 + 360) % 360;
-        const playerIndex = Math.floor((normalizedDegree / 360) * players.length);
-        
-        const selectedPlayer = players[playerIndex];
-        if (tg && tg.showAlert) {
-          tg.showAlert(`🍾 Butilka ${selectedPlayer.name} ga to'xtadi!`);
-        }
-      }, 3800);
-    }
+          <div class="message-content">
+            <strong>Mika</strong>
+            <p>Men tayyorman 😏</p>
+          </div>
+        </div>
 
-    bottle.addEventListener('click', spinBottle);
-    bottle.addEventListener('pointerdown', spinBottle);
 
-    window.onload = renderPlayers;
-  </script>
+        <div class="message own">
+          <div class="message-content">
+            <strong>You</strong>
+            <p>Ketdik 🔥</p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- quick messages -->
+      <div class="quick-messages">
+
+        <button data-message="🔥">🔥</button>
+        <button data-message="Let's go!">Let's go!</button>
+        <button data-message="😏">😏</button>
+        <button data-message="Wow!">Wow!</button>
+
+      </div>
+
+
+      <!-- input -->
+      <form id="chatForm" class="chat-input">
+
+        <input
+          id="chatInput"
+          type="text"
+          maxlength="120"
+          placeholder="Write a message..."
+          autocomplete="off">
+
+        <button type="submit">
+          ➤
+        </button>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
