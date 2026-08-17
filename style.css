@@ -4,22 +4,21 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-#root {
+#r#root {
   display: none;
 }
 
 a {
-  color: #000;
   text-decoration: none;
 }
 
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
+button, input {
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* --- SPIN THE BOTTLE (SHISHA KO'RINISHI) --- */
@@ -56,16 +55,14 @@ textarea:focus {
   transform: translate(-50%, -50%);
 }
 
-/* --- AUDIO PLEYER VA REKORDER KORPUSI --- */
-.svg__ui_audio_player_0,
-.music__recorder--0 {
-  width: 198px;
-  height: 73px;
-  background-repeat: no-repeat;
-  background-position: center;
+/* Tasvir joylashadigan klass */
+.bg-element {
+  width: 100px;
+  height: 100px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ff7e5f"/><stop offset="100%" stop-color="%23feb47b"/></linearGradient></defs><circle cx="50" cy="50" r="40" fill="url(%23g1)"/></svg>');
   background-size: contain;
-  display: inline-block;
-  position: relative;
+  background-repeat: no-repeat;
+}
   
   /* Standart pleyer foni (agar SVG yuklanmasa) */
   background-color: #2e2e2e;
