@@ -2,1083 +2,1028 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no">
+
 <title>Spin Bottle</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    background:#111;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+}
+
+.app{
+    width:100%;
+    max-width:600px;
+    height:100vh;
+    background:#f4f4f4;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+/* =========================
+   GAME AREA
+========================= */
+
+.game{
+    height:50%;
+    min-height:50%;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at center,
+        #ead4ae 0%,
+        #d8b47b 48%,
+        #c3955d 100%);
+}
+
+/* top panel */
+
+.topbar{
+    position:absolute;
+    left:12px;
+    right:12px;
+    top:10px;
+    height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:20;
+}
+
+.top-left,
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.82);
+    box-shadow:0 4px 12px rgba(0,0,0,.14);
+    font-size:19px;
+}
+
+.balance{
+    height:38px;
+    padding:0 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.88);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:800;
+    font-size:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
+
+.heart{
+    color:#e94863;
+    font-size:20px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table{
+    position:absolute;
+    width:92vw;
+    height:92vw;
+    max-width:540px;
+    max-height:540px;
+    min-width:360px;
+    min-height:360px;
+
+    left:50%;
+    top:57%;
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle,
+        #f1d6a6 0%,
+        #e4c18b 48%,
+        #d3a96e 100%);
+
+    box-shadow:
+        0 18px 35px rgba(73,44,19,.32),
+        inset 0 0 35px rgba(112,73,33,.12);
+
+    border:none;
+}
+
+/* wood decoration */
+
+.table::before{
+    content:"";
+    position:absolute;
+    inset:13px;
+    border-radius:50%;
+    border:1px solid rgba(116,75,33,.16);
+    pointer-events:none;
+}
+
+.table::after{
+    content:"";
+    position:absolute;
+    inset:28px;
+    border-radius:50%;
+    border:1px dashed rgba(116,75,33,.13);
+    pointer-events:none;
+}
+
+/* =========================
+   CENTER
+========================= */
+
+.center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:130px;
+    height:130px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(circle,
+        rgba(255,255,255,.5),
+        rgba(255,255,255,.12) 65%,
+        transparent 66%);
+
+    z-index:4;
+}
+
+.center-ring{
+    position:absolute;
+    inset:8px;
+    border-radius:50%;
+    border:1px solid rgba(107,69,30,.22);
+}
+
+.center-ring2{
+    position:absolute;
+    inset:18px;
+    border-radius:50%;
+    border:1px dashed rgba(107,69,30,.22);
+}
+
+.bottle{
+    width:110px;
+    height:38px;
+    position:relative;
+    transform-origin:center;
+    cursor:pointer;
+    z-index:8;
+    transition:transform .08s linear;
+}
+
+.bottle-body{
+    position:absolute;
+    width:70px;
+    height:25px;
+    left:22px;
+    top:7px;
+    border-radius:14px 7px 7px 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #79b58b,
+            #43855e
+        );
+
+    box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.5),
+        0 4px 7px rgba(0,0,0,.22);
+}
+
+.bottle-neck{
+    position:absolute;
+    width:28px;
+    height:13px;
+    left:78px;
+    top:13px;
+    background:#4c9568;
+    border-radius:0 7px 7px 0;
+}
+
+.bottle-cap{
+    position:absolute;
+    width:9px;
+    height:9px;
+    left:100px;
+    top:15px;
+    border-radius:3px;
+    background:#2d6748;
+}
+
+.bottle-highlight{
+    position:absolute;
+    left:32px;
+    top:10px;
+    width:43px;
+    height:5px;
+    border-radius:5px;
+    background:rgba(255,255,255,.35);
+}
+
+/* =========================
+   PLAYERS
+========================= */
+
+.player{
+    position:absolute;
+    width:70px;
+    text-align:center;
+    z-index:10;
+    transform:translate(-50%,-50%);
+}
+
+.avatar-wrap{
+    position:relative;
+    width:52px;
+    height:52px;
+    margin:auto;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    object-fit:cover;
+    display:block;
+    margin:2px auto;
+
+    background:#ddd;
+    border:3px solid rgba(255,255,255,.95);
+
+    box-shadow:
+        0 4px 9px rgba(0,0,0,.25);
+}
+
+.frame{
+    position:absolute;
+    inset:0;
+    border:3px solid #d4a85b;
+    border-radius:16px;
+    pointer-events:none;
+}
+
+.kiss{
+    position:absolute;
+    right:-5px;
+    top:-9px;
+    min-width:22px;
+    height:22px;
+    padding:0 5px;
+    border-radius:11px;
+    background:white;
+    color:#e94b66;
+    font-size:11px;
+    font-weight:900;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 7px rgba(0,0,0,.18);
+}
+
+.player-name{
+    margin-top:3px;
+    font-size:10px;
+    font-weight:800;
+    color:#4b351f;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.player.active .avatar{
+    box-shadow:
+        0 0 0 3px #fff,
+        0 0 0 6px #e54b61,
+        0 5px 12px rgba(0,0,0,.3);
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat{
+    height:50%;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+}
+
+.chat-head{
+    height:48px;
+    min-height:48px;
+    padding:0 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+}
+
+.chat-title{
+    font-size:15px;
+    font-weight:900;
+    color:#222;
+}
+
+.online{
+    font-size:11px;
+    color:#888;
+}
+
+.messages{
+    flex:1;
+    overflow-y:auto;
+    padding:10px 13px 70px;
+}
+
+.message{
+    display:flex;
+    margin-bottom:10px;
+}
+
+.message.me{
+    justify-content:flex-end;
+}
+
+.bubble{
+    max-width:75%;
+    padding:9px 12px;
+    border-radius:15px;
+    background:#f1f1f1;
+    color:#222;
+    font-size:13px;
+    line-height:1.3;
+}
+
+.message.me .bubble{
+    background:#222;
+    color:white;
+    border-bottom-right-radius:4px;
+}
+
+.message:not(.me) .bubble{
+    border-bottom-left-radius:4px;
+}
+
+.msg-name{
+    font-size:9px;
+    color:#999;
+    margin-bottom:2px;
+}
+
+/* input */
+
+.chat-input{
+    position:absolute;
+    left:10px;
+    right:10px;
+    bottom:10px;
+
+    height:48px;
+    display:flex;
+    gap:7px;
+}
+
+.chat-input input{
+    flex:1;
+    min-width:0;
+    border:1px solid #e3e3e3;
+    outline:none;
+    border-radius:15px;
+    padding:0 14px;
+    font-size:13px;
+    background:#fafafa;
+}
+
+.send{
+    width:48px;
+    border:none;
+    border-radius:15px;
+    background:#222;
+    color:white;
+    font-size:18px;
+}
+
+/* =========================
+   QUICK MESSAGES
+========================= */
+
+.quick{
+    position:absolute;
+    bottom:65px;
+    left:10px;
+    right:10px;
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    scrollbar-width:none;
+}
+
+.quick::-webkit-scrollbar{
+    display:none;
+}
+
+.quick button{
+    flex:none;
+    border:1px solid #eee;
+    background:white;
+    padding:7px 11px;
+    border-radius:12px;
+    font-size:11px;
+    box-shadow:0 2px 5px rgba(0,0,0,.06);
+}
+
+/* =========================
+   SPIN EFFECT
+========================= */
+
+.spinning{
+    animation:bottleSpin 2.8s cubic-bezier(.15,.8,.2,1);
+}
+
+@keyframes bottleSpin{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(1080deg);
+    }
+}
+
+/* kiss animation */
+
+.kiss-fx{
+    position:absolute;
+    font-size:30px;
+    pointer-events:none;
+    z-index:50;
+    animation:kissFly 1s ease forwards;
+}
+
+@keyframes kissFly{
+    0%{
+        transform:translate(-50%,0) scale(.4);
+        opacity:0;
+    }
+    30%{
+        opacity:1;
+        transform:translate(-50%,-20px) scale(1.2);
+    }
+    100%{
+        transform:translate(-50%,-100px) scale(.8);
+        opacity:0;
+    }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:700px){
+    .app{
+        box-shadow:0 0 35px rgba(0,0,0,.3);
+    }
+}
+
+/* small screens */
+
+@media(max-height:700px){
+    .table{
+        top:60%;
+    }
+
+    .player{
+        width:62px;
+    }
+
+    .avatar-wrap{
+        width:46px;
+        height:46px;
+    }
+
+    .avatar{
+        width:43px;
+        height:43px;
+    }
+
+    .center{
+        width:110px;
+        height:110px;
+    }
+
+    .bottle{
+        transform:scale(.85);
+    }
+}
+</style>
 </head>
+
 <body>
 
 <div class="app">
 
-  <section class="game">
+    <!-- ================= GAME ================= -->
 
-    <div class="topbar">
-      <div class="profile-mini">
-        <div class="mini-avatar">
-          <img src="https://i.pravatar.cc/100?img=12">
-        </div>
+    <section class="game">
 
-        <div class="profile-info">
-          <strong>Norbek</strong>
-          <span>Level 12</span>
-        </div>
-      </div>
+        <div class="topbar">
 
-      <div class="balance">
-        <span class="heart">♥</span>
-        <strong id="heartBalance">11250</strong>
-      </div>
-    </div>
+            <div class="top-left">
+                <button class="icon-btn">☰</button>
+            </div>
 
+            <div class="top-right">
+                <div class="balance">
+                    <span class="heart">♥</span>
+                    <span id="heartCount">11250</span>
+                </div>
 
-    <div class="table-area">
-
-      <div class="table">
-
-        <div class="table-glow"></div>
-
-        <div class="table-center">
-
-          <div class="bottle-shadow"></div>
-
-          <button id="bottle" class="bottle">
-            <span class="bottle-neck"></span>
-
-            <span class="bottle-body">
-              <span class="bottle-label">SPIN</span>
-            </span>
-          </button>
-
-          <div id="spinHint" class="spin-hint">
-            TAP THE BOTTLE
-          </div>
+                <button class="icon-btn">🏆</button>
+            </div>
 
         </div>
 
+        <div class="table" id="table">
 
-        <div class="player p1">
-          <div class="kiss-count">♥ 24</div>
-          <div class="avatar-frame gold">
-            <img src="https://i.pravatar.cc/120?img=47">
-          </div>
-          <span>Anna</span>
+            <div class="center">
+
+                <div class="center-ring"></div>
+                <div class="center-ring2"></div>
+
+                <div class="bottle" id="bottle">
+
+                    <div class="bottle-body">
+                        <div class="bottle-highlight"></div>
+                    </div>
+
+                    <div class="bottle-neck"></div>
+                    <div class="bottle-cap"></div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="player p2">
-          <div class="kiss-count">♥ 18</div>
-          <div class="avatar-frame pink">
-            <img src="https://i.pravatar.cc/120?img=32">
-          </div>
-          <span>Sofia</span>
+    </section>
+
+
+    <!-- ================= CHAT ================= -->
+
+    <section class="chat">
+
+        <div class="chat-head">
+            <div class="chat-title">Stol chati</div>
+            <div class="online">12 o‘yinchi</div>
         </div>
 
-        <div class="player p3">
-          <div class="kiss-count">♥ 31</div>
-          <div class="avatar-frame blue">
-            <img src="https://i.pravatar.cc/120?img=13">
-          </div>
-          <span>Alex</span>
+        <div class="messages" id="messages">
+
+            <div class="message">
+                <div>
+                    <div class="msg-name">Madina</div>
+                    <div class="bubble">
+                        Salom hammaga 👋
+                    </div>
+                </div>
+            </div>
+
+            <div class="message">
+                <div>
+                    <div class="msg-name">Jasur</div>
+                    <div class="bubble">
+                        Kim navbatda? 😄
+                    </div>
+                </div>
+            </div>
+
+            <div class="message me">
+                <div class="bubble">
+                    Boshladik 🔥
+                </div>
+            </div>
+
         </div>
 
-        <div class="player p4">
-          <div class="kiss-count">♥ 12</div>
-          <div class="avatar-frame violet">
-            <img src="https://i.pravatar.cc/120?img=44">
-          </div>
-          <span>Luna</span>
+        <div class="quick">
+
+            <button>Salom 👋</button>
+            <button>Navbat kimda?</button>
+            <button>😄</button>
+            <button>❤️</button>
+            <button>Qani ketdik!</button>
+
         </div>
 
-        <div class="player p5">
-          <div class="kiss-count">♥ 41</div>
-          <div class="avatar-frame silver">
-            <img src="https://i.pravatar.cc/120?img=11">
-          </div>
-          <span>Daniel</span>
+        <div class="chat-input">
+
+            <input
+                id="messageInput"
+                type="text"
+                placeholder="Xabar yozing..."
+            >
+
+            <button
+                class="send"
+                id="sendBtn"
+            >➤</button>
+
         </div>
 
-        <div class="player p6">
-          <div class="kiss-count">♥ 9</div>
-          <div class="avatar-frame emerald">
-            <img src="https://i.pravatar.cc/120?img=49">
-          </div>
-          <span>Mia</span>
-        </div>
-
-        <div class="player p7">
-          <div class="kiss-count">♥ 27</div>
-          <div class="avatar-frame red">
-            <img src="https://i.pravatar.cc/120?img=68">
-          </div>
-          <span>Leo</span>
-        </div>
-
-        <div class="player p8">
-          <div class="kiss-count">♥ 16</div>
-          <div class="avatar-frame pink">
-            <img src="https://i.pravatar.cc/120?img=25">
-          </div>
-          <span>Emma</span>
-        </div>
-
-        <div class="player p9">
-          <div class="kiss-count">♥ 35</div>
-          <div class="avatar-frame gold">
-            <img src="https://i.pravatar.cc/120?img=59">
-          </div>
-          <span>Chris</span>
-        </div>
-
-        <div class="player p10">
-          <div class="kiss-count">♥ 20</div>
-          <div class="avatar-frame violet">
-            <img src="https://i.pravatar.cc/120?img=5">
-          </div>
-          <span>Kate</span>
-        </div>
-
-        <div class="player p11">
-          <div class="kiss-count">♥ 11</div>
-          <div class="avatar-frame blue">
-            <img src="https://i.pravatar.cc/120?img=60">
-          </div>
-          <span>Mark</span>
-        </div>
-
-        <div class="player p12">
-          <div class="kiss-count">♥ 22</div>
-          <div class="avatar-frame emerald">
-            <img src="https://i.pravatar.cc/120?img=48">
-          </div>
-          <span>Julia</span>
-        </div>
-
-      </div>
-
-
-      <div class="music-player">
-
-        <div class="music-cover">♪</div>
-
-        <div class="music-details">
-          <strong>Night Drive</strong>
-          <span>Unknown Artist</span>
-        </div>
-
-        <button id="musicButton">▶</button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="chat">
-
-    <div class="chat-header">
-      <div>
-        <strong>Table Chat</strong>
-        <span>12 players</span>
-      </div>
-
-      <button class="chat-menu">•••</button>
-    </div>
-
-
-    <div id="messages" class="messages">
-
-      <div class="message">
-
-        <div class="message-avatar">
-          <img src="https://i.pravatar.cc/60?img=47">
-        </div>
-
-        <div>
-          <strong>Anna</strong>
-          <p>Kim spin qiladi? 😏</p>
-        </div>
-
-      </div>
-
-
-      <div class="message">
-
-        <div class="message-avatar">
-          <img src="https://i.pravatar.cc/60?img=13">
-        </div>
-
-        <div>
-          <strong>Alex</strong>
-          <p>Men tayyorman 🔥</p>
-        </div>
-
-      </div>
-
-
-      <div class="message mine">
-
-        <div>
-          <strong>Norbek</strong>
-          <p>🍾 Boshladik!</p>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="quick-messages">
-      <button>😘 Kiss</button>
-      <button>🔥 Wow</button>
-      <button>😂 Haha</button>
-      <button>❤️ Love</button>
-    </div>
-
-
-    <div class="chat-input">
-
-      <button id="emojiButton">☺</button>
-
-      <input
-        id="messageInput"
-        type="text"
-        placeholder="Write a message..."
-        autocomplete="off"
-      >
-
-      <button id="sendButton" class="send-button">
-        ➤
-      </button>
-
-    </div>
-
-  </section>
+    </section>
 
 </div>
 
-<script src="script.js"></script>
 
-</body>
-</html>
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background: #101510;
-    overflow: hidden;
-}
-
-body {
-    color: #fff;
-}
-
-.app {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* ================= TOP GAME ================= */
-
-.game {
-    height: 58%;
-    min-height: 420px;
-    position: relative;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 50% 45%, #789c58 0%, #52763c 65%, #3b592c 100%);
-}
-
-.topbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 64px;
-    padding: 10px 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    z-index: 50;
-}
-
-.profile-mini {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.mini-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 2px;
-
-    background: linear-gradient(135deg, #fff, #d6b76a);
-
-    box-shadow: 0 3px 12px rgba(0,0,0,.3);
-}
-
-.mini-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.profile-info strong {
-    font-size: 14px;
-}
-
-.profile-info span {
-    font-size: 10px;
-    opacity: .7;
-}
-
-.balance {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-
-    padding: 7px 12px;
-
-    background: rgba(0,0,0,.25);
-    border: 1px solid rgba(255,255,255,.12);
-
-    border-radius: 20px;
-
-    backdrop-filter: blur(8px);
-}
-
-.heart {
-    color: #ff5379;
-    font-size: 20px;
-}
-
-/* ================= TABLE ================= */
-
-.table-area {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-}
-
-.table {
-    width: min(92vw, 650px);
-    aspect-ratio: 1;
-
-    position: relative;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #dfc18b 0%,
-            #c9a46b 55%,
-            #a87948 100%
-        );
-
-    box-shadow:
-        0 25px 55px rgba(0,0,0,.35),
-        inset 0 0 45px rgba(72,42,15,.22);
-}
-
-.table::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 7%;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.16);
-}
-
-.table-glow {
-    position: absolute;
-
-    inset: 17%;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.12),
-            transparent 65%
-        );
-}
-
-/* ================= BOTTLE ================= */
-
-.table-center {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 180px;
-    height: 180px;
-
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 20;
-}
-
-.bottle-shadow {
-    position: absolute;
-
-    width: 125px;
-    height: 25px;
-
-    bottom: 45px;
-
-    background: rgba(50,30,10,.28);
-
-    border-radius: 50%;
-
-    filter: blur(8px);
-}
-
-.bottle {
-    width: 150px;
-    height: 100px;
-
-    position: relative;
-
-    border: 0;
-    outline: none;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    transform-origin: 50% 50%;
-
-    transition:
-        transform 4s cubic-bezier(.12,.72,.08,1);
-}
-
-.bottle:active {
-    transform: scale(.95);
-}
-
-.bottle-body {
-    position: absolute;
-
-    left: 12px;
-    top: 34px;
-
-    width: 110px;
-    height: 42px;
-
-    border-radius: 22px 30px 30px 22px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #668c4a,
-            #315d30 55%,
-            #234724
-        );
-
-    box-shadow:
-        inset 5px 5px 8px rgba(255,255,255,.18),
-        inset -5px -5px 8px rgba(0,0,0,.2),
-        0 7px 12px rgba(0,0,0,.25);
-}
-
-.bottle-neck {
-    position: absolute;
-
-    left: 105px;
-    top: 40px;
-
-    width: 42px;
-    height: 27px;
-
-    border-radius: 4px 10px 10px 4px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #71965a,
-            #315c31
-        );
-
-    box-shadow:
-        inset 2px 2px 4px rgba(255,255,255,.15);
-}
-
-.bottle-label {
-    position: absolute;
-
-    left: 32px;
-    top: 11px;
-
-    color: #e8d39a;
-
-    font-size: 9px;
-    font-weight: bold;
-
-    letter-spacing: 2px;
-}
-
-.spin-hint {
-    position: absolute;
-
-    top: 132px;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    color: rgba(255,255,255,.65);
-}
-
-/* ================= PLAYERS ================= */
-
-.player {
-    position: absolute;
-
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    z-index: 30;
-
-    font-size: 10px;
-    font-weight: 600;
-
-    text-shadow: 0 1px 4px rgba(0,0,0,.6);
-}
-
-.player img {
-    width: 54px;
-    height: 54px;
-
-    object-fit: cover;
-
-    border-radius: 13px;
-
-    display: block;
-}
-
-.avatar-frame {
-    padding: 3px;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.35);
-}
-
-.gold {
-    background: linear-gradient(135deg,#fff4ad,#bd8422,#fff0a0);
-}
-
-.pink {
-    background: linear-gradient(135deg,#fff,#f27ba9,#9e2b61);
-}
-
-.blue {
-    background: linear-gradient(135deg,#e0faff,#3e9edc,#184d9c);
-}
-
-.violet {
-    background: linear-gradient(135deg,#f3ddff,#a75de3,#52228b);
-}
-
-.silver {
-    background: linear-gradient(135deg,#fff,#b6bec9,#5d6570);
-}
-
-.emerald {
-    background: linear-gradient(135deg,#dcffe9,#3bbb7b,#126846);
-}
-
-.red {
-    background: linear-gradient(135deg,#ffd7d7,#df5151,#721d1d);
-}
-
-.kiss-count {
-    margin-bottom: 3px;
-
-    padding: 3px 7px;
-
-    border-radius: 10px;
-
-    background: rgba(45,26,8,.5);
-
-    font-size: 9px;
-}
-
-/* 12 SEATS */
-
-.p1  { left: 50%; top: 5%; }
-.p2  { left: 75%; top: 11%; }
-.p3  { left: 92%; top: 31%; }
-.p4  { left: 96%; top: 58%; }
-.p5  { left: 82%; top: 83%; }
-.p6  { left: 62%; top: 95%; }
-.p7  { left: 38%; top: 95%; }
-.p8  { left: 18%; top: 83%; }
-.p9  { left: 4%;  top: 58%; }
-.p10 { left: 8%;  top: 31%; }
-.p11 { left: 25%; top: 11%; }
-.p12 { left: 50%; top: 5%; }
-
-/* ================= MUSIC ================= */
-
-.music-player {
-    position: absolute;
-
-    bottom: 12px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: min(260px, 72vw);
-
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 7px 10px;
-
-    border-radius: 13px;
-
-    background: rgba(15,15,15,.72);
-
-    backdrop-filter: blur(10px);
-
-    z-index: 60;
-}
-
-.music-cover {
-    width: 34px;
-    height: 34px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 8px;
-
-    background: #333;
-}
-
-.music-details {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.music-details strong {
-    font-size: 11px;
-}
-
-.music-details span {
-    margin-top: 2px;
-
-    font-size: 9px;
-
-    opacity: .55;
-}
-
-.music-player button {
-    width: 30px;
-    height: 30px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #fff;
-
-    cursor: pointer;
-}
-
-/* ================= CHAT ================= */
-
-.chat {
-    height: 42%;
-
-    min-height: 250px;
-
-    display: flex;
-    flex-direction: column;
-
-    background: #fff;
-
-    color: #151515;
-}
-
-.chat-header {
-    height: 49px;
-
-    padding: 7px 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-bottom: 1px solid #eee;
-}
-
-.chat-header div {
-    display: flex;
-    flex-direction: column;
-}
-
-.chat-header strong {
-    font-size: 14px;
-}
-
-.chat-header span {
-    margin-top: 2px;
-
-    font-size: 10px;
-
-    color: #999;
-}
-
-.chat-menu {
-    border: 0;
-
-    background: none;
-
-    font-size: 18px;
-
-    color: #888;
-}
-
-.messages {
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding: 10px 13px;
-}
-
-.message {
-    max-width: 88%;
-
-    display: flex;
-
-    gap: 8px;
-
-    margin-bottom: 10px;
-
-    font-size: 12px;
-}
-
-.message-avatar img {
-    width: 29px;
-    height: 29px;
-
-    border-radius: 50%;
-
-    object-fit: cover;
-}
-
-.message p {
-    margin: 3px 0 0;
-
-    color: #555;
-}
-
-.message.mine {
-    margin-left: auto;
-
-    justify-content: flex-end;
-
-    padding: 7px 10px;
-
-    border-radius: 13px;
-
-    background: #f0f0f0;
-}
-
-/* QUICK */
-
-.quick-messages {
-    display: flex;
-
-    gap: 6px;
-
-    padding: 5px 10px;
-
-    overflow-x: auto;
-}
-
-.quick-messages button {
-    white-space: nowrap;
-
-    padding: 6px 10px;
-
-    border: 1px solid #eee;
-
-    border-radius: 15px;
-
-    background: #fafafa;
-
-    font-size: 11px;
-
-    cursor: pointer;
-}
-
-/* INPUT */
-
-.chat-input {
-    display: flex;
-
-    gap: 7px;
-
-    padding: 9px 10px;
-
-    border-top: 1px solid #eee;
-}
-
-.chat-input input {
-    flex: 1;
-
-    min-width: 0;
-
-    padding: 10px 13px;
-
-    border: 1px solid #e4e4e4;
-
-    border-radius: 20px;
-
-    background: #f7f7f7;
-
-    outline: none;
-}
-
-.chat-input button {
-    width: 39px;
-    height: 39px;
-
-    flex-shrink: 0;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: #f2f2f2;
-
-    cursor: pointer;
-}
-
-.chat-input .send-button {
-    background: #222;
-
-    color: #fff;
-
-    font-size: 16px;
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 600px) {
-
-    .game {
-        height: 57%;
+<script>
+
+/* ==========================================
+   PLAYERS
+========================================== */
+
+const players = [
+
+    {
+        name:"Madina",
+        gender:"girl",
+        avatar:"https://i.pravatar.cc/100?img=47",
+        kiss:12
+    },
+
+    {
+        name:"Jasur",
+        gender:"boy",
+        avatar:"https://i.pravatar.cc/100?img=12",
+        kiss:5
+    },
+
+    {
+        name:"Malika",
+        gender:"girl",
+        avatar:"https://i.pravatar.cc/100?img=44",
+        kiss:18
+    },
+
+    {
+        name:"Aziz",
+        gender:"boy",
+        avatar:"https://i.pravatar.cc/100?img=11",
+        kiss:3
+    },
+
+    {
+        name:"Zarina",
+        gender:"girl",
+        avatar:"https://i.pravatar.cc/100?img=32",
+        kiss:25
+    },
+
+    {
+        name:"Bekzod",
+        gender:"boy",
+        avatar:"https://i.pravatar.cc/100?img=13",
+        kiss:7
+    },
+
+    {
+        name:"Shahnoza",
+        gender:"girl",
+        avatar:"https://i.pravatar.cc/100?img=49",
+        kiss:9
+    },
+
+    {
+        name:"Sardor",
+        gender:"boy",
+        avatar:"https://i.pravatar.cc/100?img=14",
+        kiss:4
+    },
+
+    {
+        name:"Dilnoza",
+        gender:"girl",
+        avatar:"https://i.pravatar.cc/100?img=45",
+        kiss:16
+    },
+
+    {
+        name:"Doston",
+        gender:"boy",
+        avatar:"https://i.pravatar.cc/100?img=15",
+        kiss:8
+    },
+
+    {
+        name:"Gulnoza",
+        gender:"girl",
+        avatar:"https://i.pravatar.cc/100?img=48",
+        kiss:11
+    },
+
+    {
+        name:"Bobur",
+        gender:"boy",
+        avatar:"https://i.pravatar.cc/100?img=16",
+        kiss:6
     }
 
-    .chat {
-        height: 43%;
-    }
-
-    .table {
-        width: 96vw;
-    }
-
-    .player img {
-        width: 47px;
-        height: 47px;
-    }
-
-    .player {
-        font-size: 10px;
-    }
-
-    .table-center {
-        transform:
-            translate(-50%, -50%)
-            scale(.9);
-    }
-}
-const bottle = document.getElementById("bottle");
-const spinHint = document.getElementById("spinHint");
-
-const messages = document.getElementById("messages");
-const input = document.getElementById("messageInput");
-const sendButton = document.getElementById("sendButton");
-
-const musicButton = document.getElementById("musicButton");
-
-let rotation = 0;
-let spinning = false;
+];
 
 
-// ==============================
-// BOTTLE SPIN
-// ==============================
+/* ==========================================
+   SEAT PLAYERS
+========================================== */
 
-bottle.addEventListener("click", function () {
+const table = document.getElementById("table");
 
-    if (spinning) return;
+const positions = [
 
-    spinning = true;
+    [50, 7],
+    [73, 12],
+    [91, 30],
+    [95, 51],
+    [84, 73],
+    [64, 91],
+    [36, 91],
+    [16, 73],
+    [5, 51],
+    [9, 30],
+    [27, 12],
+    [50, 4]
 
-    spinHint.textContent = "SPINNING...";
+];
 
-    const extra =
-        1440 +
-        Math.floor(Math.random() * 720);
+players.forEach((player,index)=>{
 
-    rotation += extra;
+    const el = document.createElement("div");
 
-    bottle.style.transform =
-        `rotate(${rotation}deg)`;
+    el.className =
+        "player" +
+        (index === 0 ? " active" : "");
 
-    setTimeout(function () {
+    el.style.left =
+        positions[index][0] + "%";
 
-        spinning = false;
+    el.style.top =
+        positions[index][1] + "%";
 
-        spinHint.textContent =
-            "TAP THE BOTTLE";
+    el.innerHTML = `
 
-    }, 4100);
+        <div class="avatar-wrap">
+
+            <img
+                class="avatar"
+                src="${player.avatar}"
+                alt=""
+            >
+
+            <div class="frame"></div>
+
+            <div class="kiss">
+                ♥ ${player.kiss}
+            </div>
+
+        </div>
+
+        <div class="player-name">
+            ${player.name}
+        </div>
+
+    `;
+
+    table.appendChild(el);
 
 });
 
 
-// ==============================
-// CHAT
-// ==============================
+/* ==========================================
+   BOTTLE
+========================================== */
 
-function addMessage(text) {
+const bottle =
+    document.getElementById("bottle");
 
-    const value = text.trim();
+let spinning = false;
 
-    if (!value) return;
+let currentPlayer =
+    players[0];
+
+
+/*
+    O'yinchi jinsiga qarab
+    qarama-qarshi jinsni tanlaymiz.
+*/
+
+function getTarget(){
+
+    const possible =
+        players.filter(player => {
+
+            return player.gender !==
+                   currentPlayer.gender;
+
+        });
+
+    return possible[
+        Math.floor(
+            Math.random() *
+            possible.length
+        )
+    ];
+
+}
+
+
+/* ==========================================
+   SPIN
+========================================== */
+
+bottle.addEventListener("click",()=>{
+
+    if(spinning) return;
+
+    spinning = true;
+
+    const target =
+        getTarget();
+
+    /*
+       Bottle aylanishi.
+       Bu yerda faqat vizual effekt.
+       Natija esa qarama-qarshi jinsdan tanlanadi.
+    */
+
+    bottle.classList.remove("spinning");
+
+    void bottle.offsetWidth;
+
+    bottle.classList.add("spinning");
+
+
+    setTimeout(()=>{
+
+        bottle.classList.remove("spinning");
+
+        spinning = false;
+
+        showTarget(target);
+
+    },2800);
+
+});
+
+
+/* ==========================================
+   SHOW TARGET
+========================================== */
+
+function showTarget(target){
+
+    document
+        .querySelectorAll(".player")
+        .forEach(el=>{
+            el.classList.remove("active");
+        });
+
+
+    const index =
+        players.indexOf(target);
+
+    const all =
+        document.querySelectorAll(".player");
+
+    if(all[index]){
+        all[index].classList.add("active");
+    }
+
+
+    addMessage(
+        "Tizim",
+        `💋 Shisha ${target.name} ga tushdi!`
+    );
+
+}
+
+
+/* ==========================================
+   CHAT
+========================================== */
+
+const input =
+    document.getElementById(
+        "messageInput"
+    );
+
+const send =
+    document.getElementById(
+        "sendBtn"
+    );
+
+const messages =
+    document.getElementById(
+        "messages"
+    );
+
+
+function sendMessage(){
+
+    const text =
+        input.value.trim();
+
+    if(!text) return;
 
     const message =
         document.createElement("div");
 
-    message.className = "message mine";
+    message.className =
+        "message me";
 
-    const content =
-        document.createElement("div");
-
-    const username =
-        document.createElement("strong");
-
-    const textElement =
-        document.createElement("p");
-
-    username.textContent = "Norbek";
-
-    textElement.textContent = value;
-
-    content.appendChild(username);
-    content.appendChild(textElement);
-
-    message.appendChild(content);
+    message.innerHTML = `
+        <div class="bubble">
+            ${escapeHTML(text)}
+        </div>
+    `;
 
     messages.appendChild(message);
+
+    input.value = "";
 
     messages.scrollTop =
         messages.scrollHeight;
 
-    input.value = "";
-
-    input.focus();
 }
 
 
-// ==============================
-// SEND
-// ==============================
-
-sendButton.addEventListener(
+send.addEventListener(
     "click",
-    function () {
-
-        addMessage(input.value);
-
-    }
+    sendMessage
 );
 
 
-// ==============================
-// ENTER
-// ==============================
-
 input.addEventListener(
     "keydown",
-    function (event) {
+    e=>{
 
-        if (event.key === "Enter") {
-
-            event.preventDefault();
-
-            addMessage(input.value);
-
+        if(e.key === "Enter"){
+            sendMessage();
         }
 
     }
 );
 
 
-// ==============================
-// QUICK MESSAGES
-// ==============================
+/* ==========================================
+   QUICK MESSAGES
+========================================== */
 
 document
-    .querySelectorAll(".quick-messages button")
-    .forEach(function (button) {
+    .querySelectorAll(".quick button")
+    .forEach(button=>{
 
         button.addEventListener(
             "click",
-            function () {
+            ()=>{
 
-                addMessage(
-                    button.textContent
-                );
+                input.value =
+                    button.textContent;
+
+                sendMessage();
 
             }
         );
@@ -1086,41 +1031,113 @@ document
     });
 
 
-// ==============================
-// EMOJI
-// ==============================
+function addMessage(name,text){
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message";
+
+    message.innerHTML = `
+
+        <div>
+
+            <div class="msg-name">
+                ${name}
+            </div>
+
+            <div class="bubble">
+                ${escapeHTML(text)}
+            </div>
+
+        </div>
+
+    `;
+
+    messages.appendChild(message);
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* ==========================================
+   XSS PROTECTION
+========================================== */
+
+function escapeHTML(text){
+
+    return text
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* ==========================================
+   KISS EFFECT
+========================================== */
+
+function kissEffect(x,y){
+
+    const el =
+        document.createElement("div");
+
+    el.className =
+        "kiss-fx";
+
+    el.textContent =
+        "💋";
+
+    el.style.left =
+        x + "px";
+
+    el.style.top =
+        y + "px";
+
+    table.appendChild(el);
+
+    setTimeout(()=>{
+        el.remove();
+    },1000);
+
+}
+
+
+/* ==========================================
+   KISS DEMO
+========================================== */
 
 document
-    .getElementById("emojiButton")
-    .addEventListener(
-        "click",
-        function () {
+    .querySelectorAll(".player")
+    .forEach(player=>{
 
-            input.value += " ❤️";
+        player.addEventListener(
+            "dblclick",
+            e=>{
 
-            input.focus();
+                const rect =
+                    table.getBoundingClientRect();
 
-        }
-    );
+                kissEffect(
+                    e.clientX -
+                    rect.left,
 
+                    e.clientY -
+                    rect.top
+                );
 
-// ==============================
-// MUSIC BUTTON
-// ==============================
+            }
+        );
 
-let musicPlaying = false;
+    });
 
-musicButton.addEventListener(
-    "click",
-    function () {
+</script>
 
-        musicPlaying =
-            !musicPlaying;
-
-        musicButton.textContent =
-            musicPlaying
-                ? "❚❚"
-                : "▶";
-
-    }
-);
+</body>
+</html>
