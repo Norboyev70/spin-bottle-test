@@ -530,46 +530,219 @@ body{
 }
 
 /* =========================
-   DESKTOP
+   TELEFON
 ========================= */
 
-@media(min-width:700px){
+@media (max-width: 699px){
+
     .app{
-        box-shadow:0 0 35px rgba(0,0,0,.3);
+        width:100%;
+        height:100vh;
+        max-width:none;
     }
-}
 
-/* small screens */
+    .game{
+        height:50vh;
+        min-height:50vh;
+    }
 
-@media(max-height:700px){
+    .chat{
+        height:50vh;
+        min-height:50vh;
+    }
+
     .table{
-        top:60%;
+        width:92vw;
+        height:92vw;
+
+        min-width:0;
+        min-height:0;
+
+        max-width:none;
+        max-height:none;
+
+        top:57%;
     }
 
     .player{
-        width:62px;
+        width:100px;
     }
 
     .avatar-wrap{
-        width:46px;
-        height:46px;
+        width:80px;
+        height:80px;
     }
 
     .avatar{
-        width:43px;
-        height:43px;
+        width:74px;
+        height:74px;
+        border-radius:20px;
+    }
+
+    .frame{
+        border-radius:22px;
+        border-width:4px;
+    }
+
+    .kiss{
+        min-width:27px;
+        height:27px;
+        font-size:12px;
+    }
+
+    .player-name{
+        font-size:11px;
     }
 
     .center{
-        width:110px;
-        height:110px;
+        width:115px;
+        height:115px;
     }
 
     .bottle{
-        transform:scale(.85);
+        transform:scale(.9);
     }
 }
-</style>
+
+
+/* KICHIK TELEFONLAR */
+
+@media (max-width:400px){
+
+    .table{
+        width:94vw;
+        height:94vw;
+        top:58%;
+    }
+
+    .player{
+        width:88px;
+    }
+
+    .avatar-wrap{
+        width:70px;
+        height:70px;
+    }
+
+    .avatar{
+        width:65px;
+        height:65px;
+        border-radius:18px;
+    }
+
+    .frame{
+        border-radius:19px;
+    }
+
+    .player-name{
+        font-size:10px;
+    }
+
+    .center{
+        width:105px;
+        height:105px;
+    }
+}
+
+
+/* =========================
+   KOMPYUTER
+========================= */
+
+@media (min-width:700px){
+
+    body{
+        background:#171717;
+    }
+
+    .app{
+        width:100%;
+        max-width:1100px;
+        height:100vh;
+
+        display:flex;
+        flex-direction:row;
+    }
+
+    .game{
+        width:60%;
+        height:100vh;
+        min-height:100vh;
+    }
+
+    .chat{
+        width:40%;
+        height:100vh;
+        min-height:100vh;
+
+        border-left:1px solid #ddd;
+    }
+
+    .table{
+        width:min(52vw,620px);
+        height:min(52vw,620px);
+
+        min-width:500px;
+        min-height:500px;
+
+        top:53%;
+    }
+
+    .player{
+        width:115px;
+    }
+
+    .avatar-wrap{
+        width:92px;
+        height:92px;
+    }
+
+    .avatar{
+        width:86px;
+        height:86px;
+        border-radius:23px;
+    }
+
+    .frame{
+        border-radius:25px;
+        border-width:4px;
+    }
+
+    .kiss{
+        min-width:30px;
+        height:30px;
+        font-size:13px;
+    }
+
+    .player-name{
+        font-size:12px;
+    }
+
+    .center{
+        width:140px;
+        height:140px;
+    }
+
+    .bottle{
+        transform:scale(1.05);
+    }
+
+    .chat-head{
+        height:58px;
+    }
+
+    .chat-title{
+        font-size:17px;
+    }
+
+    .messages{
+        padding:15px;
+    }
+
+    .bubble{
+        font-size:14px;
+    }
+}</style>
 </head>
 
 <body>
