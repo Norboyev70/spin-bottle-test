@@ -262,7 +262,7 @@ body{
 
 .player{
     position:absolute;
-    width:96px;
+    width:92px;
     text-align:center;
     z-index:10;
     transform:translate(-50%,-50%);
@@ -271,11 +271,21 @@ body{
 
 .avatar-wrap{
     position:relative;
-    width:78px;
-    height:78px;
+    width:82px;
+    height:82px;
     margin:auto;
 }
 
+.avatar{
+    width:76px;
+    height:76px;
+    border-radius:20px;
+    object-fit:cover;
+    display:block;
+    margin:3px auto;
+    border:3px solid #fff;
+    box-shadow:0 5px 12px rgba(0,0,0,.28);
+}
 .avatar{
     width:72px;
     height:72px;
@@ -962,18 +972,18 @@ const players = [
 const table = document.getElementById("table");
 
 const positions = [
-    [50, 8],    // 1 - yuqori
-    [72, 12],   // 2
-    [88, 27],   // 3
-    [94, 50],   // 4 - o'ng
-    [88, 73],   // 5
-    [72, 88],   // 6
-    [50, 92],   // 7 - past
-    [28, 88],   // 8
-    [12, 73],   // 9
-    [6, 50],    // 10 - chap
-    [12, 27],   // 11
-    [28, 12]    // 12
+    [50, 13],
+    [69, 17],
+    [83, 32],
+    [87, 50],
+    [83, 68],
+    [69, 83],
+    [50, 87],
+    [31, 83],
+    [17, 68],
+    [13, 50],
+    [17, 32],
+    [31, 17]
 ];
 players.forEach((player,index)=>{
 
