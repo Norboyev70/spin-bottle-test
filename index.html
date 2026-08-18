@@ -260,3 +260,867 @@
 
 </body>
 </html>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: #101510;
+    overflow: hidden;
+}
+
+body {
+    color: #fff;
+}
+
+.app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= TOP GAME ================= */
+
+.game {
+    height: 58%;
+    min-height: 420px;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 45%, #789c58 0%, #52763c 65%, #3b592c 100%);
+}
+
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 64px;
+    padding: 10px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 50;
+}
+
+.profile-mini {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.mini-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 2px;
+
+    background: linear-gradient(135deg, #fff, #d6b76a);
+
+    box-shadow: 0 3px 12px rgba(0,0,0,.3);
+}
+
+.mini-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.profile-info strong {
+    font-size: 14px;
+}
+
+.profile-info span {
+    font-size: 10px;
+    opacity: .7;
+}
+
+.balance {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    background: rgba(0,0,0,.25);
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(8px);
+}
+
+.heart {
+    color: #ff5379;
+    font-size: 20px;
+}
+
+/* ================= TABLE ================= */
+
+.table-area {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.table {
+    width: min(92vw, 650px);
+    aspect-ratio: 1;
+
+    position: relative;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #dfc18b 0%,
+            #c9a46b 55%,
+            #a87948 100%
+        );
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.35),
+        inset 0 0 45px rgba(72,42,15,.22);
+}
+
+.table::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 7%;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.16);
+}
+
+.table-glow {
+    position: absolute;
+
+    inset: 17%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.12),
+            transparent 65%
+        );
+}
+
+/* ================= BOTTLE ================= */
+
+.table-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 180px;
+    height: 180px;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 20;
+}
+
+.bottle-shadow {
+    position: absolute;
+
+    width: 125px;
+    height: 25px;
+
+    bottom: 45px;
+
+    background: rgba(50,30,10,.28);
+
+    border-radius: 50%;
+
+    filter: blur(8px);
+}
+
+.bottle {
+    width: 150px;
+    height: 100px;
+
+    position: relative;
+
+    border: 0;
+    outline: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transform-origin: 50% 50%;
+
+    transition:
+        transform 4s cubic-bezier(.12,.72,.08,1);
+}
+
+.bottle:active {
+    transform: scale(.95);
+}
+
+.bottle-body {
+    position: absolute;
+
+    left: 12px;
+    top: 34px;
+
+    width: 110px;
+    height: 42px;
+
+    border-radius: 22px 30px 30px 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #668c4a,
+            #315d30 55%,
+            #234724
+        );
+
+    box-shadow:
+        inset 5px 5px 8px rgba(255,255,255,.18),
+        inset -5px -5px 8px rgba(0,0,0,.2),
+        0 7px 12px rgba(0,0,0,.25);
+}
+
+.bottle-neck {
+    position: absolute;
+
+    left: 105px;
+    top: 40px;
+
+    width: 42px;
+    height: 27px;
+
+    border-radius: 4px 10px 10px 4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #71965a,
+            #315c31
+        );
+
+    box-shadow:
+        inset 2px 2px 4px rgba(255,255,255,.15);
+}
+
+.bottle-label {
+    position: absolute;
+
+    left: 32px;
+    top: 11px;
+
+    color: #e8d39a;
+
+    font-size: 9px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.spin-hint {
+    position: absolute;
+
+    top: 132px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255,255,255,.65);
+}
+
+/* ================= PLAYERS ================= */
+
+.player {
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 30;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    text-shadow: 0 1px 4px rgba(0,0,0,.6);
+}
+
+.player img {
+    width: 54px;
+    height: 54px;
+
+    object-fit: cover;
+
+    border-radius: 13px;
+
+    display: block;
+}
+
+.avatar-frame {
+    padding: 3px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.35);
+}
+
+.gold {
+    background: linear-gradient(135deg,#fff4ad,#bd8422,#fff0a0);
+}
+
+.pink {
+    background: linear-gradient(135deg,#fff,#f27ba9,#9e2b61);
+}
+
+.blue {
+    background: linear-gradient(135deg,#e0faff,#3e9edc,#184d9c);
+}
+
+.violet {
+    background: linear-gradient(135deg,#f3ddff,#a75de3,#52228b);
+}
+
+.silver {
+    background: linear-gradient(135deg,#fff,#b6bec9,#5d6570);
+}
+
+.emerald {
+    background: linear-gradient(135deg,#dcffe9,#3bbb7b,#126846);
+}
+
+.red {
+    background: linear-gradient(135deg,#ffd7d7,#df5151,#721d1d);
+}
+
+.kiss-count {
+    margin-bottom: 3px;
+
+    padding: 3px 7px;
+
+    border-radius: 10px;
+
+    background: rgba(45,26,8,.5);
+
+    font-size: 9px;
+}
+
+/* 12 SEATS */
+
+.p1  { left: 50%; top: 5%; }
+.p2  { left: 75%; top: 11%; }
+.p3  { left: 92%; top: 31%; }
+.p4  { left: 96%; top: 58%; }
+.p5  { left: 82%; top: 83%; }
+.p6  { left: 62%; top: 95%; }
+.p7  { left: 38%; top: 95%; }
+.p8  { left: 18%; top: 83%; }
+.p9  { left: 4%;  top: 58%; }
+.p10 { left: 8%;  top: 31%; }
+.p11 { left: 25%; top: 11%; }
+.p12 { left: 50%; top: 5%; }
+
+/* ================= MUSIC ================= */
+
+.music-player {
+    position: absolute;
+
+    bottom: 12px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(260px, 72vw);
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 7px 10px;
+
+    border-radius: 13px;
+
+    background: rgba(15,15,15,.72);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 60;
+}
+
+.music-cover {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 8px;
+
+    background: #333;
+}
+
+.music-details {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.music-details strong {
+    font-size: 11px;
+}
+
+.music-details span {
+    margin-top: 2px;
+
+    font-size: 9px;
+
+    opacity: .55;
+}
+
+.music-player button {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    cursor: pointer;
+}
+
+/* ================= CHAT ================= */
+
+.chat {
+    height: 42%;
+
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #fff;
+
+    color: #151515;
+}
+
+.chat-header {
+    height: 49px;
+
+    padding: 7px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #eee;
+}
+
+.chat-header div {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header strong {
+    font-size: 14px;
+}
+
+.chat-header span {
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: #999;
+}
+
+.chat-menu {
+    border: 0;
+
+    background: none;
+
+    font-size: 18px;
+
+    color: #888;
+}
+
+.messages {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 10px 13px;
+}
+
+.message {
+    max-width: 88%;
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+}
+
+.message-avatar img {
+    width: 29px;
+    height: 29px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.message p {
+    margin: 3px 0 0;
+
+    color: #555;
+}
+
+.message.mine {
+    margin-left: auto;
+
+    justify-content: flex-end;
+
+    padding: 7px 10px;
+
+    border-radius: 13px;
+
+    background: #f0f0f0;
+}
+
+/* QUICK */
+
+.quick-messages {
+    display: flex;
+
+    gap: 6px;
+
+    padding: 5px 10px;
+
+    overflow-x: auto;
+}
+
+.quick-messages button {
+    white-space: nowrap;
+
+    padding: 6px 10px;
+
+    border: 1px solid #eee;
+
+    border-radius: 15px;
+
+    background: #fafafa;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+/* INPUT */
+
+.chat-input {
+    display: flex;
+
+    gap: 7px;
+
+    padding: 9px 10px;
+
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 10px 13px;
+
+    border: 1px solid #e4e4e4;
+
+    border-radius: 20px;
+
+    background: #f7f7f7;
+
+    outline: none;
+}
+
+.chat-input button {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #f2f2f2;
+
+    cursor: pointer;
+}
+
+.chat-input .send-button {
+    background: #222;
+
+    color: #fff;
+
+    font-size: 16px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .game {
+        height: 57%;
+    }
+
+    .chat {
+        height: 43%;
+    }
+
+    .table {
+        width: 96vw;
+    }
+
+    .player img {
+        width: 47px;
+        height: 47px;
+    }
+
+    .player {
+        font-size: 10px;
+    }
+
+    .table-center {
+        transform:
+            translate(-50%, -50%)
+            scale(.9);
+    }
+}
+const bottle = document.getElementById("bottle");
+const spinHint = document.getElementById("spinHint");
+
+const messages = document.getElementById("messages");
+const input = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+
+const musicButton = document.getElementById("musicButton");
+
+let rotation = 0;
+let spinning = false;
+
+
+// ==============================
+// BOTTLE SPIN
+// ==============================
+
+bottle.addEventListener("click", function () {
+
+    if (spinning) return;
+
+    spinning = true;
+
+    spinHint.textContent = "SPINNING...";
+
+    const extra =
+        1440 +
+        Math.floor(Math.random() * 720);
+
+    rotation += extra;
+
+    bottle.style.transform =
+        `rotate(${rotation}deg)`;
+
+    setTimeout(function () {
+
+        spinning = false;
+
+        spinHint.textContent =
+            "TAP THE BOTTLE";
+
+    }, 4100);
+
+});
+
+
+// ==============================
+// CHAT
+// ==============================
+
+function addMessage(text) {
+
+    const value = text.trim();
+
+    if (!value) return;
+
+    const message =
+        document.createElement("div");
+
+    message.className = "message mine";
+
+    const content =
+        document.createElement("div");
+
+    const username =
+        document.createElement("strong");
+
+    const textElement =
+        document.createElement("p");
+
+    username.textContent = "Norbek";
+
+    textElement.textContent = value;
+
+    content.appendChild(username);
+    content.appendChild(textElement);
+
+    message.appendChild(content);
+
+    messages.appendChild(message);
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+    input.value = "";
+
+    input.focus();
+}
+
+
+// ==============================
+// SEND
+// ==============================
+
+sendButton.addEventListener(
+    "click",
+    function () {
+
+        addMessage(input.value);
+
+    }
+);
+
+
+// ==============================
+// ENTER
+// ==============================
+
+input.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            addMessage(input.value);
+
+        }
+
+    }
+);
+
+
+// ==============================
+// QUICK MESSAGES
+// ==============================
+
+document
+    .querySelectorAll(".quick-messages button")
+    .forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                addMessage(
+                    button.textContent
+                );
+
+            }
+        );
+
+    });
+
+
+// ==============================
+// EMOJI
+// ==============================
+
+document
+    .getElementById("emojiButton")
+    .addEventListener(
+        "click",
+        function () {
+
+            input.value += " ❤️";
+
+            input.focus();
+
+        }
+    );
+
+
+// ==============================
+// MUSIC BUTTON
+// ==============================
+
+let musicPlaying = false;
+
+musicButton.addEventListener(
+    "click",
+    function () {
+
+        musicPlaying =
+            !musicPlaying;
+
+        musicButton.textContent =
+            musicPlaying
+                ? "❚❚"
+                : "▶";
+
+    }
+);
