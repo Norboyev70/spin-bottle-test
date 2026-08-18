@@ -2,285 +2,37 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <title>Spin Bottle</title>
-
-    <link rel="stylesheet" href="style.css">
+    <title>Bottle Game Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background: #121212; color: white; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #ff4757; color: white; border: none; border-radius: 5px; }
+        #log { margin-top: 20px; text-align: left; display: inline-block; background: #1e1e1e; padding: 15px; border-radius: 5px; width: 400px; height: 200px; overflow-y: auto; }
+    </style>
 </head>
-
 <body>
-
-<div class="app">
-
-    <!-- ================= TABLE ================= -->
-    <section class="game">
-
-        <!-- TOP BAR -->
-        <div class="topbar">
-
-            <div class="profile-mini">
-                <div class="mini-avatar">
-                    <img src="https://i.pravatar.cc/100?img=12">
-                </div>
-
-                <div class="profile-info">
-                    <strong>Norbek</strong>
-                    <span>Level 12</span>
-                </div>
-            </div>
-
-            <div class="balance">
-                <span class="heart">♥</span>
-                <strong id="heartBalance">11250</strong>
-            </div>
-
-        </div>
-
-
-        <!-- TABLE -->
-        <div class="table-area">
-
-            <div class="table">
-
-                <!-- TABLE DECOR -->
-                <div class="table-glow"></div>
-
-                <!-- CENTER -->
-                <div class="table-center">
-
-                    <div class="bottle-shadow"></div>
-
-                    <div id="bottle" class="bottle">
-                        <div class="bottle-neck"></div>
-                        <div class="bottle-body">
-                            <div class="bottle-label">
-                                <span>SPIN</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="spinHint" class="spin-hint">
-                        TAP THE BOTTLE
-                    </div>
-
-                </div>
-
-
-                <!-- PLAYERS -->
-
-                <div class="player player-1">
-                    <div class="kiss-count">♥ 24</div>
-                    <div class="avatar-frame gold">
-                        <img src="https://i.pravatar.cc/120?img=47">
-                    </div>
-                    <span>Anna</span>
-                </div>
-
-                <div class="player player-2">
-                    <div class="kiss-count">♥ 18</div>
-                    <div class="avatar-frame pink">
-                        <img src="https://i.pravatar.cc/120?img=32">
-                    </div>
-                    <span>Sofia</span>
-                </div>
-
-                <div class="player player-3">
-                    <div class="kiss-count">♥ 31</div>
-                    <div class="avatar-frame blue">
-                        <img src="https://i.pravatar.cc/120?img=13">
-                    </div>
-                    <span>Alex</span>
-                </div>
-
-                <div class="player player-4">
-                    <div class="kiss-count">♥ 12</div>
-                    <div class="avatar-frame violet">
-                        <img src="https://i.pravatar.cc/120?img=44">
-                    </div>
-                    <span>Luna</span>
-                </div>
-
-                <div class="player player-5">
-                    <div class="kiss-count">♥ 41</div>
-                    <div class="avatar-frame silver">
-                        <img src="https://i.pravatar.cc/120?img=11">
-                    </div>
-                    <span>Daniel</span>
-                </div>
-
-                <div class="player player-6">
-                    <div class="kiss-count">♥ 9</div>
-                    <div class="avatar-frame emerald">
-                        <img src="https://i.pravatar.cc/120?img=49">
-                    </div>
-                    <span>Mia</span>
-                </div>
-
-                <div class="player player-7">
-                    <div class="kiss-count">♥ 27</div>
-                    <div class="avatar-frame red">
-                        <img src="https://i.pravatar.cc/120?img=68">
-                    </div>
-                    <span>Leo</span>
-                </div>
-
-                <div class="player player-8">
-                    <div class="kiss-count">♥ 16</div>
-                    <div class="avatar-frame pink">
-                        <img src="https://i.pravatar.cc/120?img=25">
-                    </div>
-                    <span>Emma</span>
-                </div>
-
-                <div class="player player-9">
-                    <div class="kiss-count">♥ 35</div>
-                    <div class="avatar-frame gold">
-                        <img src="https://i.pravatar.cc/120?img=59">
-                    </div>
-                    <span>Chris</span>
-                </div>
-
-                <div class="player player-10">
-                    <div class="kiss-count">♥ 20</div>
-                    <div class="avatar-frame violet">
-                        <img src="https://i.pravatar.cc/120?img=5">
-                    </div>
-                    <span>Kate</span>
-                </div>
-
-                <div class="player player-11">
-                    <div class="kiss-count">♥ 11</div>
-                    <div class="avatar-frame blue">
-                        <img src="https://i.pravatar.cc/120?img=60">
-                    </div>
-                    <span>Mark</span>
-                </div>
-
-                <div class="player player-12">
-                    <div class="kiss-count">♥ 22</div>
-                    <div class="avatar-frame emerald">
-                        <img src="https://i.pravatar.cc/120?img=48">
-                    </div>
-                    <span>Julia</span>
-                </div>
-
-            </div>
-
-
-            <!-- MUSIC -->
-            <div class="music-player">
-
-                <div class="music-cover">
-                    ♪
-                </div>
-
-                <div class="music-details">
-                    <strong>Night Drive</strong>
-                    <span>Unknown Artist</span>
-                </div>
-
-                <button id="musicButton">▶</button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= CHAT ================= -->
-
-    <section class="chat">
-
-        <div class="chat-header">
-
-            <div>
-                <strong>Table Chat</strong>
-                <span>12 players</span>
-            </div>
-
-            <button class="chat-menu">•••</button>
-
-        </div>
-
-
-        <div id="messages" class="messages">
-
-            <div class="message">
-                <div class="message-avatar">
-                    <img src="https://i.pravatar.cc/60?img=47">
-                </div>
-
-                <div>
-                    <strong>Anna</strong>
-                    <p>Kim spin qiladi? 😏</p>
-                </div>
-            </div>
-
-
-            <div class="message">
-                <div class="message-avatar">
-                    <img src="https://i.pravatar.cc/60?img=13">
-                </div>
-
-                <div>
-                    <strong>Alex</strong>
-                    <p>Men tayyorman 🔥</p>
-                </div>
-            </div>
-
-
-            <div class="message mine">
-
-                <div>
-                    <strong>Norbek</strong>
-                    <p>🍾 Boshladik!</p>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- QUICK MESSAGES -->
-
-        <div class="quick-messages">
-
-            <button>😘 Kiss</button>
-            <button>🔥 Wow</button>
-            <button>😂 Haha</button>
-            <button>❤️ Love</button>
-
-        </div>
-
-
-        <!-- INPUT -->
-
-        <div class="chat-input">
-
-            <button id="emojiButton">☺</button>
-
-            <input
-                id="messageInput"
-                type="text"
-                placeholder="Write a message..."
-                autocomplete="off"
-            >
-
-            <button id="sendButton" class="send-button">
-                ➤
-            </button>
-
-        </div>
-
-    </section>
-
-</div>
-
-
-<script src="script.js"></script>
-
+    <h1>🍾 Butilka O'yini (Test)</h1>
+    <p>Foydalanuvchi ID: <span id="uid"></span></p>
+    <button onclick="spinBottle()">Butilkani aylantirish</button>
+    <br><br>
+    <h3>O'yin tarixi (Log):</h3>
+    <div id="log"></div>
+
+    <script>
+        const userId = "User_" + Math.floor(Math.random() * 1000);
+        document.getElementById("uid").innerText = userId;
+
+        const ws = new WebSocket(`ws://127.0.0.1:8000/ws/game/${userId}`);
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const logDiv = document.getElementById("log");
+            logDiv.innerHTML += `<p><b>${data.event}:</b> ${JSON.stringify(data)}</p>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        };
+
+        function spinBottle() {
+            ws.send(JSON.stringify({ action: "spin_bottle" }));
+        }
+    </script>
 </body>
 </html>
