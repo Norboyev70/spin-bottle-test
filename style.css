@@ -1,6 +1,6 @@
-/* ==================================================
-   RESET
-================================================== */
+/* =========================================================
+   SPIN THE BOTTLE — PREMIUM DESIGN
+========================================================= */
 
 * {
     margin: 0;
@@ -15,19 +15,23 @@ body {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-
-    background: #120d09;
-
+    font-family: Inter, Arial, sans-serif;
+    overflow: hidden;
     color: #fff;
 
-    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #3a281d 0%,
+            #1e1510 42%,
+            #0c0907 100%
+        );
 }
 
 
-/* ==================================================
+/* =========================================================
    APP
-================================================== */
+========================================================= */
 
 .app {
     width: 100%;
@@ -38,35 +42,40 @@ body {
 
     background:
         radial-gradient(
-            circle at 50% 20%,
-            #3b281b 0%,
-            #21160f 45%,
-            #100b08 100%
+            circle at 50% 15%,
+            rgba(139, 92, 48, .12),
+            transparent 38%
         );
 }
 
 
-/* ==================================================
+/* =========================================================
    TOP BAR
-================================================== */
+========================================================= */
 
 .topbar {
-    width: 100%;
     height: 62px;
-
     flex: 0 0 62px;
+
+    padding: 0 18px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 18px;
-
-    background: rgba(13, 9, 7, .94);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(19,14,10,.98),
+            rgba(12,9,7,.96)
+        );
 
     border-bottom: 1px solid rgba(255,255,255,.06);
 
-    z-index: 50;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.28);
+
+    z-index: 100;
 }
 
 
@@ -75,79 +84,91 @@ body {
 .user-box {
     display: flex;
     align-items: center;
-
-    gap: 9px;
+    gap: 10px;
 }
 
 .user-avatar {
-    width: 40px;
-    height: 40px;
+    width: 41px;
+    height: 41px;
 
     padding: 2px;
 
-    border-radius: 11px;
+    border-radius: 12px;
 
     background:
         linear-gradient(
             135deg,
-            #f3d59d,
-            #875127
+            #f5d49b,
+            #c28a4d,
+            #60391e
         );
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.4);
 }
 
 .user-avatar img {
     width: 100%;
     height: 100%;
 
-    display: block;
-
     object-fit: cover;
 
-    border-radius: 9px;
+    border-radius: 10px;
+
+    display: block;
 }
 
 .user-info strong {
     display: block;
-
     font-size: 13px;
 }
 
 .user-info span {
     display: block;
 
-    margin-top: 2px;
+    margin-top: 3px;
 
-    color: #94877e;
+    color: #9b9188;
 
     font-size: 9px;
 }
 
 
-/* HEARTS */
+/* HEART */
 
 .heart-box {
     height: 36px;
 
-    padding: 0 12px;
+    padding: 0 13px;
 
     display: flex;
     align-items: center;
-
     gap: 7px;
 
     border-radius: 11px;
 
-    background: rgba(255,255,255,.055);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.035)
+        );
 
-    border: 1px solid rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.05);
 }
 
 .heart {
-    color: #ff526c;
+    color: #ff506a;
 
     font-size: 20px;
 
-    line-height: 1;
+    filter:
+        drop-shadow(
+            0 2px 4px rgba(255,50,80,.25)
+        );
 }
 
 .heart-box strong {
@@ -155,9 +176,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    GAME
-================================================== */
+========================================================= */
 
 .game {
     flex: 1;
@@ -169,9 +190,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    TABLE AREA
-================================================== */
+========================================================= */
 
 .table-area {
     flex: 1;
@@ -183,13 +204,13 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 10px;
+    padding: 12px;
 }
 
 
-/* ==================================================
-   TABLE
-================================================== */
+/* =========================================================
+   PREMIUM WOOD TABLE
+========================================================= */
 
 .table {
     position: relative;
@@ -203,28 +224,43 @@ body {
 
     border-radius: 50%;
 
+    overflow: hidden;
+
     background:
+
+        /* wood grain */
+        repeating-radial-gradient(
+            ellipse at 50% 50%,
+            transparent 0px,
+            transparent 18px,
+            rgba(62,28,10,.10) 19px,
+            transparent 23px
+        ),
+
+        /* natural wood */
         radial-gradient(
-            circle at 45% 38%,
-            #cb9155 0%,
-            #ad6e3a 32%,
-            #884d29 63%,
-            #63351e 100%
+            ellipse at 35% 30%,
+            #d09a5c 0%,
+            #b87940 28%,
+            #985b2f 58%,
+            #70401f 100%
         );
 
-    border: 9px solid #59311c;
+    border: 7px solid #553019;
 
     box-shadow:
 
-        0 25px 60px rgba(0,0,0,.65),
+        0 30px 65px rgba(0,0,0,.65),
 
-        inset 0 3px 5px rgba(255,255,255,.17),
+        0 5px 15px rgba(0,0,0,.35),
 
-        inset 0 -15px 25px rgba(40,15,5,.4);
+        inset 0 4px 8px rgba(255,255,255,.17),
+
+        inset 0 -18px 30px rgba(46,18,5,.45);
 }
 
 
-/* INNER RING */
+/* TABLE LIGHT */
 
 .table::before {
     content: "";
@@ -235,16 +271,18 @@ body {
 
     border-radius: 50%;
 
-    border: 1px solid rgba(255,255,255,.13);
+    border: 1px solid rgba(255,236,199,.18);
 
     box-shadow:
-        inset 0 0 30px rgba(50,20,8,.25);
+        inset 0 0 45px rgba(53,22,7,.35);
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 
-/* WOOD */
+/* TABLE TEXTURE */
 
 .table::after {
     content: "";
@@ -255,24 +293,26 @@ body {
 
     border-radius: 50%;
 
-    opacity: .12;
+    opacity: .22;
 
     background:
-        repeating-radial-gradient(
-            ellipse at center,
-            transparent 0,
-            transparent 20px,
-            rgba(45,20,8,.35) 21px,
-            transparent 24px
+        repeating-linear-gradient(
+            7deg,
+            transparent 0px,
+            transparent 15px,
+            rgba(55,25,9,.07) 16px,
+            transparent 18px
         );
 
     pointer-events: none;
+
+    z-index: 2;
 }
 
 
-/* ==================================================
+/* =========================================================
    PLAYERS
-================================================== */
+========================================================= */
 
 .player {
     position: absolute;
@@ -285,27 +325,52 @@ body {
 
     transform: translate(-50%, -50%);
 
-    z-index: 10;
+    z-index: 20;
 }
 
+
+/* AVATAR PREMIUM FRAME */
+
 .avatar {
-    width: 55px;
-    height: 55px;
+    position: relative;
+
+    width: 56px;
+    height: 56px;
 
     padding: 3px;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
     background:
         linear-gradient(
-            135deg,
-            #f1d49c,
-            #a26732,
-            #5a321d
+            145deg,
+            #f5dcad 0%,
+            #bd8750 35%,
+            #75431f 65%,
+            #e0b475 100%
         );
 
     box-shadow:
-        0 5px 13px rgba(0,0,0,.45);
+
+        0 7px 14px rgba(0,0,0,.48),
+
+        inset 0 1px 1px rgba(255,255,255,.55),
+
+        0 0 0 1px rgba(40,18,6,.45);
+}
+
+.avatar::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -3px;
+
+    border-radius: 17px;
+
+    border: 1px solid rgba(255,225,176,.25);
+
+    pointer-events: none;
 }
 
 .avatar img {
@@ -316,13 +381,16 @@ body {
 
     object-fit: cover;
 
-    border-radius: 11px;
+    border-radius: 12px;
 }
+
+
+/* PLAYER NAME */
 
 .player strong {
     max-width: 70px;
 
-    margin-top: 4px;
+    margin-top: 5px;
 
     overflow: hidden;
 
@@ -332,25 +400,30 @@ body {
 
     font-size: 9px;
 
+    font-weight: 600;
+
     text-shadow:
-        0 2px 4px rgba(0,0,0,.9);
+        0 2px 5px #000;
 }
+
+
+/* HEART COUNT */
 
 .player small {
     margin-top: 2px;
 
-    color: #ffd3da;
+    color: #ffd8de;
 
     font-size: 7px;
 
     text-shadow:
-        0 1px 3px rgba(0,0,0,.9);
+        0 1px 4px #000;
 }
 
 
-/* ==================================================
+/* =========================================================
    PLAYER POSITIONS
-================================================== */
+========================================================= */
 
 .player-1 {
     left: 50%;
@@ -413,9 +486,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    MODERN GLASS BOTTLE
-================================================== */
+========================================================= */
 
 .bottle-button {
     position: absolute;
@@ -428,19 +501,20 @@ body {
 
     transform: translate(-50%, -50%);
 
-    padding: 0;
-
     border: 0;
+    outline: 0;
 
     background: transparent;
 
-    cursor: pointer;
-
-    z-index: 25;
+    padding: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 40;
 }
 
 
@@ -456,7 +530,7 @@ body {
 
     filter:
         drop-shadow(
-            0 8px 7px rgba(0,0,0,.55)
+            0 10px 8px rgba(0,0,0,.58)
         );
 }
 
@@ -477,13 +551,13 @@ body {
     background:
         linear-gradient(
             90deg,
-            #594520,
-            #d5b158,
-            #705426
+            #493716,
+            #e1c16b,
+            #6b4b1e
         );
 
     box-shadow:
-        inset 1px 0 rgba(255,255,255,.45);
+        inset 1px 0 rgba(255,255,255,.5);
 }
 
 
@@ -495,7 +569,7 @@ body {
     left: 12px;
     top: 21px;
 
-    width: 65px;
+    width: 67px;
     height: 16px;
 
     border-radius: 5px;
@@ -503,17 +577,13 @@ body {
     background:
         linear-gradient(
             180deg,
-            rgba(116,183,145,.8),
-            rgba(17,82,55,.95)
+            rgba(117,184,146,.88),
+            rgba(12,75,48,.97)
         );
 
-    border-top: 1px solid rgba(255,255,255,.5);
-
-    border-bottom: 1px solid rgba(0,0,0,.3);
+    border-top: 1px solid rgba(255,255,255,.6);
+    border-bottom: 1px solid rgba(0,0,0,.35);
 }
-
-
-/* SHINE */
 
 .shine {
     position: absolute;
@@ -526,7 +596,8 @@ body {
 
     border-radius: 10px;
 
-    background: rgba(255,255,255,.55);
+    background:
+        rgba(255,255,255,.65);
 }
 
 
@@ -537,10 +608,10 @@ body {
 
     position: absolute;
 
-    right: -22px;
+    right: -23px;
     top: -7px;
 
-    width: 30px;
+    width: 31px;
     height: 30px;
 
     border-radius: 50%;
@@ -548,9 +619,9 @@ body {
     background:
         linear-gradient(
             90deg,
-            #0b4d31,
-            #58a078,
-            #145b3a
+            #0b4a2f,
+            #63a77d,
+            #145938
         );
 }
 
@@ -560,10 +631,10 @@ body {
 .bottle-body {
     position: absolute;
 
-    left: 73px;
+    left: 74px;
     top: 7px;
 
-    width: 117px;
+    width: 116px;
     height: 44px;
 
     border-radius: 7px 20px 20px 7px;
@@ -571,22 +642,24 @@ body {
     background:
         linear-gradient(
             180deg,
-            #64a67c,
-            #17613e 45%,
-            #083d27
+            #6aae83,
+            #1b6945 42%,
+            #073b26
         );
 
-    border-top: 1px solid rgba(255,255,255,.6);
+    border-top: 1px solid rgba(255,255,255,.65);
 
-    border-bottom: 2px solid rgba(0,0,0,.35);
+    border-bottom: 2px solid rgba(0,0,0,.38);
 
     box-shadow:
-        inset 0 4px 7px rgba(255,255,255,.14),
-        inset 0 -5px 8px rgba(0,0,0,.3);
+
+        inset 0 4px 7px rgba(255,255,255,.16),
+
+        inset 0 -6px 10px rgba(0,0,0,.32);
 }
 
 
-/* BODY LIGHT */
+/* GLASS REFLECTION */
 
 .bottle-light {
     position: absolute;
@@ -602,7 +675,7 @@ body {
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.7),
+            rgba(255,255,255,.78),
             rgba(255,255,255,.08)
         );
 }
@@ -629,8 +702,8 @@ body {
     background:
         linear-gradient(
             180deg,
-            #f0dfb5,
-            #bca06c
+            #f2e2ba,
+            #bfa36e
         );
 
     color: #173c29;
@@ -640,12 +713,15 @@ body {
     font-weight: 900;
 
     letter-spacing: 2px;
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.25);
 }
 
 
-/* ==================================================
+/* =========================================================
    BOTTLE SPIN
-================================================== */
+========================================================= */
 
 .bottle.spinning {
     animation:
@@ -683,9 +759,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    CHAT
-================================================== */
+========================================================= */
 
 .chat {
     width: 100%;
@@ -699,22 +775,27 @@ body {
     display: flex;
     flex-direction: column;
 
-    background: #fff;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #faf9f8
+        );
 
-    color: #201a16;
+    color: #211b17;
 
     border-radius: 18px 18px 0 0;
 
     overflow: hidden;
 
     box-shadow:
-        0 -8px 25px rgba(0,0,0,.25);
+        0 -8px 28px rgba(0,0,0,.3);
 
-    z-index: 40;
+    z-index: 60;
 }
 
 
-/* HEADER */
+/* CHAT HEADER */
 
 .chat-header {
     height: 44px;
@@ -727,7 +808,7 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    border-bottom: 1px solid #ece8e5;
+    border-bottom: 1px solid #eee8e3;
 }
 
 .chat-header strong {
@@ -744,16 +825,6 @@ body {
     color: #999;
 
     font-size: 8px;
-}
-
-.more {
-    border: 0;
-
-    background: transparent;
-
-    color: #888;
-
-    font-size: 15px;
 }
 
 
@@ -783,14 +854,14 @@ body {
 }
 
 .message-avatar {
-    width: 28px;
-    height: 28px;
+    width: 29px;
+    height: 29px;
 
-    flex: 0 0 28px;
+    flex: 0 0 29px;
 
     overflow: hidden;
 
-    border-radius: 8px;
+    border-radius: 9px;
 }
 
 .message-avatar img {
@@ -801,7 +872,7 @@ body {
 }
 
 .message-text {
-    max-width: 75%;
+    max-width: 76%;
 }
 
 .message-text strong {
@@ -809,7 +880,7 @@ body {
 
     margin-bottom: 2px;
 
-    color: #a16b3b;
+    color: #a36a38;
 
     font-size: 9px;
 }
@@ -817,11 +888,11 @@ body {
 .message-text p {
     display: inline-block;
 
-    padding: 6px 9px;
+    padding: 7px 9px;
 
-    border-radius: 5px 11px 11px 11px;
+    background: #f2efec;
 
-    background: #f3efec;
+    border-radius: 5px 12px 12px 12px;
 
     font-size: 10px;
 }
@@ -835,23 +906,22 @@ body {
 }
 
 .message.own .message-text p {
-    border-radius: 11px 5px 11px 11px;
+    background: #f0dfcf;
 
-    background: #f0dfd0;
+    border-radius: 12px 5px 12px 12px;
 }
 
 
-/* ==================================================
-   QUICK
-================================================== */
+/* =========================================================
+   QUICK MESSAGE
+========================================================= */
 
 .quick {
     height: 34px;
 
-    flex-shrink: 0;
+    flex: 0 0 34px;
 
     display: flex;
-
     align-items: center;
 
     gap: 5px;
@@ -864,26 +934,38 @@ body {
 .quick button {
     flex-shrink: 0;
 
-    border: 1px solid #e5dfda;
+    border: 1px solid #e3dcd6;
 
     background: #faf8f6;
+
+    color: #443a33;
 
     border-radius: 8px;
 
     padding: 4px 9px;
 
     font-size: 10px;
+
+    transition:
+        transform .15s ease,
+        background .15s ease;
+}
+
+.quick button:active {
+    transform: scale(.94);
+
+    background: #f0e7df;
 }
 
 
-/* ==================================================
-   INPUT
-================================================== */
+/* =========================================================
+   CHAT INPUT
+========================================================= */
 
 .chat-input {
     height: 48px;
 
-    flex-shrink: 0;
+    flex: 0 0 48px;
 
     display: flex;
 
@@ -891,7 +973,7 @@ body {
 
     padding: 6px 9px;
 
-    border-top: 1px solid #eee;
+    border-top: 1px solid #eee9e5;
 }
 
 .chat-input input {
@@ -899,9 +981,9 @@ body {
 
     min-width: 0;
 
-    border: 1px solid #e3ddd8;
-
     outline: none;
+
+    border: 1px solid #e2dbd5;
 
     border-radius: 10px;
 
@@ -910,68 +992,87 @@ body {
     background: #f8f6f4;
 
     font-size: 11px;
+
+    transition:
+        border .2s ease,
+        box-shadow .2s ease;
+}
+
+.chat-input input:focus {
+    border-color: #bd8b5b;
+
+    box-shadow:
+        0 0 0 3px rgba(189,139,91,.12);
 }
 
 .chat-input button {
-    width: 36px;
+    width: 37px;
 
     border: 0;
 
     border-radius: 10px;
 
-    background: #965d31;
+    background:
+        linear-gradient(
+            135deg,
+            #b97942,
+            #804820
+        );
 
     color: white;
 
     cursor: pointer;
+
+    box-shadow:
+        0 3px 8px rgba(90,45,18,.25);
 }
 
 
-/* ==================================================
+/* =========================================================
    MOBILE
-================================================== */
+========================================================= */
 
 @media (max-width: 600px) {
 
     .topbar {
         height: 54px;
-
         flex-basis: 54px;
 
         padding: 0 11px;
     }
 
-    .user-avatar {
-        width: 35px;
-        height: 35px;
-    }
-
-    .user-info strong {
-        font-size: 11px;
-    }
-
-    .heart-box {
-        height: 32px;
-
-        padding: 0 9px;
-    }
-
-    .heart-box strong {
-        font-size: 10px;
+    .game {
+        height: calc(100dvh - 54px);
     }
 
 
     /* TABLE */
 
     .table-area {
-        flex: 0 0 57%;
+        flex: 0 0 auto;
+
+        width: 100%;
+
+        height: min(
+            57dvh,
+            calc(100vw - 10px)
+        );
+
+        min-height: 0;
 
         padding: 5px;
     }
 
     .table {
-        width: min(94vw, 480px);
-        height: min(94vw, 480px);
+        width: min(
+            calc(100vw - 10px),
+            57dvh
+        );
+
+        height: min(
+            calc(100vw - 10px),
+            57dvh
+        );
 
         border-width: 7px;
     }
@@ -980,40 +1081,42 @@ body {
     /* PLAYERS */
 
     .player {
-        width: 52px;
+        width: clamp(46px, 12vw, 58px);
     }
 
     .avatar {
-        width: 43px;
-        height: 43px;
+        width: clamp(38px, 11vw, 50px);
+        height: clamp(38px, 11vw, 50px);
 
-        border-radius: 11px;
+        border-radius: 12px;
     }
 
     .avatar img {
-        border-radius: 8px;
+        border-radius: 9px;
     }
 
     .player strong {
-        max-width: 52px;
+        max-width: 60px;
 
-        font-size: 7px;
+        font-size: clamp(6px, 2vw, 9px);
     }
 
     .player small {
-        font-size: 6px;
+        font-size: clamp(5px, 1.7vw, 7px);
     }
 
 
     /* BOTTLE */
 
     .bottle-button {
-        width: 180px;
-        height: 80px;
+        width: 42%;
+        height: 30%;
     }
 
     .bottle {
-        transform: scale(.78);
+        transform: scale(
+            clamp(.55, 22vw / 100, .85)
+        );
     }
 
     .bottle.spinning {
@@ -1028,71 +1131,59 @@ body {
     /* CHAT */
 
     .chat {
+        width: 100%;
+
         height: auto;
 
         min-height: 0;
 
         flex: 1;
+
+        border-radius: 18px 18px 0 0;
     }
 
     .chat-header {
         height: 40px;
+        flex-basis: 40px;
     }
 
     .messages {
         padding: 6px 10px;
     }
 
-}
-
-
-/* MOBILE SPIN */
-
-@keyframes spinBottleMobile {
-
-    0% {
-        transform: scale(.78) rotate(0deg);
+    .quick {
+        height: 34px;
     }
 
-    25% {
-        transform: scale(.78) rotate(360deg);
-    }
-
-    50% {
-        transform: scale(.78) rotate(720deg);
-    }
-
-    72% {
-        transform: scale(.78) rotate(990deg);
-    }
-
-    88% {
-        transform: scale(.78) rotate(1120deg);
-    }
-
-    100% {
-        transform: scale(.78) rotate(1170deg);
+    .chat-input {
+        height: 48px;
     }
 }
 
 
-/* ==================================================
-   SMALL PHONE
-================================================== */
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media (max-width: 380px) {
 
     .table-area {
-        flex-basis: 54%;
+        height: min(
+            54dvh,
+            calc(100vw - 10px)
+        );
     }
 
     .table {
-        width: 92vw;
-        height: 92vw;
-    }
+        width: min(
+            calc(100vw - 10px),
+            54dvh
+        );
 
-    .player {
-        width: 48px;
+        height: min(
+            calc(100vw - 10px),
+            54dvh
+        );
     }
 
     .avatar {
@@ -1106,45 +1197,5 @@ body {
 
     .player small {
         font-size: 5px;
-    }
-
-    .bottle {
-        transform: scale(.68);
-    }
-
-    .bottle.spinning {
-        animation:
-            spinBottleSmall
-            2.7s
-            cubic-bezier(.12,.72,.18,1)
-            forwards;
-    }
-}
-
-
-@keyframes spinBottleSmall {
-
-    0% {
-        transform: scale(.68) rotate(0deg);
-    }
-
-    25% {
-        transform: scale(.68) rotate(360deg);
-    }
-
-    50% {
-        transform: scale(.68) rotate(720deg);
-    }
-
-    72% {
-        transform: scale(.68) rotate(990deg);
-    }
-
-    88% {
-        transform: scale(.68) rotate(1120deg);
-    }
-
-    100% {
-        transform: scale(.68) rotate(1170deg);
     }
 }
