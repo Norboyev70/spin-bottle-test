@@ -1,321 +1,565 @@
-<!DOCTYPE html>
+[20.08.2026 17:13] Янги Сув Турсунпулат: <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spin the Bottle ❤️</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <title>Spin the Bottle</title>
+body {
+    font-family: Arial, sans-serif;
+    background: #241306;
+    color: white;
+    overflow-x: hidden;
+}
 
-    <link rel="stylesheet" href="style.css">
+.game {
+    width: 100%;
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(70,35,10,.15),rgba(70,35,10,.15)),
+        repeating-linear-gradient(
+            0deg,
+            #9b5b22 0px,
+            #a96628 3px,
+            #8e4d19 7px,
+            #a86224 12px
+        );
+}
+
+/* TOP BAR */
+.top {
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    background: rgba(50,20,5,.75);
+}
+
+.title {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.top-left {
+    font-size: 30px;
+}
+
+.top-right {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: linear-gradient(#ee9b35,#c86a13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 29px;
+    box-shadow: inset 0 2px 5px #ffc36a;
+}
+
+.table {
+    font-size: 17px;
+    text-align: center;
+}
+
+/* GAME AREA */
+.board {
+    position: relative;
+    width: min(900px, 96vw);
+    height: 850px;
+    margin: auto;
+}
+
+/* decorative circles */
+.circle {
+    position: absolute;
+    width: 570px;
+    height: 570px;
+    left: 50%;
+    top: 370px;
+    transform: translate(-50%,-50%);
+    border: 2px solid rgba(255,220,170,.35);
+    border-radius: 50%;
+}
+
+.circle::after {
+    content: "♛";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150px;
+    color: rgba(100,55,20,.35);
+}
+
+/* BOTTLE */
+.bottle-area {
+    position: absolute;
+    left: 50%;
+    top: 370px;
+    transform: translate(-50%,-50%);
+    width: 270px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottle {
+    width: 180px;
+    height: 55px;
+    border-radius: 50px 18px 18px 50px;
+    background: linear-gradient(
+        90deg,
+        #0b521e,
+        #20a63c,
+        #063b15
+    );
+    box-shadow:
+        0 12px 18px rgba(0,0,0,.55),
+        inset 0 4px 7px rgba(255,255,255,.35);
+    position: relative;
+    transform-origin: center;
+    transition: transform 3s cubic-bezier(.15,.8,.2,1);
+}
+
+.bottle::before {
+    content: "";
+    position: absolute;
+    right: -23px;
+    top: 17px;
+    width: 30px;
+    height: 21px;
+    background: #092b13;
+    border-radius: 3px 7px 7px 3px;
+}
+
+.bottle::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    width: 110px;
+    height: 7px;
+    background: rgba(255,255,255,.28);
+    border-radius: 20px;
+}
+
+/* PLAYERS */
+.player {
+    position: absolute;
+    width: 125px;
+    text-align: center;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    margin: auto;
+    border-radius: 32px;
+    padding: 5px;
+    background: linear-gradient(135deg,#ff29c8,#ff9b35);
+    box-shadow: 0 0 18px rgba(255,55,180,.8);
+}
+
+.avatar.blue {
+    background: linear-gradient(135deg,#55aaff,#1470ff);
+    box-shadow: 0 0 18px rgba(30,130,255,.8);
+}
+
+.face {
+    width: 100%;
+    height: 100%;
+    border-radius: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 65px;
+    background: linear-gradient(#29213d,#d58c75);
+}
+
+.name {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px 14px;
+    border-radius: 15px;
+    background: rgba(30,18,10,.9);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.level {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #ff9d28;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+[20.08.2026 17:13] Янги Сув Турсунпулат: /* JOYLASHUV */
+.p1 { left: 38%; top: 20px; }
+.p2 { left: 14%; top: 80px; }
+.p3 { left: 66%; top: 80px; }
+.p4 { left: 0; top: 195px; }
+.p5 { right: 0; top: 195px; }
+.p6 { left: 0; top: 365px; }
+.p7 { right: 0; top: 365px; }
+.p8 { left: 7%; top: 545px; }
+.p9 { right: 7%; top: 545px; }
+.p10 { left: 26%; top: 660px; }
+.p11 { right: 26%; top: 660px; }
+
+/* CHAT */
+.chat {
+    width: min(900px, 96vw);
+    margin: 0 auto 30px;
+    background: #fff;
+    color: #222;
+    border-radius: 38px 38px 0 0;
+    min-height: 390px;
+    padding: 25px;
+}
+
+.chat-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 14px 0;
+}
+
+.mini-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(#222,#d99982);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+.msg-content {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    padding: 9px 15px;
+}
+
+.msg-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.input {
+    margin-top: 25px;
+    height: 65px;
+    border: 1px solid #ddd;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: #999;
+    font-size: 18px;
+}
+
+/* MOBILE */
+@media(max-width:650px) {
+
+    .top {
+        height: 70px;
+        padding: 0 12px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .top-right {
+        gap: 6px;
+    }
+
+    .icon {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+
+    .board {
+        height: 650px;
+        transform: scale(.8);
+        transform-origin: top center;
+        margin-bottom: -120px;
+    }
+
+    .circle {
+        top: 330px;
+    }
+
+    .bottle-area {
+        top: 330px;
+    }
+
+    .p1 { left: 38%; }
+}
+
+/* SPIN BUTTON */
+.spin-btn {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(#ff9b30,#db6410);
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px #0008;
+}
+
+.spin-btn:active {
+    transform: scale(.9);
+}
+</style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="game">
 
-    <!-- ================= TOP BAR ================= -->
+    <!-- TOP -->
+    <div class="top">
 
-    <header class="topbar">
-
-        <div class="user-box">
-
-            <div class="user-avatar">
-                <img src="https://i.pravatar.cc/100?img=12" alt="">
-            </div>
-
-            <div class="user-info">
-                <strong>Norbek</strong>
-                <span>Level 18</span>
-            </div>
-
+        <div class="top-left">
+            ❤️ 143
         </div>
 
-
-        <div class="heart-box">
-
-            <span class="heart">♥</span>
-
-            <strong>11 250</strong>
-
+        <div class="title">
+            Spin the Bottle 🍾 ❤️
         </div>
 
-    </header>
-
-
-    <!-- ================= GAME ================= -->
-
-    <main class="game">
-
-        <!-- ================= TABLE ================= -->
-
-        <section class="table-area">
+        <div class="top-right">
+            <div class="icon">♻</div>
+            <div class="icon">☰</div>
+            <div class="icon">⚙</div>
 
             <div class="table">
-
-                <!-- PLAYER 1 -->
-                <div class="player player-1">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=32" alt="">
-                    </div>
-                    <strong>Madina</strong>
-                    <small>♥ 128</small>
-                </div>
-
-
-                <!-- PLAYER 2 -->
-                <div class="player player-2">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=14" alt="">
-                    </div>
-                    <strong>Jasur</strong>
-                    <small>♥ 96</small>
-                </div>
-
-
-                <!-- PLAYER 3 -->
-                <div class="player player-3">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=47" alt="">
-                    </div>
-                    <strong>Malika</strong>
-                    <small>♥ 214</small>
-                </div>
-
-
-                <!-- PLAYER 4 -->
-                <div class="player player-4">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=11" alt="">
-                    </div>
-                    <strong>Bekzod</strong>
-                    <small>♥ 74</small>
-                </div>
-
-
-                <!-- PLAYER 5 -->
-                <div class="player player-5">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=44" alt="">
-                    </div>
-                    <strong>Sevinch</strong>
-                    <small>♥ 183</small>
-                </div>
-
-
-                <!-- PLAYER 6 -->
-                <div class="player player-6">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=13" alt="">
-                    </div>
-                    <strong>Aziz</strong>
-                    <small>♥ 61</small>
-                </div>
-
-
-                <!-- PLAYER 7 -->
-                <div class="player player-7">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=49" alt="">
-                    </div>
-                    <strong>Shahnoza</strong>
-                    <small>♥ 302</small>
-                </div>
-
-
-                <!-- PLAYER 8 -->
-                <div class="player player-8">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=8" alt="">
-                    </div>
-                    <strong>Sardor</strong>
-                    <small>♥ 119</small>
-                </div>
-
-
-                <!-- PLAYER 9 -->
-                <div class="player player-9">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=25" alt="">
-                    </div>
-                    <strong>Zarina</strong>
-                    <small>♥ 246</small>
-                </div>
-
-
-                <!-- PLAYER 10 -->
-                <div class="player player-10">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=3" alt="">
-                    </div>
-                    <strong>Diyor</strong>
-                    <small>♥ 88</small>
-                </div>
-
-
-                <!-- PLAYER 11 -->
-                <div class="player player-11">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=45" alt="">
-                    </div>
-                    <strong>Rayhona</strong>
-                    <small>♥ 156</small>
-                </div>
-
-
-                <!-- PLAYER 12 -->
-                <div class="player player-12">
-                    <div class="avatar">
-                        <img src="https://i.pravatar.cc/100?img=6" alt="">
-                    </div>
-                    <strong>Kamron</strong>
-                    <small>♥ 105</small>
-                </div>
-
-
-                <!-- ================= BOTTLE ================= -->
-
-                <button
-                    class="bottle-button"
-                    id="bottleButton"
-                    aria-label="Butilkani aylantirish"
-                >
-
-                    <div class="bottle">
-
-                        <div class="bottle-cap"></div>
-
-                        <div class="bottle-neck">
-                            <div class="shine"></div>
-                        </div>
-
-                        <div class="bottle-body">
-
-                            <div class="bottle-light"></div>
-
-                            <div class="bottle-label">
-                                SPIN
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </button>
-
+                Table<br>
+                <b>229</b>
             </div>
+        </div>
 
-        </section>
+    </div>
 
 
-        <!-- ================= CHAT ================= -->
+    <!-- PLAYER BOARD -->
+    <div class="board">
 
-        <section class="chat">
+        <div class="circle"></div>
 
-            <div class="chat-header">
-
-                <div>
-                    <strong>Stol suhbati</strong>
-                    <span>12 o‘yinchi</span>
-                </div>
-
-                <button class="more">
-                    •••
-                </button>
-
+        <div class="player p1">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
             </div>
+            <div class="level">4</div>
+            <div class="name">Aziza 👑</div>
+        </div>
 
-
-            <div
-                class="messages"
-                id="messages"
-            >
-
-                <div class="message">
-
-                    <div class="message-avatar">
-                        <img src="https://i.pravatar.cc/60?img=32" alt="">
-                    </div>
-
-                    <div class="message-text">
-                        <strong>Madina</strong>
-                        <p>Salom hammaga ❤️</p>
-                    </div>
-
-                </div>
-
-
-                <div class="message own">
-
-                    <div class="message-avatar">
-                        <img src="https://i.pravatar.cc/60?img=12" alt="">
-                    </div>
-
-                    <div class="message-text">
-                        <strong>Norbek</strong>
-                        <p>Qani boshladik 😎</p>
-                    </div>
-
-                </div>
-
-
-                <div class="message">
-
-                    <div class="message-avatar">
-                        <img src="https://i.pravatar.cc/60?img=14" alt="">
-                    </div>
-
-                    <div class="message-text">
-                        <strong>Jasur</strong>
-                        <p>Kimga tusharkin? 😂</p>
-                    </div>
-
-                </div>
-
+        <div class="player p2">
+            <div class="avatar blue">
+                <div class="face">👦🏻</div>
             </div>
+            <div class="level">1</div>
+            <div class="name">Bekzod</div>
+        </div>
 
-
-            <!-- QUICK -->
-
-            <div class="quick">
-
-                <button>❤️</button>
-                <button>😂</button>
-                <button>🔥</button>
-                <button>😍</button>
-                <button>Voy!</button>
-
+        <div class="player p3">
+            <div class="avatar">
+                <div class="face">👩🏽</div>
             </div>
+            <div class="level">2</div>
+            <div class="name">Malika 👑</div>
+        </div>
 
-
-            <!-- INPUT -->
-
-            <div class="chat-input">
-
-                <input
-                    id="messageInput"
-                    type="text"
-                    placeholder="Xabar yozing..."
-                    autocomplete="off"
-                >
-
-                <button id="sendButton">
-                    ➤
-                </button>
-
+        <div class="player p4">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
             </div>
+            <div class="level">1</div>
+            <div class="name">Madina</div>
+        </div>
 
-        </section>
+        <div class="player p5">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
+            </div>
+            <div class="level">1</div>
+            <div class="name">Sevinch</div>
+        </div>
+[20.08.2026 17:13] Янги Сув Турсунпулат: <div class="player p6">
+            <div class="avatar blue">
+                <div class="face">👦🏻</div>
+            </div>
+            <div class="level">1</div>
+            <div class="name">Jasur</div>
+        </div>
 
-    </main>
+        <div class="player p7">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
+            </div>
+            <div class="level">1</div>
+            <div class="name">Gulnoza</div>
+        </div>
+
+        <div class="player p8">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
+            </div>
+            <div class="level">1</div>
+            <div class="name">Madina</div>
+        </div>
+
+        <div class="player p9">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
+            </div>
+            <div class="level">5</div>
+            <div class="name">Nilufar</div>
+        </div>
+
+        <div class="player p10">
+            <div class="avatar blue">
+                <div class="face">👦🏻</div>
+            </div>
+            <div class="level">1</div>
+            <div class="name">Sardor</div>
+        </div>
+
+        <div class="player p11">
+            <div class="avatar">
+                <div class="face">👩🏻</div>
+            </div>
+            <div class="level">5</div>
+            <div class="name">Dildora</div>
+        </div>
+
+
+        <!-- BOTTLE -->
+        <div class="bottle-area">
+            <div class="bottle" id="bottle"></div>
+        </div>
+
+    </div>
+
+
+    <!-- CHAT -->
+    <div class="chat">
+
+        <div class="chat-title">
+            💬 Chat
+            <span>👥 12/12</span>
+        </div>
+
+        <div class="message">
+            <div class="mini-avatar">👩🏻</div>
+            <div class="msg-content">
+                <div class="msg-name">Aziza 👑</div>
+                Salom hammaga! 👋
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="mini-avatar">👦🏻</div>
+            <div class="msg-content">
+                <div class="msg-name">Bekzod ✔️</div>
+                O'yin boshlaymizmi? 🔥
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="mini-avatar">👩🏽</div>
+            <div class="msg-content">
+                <div class="msg-name">Malika 👑</div>
+                Let's go 😍
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="mini-avatar">👦🏻</div>
+            <div class="msg-content">
+                <div class="msg-name">Jasur ✔️</div>
+                Aziza navbat seniki 😊
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="mini-avatar">👩🏻</div>
+            <div class="msg-content">
+                <div class="msg-name">Dildora 💗</div>
+                Hayajonli 😍
+            </div>
+        </div>
+
+        <div class="input">
+            Xabar yozing...
+        </div>
+
+    </div>
 
 </div>
 
+<button class="spin-btn" onclick="spinBottle()">↻</button>
 
-<script src="script.js"></script>
+
+<script>
+
+let rotation = 0;
+
+function spinBottle() {
+
+    const bottle = document.getElementById("bottle");
+
+    // Tasodifiy aylanish
+    const random = Math.floor(Math.random() * 360);
+
+    rotation += 1440 + random;
+
+    bottle.style.transform =
+        rotate(${rotation}deg);
+}
+
+</script>
 
 </body>
 </html>
