@@ -1,381 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #130e0a;
-    color: white;
-    overflow: hidden;
-}
-
-
 /* =========================
-   APP
-========================= */
-
-.app {
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #3a2618,
-            #1c130d 60%,
-            #0e0a07
-        );
-}
-
-
-/* =========================
-   TOP
-========================= */
-
-.topbar {
-    height: 64px;
-    flex-shrink: 0;
-
-    padding: 0 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: rgba(12,9,7,.9);
-
-    border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.profile-avatar {
-    width: 40px;
-    height: 40px;
-
-    padding: 2px;
-
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f0ce92,
-            #805022
-        );
-}
-
-.profile-avatar img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 9px;
-}
-
-.profile b {
-    display: block;
-    font-size: 13px;
-}
-
-.profile small {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #9c9188;
-
-    font-size: 9px;
-}
-
-.hearts {
-    height: 36px;
-
-    padding: 0 12px;
-
-    display: flex;
-    align-items: center;
-    gap: 7px;
-
-    border-radius: 11px;
-
-    background: rgba(255,255,255,.06);
-}
-
-.hearts span {
-    color: #ff536e;
-    font-size: 19px;
-}
-
-.hearts b {
-    font-size: 12px;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-    flex: 1;
-    min-height: 0;
-
-    display: flex;
-}
-
-
-/* =========================
-   TABLE AREA
-========================= */
-
-.table-area {
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-
-/* =========================
-   TABLE
-========================= */
-
-.game-table {
-    position: relative;
-
-    width: min(72vh, 700px);
-    height: min(72vh, 700px);
-
-    aspect-ratio: 1 / 1;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 45% 40%,
-            #c58a4e,
-            #a56835 35%,
-            #824b28 65%,
-            #60331e 100%
-        );
-
-    border: 9px solid #56301c;
-
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.6),
-        inset 0 3px 5px rgba(255,255,255,.16),
-        inset 0 -15px 25px rgba(40,15,5,.4);
-}
-
-
-/* STOL ICHKI CHIZIG'I */
-
-.game-table::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 14px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        inset 0 0 35px rgba(50,20,8,.3);
-
-    pointer-events: none;
-}
-
-
-/* YOG'OCH TEKSTURASI */
-
-.game-table::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    border-radius: 50%;
-
-    opacity: .16;
-
-    background:
-        repeating-radial-gradient(
-            ellipse at center,
-            transparent 0,
-            transparent 18px,
-            rgba(45,20,8,.3) 19px,
-            transparent 22px
-        );
-
-    pointer-events: none;
-}
-
-
-/* =========================
-   PLAYER
-========================= */
-
-.player {
-    position: absolute;
-
-    width: 75px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    transform: translate(-50%, -50%);
-
-    z-index: 5;
-}
-
-.avatar {
-    width: 58px;
-    height: 58px;
-
-    padding: 3px;
-
-    border-radius: 15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f2d39a,
-            #9d6331,
-            #5b321d
-        );
-
-    box-shadow:
-        0 5px 12px rgba(0,0,0,.45);
-}
-
-.avatar img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-
-    display: block;
-}
-
-.player b {
-    max-width: 75px;
-
-    margin-top: 4px;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    font-size: 10px;
-
-    text-shadow: 0 2px 4px black;
-}
-
-.player small {
-    margin-top: 2px;
-
-    color: #ffd5dc;
-
-    font-size: 8px;
-
-    text-shadow: 0 1px 3px black;
-}
-
-
-/* =========================
-   12 JOY
-========================= */
-
-.p1 {
-    left: 50%;
-    top: 8%;
-}
-
-.p2 {
-    left: 70%;
-    top: 12%;
-}
-
-.p3 {
-    left: 87%;
-    top: 28%;
-}
-
-.p4 {
-    left: 92%;
-    top: 50%;
-}
-
-.p5 {
-    left: 87%;
-    top: 72%;
-}
-
-.p6 {
-    left: 70%;
-    top: 88%;
-}
-
-.p7 {
-    left: 50%;
-    top: 92%;
-}
-
-.p8 {
-    left: 30%;
-    top: 88%;
-}
-
-.p9 {
-    left: 13%;
-    top: 72%;
-}
-
-.p10 {
-    left: 8%;
-    top: 50%;
-}
-
-.p11 {
-    left: 13%;
-    top: 28%;
-}
-
-.p12 {
-    left: 30%;
-    top: 12%;
-}
-
-
-/* =========================
-   BUTILKA
+   MODERN GLASS BOTTLE
 ========================= */
 
 .bottle-button {
@@ -384,14 +8,13 @@ body {
     left: 50%;
     top: 50%;
 
-    width: 150px;
-    height: 150px;
+    width: 230px;
+    height: 100px;
 
     transform: translate(-50%, -50%);
 
-    border: none;
-    outline: none;
-
+    border: 0;
+    outline: 0;
     padding: 0;
 
     background: transparent;
@@ -402,370 +25,345 @@ body {
 
     cursor: pointer;
 
-    z-index: 15;
+    z-index: 30;
 }
 
-.bottle {
-    width: 120px;
-    height: 120px;
 
-    object-fit: contain;
+/* BUTILKANING O'ZI */
 
-    display: block;
+.modern-bottle {
+    position: relative;
 
-    filter:
-        drop-shadow(
-            0 8px 8px rgba(0,0,0,.55)
-        );
+    width: 210px;
+    height: 55px;
 
-    transform: rotate(90deg);
+    transform: rotate(0deg);
 
     transform-origin: center;
 
-    user-select: none;
+    filter:
+        drop-shadow(0 9px 7px rgba(0,0,0,.48));
 
-    pointer-events: none;
+    transition: transform .15s ease;
 }
 
 
-/* =========================
-   CHAT
-========================= */
+/* QOPQOQ */
 
-.chat {
-    width: 330px;
-    flex-shrink: 0;
+.bottle-cap {
+    position: absolute;
 
-    display: flex;
-    flex-direction: column;
+    left: 0;
+    top: 19px;
 
-    background: #fff;
+    width: 15px;
+    height: 18px;
 
-    color: #211b17;
+    border-radius: 4px 2px 2px 4px;
 
-    border-radius: 18px 0 0 18px;
+    background:
+        linear-gradient(
+            90deg,
+            #66502b,
+            #d6b45d,
+            #765a2c
+        );
 
-    overflow: hidden;
+    box-shadow:
+        inset 1px 0 rgba(255,255,255,.4),
+        inset -2px 0 rgba(0,0,0,.35);
 }
 
 
-/* CHAT HEADER */
+/* BO'YIN */
 
-.chat-top {
-    height: 52px;
-    flex-shrink: 0;
+.bottle-neck {
+    position: absolute;
 
-    padding: 0 15px;
+    left: 13px;
+    top: 20px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    width: 62px;
+    height: 16px;
 
-    border-bottom: 1px solid #eee;
-}
+    border-radius: 4px;
 
-.chat-top b {
-    display: block;
-    font-size: 13px;
-}
+    background:
+        linear-gradient(
+            180deg,
+            rgba(101,166,132,.72),
+            rgba(18,84,57,.9)
+        );
 
-.chat-top small {
-    display: block;
-
-    margin-top: 2px;
-
-    color: #999;
-
-    font-size: 9px;
+    border-top: 1px solid rgba(255,255,255,.5);
+    border-bottom: 1px solid rgba(0,0,0,.25);
 }
 
 
-/* MESSAGES */
+/* BO'YINDAGI YORUG'LIK */
 
-.messages {
-    flex: 1;
-    min-height: 0;
+.glass-shine {
+    position: absolute;
 
-    padding: 12px;
+    left: 8px;
+    top: 2px;
 
-    overflow-y: auto;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-.message {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 7px;
-}
-
-.message > img {
-    width: 29px;
-    height: 29px;
-
-    border-radius: 9px;
-
-    object-fit: cover;
-}
-
-.message div {
-    max-width: 78%;
-}
-
-.message b {
-    display: block;
-
-    color: #a06a37;
-
-    font-size: 9px;
-
-    margin-bottom: 2px;
-}
-
-.message p {
-    padding: 7px 9px;
-
-    background: #f3efeb;
-
-    border-radius: 5px 11px 11px 11px;
-
-    font-size: 11px;
-}
-
-.message.own {
-    flex-direction: row-reverse;
-}
-
-.message.own div {
-    text-align: right;
-}
-
-.message.own p {
-    background: #f1dfcf;
-
-    border-radius: 11px 5px 11px 11px;
-}
-
-
-/* QUICK */
-
-.quick {
-    display: flex;
-
-    gap: 6px;
-
-    padding: 5px 10px;
-
-    overflow-x: auto;
-}
-
-.quick button {
-    flex-shrink: 0;
-
-    padding: 5px 9px;
-
-    border: 1px solid #e5ddd7;
-
-    background: #faf8f6;
-
-    border-radius: 9px;
-
-    cursor: pointer;
-}
-
-
-/* INPUT */
-
-.chat-input {
-    height: 54px;
-    flex-shrink: 0;
-
-    padding: 7px 9px;
-
-    display: flex;
-
-    gap: 7px;
-
-    border-top: 1px solid #eee;
-}
-
-.chat-input input {
-    flex: 1;
-
-    min-width: 0;
-
-    border: 1px solid #e2ddd9;
-
-    border-radius: 11px;
-
-    outline: none;
-
-    padding: 0 10px;
-
-    background: #f8f6f4;
-}
-
-.chat-input button {
-    width: 38px;
-
-    border: none;
+    width: 6px;
+    height: 11px;
 
     border-radius: 10px;
 
-    background: #965c2f;
+    background: rgba(255,255,255,.5);
 
-    color: white;
+    filter: blur(.5px);
+}
 
-    cursor: pointer;
+
+/* YELKA */
+
+.bottle-shoulder {
+    position: absolute;
+
+    left: 66px;
+    top: 13px;
+
+    width: 24px;
+    height: 30px;
+
+    border-radius: 10px 5px 5px 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0b4b31,
+            #4f9c70,
+            #17613e
+        );
+
+    clip-path: polygon(
+        0 20%,
+        35% 0,
+        100% 0,
+        100% 100%,
+        35% 100%,
+        0 80%
+    );
+}
+
+
+/* ASOSIY TANASI */
+
+.bottle-body {
+    position: absolute;
+
+    left: 78px;
+    top: 7px;
+
+    width: 116px;
+    height: 42px;
+
+    border-radius: 7px 18px 18px 7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(95,160,117,.95),
+            rgba(18,92,59,.98) 45%,
+            rgba(9,57,37,1)
+        );
+
+    border-top: 1px solid rgba(255,255,255,.55);
+
+    border-bottom: 2px solid rgba(0,0,0,.35);
+
+    box-shadow:
+        inset 0 4px 7px rgba(255,255,255,.13),
+        inset 0 -5px 8px rgba(0,0,0,.3);
+}
+
+
+/* SHISHA YALTIRASHI */
+
+.glass-reflection {
+    position: absolute;
+
+    left: 12px;
+    top: 5px;
+
+    width: 7px;
+    height: 30px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.08)
+        );
+
+    filter: blur(.4px);
+
+    opacity: .8;
+}
+
+
+/* ZAMONAVIY LABEL */
+
+.bottle-label {
+    position: absolute;
+
+    left: 35px;
+    top: 9px;
+
+    width: 58px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(240,225,185,.95),
+            rgba(193,166,112,.9)
+        );
+
+    color: #183b29;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.3);
+}
+
+
+/* ORQA QISMI */
+
+.bottle-bottom {
+    position: absolute;
+
+    right: 0;
+    top: 9px;
+
+    width: 19px;
+    height: 38px;
+
+    border-radius: 5px 18px 18px 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0a482e,
+            #4d986b,
+            #174e34
+        );
+
+    box-shadow:
+        inset -4px 0 rgba(0,0,0,.25);
+}
+
+
+/* BOSGANDA */
+
+.bottle-button:active .modern-bottle {
+    transform: scale(.96);
 }
 
 
 /* =========================
-   TABLET
+   AYLANISH
 ========================= */
 
-@media (max-width: 850px) and (min-width: 601px) {
+.modern-bottle.spinning {
+    animation:
+        modernBottleSpin
+        2.8s
+        cubic-bezier(.12,.72,.18,1)
+        forwards;
+}
 
-    .chat {
-        width: 280px;
+@keyframes modernBottleSpin {
+
+    0% {
+        transform: rotate(0deg);
     }
 
-    .game-table {
-        width: min(65vw, 600px);
-        height: min(65vw, 600px);
+    25% {
+        transform: rotate(360deg);
+    }
+
+    55% {
+        transform: rotate(720deg);
+    }
+
+    78% {
+        transform: rotate(1000deg);
+    }
+
+    92% {
+        transform: rotate(1120deg);
+    }
+
+    100% {
+        transform: rotate(1170deg);
     }
 }
 
 
-/* =========================
-   TELEFON
-========================= */
+/* TELEFON */
 
 @media (max-width: 600px) {
 
-    .topbar {
-        height: 55px;
-        padding: 0 12px;
-    }
-
-    .main {
-        flex-direction: column;
-    }
-
-    .table-area {
-        flex: 0 0 56%;
-
-        padding: 6px;
-    }
-
-    .game-table {
-        width: 94vw;
-        height: 94vw;
-
-        max-width: 500px;
-        max-height: 500px;
-
-        border-width: 7px;
-    }
-
-    .player {
-        width: 55px;
-    }
-
-    .avatar {
-        width: 44px;
-        height: 44px;
-
-        border-radius: 12px;
-    }
-
-    .avatar img {
-        border-radius: 9px;
-    }
-
-    .player b {
-        font-size: 7px;
-        max-width: 55px;
-    }
-
-    .player small {
-        font-size: 6px;
-    }
-
     .bottle-button {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 80px;
     }
 
-    .bottle {
-        width: 92px;
-        height: 92px;
+    .modern-bottle {
+        transform: scale(.78);
     }
 
-    .chat {
-        width: 100%;
-        flex: 1;
-
-        min-height: 0;
-
-        border-radius: 18px 18px 0 0;
-    }
-
-    .chat-top {
-        height: 42px;
-    }
-
-    .messages {
-        padding: 7px 10px;
-        gap: 7px;
-    }
-
-    .message p {
-        font-size: 10px;
-        padding: 6px 8px;
+    .modern-bottle.spinning {
+        animation:
+            modernBottleSpinMobile
+            2.8s
+            cubic-bezier(.12,.72,.18,1)
+            forwards;
     }
 }
 
+@keyframes modernBottleSpinMobile {
 
-/* =========================
-   JUDA KICHIK TELEFON
-========================= */
-
-@media (max-width: 380px) {
-
-    .table-area {
-        flex-basis: 53%;
+    0% {
+        transform: scale(.78) rotate(0deg);
     }
 
-    .game-table {
-        width: 92vw;
-        height: 92vw;
+    25% {
+        transform: scale(.78) rotate(360deg);
     }
 
-    .avatar {
-        width: 40px;
-        height: 40px;
+    55% {
+        transform: scale(.78) rotate(720deg);
     }
 
-    .player {
-        width: 50px;
+    78% {
+        transform: scale(.78) rotate(1000deg);
     }
 
-    .player b {
-        font-size: 6px;
+    92% {
+        transform: scale(.78) rotate(1120deg);
     }
 
-    .player small {
-        font-size: 5px;
-    }
-
-    .bottle {
-        width: 80px;
-        height: 80px;
+    100% {
+        transform: scale(.78) rotate(1170deg);
     }
 }
