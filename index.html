@@ -1,8 +1,8 @@
-[20.08.2026 17:13] Янги Сув Турсунпулат: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Spin the Bottle ❤️</title>
 
 <style>
@@ -10,6 +10,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -22,8 +28,12 @@ body {
 .game {
     width: 100%;
     min-height: 100vh;
+
     background:
-        linear-gradient(rgba(70,35,10,.15),rgba(70,35,10,.15)),
+        linear-gradient(
+            rgba(70,35,10,.15),
+            rgba(70,35,10,.15)
+        ),
         repeating-linear-gradient(
             0deg,
             #9b5b22 0px,
@@ -33,14 +43,24 @@ body {
         );
 }
 
-/* TOP BAR */
+
+/* =========================
+   TOP BAR
+========================= */
+
 .top {
     height: 92px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 25px;
+
     background: rgba(50,20,5,.75);
+
+    position: relative;
+    z-index: 20;
 }
 
 .title {
@@ -61,13 +81,24 @@ body {
 .icon {
     width: 62px;
     height: 62px;
+
     border-radius: 50%;
-    background: linear-gradient(#ee9b35,#c86a13);
+
+    background:
+        linear-gradient(
+            #ee9b35,
+            #c86a13
+        );
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 29px;
-    box-shadow: inset 0 2px 5px #ffc36a;
+
+    box-shadow:
+        inset 0 2px 5px #ffc36a,
+        0 4px 10px rgba(0,0,0,.3);
 }
 
 .table {
@@ -75,232 +106,506 @@ body {
     text-align: center;
 }
 
-/* GAME AREA */
+
+/* =========================
+   BOARD
+========================= */
+
 .board {
     position: relative;
+
     width: min(900px, 96vw);
+
     height: 850px;
+
     margin: auto;
 }
 
-/* decorative circles */
+
+/* =========================
+   DECORATIVE CIRCLE
+========================= */
+
 .circle {
     position: absolute;
+
     width: 570px;
     height: 570px;
+
     left: 50%;
     top: 370px;
-    transform: translate(-50%,-50%);
-    border: 2px solid rgba(255,220,170,.35);
+
+    transform: translate(-50%, -50%);
+
+    border:
+        2px solid rgba(255,220,170,.35);
+
     border-radius: 50%;
+
+    pointer-events: none;
 }
 
 .circle::after {
     content: "♛";
+
     position: absolute;
+
     inset: 0;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     font-size: 150px;
+
     color: rgba(100,55,20,.35);
 }
 
-/* BOTTLE */
+
+/* =========================
+   BOTTLE
+========================= */
+
 .bottle-area {
     position: absolute;
+
     left: 50%;
     top: 370px;
-    transform: translate(-50%,-50%);
+
+    transform: translate(-50%, -50%);
+
     width: 270px;
     height: 270px;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
+    z-index: 10;
+
+    pointer-events: none;
 }
 
 .bottle {
     width: 180px;
     height: 55px;
-    border-radius: 50px 18px 18px 50px;
-    background: linear-gradient(
-        90deg,
-        #0b521e,
-        #20a63c,
-        #063b15
-    );
+
+    position: relative;
+
+    border-radius:
+        50px
+        18px
+        18px
+        50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0b521e,
+            #20a63c,
+            #063b15
+        );
+
     box-shadow:
         0 12px 18px rgba(0,0,0,.55),
-        inset 0 4px 7px rgba(255,255,255,.35);
-    position: relative;
+        inset 0 4px 7px rgba(255,255,255,.35),
+        inset 0 -5px 8px rgba(0,0,0,.3);
+
     transform-origin: center;
-    transition: transform 3s cubic-bezier(.15,.8,.2,1);
+
+    transition:
+        transform 3s
+        cubic-bezier(.15,.8,.2,1);
 }
+
+
+/* BUTILKA BO'YNI */
 
 .bottle::before {
     content: "";
+
     position: absolute;
+
     right: -23px;
     top: 17px;
+
     width: 30px;
     height: 21px;
+
     background: #092b13;
-    border-radius: 3px 7px 7px 3px;
+
+    border-radius:
+        3px
+        7px
+        7px
+        3px;
 }
+
+
+/* SHISHA YALTIROG'I */
 
 .bottle::after {
     content: "";
+
     position: absolute;
+
     left: 10px;
     top: 5px;
+
     width: 110px;
     height: 7px;
-    background: rgba(255,255,255,.28);
+
+    background:
+        rgba(255,255,255,.28);
+
     border-radius: 20px;
 }
 
-/* PLAYERS */
+
+/* =========================
+   PLAYERS
+========================= */
+
 .player {
     position: absolute;
+
     width: 125px;
+
     text-align: center;
+
+    z-index: 5;
 }
 
 .avatar {
     width: 110px;
     height: 110px;
+
     margin: auto;
+
     border-radius: 32px;
+
     padding: 5px;
-    background: linear-gradient(135deg,#ff29c8,#ff9b35);
-    box-shadow: 0 0 18px rgba(255,55,180,.8);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff29c8,
+            #ff9b35
+        );
+
+    box-shadow:
+        0 0 18px rgba(255,55,180,.8),
+        0 5px 12px rgba(0,0,0,.4);
 }
 
 .avatar.blue {
-    background: linear-gradient(135deg,#55aaff,#1470ff);
-    box-shadow: 0 0 18px rgba(30,130,255,.8);
+    background:
+        linear-gradient(
+            135deg,
+            #55aaff,
+            #1470ff
+        );
+
+    box-shadow:
+        0 0 18px rgba(30,130,255,.8),
+        0 5px 12px rgba(0,0,0,.4);
 }
 
 .face {
     width: 100%;
     height: 100%;
+
     border-radius: 27px;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     font-size: 65px;
-    background: linear-gradient(#29213d,#d58c75);
+
+    background:
+        linear-gradient(
+            #29213d,
+            #d58c75
+        );
 }
 
 .name {
     display: inline-block;
+
     margin-top: 5px;
+
     padding: 5px 14px;
+
     border-radius: 15px;
-    background: rgba(30,18,10,.9);
+
+    background:
+        rgba(30,18,10,.9);
+
     font-size: 18px;
+
     font-weight: bold;
+
+    white-space: nowrap;
 }
 
 .level {
     position: absolute;
+
     right: 0;
     top: -10px;
+
     width: 35px;
     height: 35px;
+
     border-radius: 50%;
+
     background: #ff9d28;
+
     border: 3px solid white;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-}
-[20.08.2026 17:13] Янги Сув Турсунпулат: /* JOYLASHUV */
-.p1 { left: 38%; top: 20px; }
-.p2 { left: 14%; top: 80px; }
-.p3 { left: 66%; top: 80px; }
-.p4 { left: 0; top: 195px; }
-.p5 { right: 0; top: 195px; }
-.p6 { left: 0; top: 365px; }
-.p7 { right: 0; top: 365px; }
-.p8 { left: 7%; top: 545px; }
-.p9 { right: 7%; top: 545px; }
-.p10 { left: 26%; top: 660px; }
-.p11 { right: 26%; top: 660px; }
 
-/* CHAT */
+    font-weight: bold;
+
+    z-index: 3;
+}
+
+
+/* =========================
+   PLAYER POSITIONS
+========================= */
+
+.p1 {
+    left: 38%;
+    top: 20px;
+}
+
+.p2 {
+    left: 14%;
+    top: 80px;
+}
+
+.p3 {
+    left: 66%;
+    top: 80px;
+}
+
+.p4 {
+    left: 0;
+    top: 195px;
+}
+
+.p5 {
+    right: 0;
+    top: 195px;
+}
+
+.p6 {
+    left: 0;
+    top: 365px;
+}
+
+.p7 {
+    right: 0;
+    top: 365px;
+}
+
+.p8 {
+    left: 7%;
+    top: 545px;
+}
+
+.p9 {
+    right: 7%;
+    top: 545px;
+}
+
+.p10 {
+    left: 26%;
+    top: 660px;
+}
+
+.p11 {
+    right: 26%;
+    top: 660px;
+}
+
+
+/* =========================
+   CHAT
+========================= */
+
 .chat {
     width: min(900px, 96vw);
+
     margin: 0 auto 30px;
+
     background: #fff;
+
     color: #222;
-    border-radius: 38px 38px 0 0;
+
+    border-radius:
+        38px
+        38px
+        0
+        0;
+
     min-height: 390px;
+
     padding: 25px;
+
+    box-shadow:
+        0 -8px 25px rgba(0,0,0,.25);
 }
 
 .chat-title {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
+
     font-size: 27px;
+
     font-weight: bold;
+
     margin-bottom: 20px;
 }
 
 .message {
     display: flex;
+
     align-items: center;
+
     gap: 15px;
+
     margin: 14px 0;
 }
 
 .mini-avatar {
     width: 52px;
     height: 52px;
+
+    flex-shrink: 0;
+
     border-radius: 50%;
-    background: linear-gradient(#222,#d99982);
+
+    background:
+        linear-gradient(
+            #222,
+            #d99982
+        );
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     font-size: 28px;
 }
 
 .msg-content {
     background: #fafafa;
+
     border: 1px solid #ddd;
+
     border-radius: 18px;
+
     padding: 9px 15px;
 }
 
 .msg-name {
     font-weight: bold;
+
     margin-bottom: 4px;
 }
 
 .input {
     margin-top: 25px;
+
     height: 65px;
-    border: 1px solid #ddd;
+
+    border:
+        1px solid #ddd;
+
     border-radius: 35px;
+
     display: flex;
+
     align-items: center;
+
     padding: 0 20px;
+
     color: #999;
+
     font-size: 18px;
 }
 
-/* MOBILE */
-@media(max-width:650px) {
+
+/* =========================
+   SPIN BUTTON
+========================= */
+
+.spin-btn {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 70px;
+    height: 70px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            #ff9b30,
+            #db6410
+        );
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px #0008;
+
+    z-index: 100;
+}
+
+.spin-btn:active {
+    transform: scale(.9);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
 
     .top {
         height: 70px;
+
         padding: 0 12px;
     }
 
     .title {
         font-size: 20px;
+    }
+
+    .top-left {
+        font-size: 18px;
     }
 
     .top-right {
@@ -310,15 +615,31 @@ body {
     .icon {
         width: 42px;
         height: 42px;
+
         font-size: 20px;
     }
 
+    .table {
+        font-size: 11px;
+    }
+
+
+    /* BOARD */
+
     .board {
+        width: 100%;
+
         height: 650px;
-        transform: scale(.8);
-        transform-origin: top center;
+
+        transform:
+            scale(.80);
+
+        transform-origin:
+            top center;
+
         margin-bottom: -120px;
     }
+
 
     .circle {
         top: 330px;
@@ -328,30 +649,138 @@ body {
         top: 330px;
     }
 
-    .p1 { left: 38%; }
+
+    /* PLAYERS */
+
+    .player {
+        width: 105px;
+    }
+
+    .avatar {
+        width: 90px;
+        height: 90px;
+
+        border-radius: 27px;
+    }
+
+    .face {
+        border-radius: 22px;
+
+        font-size: 53px;
+    }
+
+    .name {
+        font-size: 14px;
+
+        padding:
+            4px 10px;
+    }
+
+    .level {
+        width: 29px;
+        height: 29px;
+
+        font-size: 12px;
+
+        border-width: 2px;
+    }
+
+
+    /* CHAT */
+
+    .chat {
+        width: 96vw;
+
+        min-height: 300px;
+
+        padding: 18px;
+
+        border-radius:
+            28px
+            28px
+            0
+            0;
+    }
+
+    .chat-title {
+        font-size: 20px;
+    }
+
+    .mini-avatar {
+        width: 42px;
+        height: 42px;
+
+        font-size: 22px;
+    }
+
+    .message {
+        gap: 9px;
+    }
+
+    .msg-content {
+        font-size: 13px;
+
+        padding:
+            7px 11px;
+    }
+
+    .input {
+        height: 52px;
+
+        font-size: 14px;
+    }
+
+
+    /* SPIN */
+
+    .spin-btn {
+        width: 58px;
+        height: 58px;
+
+        right: 15px;
+        bottom: 15px;
+
+        font-size: 25px;
+    }
 }
 
-/* SPIN BUTTON */
-.spin-btn {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    width: 70px;
-    height: 70px;
-    border: none;
-    border-radius: 50%;
-    background: linear-gradient(#ff9b30,#db6410);
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px #0008;
-}
 
-.spin-btn:active {
-    transform: scale(.9);
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 380px) {
+
+    .title {
+        font-size: 17px;
+    }
+
+    .top-left {
+        font-size: 15px;
+    }
+
+    .icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 17px;
+    }
+
+    .board {
+        transform: scale(.68);
+
+        margin-bottom: -205px;
+    }
+
+    .chat {
+        width: 97vw;
+
+        padding: 14px;
+    }
 }
 </style>
 </head>
+
 
 <body>
 
@@ -369,167 +798,338 @@ body {
         </div>
 
         <div class="top-right">
+
             <div class="icon">♻</div>
+
             <div class="icon">☰</div>
+
             <div class="icon">⚙</div>
 
             <div class="table">
                 Table<br>
                 <b>229</b>
             </div>
+
         </div>
 
     </div>
 
 
     <!-- PLAYER BOARD -->
+
     <div class="board">
 
         <div class="circle"></div>
 
+
+        <!-- PLAYER 1 -->
+
         <div class="player p1">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">4</div>
-            <div class="name">Aziza 👑</div>
+
+            <div class="name">
+                Aziza 👑
+            </div>
+
         </div>
 
+
+        <!-- PLAYER 2 -->
+
         <div class="player p2">
+
             <div class="avatar blue">
                 <div class="face">👦🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Bekzod</div>
+
+            <div class="name">
+                Bekzod
+            </div>
+
         </div>
 
+
+        <!-- PLAYER 3 -->
+
         <div class="player p3">
+
             <div class="avatar">
                 <div class="face">👩🏽</div>
             </div>
+
             <div class="level">2</div>
-            <div class="name">Malika 👑</div>
+
+            <div class="name">
+                Malika 👑
+            </div>
+
         </div>
+
+
+        <!-- PLAYER 4 -->
 
         <div class="player p4">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Madina</div>
+
+            <div class="name">
+                Madina
+            </div>
+
         </div>
+
+
+        <!-- PLAYER 5 -->
 
         <div class="player p5">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Sevinch</div>
+
+            <div class="name">
+                Sevinch
+            </div>
+
         </div>
-[20.08.2026 17:13] Янги Сув Турсунпулат: <div class="player p6">
+
+
+        <!-- PLAYER 6 -->
+
+        <div class="player p6">
+
             <div class="avatar blue">
                 <div class="face">👦🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Jasur</div>
+
+            <div class="name">
+                Jasur
+            </div>
+
         </div>
+
+
+        <!-- PLAYER 7 -->
 
         <div class="player p7">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Gulnoza</div>
+
+            <div class="name">
+                Gulnoza
+            </div>
+
         </div>
+
+
+        <!-- PLAYER 8 -->
 
         <div class="player p8">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Madina</div>
+
+            <div class="name">
+                Madina
+            </div>
+
         </div>
+
+
+        <!-- PLAYER 9 -->
 
         <div class="player p9">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">5</div>
-            <div class="name">Nilufar</div>
+
+            <div class="name">
+                Nilufar
+            </div>
+
         </div>
 
+
+        <!-- PLAYER 10 -->
+
         <div class="player p10">
+
             <div class="avatar blue">
                 <div class="face">👦🏻</div>
             </div>
+
             <div class="level">1</div>
-            <div class="name">Sardor</div>
+
+            <div class="name">
+                Sardor
+            </div>
+
         </div>
 
+
+        <!-- PLAYER 11 -->
+
         <div class="player p11">
+
             <div class="avatar">
                 <div class="face">👩🏻</div>
             </div>
+
             <div class="level">5</div>
-            <div class="name">Dildora</div>
+
+            <div class="name">
+                Dildora
+            </div>
+
         </div>
 
 
         <!-- BOTTLE -->
+
         <div class="bottle-area">
-            <div class="bottle" id="bottle"></div>
+
+            <div
+                class="bottle"
+                id="bottle">
+            </div>
+
         </div>
 
     </div>
 
 
     <!-- CHAT -->
+
     <div class="chat">
 
         <div class="chat-title">
-            💬 Chat
+
+            <span>💬 Chat</span>
+
             <span>👥 12/12</span>
+
         </div>
 
+
         <div class="message">
-            <div class="mini-avatar">👩🏻</div>
+
+            <div class="mini-avatar">
+                👩🏻
+            </div>
+
             <div class="msg-content">
-                <div class="msg-name">Aziza 👑</div>
+
+                <div class="msg-name">
+                    Aziza 👑
+                </div>
+
                 Salom hammaga! 👋
+
             </div>
+
         </div>
 
+
         <div class="message">
-            <div class="mini-avatar">👦🏻</div>
+
+            <div class="mini-avatar">
+                👦🏻
+            </div>
+
             <div class="msg-content">
-                <div class="msg-name">Bekzod ✔️</div>
+
+                <div class="msg-name">
+                    Bekzod ✔️
+                </div>
+
                 O'yin boshlaymizmi? 🔥
+
             </div>
+
         </div>
 
+
         <div class="message">
-            <div class="mini-avatar">👩🏽</div>
+
+            <div class="mini-avatar">
+                👩🏽
+            </div>
+
             <div class="msg-content">
-                <div class="msg-name">Malika 👑</div>
+
+                <div class="msg-name">
+                    Malika 👑
+                </div>
+
                 Let's go 😍
+
             </div>
+
         </div>
 
+
         <div class="message">
-            <div class="mini-avatar">👦🏻</div>
+
+            <div class="mini-avatar">
+                👦🏻
+            </div>
+
             <div class="msg-content">
-                <div class="msg-name">Jasur ✔️</div>
+
+                <div class="msg-name">
+                    Jasur ✔️
+                </div>
+
                 Aziza navbat seniki 😊
+
             </div>
+
         </div>
 
+
         <div class="message">
-            <div class="mini-avatar">👩🏻</div>
-            <div class="msg-content">
-                <div class="msg-name">Dildora 💗</div>
-                Hayajonli 😍
+
+            <div class="mini-avatar">
+                👩🏻
             </div>
+
+            <div class="msg-content">
+
+                <div class="msg-name">
+                    Dildora 💗
+                </div>
+
+                Hayajonli 😍
+
+            </div>
+
         </div>
+
 
         <div class="input">
             Xabar yozing...
@@ -539,7 +1139,14 @@ body {
 
 </div>
 
-<button class="spin-btn" onclick="spinBottle()">↻</button>
+
+<!-- SPIN BUTTON -->
+
+<button
+    class="spin-btn"
+    onclick="spinBottle()">
+    ↻
+</button>
 
 
 <script>
@@ -548,15 +1155,16 @@ let rotation = 0;
 
 function spinBottle() {
 
-    const bottle = document.getElementById("bottle");
+    const bottle =
+        document.getElementById("bottle");
 
-    // Tasodifiy aylanish
-    const random = Math.floor(Math.random() * 360);
+    const random =
+        Math.floor(Math.random() * 360);
 
     rotation += 1440 + random;
 
     bottle.style.transform =
-        rotate(${rotation}deg);
+        `rotate(${rotation}deg)`;
 }
 
 </script>
