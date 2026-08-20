@@ -443,27 +443,19 @@ body {
 
 .bottle-button {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     width: 150px;
     height: 150px;
-
     transform: translate(-50%, -50%);
-
     border: none;
-    outline: none;
-
     background: transparent;
-
     cursor: pointer;
-
     z-index: 10;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
 
@@ -489,25 +481,23 @@ body {
 
 /* BOTTLE */
 
-.bottle-wrapper {
-    width: 100px;
-    height: 100px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transform: rotate(-20deg);
-
+.bottle-image {
+    width: 115px;
+    height: 115px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 8px 8px rgba(0,0,0,.45));
+    transform: rotate(90deg);
     transition: transform .2s ease;
 }
 
-.bottle-button:hover .bottle-wrapper {
-    transform: rotate(-20deg) scale(1.05);
+.bottle-button:active .bottle-image {
+    transform: rotate(90deg) scale(.94);
 }
 
-.bottle-button:active .bottle-wrapper {
-    transform: rotate(-20deg) scale(.94);
+.bottle-image.spinning {
+    animation: bottleSpin 2.2s cubic-bezier(.12,.72,.18,1) forwards;
 }
 
 .bottle {
@@ -1172,34 +1162,17 @@ body {
    BOTTLE SPIN ANIMATION
 ========================= */
 
-.bottle-wrapper.spinning {
+.bottle-image.spinning {
     animation: bottleSpin 2.2s cubic-bezier(.12,.72,.18,1) forwards;
 }
 
 @keyframes bottleSpin {
-
-    0% {
-        transform: rotate(-20deg);
+    from {
+        transform: rotate(90deg);
     }
 
-    20% {
-        transform: rotate(320deg);
-    }
-
-    45% {
-        transform: rotate(720deg);
-    }
-
-    70% {
-        transform: rotate(1060deg);
-    }
-
-    88% {
-        transform: rotate(1250deg);
-    }
-
-    100% {
-        transform: rotate(1320deg);
+    to {
+        transform: rotate(1170deg);
     }
 }
 
