@@ -1,12 +1,7 @@
-/* =========================
-   RESET
-========================= */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -16,9 +11,9 @@ body {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #17120f;
-    color: #fff;
+    font-family: Arial, sans-serif;
+    background: #130e0a;
+    color: white;
     overflow: hidden;
 }
 
@@ -30,119 +25,134 @@ body {
 .app {
     width: 100%;
     height: 100vh;
-    min-height: 600px;
+
     display: flex;
     flex-direction: column;
+
     background:
-        radial-gradient(circle at 50% 25%, #3b281c 0%, #1d1510 45%, #100c09 100%);
+        radial-gradient(
+            circle at center,
+            #3a2618,
+            #1c130d 60%,
+            #0e0a07
+        );
 }
 
 
 /* =========================
-   TOP BAR
+   TOP
 ========================= */
 
 .topbar {
-    height: 68px;
-    min-height: 68px;
-    width: 100%;
+    height: 64px;
+    flex-shrink: 0;
+
+    padding: 0 20px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 22px;
-    background: rgba(22, 16, 12, .92);
+
+    background: rgba(12,9,7,.9);
+
     border-bottom: 1px solid rgba(255,255,255,.06);
-    position: relative;
-    z-index: 20;
 }
 
 .profile {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
 }
 
 .profile-avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+
     padding: 2px;
-    background: linear-gradient(145deg, #f7d79b, #8c5b2c);
-    box-shadow:
-        0 3px 12px rgba(0,0,0,.45),
-        inset 0 0 0 1px rgba(255,255,255,.35);
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0ce92,
+            #805022
+        );
 }
 
 .profile-avatar img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
-    border-radius: 10px;
+
+    border-radius: 9px;
 }
 
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+.profile b {
+    display: block;
+    font-size: 13px;
 }
 
-.profile-info strong {
-    font-size: 14px;
-    color: #fff;
+.profile small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9c9188;
+
+    font-size: 9px;
 }
 
-.profile-info span {
-    font-size: 11px;
-    color: #a99b91;
-}
+.hearts {
+    height: 36px;
 
-.currency {
-    height: 38px;
-    padding: 0 13px;
+    padding: 0 12px;
+
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-radius: 12px;
-    background: rgba(255,255,255,.055);
-    border: 1px solid rgba(255,255,255,.07);
+    gap: 7px;
+
+    border-radius: 11px;
+
+    background: rgba(255,255,255,.06);
 }
 
-.heart-icon {
-    color: #ff526e;
-    font-size: 20px;
-    line-height: 1;
-    text-shadow: 0 0 10px rgba(255,55,90,.35);
+.hearts span {
+    color: #ff536e;
+    font-size: 19px;
 }
 
-.currency strong {
-    font-size: 13px;
-    color: #f7eee8;
+.hearts b {
+    font-size: 12px;
 }
 
 
 /* =========================
-   GAME AREA
+   MAIN
 ========================= */
 
-.game-area {
+.main {
     flex: 1;
     min-height: 0;
+
     display: flex;
-    flex-direction: column;
 }
 
 
 /* =========================
-   TABLE SECTION
+   TABLE AREA
 ========================= */
 
-.table-section {
+.table-area {
     flex: 1;
+    min-width: 0;
     min-height: 0;
-    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 20px;
 }
 
@@ -154,11 +164,8 @@ body {
 .game-table {
     position: relative;
 
-    width: min(74vh, 680px);
-    height: min(74vh, 680px);
-
-    max-width: calc(100vw - 40px);
-    max-height: calc(100vw - 40px);
+    width: min(72vh, 700px);
+    height: min(72vh, 700px);
 
     aspect-ratio: 1 / 1;
 
@@ -167,29 +174,29 @@ body {
     background:
         radial-gradient(
             circle at 45% 40%,
-            #c99053 0%,
-            #ae6d37 28%,
-            #8a4f29 58%,
-            #64351f 82%,
-            #4a2718 100%
+            #c58a4e,
+            #a56835 35%,
+            #824b28 65%,
+            #60331e 100%
         );
 
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.55),
-        0 8px 20px rgba(0,0,0,.4),
-        inset 0 3px 5px rgba(255,255,255,.18),
-        inset 0 -12px 20px rgba(40,18,8,.35);
+    border: 9px solid #56301c;
 
-    border: 10px solid #5b321d;
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.6),
+        inset 0 3px 5px rgba(255,255,255,.16),
+        inset 0 -15px 25px rgba(40,15,5,.4);
 }
 
 
-/* TABLE INNER AREA */
+/* STOL ICHKI CHIZIG'I */
 
 .game-table::before {
     content: "";
+
     position: absolute;
-    inset: 10px;
+
+    inset: 14px;
 
     border-radius: 50%;
 
@@ -202,12 +209,13 @@ body {
 }
 
 
-/* WOOD GRAIN */
+/* YOG'OCH TEKSTURASI */
 
 .game-table::after {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     border-radius: 50%;
@@ -216,76 +224,36 @@ body {
 
     background:
         repeating-radial-gradient(
-            ellipse at 50% 50%,
+            ellipse at center,
             transparent 0,
-            transparent 17px,
-            rgba(55,25,10,.25) 18px,
-            transparent 20px
+            transparent 18px,
+            rgba(45,20,8,.3) 19px,
+            transparent 22px
         );
-
-    mix-blend-mode: multiply;
 
     pointer-events: none;
 }
 
 
 /* =========================
-   TABLE DECORATIONS
-========================= */
-
-.table-decoration {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255,220,165,.3);
-    box-shadow: 0 0 8px rgba(255,210,150,.15);
-    z-index: 2;
-}
-
-.decoration-1 {
-    top: 24%;
-    left: 25%;
-}
-
-.decoration-2 {
-    top: 24%;
-    right: 25%;
-}
-
-.decoration-3 {
-    bottom: 24%;
-    left: 25%;
-}
-
-.decoration-4 {
-    bottom: 24%;
-    right: 25%;
-}
-
-
-/* =========================
-   PLAYERS
+   PLAYER
 ========================= */
 
 .player {
     position: absolute;
 
-    width: 72px;
+    width: 75px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    z-index: 8;
-
     transform: translate(-50%, -50%);
+
+    z-index: 5;
 }
 
-
-/* AVATAR */
-
-.player-avatar {
+.avatar {
     width: 58px;
     height: 58px;
 
@@ -295,33 +263,17 @@ body {
 
     background:
         linear-gradient(
-            145deg,
-            #ffe1a8,
-            #c08342 45%,
-            #75431f
+            135deg,
+            #f2d39a,
+            #9d6331,
+            #5b321d
         );
 
     box-shadow:
-        0 5px 14px rgba(0,0,0,.4),
-        inset 0 0 0 1px rgba(255,255,255,.4);
-
-    position: relative;
+        0 5px 12px rgba(0,0,0,.45);
 }
 
-.player-avatar::after {
-    content: "";
-
-    position: absolute;
-    inset: -3px;
-
-    border-radius: 17px;
-
-    border: 1px solid rgba(255,255,255,.15);
-
-    pointer-events: none;
-}
-
-.player-avatar img {
+.avatar img {
     width: 100%;
     height: 100%;
 
@@ -332,276 +284,147 @@ body {
     display: block;
 }
 
+.player b {
+    max-width: 75px;
 
-/* NAME */
+    margin-top: 4px;
 
-.player-name {
-    margin-top: 5px;
-
-    max-width: 72px;
-
-    overflow: hidden;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
 
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
 
-    color: #fff;
-
-    text-shadow:
-        0 1px 3px rgba(0,0,0,.9);
+    text-shadow: 0 2px 4px black;
 }
 
-
-/* KISS COUNT */
-
-.kiss-count {
+.player small {
     margin-top: 2px;
-
-    font-size: 9px;
 
     color: #ffd5dc;
 
-    text-shadow: 0 1px 3px rgba(0,0,0,.8);
+    font-size: 8px;
+
+    text-shadow: 0 1px 3px black;
 }
 
 
 /* =========================
-   12 PLAYER POSITIONS
+   12 JOY
 ========================= */
 
-/*
-   12 ta joy aylana bo'ylab.
-   Har biri orasida yetarli masofa bor.
-*/
-
-.player-1 {
+.p1 {
     left: 50%;
-    top: 9%;
+    top: 8%;
 }
 
-.player-2 {
-    left: 71%;
-    top: 13%;
+.p2 {
+    left: 70%;
+    top: 12%;
 }
 
-.player-3 {
-    left: 88%;
+.p3 {
+    left: 87%;
     top: 28%;
 }
 
-.player-4 {
+.p4 {
     left: 92%;
     top: 50%;
 }
 
-.player-5 {
-    left: 88%;
+.p5 {
+    left: 87%;
     top: 72%;
 }
 
-.player-6 {
-    left: 71%;
-    top: 87%;
+.p6 {
+    left: 70%;
+    top: 88%;
 }
 
-.player-7 {
+.p7 {
     left: 50%;
-    top: 91%;
+    top: 92%;
 }
 
-.player-8 {
-    left: 29%;
-    top: 87%;
+.p8 {
+    left: 30%;
+    top: 88%;
 }
 
-.player-9 {
-    left: 12%;
+.p9 {
+    left: 13%;
     top: 72%;
 }
 
-.player-10 {
+.p10 {
     left: 8%;
     top: 50%;
 }
 
-.player-11 {
-    left: 12%;
+.p11 {
+    left: 13%;
     top: 28%;
 }
 
-.player-12 {
-    left: 29%;
-    top: 13%;
+.p12 {
+    left: 30%;
+    top: 12%;
 }
 
 
 /* =========================
-   BOTTLE
+   BUTILKA
 ========================= */
 
 .bottle-button {
     position: absolute;
+
     left: 50%;
     top: 50%;
+
     width: 150px;
     height: 150px;
+
     transform: translate(-50%, -50%);
+
     border: none;
+    outline: none;
+
+    padding: 0;
+
     background: transparent;
-    cursor: pointer;
-    z-index: 10;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-}
 
+    cursor: pointer;
 
-/* CENTER DECORATION */
-
-.bottle-button::before {
-    content: "";
-
-    position: absolute;
-
-    width: 130px;
-    height: 130px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 0 25px rgba(30,12,5,.25),
-        inset 0 0 20px rgba(60,25,10,.25);
-}
-
-
-/* BOTTLE */
-
-
-.bottle-image {
-    width: 115px;
-    height: 115px;
-    object-fit: contain;
-    display: block;
-    filter: drop-shadow(0 8px 8px rgba(0,0,0,.45));
-    transform: rotate(90deg);
-    transition: transform .2s ease;
-}
-
-.bottle-button:active .bottle-image {
-    transform: rotate(90deg) scale(.94);
-}
-
-.bottle-image.spinning {
-    animation: bottleSpin 2.2s cubic-bezier(.12,.72,.18,1) forwards;
+    z-index: 15;
 }
 
 .bottle {
-    position: relative;
+    width: 120px;
+    height: 120px;
 
-    width: 35px;
-    height: 80px;
+    object-fit: contain;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 8px 8px rgba(0,0,0,.55)
+        );
 
     transform: rotate(90deg);
 
-    filter:
-        drop-shadow(0 7px 7px rgba(0,0,0,.5));
-}
+    transform-origin: center;
 
+    user-select: none;
 
-/* BOTTLE BODY */
-
-.bottle-body {
-    position: absolute;
-
-    left: 7px;
-    bottom: 0;
-
-    width: 43px;
-    height: 45px;
-
-    border-radius: 9px 9px 12px 12px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #173e28,
-            #3c8051 28%,
-            #79a85e 48%,
-            #316c43 70%,
-            #12331f
-        );
-
-    box-shadow:
-        inset 4px 0 5px rgba(255,255,255,.16),
-        inset -5px 0 7px rgba(0,0,0,.3);
-}
-
-
-/* BOTTLE NECK */
-
-.bottle-neck {
-    position: absolute;
-
-    left: 19px;
-    top: 0;
-
-    width: 19px;
-    height: 35px;
-
-    border-radius: 5px 5px 2px 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #163b25,
-            #619154 45%,
-            #1c442a
-        );
-}
-
-
-/* BOTTLE CAP */
-
-.bottle-neck::before {
-    content: "";
-
-    position: absolute;
-
-    top: -6px;
-    left: -1px;
-
-    width: 21px;
-    height: 8px;
-
-    border-radius: 3px;
-
-    background:
-        linear-gradient(
-            #d7ad58,
-            #8e6227
-        );
-}
-
-
-/* BOTTLE HIGHLIGHT */
-
-.bottle-highlight {
-    position: absolute;
-
-    left: 14px;
-    bottom: 7px;
-
-    width: 5px;
-    height: 27px;
-
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.2);
+    pointer-events: none;
 }
 
 
@@ -609,34 +432,30 @@ body {
    CHAT
 ========================= */
 
-.chat-section {
-    height: 31%;
-    min-height: 220px;
+.chat {
+    width: 330px;
+    flex-shrink: 0;
 
     display: flex;
     flex-direction: column;
 
     background: #fff;
 
-    color: #17120f;
+    color: #211b17;
 
-    border-radius: 22px 22px 0 0;
+    border-radius: 18px 0 0 18px;
 
     overflow: hidden;
-
-    box-shadow:
-        0 -10px 30px rgba(0,0,0,.2);
-
-    position: relative;
-    z-index: 15;
 }
 
 
-.chat-header {
-    height: 50px;
-    min-height: 50px;
+/* CHAT HEADER */
 
-    padding: 0 17px;
+.chat-top {
+    height: 52px;
+    flex-shrink: 0;
+
+    padding: 0 15px;
 
     display: flex;
     align-items: center;
@@ -645,26 +464,19 @@ body {
     border-bottom: 1px solid #eee;
 }
 
-.chat-header div {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.chat-header strong {
+.chat-top b {
+    display: block;
     font-size: 13px;
 }
 
-.chat-header span {
-    font-size: 10px;
-    color: #999;
-}
+.chat-top small {
+    display: block;
 
-.chat-more {
-    border: none;
-    background: transparent;
-    font-size: 17px;
-    color: #777;
+    margin-top: 2px;
+
+    color: #999;
+
+    font-size: 9px;
 }
 
 
@@ -672,133 +484,112 @@ body {
 
 .messages {
     flex: 1;
-
     min-height: 0;
+
+    padding: 12px;
 
     overflow-y: auto;
 
-    padding: 10px 15px;
-
     display: flex;
     flex-direction: column;
+
     gap: 10px;
 }
 
 .message {
     display: flex;
+
     align-items: flex-start;
-    gap: 8px;
+
+    gap: 7px;
 }
 
-.message-avatar {
-    width: 30px;
-    height: 30px;
-
-    flex: 0 0 30px;
+.message > img {
+    width: 29px;
+    height: 29px;
 
     border-radius: 9px;
 
-    overflow: hidden;
-}
-
-.message-avatar img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
-.message-content {
-    max-width: 80%;
+.message div {
+    max-width: 78%;
 }
 
-.message-content strong {
+.message b {
     display: block;
 
-    font-size: 10px;
-
     color: #a06a37;
+
+    font-size: 9px;
 
     margin-bottom: 2px;
 }
 
-.message-content p {
-    display: inline-block;
+.message p {
+    padding: 7px 9px;
 
-    padding: 7px 10px;
+    background: #f3efeb;
 
-    border-radius: 5px 12px 12px 12px;
+    border-radius: 5px 11px 11px 11px;
 
-    background: #f4f1ee;
-
-    font-size: 12px;
-
-    color: #29231f;
+    font-size: 11px;
 }
 
 .message.own {
     flex-direction: row-reverse;
 }
 
-.message.own .message-content {
+.message.own div {
     text-align: right;
 }
 
-.message.own .message-content p {
-    border-radius: 12px 5px 12px 12px;
-    background: #f3e1d0;
+.message.own p {
+    background: #f1dfcf;
+
+    border-radius: 11px 5px 11px 11px;
 }
 
 
-/* =========================
-   QUICK MESSAGES
-========================= */
+/* QUICK */
 
-.quick-messages {
+.quick {
     display: flex;
 
     gap: 6px;
 
-    padding: 5px 12px;
+    padding: 5px 10px;
 
     overflow-x: auto;
-
-    scrollbar-width: none;
 }
 
-.quick-messages::-webkit-scrollbar {
-    display: none;
-}
+.quick button {
+    flex-shrink: 0;
 
-.quick-messages button {
-    flex: 0 0 auto;
+    padding: 5px 9px;
 
-    border: 1px solid #e7e0db;
+    border: 1px solid #e5ddd7;
 
     background: #faf8f6;
 
-    border-radius: 10px;
-
-    padding: 5px 10px;
-
-    font-size: 11px;
+    border-radius: 9px;
 
     cursor: pointer;
 }
 
 
-/* =========================
-   CHAT INPUT
-========================= */
+/* INPUT */
 
 .chat-input {
-    height: 52px;
+    height: 54px;
+    flex-shrink: 0;
+
+    padding: 7px 9px;
 
     display: flex;
-    align-items: center;
 
     gap: 7px;
-
-    padding: 6px 10px;
 
     border-top: 1px solid #eee;
 }
@@ -806,324 +597,149 @@ body {
 .chat-input input {
     flex: 1;
 
-    height: 38px;
+    min-width: 0;
 
-    border: 1px solid #e5dfda;
+    border: 1px solid #e2ddd9;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
     outline: none;
 
-    padding: 0 12px;
-
-    font-size: 12px;
+    padding: 0 10px;
 
     background: #f8f6f4;
 }
 
-.chat-input input:focus {
-    border-color: #c28a55;
-}
-
-.emoji-button,
-.send-button {
+.chat-input button {
     width: 38px;
-    height: 38px;
 
     border: none;
 
-    border-radius: 11px;
+    border-radius: 10px;
+
+    background: #965c2f;
+
+    color: white;
 
     cursor: pointer;
 }
 
-.emoji-button {
-    background: #f4f1ee;
-    color: #6c625b;
-}
-
-.send-button {
-    background: #9b6030;
-    color: #fff;
-
-    font-size: 16px;
-}
-
 
 /* =========================
-   BOTTOM NAV
+   TABLET
 ========================= */
 
-.bottom-nav {
-    height: 60px;
-    min-height: 60px;
+@media (max-width: 850px) and (min-width: 601px) {
 
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-    background: #17120f;
-
-    border-top: 1px solid rgba(255,255,255,.06);
-}
-
-.nav-item {
-    width: 70px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-
-    border: none;
-    background: transparent;
-
-    color: #786e67;
-
-    cursor: pointer;
-}
-
-.nav-item span {
-    font-size: 18px;
-}
-
-.nav-item small {
-    font-size: 9px;
-}
-
-.nav-item.active {
-    color: #e6ae70;
-}
-
-
-/* =========================
-   TABLET / SMALL LAPTOP
-========================= */
-
-@media (min-width: 700px) {
-
-    .game-area {
-        flex-direction: row;
-    }
-
-    .table-section {
-        width: 68%;
-        height: 100%;
-    }
-
-    .chat-section {
-        width: 32%;
-        height: 100%;
-
-        min-height: 0;
-
-        border-radius: 18px 0 0 18px;
-    }
-
-    .bottom-nav {
-        display: none;
+    .chat {
+        width: 280px;
     }
 
     .game-table {
-        width: min(72vh, 650px);
-        height: min(72vh, 650px);
+        width: min(65vw, 600px);
+        height: min(65vw, 600px);
     }
 }
 
 
 /* =========================
-   DESKTOP
+   TELEFON
 ========================= */
 
-@media (min-width: 1100px) {
+@media (max-width: 600px) {
 
     .topbar {
-        height: 72px;
-        min-height: 72px;
-        padding: 0 35px;
+        height: 55px;
+        padding: 0 12px;
     }
 
-    .table-section {
-        width: 72%;
+    .main {
+        flex-direction: column;
     }
 
-    .chat-section {
-        width: 28%;
-    }
+    .table-area {
+        flex: 0 0 56%;
 
-    .game-table {
-        width: min(76vh, 720px);
-        height: min(76vh, 720px);
-    }
-
-    .player-avatar {
-        width: 64px;
-        height: 64px;
-    }
-
-    .player {
-        width: 80px;
-    }
-
-    .player-name {
-        font-size: 12px;
-    }
-
-    .kiss-count {
-        font-size: 10px;
-    }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 699px) {
-
-    body {
-        overflow: hidden;
-    }
-
-    .app {
-        min-height: 100dvh;
-        height: 100dvh;
-    }
-
-    .topbar {
-        height: 58px;
-        min-height: 58px;
-        padding: 0 13px;
-    }
-
-    .profile-avatar {
-        width: 36px;
-        height: 36px;
-    }
-
-    .profile-info strong {
-        font-size: 12px;
-    }
-
-    .profile-info span {
-        font-size: 9px;
-    }
-
-    .currency {
-        height: 34px;
-        padding: 0 10px;
-    }
-
-    .currency strong {
-        font-size: 11px;
-    }
-
-    .table-section {
-        flex: 0 0 57%;
-        padding: 8px;
+        padding: 6px;
     }
 
     .game-table {
-        width: min(94vw, 500px);
-        height: min(94vw, 500px);
+        width: 94vw;
+        height: 94vw;
+
+        max-width: 500px;
+        max-height: 500px;
 
         border-width: 7px;
     }
 
     .player {
-        width: 58px;
+        width: 55px;
     }
 
-    .player-avatar {
-        width: 46px;
-        height: 46px;
+    .avatar {
+        width: 44px;
+        height: 44px;
+
         border-radius: 12px;
     }
 
-    .player-avatar img {
+    .avatar img {
         border-radius: 9px;
     }
 
-    .player-name {
-        font-size: 8px;
-        max-width: 58px;
+    .player b {
+        font-size: 7px;
+        max-width: 55px;
     }
 
-    .kiss-count {
-        font-size: 7px;
+    .player small {
+        font-size: 6px;
     }
 
     .bottle-button {
-        width: 115px;
-        height: 115px;
+        width: 120px;
+        height: 120px;
     }
 
-    .bottle-button::before {
-        width: 100px;
-        height: 100px;
+    .bottle {
+        width: 92px;
+        height: 92px;
     }
 
-    .bottle-wrapper {
-        transform: scale(.82) rotate(-20deg);
-    }
-
-    .chat-section {
+    .chat {
+        width: 100%;
         flex: 1;
-        height: auto;
+
         min-height: 0;
+
+        border-radius: 18px 18px 0 0;
     }
 
-    .chat-header {
+    .chat-top {
         height: 42px;
-        min-height: 42px;
-        padding: 0 13px;
     }
 
     .messages {
-        padding: 7px 12px;
+        padding: 7px 10px;
         gap: 7px;
     }
 
-    .message-avatar {
-        width: 27px;
-        height: 27px;
-        flex-basis: 27px;
-    }
-
-    .message-content p {
-        font-size: 11px;
+    .message p {
+        font-size: 10px;
         padding: 6px 8px;
-    }
-
-    .quick-messages {
-        padding: 4px 9px;
-    }
-
-    .chat-input {
-        height: 48px;
-        min-height: 48px;
-    }
-
-    .chat-input input {
-        height: 34px;
-    }
-
-    .emoji-button,
-    .send-button {
-        width: 34px;
-        height: 34px;
     }
 }
 
 
 /* =========================
-   VERY SMALL PHONES
+   JUDA KICHIK TELEFON
 ========================= */
 
 @media (max-width: 380px) {
 
-    .table-section {
-        flex: 0 0 54%;
+    .table-area {
+        flex-basis: 53%;
     }
 
     .game-table {
@@ -1131,61 +747,25 @@ body {
         height: 92vw;
     }
 
-    .player-avatar {
-        width: 41px;
-        height: 41px;
+    .avatar {
+        width: 40px;
+        height: 40px;
     }
 
     .player {
-        width: 52px;
+        width: 50px;
     }
 
-    .player-name {
-        font-size: 7px;
-    }
-
-    .kiss-count {
+    .player b {
         font-size: 6px;
     }
 
-    .player-1 {
-        top: 8%;
+    .player small {
+        font-size: 5px;
     }
 
-    .player-7 {
-        top: 92%;
+    .bottle {
+        width: 80px;
+        height: 80px;
     }
-}
-
-
-/* =========================
-   BOTTLE SPIN ANIMATION
-========================= */
-
-.bottle-image.spinning {
-    animation: bottleSpin 2.2s cubic-bezier(.12,.72,.18,1) forwards;
-}
-
-@keyframes bottleSpin {
-    from {
-        transform: rotate(90deg);
-    }
-
-    to {
-        transform: rotate(1170deg);
-    }
-}
-
-
-/* =========================
-   SCROLLBAR
-========================= */
-
-.messages::-webkit-scrollbar {
-    width: 3px;
-}
-
-.messages::-webkit-scrollbar-thumb {
-    background: #c8b7a8;
-    border-radius: 10px;
 }
