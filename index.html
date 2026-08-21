@@ -337,7 +337,7 @@
         const centerOffset = 165 - (avatarSize / 2); // 350px container markazi
 
         players.forEach((player, index) => {
-            const angleDeg = (index * (360 / total)) - 110; // Har 30 darajada aniq taqsimlash
+            const angleDeg = (index * (360 / total)) - 360; // Har 30 darajada aniq taqsimlash
             const angleRad = angleDeg * (Math.PI / 180);
 
             const x = centerOffset + radius * Math.cos(angleRad);
