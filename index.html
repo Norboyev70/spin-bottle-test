@@ -9,22 +9,39 @@
 
   .phone {
     width: 390px;
-    background: #2b1a0e;
+    background: #1c1c2e;
     border-radius: 28px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
   }
 
+  /* status bar */
+  .statusbar {
+    background: #1c1c2e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 4px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .statusbar .icons { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+  .battery {
+    background: #fff; color: #1c1c2e; border-radius: 4px;
+    padding: 1px 6px; font-size: 12px; font-weight: 700;
+  }
+
   /* header */
   .header {
-    background: #2b1a0e;
+    background: #1c1c2e;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 16px 10px;
+    padding: 8px 16px 16px;
   }
-  .header .title { font-size: 19px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .header .title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
   .header .side { display: flex; align-items: center; gap: 18px; font-size: 20px; opacity: .9; }
   .close-x { font-size: 22px; font-weight: 300; }
 
@@ -34,7 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 14px 16px;
+    padding: 10px 14px;
   }
   .toolbar .hearts {
     background: rgba(0,0,0,.15);
@@ -66,115 +83,117 @@
   .toolbar .table b { font-size: 13px; display: block; }
   .refresh { color: #ffd9a8; font-size: 20px; }
 
-  /* table area: circular player layout */
+  /* table area */
   .table-area {
     background:
-      radial-gradient(circle at 50% 42%, rgba(255,200,120,.2), transparent 65%),
+      radial-gradient(circle at 50% 40%, rgba(255,200,120,.25), transparent 60%),
       repeating-linear-gradient(115deg, #c9853f, #c9853f 2px, #bd7a37 2px, #bd7a37 4px);
+    padding: 18px 14px 10px;
     position: relative;
-    height: 640px;
+  }
+
+  .player-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: 14px 10px;
+    position: relative;
   }
 
   .player {
-    position: absolute;
+    position: relative;
     text-align: center;
-    width: 84px;
-    transform: translate(-50%, -50%);
   }
   .avatar-wrap {
     width: 78px; height: 78px;
-    border-radius: 16px;
+    border-radius: 50%;
     margin: 0 auto 6px;
     position: relative;
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 22px; color: #fff;
-    border: 2.5px solid rgba(255,255,255,.35);
+    border: 2px solid rgba(255,255,255,.25);
   }
   .player-name {
-    color: #fff; font-size: 12px; font-weight: 600;
+    color: #fff; font-size: 11px; font-weight: 600;
     text-shadow: 0 1px 2px rgba(0,0,0,.6);
-    background: rgba(0,0,0,.4);
-    border-radius: 8px;
-    display: inline-block;
-    padding: 1px 8px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    max-width: 84px;
   }
   .kiss-badge {
-    position: absolute; top: -8px; right: 4px;
-    background: #ffb020; color: #4a2600; font-size: 11px; font-weight: 800;
-    width: 20px; height: 20px; border-radius: 50%;
+    position: absolute; top: -6px; right: 6px;
+    background: #e8433a; color: #fff; font-size: 10px; font-weight: 700;
+    width: 18px; height: 18px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    border: 2px solid #2b1a0e;
-    box-shadow: 0 1px 3px rgba(0,0,0,.4);
-  }
-  .top-arrow {
-    position: absolute;
-    left: 50%; top: 41%;
-    transform: translate(-50%, 0);
-    color: #ffb020;
-    font-size: 16px;
+    border: 2px solid #1c1c2e;
   }
 
+  /* center bottle */
   .bottle-center {
-    position: absolute;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex; align-items: center; justify-content: center;
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,200,120,.25);
+    grid-column: 2 / span 2;
+    grid-row: 2 / span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.85);
+    font-size: 12px;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,.4);
   }
-  .bottle-svg { width: 60px; height: 60px; transform: rotate(-30deg); }
+  .bottle-svg { width: 70px; height: 70px; margin-bottom: 4px; transform: rotate(-35deg); }
 
-  /* chat panel */
-  .chat-panel {
-    background: #fff;
-    border-radius: 22px 22px 0 0;
-    margin-top: -18px;
-    position: relative;
-    padding: 16px 18px 0;
-  }
-  .chat-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .chat-header .left { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; color: #1a1a1a; }
-  .chat-header .right { display: flex; align-items: center; gap: 6px; color: #888; font-size: 14px; }
+  .arrow-hint { color: #fff; font-size: 20px; opacity: .8; }
 
-  .msg-list { display: flex; flex-direction: column; gap: 16px; max-height: 320px; overflow: hidden; }
-  .msg-row { display: flex; gap: 10px; }
+  /* chat */
+  .chat {
+    background: #262638;
+    padding: 10px 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .msg-row { display: flex; gap: 8px; align-items: flex-start; }
   .msg-avatar {
-    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: #fff;
+    font-size: 12px; font-weight: 700; color: #fff;
   }
-  .msg-body { flex: 1; min-width: 0; }
-  .msg-name-row { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
-  .msg-name { font-size: 14px; font-weight: 700; color: #1a1a1a; }
-  .msg-icon { font-size: 12px; }
-  .msg-content-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-  .msg-text { font-size: 14px; color: #333; }
-  .msg-time { font-size: 12px; color: #aaa; flex-shrink: 0; }
+  .msg-bubble {
+    background: #33334a;
+    border-radius: 10px;
+    padding: 7px 10px;
+    max-width: 260px;
+  }
+  .msg-name { font-size: 12.5px; font-weight: 700; }
+  .msg-text { font-size: 13px; color: #ddd; margin-top: 1px; }
+  .msg-translate { font-size: 11px; color: #8a8aa3; margin-top: 3px; }
+
+  .gift-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+  .gift-thumb { width: 34px; height: 34px; border-radius: 8px; }
+  .gift-arrow { color: #4caf6b; font-size: 14px; }
+  .reply-btn {
+    background: #3a5a3f; color: #8fe3a3; border-radius: 14px;
+    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; margin-left: 4px;
+  }
 
   .input-bar {
     display: flex; align-items: center; gap: 10px;
-    padding: 14px 0 18px;
+    padding: 10px 14px 16px;
+    background: #262638;
   }
-  .input-bar .emoji { font-size: 20px; color: #aaa; }
   .input-bar input {
     flex: 1;
-    background: #f2f2f2;
+    background: #33334a;
     border: none;
     border-radius: 20px;
     padding: 10px 16px;
-    color: #333;
+    color: #ccc;
     font-size: 14px;
     outline: none;
   }
   .send-btn {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: #1a1a1a;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #ff8a3d;
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 16px;
   }
@@ -182,6 +201,11 @@
 </head>
 <body>
 <div class="phone">
+
+  <div class="statusbar">
+    <span>22:14</span>
+    <span class="icons">H+ <span>▂▄▆█</span> <span class="battery">39</span></span>
+  </div>
 
   <div class="header">
     <div class="close-x">✕</div>
@@ -197,7 +221,7 @@
     <div class="mid-icons">
       <div class="circle-btn">✦<span class="badge">8 d.</span></div>
       <div class="circle-btn">⊛<span class="badge">1 hr.</span></div>
-      <div class="circle-btn">#5</div>
+      <div class="circle-btn">#6</div>
       <div class="circle-btn">☰</div>
       <div class="circle-btn">⚙</div>
     </div>
@@ -206,157 +230,132 @@
   </div>
 
   <div class="table-area">
-    <!-- 12 players evenly spaced in a circle, clockwise from top -->
-    <div class="player" style="left:50%; top:16%;">
-      <div class="kiss-badge">4</div>
-      <div class="avatar-wrap" style="background:#7a4a9e;">A</div>
-      <div class="player-name">Aziza</div>
-    </div>
-    <div class="top-arrow">▲</div>
+    <div class="player-grid">
+      <!-- Row 1 -->
+      <div class="player" style="grid-row:1; grid-column:1;">
+        <div class="avatar-wrap" style="background:#b6446b;">A</div>
+        <div class="player-name">ANAKONDA, 21</div>
+      </div>
+      <div class="player" style="grid-row:1; grid-column:2;">
+        <div class="kiss-badge">1</div>
+        <div class="avatar-wrap" style="background:#3d6e8f;">U</div>
+        <div class="player-name">Ubaydulla, 24</div>
+      </div>
+      <div class="player" style="grid-row:1; grid-column:3;">
+        <div class="kiss-badge">18</div>
+        <div class="avatar-wrap" style="background:#4a4a5e;">♡</div>
+        <div class="player-name">♡, 27</div>
+      </div>
+      <div class="player" style="grid-row:1; grid-column:4;">
+        <div class="kiss-badge">3</div>
+        <div class="avatar-wrap" style="background:#3f7fb0;">L</div>
+        <div class="player-name">Luna, 27</div>
+      </div>
 
-    <div class="player" style="left:70%; top:20.6%;">
-      <div class="kiss-badge">2</div>
-      <div class="avatar-wrap" style="background:#9e4a7a;">M</div>
-      <div class="player-name">Malika</div>
+      <!-- Row 2: only col1 and col4 have players, col2-3 = bottle -->
+      <div class="player" style="grid-row:2; grid-column:1;">
+        <div class="avatar-wrap" style="background:#3a3a4a;">N</div>
+        <div class="player-name">Norboyev⁷⁰</div>
+      </div>
+      <div class="player" style="grid-row:2; grid-column:4;">
+        <div class="avatar-wrap" style="background:#2a2a2a;">N</div>
+        <div class="player-name">No name [1], 27</div>
+      </div>
+
+      <div class="bottle-center" style="grid-row:2 / span 2; grid-column:2 / span 2;">
+        <svg class="bottle-svg" viewBox="0 0 100 100">
+          <rect x="42" y="10" width="16" height="34" rx="4" fill="#2e8b3d"/>
+          <rect x="30" y="42" width="40" height="46" rx="8" fill="#39a34c"/>
+          <rect x="44" y="4" width="12" height="10" fill="#1f5f28"/>
+        </svg>
+        Spins<br>the bottle
+      </div>
+
+      <!-- Row 3: only col1 and col4 have players, col2-3 = bottle (continued) -->
+      <div class="player" style="grid-row:3; grid-column:1;">
+        <div class="kiss-badge">3</div>
+        <div class="avatar-wrap" style="background:#2f2f3d;">Ф</div>
+        <div class="player-name">ФВО</div>
+      </div>
+      <div class="player" style="grid-row:3; grid-column:4;">
+        <div class="kiss-badge">6</div>
+        <div class="avatar-wrap" style="background:#8a4a7a;">Я</div>
+        <div class="player-name">ЯДЕRUL, 22</div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="player" style="grid-row:4; grid-column:1;">
+        <div class="kiss-badge">1</div>
+        <div class="avatar-wrap" style="background:#c07a2f;">?</div>
+        <div class="player-name">••••, 26</div>
+      </div>
+      <div class="player" style="grid-row:4; grid-column:2;">
+        <div class="avatar-wrap" style="background:#5a5a6a;">C</div>
+        <div class="player-name">CCCR, 22</div>
+      </div>
+      <div class="player" style="grid-row:4; grid-column:3;">
+        <div class="kiss-badge">5</div>
+        <div class="avatar-wrap" style="background:#2a2a38;">S</div>
+        <div class="player-name">Mr.SKROM, 23</div>
+      </div>
+      <div class="player" style="grid-row:4; grid-column:4;">
+        <div class="kiss-badge">1</div>
+        <div class="avatar-wrap" style="background:#a9527a;">N</div>
+        <div class="player-name">No name, 31</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:6px; color:rgba(255,255,255,.7); font-size:20px;">←</div>
+  </div>
+
+  <div class="chat">
+    <div class="msg-row">
+      <div class="msg-avatar" style="background:#2a2a38;">S</div>
+      <div class="msg-bubble">
+        <span class="msg-name" style="color:#f0b23d;">👑 Mr.SKROMNIY:</span>
+        <span class="msg-text">ANAKONDA 😂</span>
+        <div class="msg-translate">Show translation</div>
+      </div>
     </div>
 
-    <div class="player" style="left:84.6%; top:33%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#c05a8a;">S</div>
-      <div class="player-name">Sevinch</div>
+    <div class="gift-row">
+      <img class="gift-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect width='40' height='40' rx='8' fill='%23b6446b'/></svg>">
+      <span class="gift-arrow">»</span>
+      <img class="gift-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect width='40' height='40' rx='8' fill='%233a3a4a'/></svg>">
+      <div class="reply-btn">↩</div>
     </div>
 
-    <div class="player" style="left:90%; top:50%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#a03a6a;">G</div>
-      <div class="player-name">Gulnoza</div>
+    <div class="msg-row">
+      <div class="msg-avatar" style="background:#b6446b;">A</div>
+      <div class="msg-bubble">
+        <span class="msg-name" style="color:#e8608a;">ANAKONDA:</span>
+        <span class="msg-text" style="color:#f0b23d; font-weight:700;">Mr.SKROMNIY</span>
+        <span class="msg-text">, koramz</span>
+        <div class="msg-translate">Show translation</div>
+      </div>
     </div>
 
-    <div class="player" style="left:84.6%; top:67%;">
-      <div class="kiss-badge">5</div>
-      <div class="avatar-wrap" style="background:#7a3a9a;">N</div>
-      <div class="player-name">Nilufar</div>
+    <div class="msg-row">
+      <div class="msg-avatar" style="background:#2f2f3d;">Ф</div>
+      <div class="msg-bubble">
+        <span class="msg-name" style="color:#e05a45;">ФВО:</span>
+        <span class="msg-text">ANAKONDA, xow nma qlay man eni</span>
+        <div class="msg-translate">Show translation</div>
+      </div>
     </div>
 
-    <div class="player" style="left:70%; top:79.4%;">
-      <div class="kiss-badge">5</div>
-      <div class="avatar-wrap" style="background:#2e5f9e;">F</div>
-      <div class="player-name">Fazliddin</div>
-    </div>
-
-    <div class="player" style="left:50%; top:84%;">
-      <div class="kiss-badge">5</div>
-      <div class="avatar-wrap" style="background:#8a3a7e;">D</div>
-      <div class="player-name">Dildora</div>
-    </div>
-
-    <div class="player" style="left:30%; top:79.4%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#2e5f9e;">S</div>
-      <div class="player-name">Sardor</div>
-    </div>
-
-    <div class="player" style="left:15.4%; top:67%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#c9822f;">M</div>
-      <div class="player-name">Madina</div>
-    </div>
-
-    <div class="player" style="left:10%; top:50%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#2e5f9e;">J</div>
-      <div class="player-name">Jasur</div>
-    </div>
-
-    <div class="player" style="left:15.4%; top:33%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#9e4a7a;">M</div>
-      <div class="player-name">Madina</div>
-    </div>
-
-    <div class="player" style="left:30%; top:20.6%;">
-      <div class="kiss-badge">1</div>
-      <div class="avatar-wrap" style="background:#2e5f9e;">B</div>
-      <div class="player-name">Bekzod</div>
-    </div>
-
-    <div class="bottle-center">
-      <svg class="bottle-svg" viewBox="0 0 100 100">
-        <rect x="42" y="10" width="16" height="34" rx="4" fill="#2e8b3d"/>
-        <rect x="30" y="42" width="40" height="46" rx="8" fill="#39a34c"/>
-        <rect x="44" y="4" width="12" height="10" fill="#1f5f28"/>
-      </svg>
+    <div class="msg-row">
+      <div class="msg-avatar" style="background:#3a3a4a;">N</div>
+      <div class="msg-bubble">
+        <span class="msg-name" style="color:#4a9fe0;">Norboyev⁷⁰:</span>
+        <span class="msg-text">ANAKONDA, kelurdm sekn</span>
+        <div class="msg-translate">Show translation</div>
+      </div>
     </div>
   </div>
 
-  <div class="chat-panel">
-    <div class="chat-header">
-      <div class="left">💬 Chat</div>
-      <div class="right">👥 12/12</div>
-    </div>
-
-    <div class="msg-list">
-      <div class="msg-row">
-        <div class="msg-avatar" style="background:#7a4a9e;">A</div>
-        <div class="msg-body">
-          <div class="msg-name-row"><span class="msg-name">Aziza</span><span class="msg-icon">👑</span></div>
-          <div class="msg-content-row">
-            <span class="msg-text">Salom hammaga! 👋</span>
-            <span class="msg-time">21:48</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="msg-row">
-        <div class="msg-avatar" style="background:#2e5f9e;">B</div>
-        <div class="msg-body">
-          <div class="msg-name-row"><span class="msg-name">Bekzod</span><span class="msg-icon">✅</span></div>
-          <div class="msg-content-row">
-            <span class="msg-text">O'yin boshlaymizmi? 🔥</span>
-            <span class="msg-time">21:48</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="msg-row">
-        <div class="msg-avatar" style="background:#9e4a7a;">M</div>
-        <div class="msg-body">
-          <div class="msg-name-row"><span class="msg-name">Malika</span><span class="msg-icon">👑</span></div>
-          <div class="msg-content-row">
-            <span class="msg-text">Lets go 😍</span>
-            <span class="msg-time">21:49</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="msg-row">
-        <div class="msg-avatar" style="background:#2e5f9e;">J</div>
-        <div class="msg-body">
-          <div class="msg-name-row"><span class="msg-name">Jasur</span><span class="msg-icon">✅</span></div>
-          <div class="msg-content-row">
-            <span class="msg-text">Aziza navbat seniqiku 😏</span>
-            <span class="msg-time">21:49</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="msg-row">
-        <div class="msg-avatar" style="background:#8a3a7e;">D</div>
-        <div class="msg-body">
-          <div class="msg-name-row"><span class="msg-name">Dildora</span><span class="msg-icon">💗</span></div>
-          <div class="msg-content-row">
-            <span class="msg-text">Hayajonlii 😍</span>
-            <span class="msg-time">21:49</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="input-bar">
-      <span class="emoji">☺</span>
-      <input type="text" placeholder="Xabar yozing...">
-      <div class="send-btn">➤</div>
-    </div>
+  <div class="input-bar">
+    <input type="text" placeholder="Write a message here">
+    <div class="send-btn">➤</div>
   </div>
 
 </div>
