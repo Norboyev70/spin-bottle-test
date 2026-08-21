@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spin the Bottle - No Glow Effect</title>
+    <title>Spin the Bottle - Fixed Layout</title>
     <style>
         * {
             box-sizing: border-box;
@@ -124,12 +124,11 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Oddiy sobiq soya g`uborsiz */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             border: 2.5px solid #ff2a8d;
             z-index: 10;
         }
 
-        /* 📍 Neon va yorug'lik effektlari olib tashlandi: */
         .player.pink { border-color: #ff2a8d; }
         .player.blue { border-color: #00bfff; }
         .player.gold { border-color: #ffd700; }
@@ -340,12 +339,11 @@
             let x = centerOffset + radius * Math.cos(angleRad) + 12;
             let y = centerOffset + radius * Math.sin(angleRad);
 
-            // Gulnoza va Sevinch chaproqqa surilgan
             if (player.name.includes("Gulnoza")) {
                 x -= 15;
             }
             if (player.name.includes("Sevinch")) {
-                x -= 12;
+                x -= 4; // Sevinch biroz o'ngga qaytarildi (-12px o'rniga -4px qilindi)
             }
 
             const playerEl = document.createElement("div");
