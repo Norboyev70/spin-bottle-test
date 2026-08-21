@@ -133,19 +133,22 @@
         .player.blue { border-color: #00bfff; }
         .player.gold { border-color: #ffd700; }
 
+        /* NIK NAME NING YANGI VA ANIQLASHTIRILGAN STILI */
         .player-name {
             position: absolute;
-            bottom: -18px;
-            font-size: 10.5px;
+            bottom: -20px;
+            left: -2.5px;             /* Avatarning ramka chetiga aniq taqaladi */
+            width: 58px;              /* Eni avatar eni bilan bir xil */
+            font-size: 10px;
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 2px 4px #000, 0 0 4px #000;
-            white-space: nowrap;
-            max-width: 60px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1px 6px;
-            border-radius: 8px;
+            white-space: nowrap;      /* Bir qatordan chiqmaydi */
+            overflow: hidden;         /* Avatar enidan oshgani ko'rinmaydi */
+            text-align: left;         /* Matn chap tomondan boshlanadi */
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1px 3px;
+            border-radius: 6px;
             z-index: 15;
             cursor: pointer;
         }
@@ -311,14 +314,14 @@
     const players = [
         { name: "Aziza", img: "https://i.pravatar.cc/150?img=1", badge: 4, type: "gold" },
         { name: "Malika 👑", img: "https://i.pravatar.cc/150?img=2", badge: 2, type: "pink" },
-        { name: "Sevinch", img: "https://i.pravatar.cc/150?img=3", badge: 1, type: "pink" },
+        { name: "Sevinchbekova", img: "https://i.pravatar.cc/150?img=3", badge: 1, type: "pink" },
         { name: "Gulnoza", img: "https://i.pravatar.cc/150?img=4", badge: 1, type: "pink" },
         { name: "Nilufar", img: "https://i.pravatar.cc/150?img=5", badge: 5, type: "pink" },
         { name: "Fazliddin", img: "https://i.pravatar.cc/150?img=6", badge: 5, type: "blue" },
         { name: "Dildora", img: "https://i.pravatar.cc/150?img=7", badge: 5, type: "pink" },
-        { name: "Sardor ✔", img: "https://i.pravatar.cc/150?img=8", badge: 1, type: "blue" },
+        { name: "Sardorbek ✔", img: "https://i.pravatar.cc/150?img=8", badge: 1, type: "blue" },
         { name: "Madina", img: "https://i.pravatar.cc/150?img=9", badge: 1, type: "gold" },
-        { name: "Jasur ✔", img: "https://i.pravatar.cc/150?img=10", badge: 1, type: "blue" },
+        { name: "Jasurbek ✔", img: "https://i.pravatar.cc/150?img=10", badge: 1, type: "blue" },
         { name: "Madina", img: "https://i.pravatar.cc/150?img=11", badge: 1, type: "pink" },
         { name: "Bekzod ✔", img: "https://i.pravatar.cc/150?img=12", badge: 1, type: "blue" }
     ];
@@ -340,10 +343,10 @@
             let y = centerOffset + radius * Math.sin(angleRad);
 
             if (player.name.includes("Gulnoza")) {
-                x -= 8; // Gulnoza sal o'ngga surildi (-15px o'rniga -8px)
+                x -= 8;
             }
             if (player.name.includes("Sevinch")) {
-                x -= 12; // Sevinch boyagi holatiga qaytarildi (-12px)
+                x -= 12;
             }
 
             const playerEl = document.createElement("div");
