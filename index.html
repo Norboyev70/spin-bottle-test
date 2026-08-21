@@ -133,22 +133,22 @@
         .player.blue { border-color: #00bfff; }
         .player.gold { border-color: #ffd700; }
 
-        /* NIK NAME NING YANGI VA ANIQLASHTIRILGAN STILI */
+        /* NIK NAME NING TIKLANAN STILI */
         .player-name {
             position: absolute;
-            bottom: -20px;
-            left: -2.5px;             /* Avatarning ramka chetiga aniq taqaladi */
-            width: 58px;              /* Eni avatar eni bilan bir xil */
-            font-size: 10px;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%); /* Ismni teng o'rtaga markazlaydi */
+            font-size: 10.5px;
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 2px 4px #000, 0 0 4px #000;
-            white-space: nowrap;      /* Bir qatordan chiqmaydi */
-            overflow: hidden;         /* Avatar enidan oshgani ko'rinmaydi */
-            text-align: left;         /* Matn chap tomondan boshlanadi */
-            background: rgba(0, 0, 0, 0.6);
-            padding: 1px 3px;
-            border-radius: 6px;
+            white-space: nowrap;      /* Bir qatorda uzayadi */
+            max-width: 80px;          /* Uzun bo'lsa avatardan kengroq bo'la oladi */
+            overflow: hidden;
+            text-overflow: ellipsis;  /* Juda uzun bo'lsa uch nuqta bo'ladi */
+            background: transparent;  /* Qora orqa fon olib tashlandi */
+            padding: 0;               /* Chetdagi bo'shliqlar olib tashlandi */
             z-index: 15;
             cursor: pointer;
         }
