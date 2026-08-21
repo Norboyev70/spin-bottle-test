@@ -2,18 +2,19 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle - Perfect Circle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spin the Bottle - World Class Edition</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            user-select: none;
         }
 
         body {
-            background-color: #000;
+            background-color: #050505;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,26 +24,28 @@
         .game-container {
             width: 100%;
             max-width: 414px;
-            height: 896px;
-            background: #231205 url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-            background-size: cover;
+            height: 100vh;
+            max-height: 896px;
+            background: radial-gradient(circle at center, #2e1809 0%, #120803 100%);
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
-            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.95);
+            border-radius: 28px;
             overflow: hidden;
             color: #fff;
         }
 
-        /* Header Navigation */
+        /* Top Header Navigation */
         .header-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
+            padding: 16px 18px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
         }
 
         /* Stats Bar */
@@ -50,30 +53,32 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 14px 10px 14px;
+            padding: 4px 14px 12px 14px;
         }
 
         .heart-badge {
-            background: linear-gradient(180deg, #ff4e3a, #d62000);
-            padding: 5px 12px;
+            background: linear-gradient(180deg, #ff4e3a, #ba1100);
+            padding: 6px 14px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 800;
+            font-size: 13px;
+            box-shadow: 0 3px 10px rgba(255, 78, 58, 0.5);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .stat-item {
             font-size: 11px;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 4px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px 9px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        /* Table Playing Area */
+        /* Table Playfield Area */
         .table-area {
             flex: 1;
             position: relative;
@@ -82,108 +87,100 @@
             align-items: center;
         }
 
-        /* Siz chizgan ko'k aylana joyi */
-        .blue-circle-guide {
-            width: 270px;
-            height: 270px;
+        /* Yog'och Stol Chegarasi va Oltin Chiziqlar */
+        .table-center-ring {
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
-            border: 2px dashed rgba(53, 110, 243, 0.4);
+            border: 2px dashed rgba(212, 163, 89, 0.25);
             position: absolute;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
             pointer-events: none;
         }
 
+        /* Markazdagi Butilka */
         .bottle {
-            width: 42px;
-            height: 125px;
-            background: radial-gradient(circle at 30% 30%, #32ad4a, #0f4d1a);
-            border-radius: 20px 20px 8px 8px;
+            width: 44px;
+            height: 130px;
+            background: radial-gradient(circle at 35% 30%, #4ae368, #094717);
+            border-radius: 20px 20px 10px 10px;
             position: absolute;
-            transform: rotate(50deg);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.3);
-            z-index: 2;
+            transform: rotate(45deg);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.8), inset -3px -3px 6px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.4);
+            z-index: 10;
+            transition: transform 3s cubic-bezier(0.15, 0.9, 0.15, 1);
+            cursor: pointer;
         }
 
-        /* Players Container */
-        .players-circle {
-            width: 300px;
-            height: 300px;
+        /* Dynamic Players Container */
+        .players-container {
+            width: 320px;
+            height: 320px;
             position: relative;
         }
 
         .player {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 50px;
-            height: 50px;
-            margin-top: -25px;
-            margin-left: -25px;
-            border-radius: 14px;
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
             background-size: cover;
             background-position: center;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.7);
             border: 2px solid #ff2a8d;
+            /* Transform JavaScript orqali dinamik beriladi */
         }
 
-        /* AYLANA BO'YLAB 12 TA ANIQ TENG KOORDINATA (R = 135px) */
-        .p-aziza     { transform: translate(0px, -135px); }       /* 0deg */
-        .p-malika    { transform: translate(68px, -117px); }     /* 30deg */
-        .p-sevinch   { transform: translate(117px, -68px); }      /* 60deg */
-        .p-gulnoza   { transform: translate(135px, 0px); }        /* 90deg */
-        .p-nilufar   { transform: translate(117px, 68px); }       /* 120deg */
-        .p-fazliddin { transform: translate(68px, 117px); }       /* 150deg */
-        .p-dildora   { transform: translate(0px, 135px); }        /* 180deg */
-        .p-sardor    { transform: translate(-68px, 117px); }      /* 210deg */
-        .p-madina2   { transform: translate(-117px, 68px); }      /* 240deg */
-        .p-jasur     { transform: translate(-135px, 0px); }       /* 270deg */
-        .p-madina1   { transform: translate(-117px, -68px); }     /* 300deg */
-        .p-bekzod    { transform: translate(-68px, -117px); }     /* 330deg */
-
-        .player.pink { border-color: #ff33a8; box-shadow: 0 0 10px #ff33a8; }
-        .player.blue { border-color: #00bfff; box-shadow: 0 0 10px #00bfff; }
-        .player.gold { border-color: #ffcc00; box-shadow: 0 0 10px #ffcc00; }
+        /* Border Ranglar va Neon Glow */
+        .player.pink { border-color: #ff2a8d; box-shadow: 0 0 12px rgba(255, 42, 141, 0.8); }
+        .player.blue { border-color: #00bfff; box-shadow: 0 0 12px rgba(0, 191, 255, 0.8); }
+        .player.gold { border-color: #ffd700; box-shadow: 0 0 14px rgba(255, 215, 0, 0.9); }
 
         .player-name {
             position: absolute;
-            bottom: -18px;
-            font-size: 10px;
+            bottom: -20px;
+            font-size: 11px;
             font-weight: 700;
-            text-shadow: 0 1px 3px #000, 0 0 2px #000;
+            color: #ffffff;
+            text-shadow: 0 2px 4px #000, 0 0 3px #000;
             white-space: nowrap;
         }
 
+        /* Sovg'a Badge */
         .badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -6px;
+            right: -6px;
             background: linear-gradient(135deg, #ff9800, #f57c00);
             color: #fff;
-            font-size: 9px;
-            width: 16px;
-            height: 16px;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
-            border: 1px solid #fff;
-            z-index: 4;
+            font-weight: 800;
+            border: 1.5px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            z-index: 5;
         }
 
-        /* Chat Section */
+        /* Live Chat Panel */
         .chat-section {
             background: #ffffff;
             color: #111;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            height: 320px;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            height: 310px;
             display: flex;
             flex-direction: column;
-            padding: 12px 16px;
+            padding: 14px 16px;
+            box-shadow: 0 -8px 25px rgba(0,0,0,0.4);
         }
 
         .chat-header {
@@ -191,7 +188,7 @@
             justify-content: space-between;
             align-items: center;
             padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f0f0f0;
             font-weight: 700;
             font-size: 14px;
         }
@@ -208,36 +205,39 @@
         .chat-item {
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            gap: 10px;
         }
 
         .chat-avatar {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             background-size: cover;
             flex-shrink: 0;
         }
 
-        .chat-username { font-weight: 700; font-size: 11px; color: #333; }
+        .chat-username { font-weight: 700; font-size: 11px; color: #444; }
         .chat-bubble {
             background: #f1f2f6;
-            padding: 6px 10px;
-            border-radius: 12px;
+            padding: 7px 12px;
+            border-radius: 14px;
             font-size: 12px;
+            margin-top: 2px;
+            color: #222;
         }
 
         .chat-input-area {
             display: flex;
             align-items: center;
             gap: 8px;
+            padding-top: 6px;
         }
 
         .chat-input {
             flex: 1;
             background: #f1f2f6;
             border: 1px solid #e1e2e6;
-            padding: 10px 14px;
+            padding: 10px 16px;
             border-radius: 20px;
             outline: none;
             font-size: 12px;
@@ -247,8 +247,8 @@
             background: #0d0d0d;
             color: #fff;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -275,29 +275,17 @@
     </div>
 
     <div class="table-area">
-        <div class="blue-circle-guide"></div>
-        <div class="bottle"></div>
+        <div class="table-center-ring"></div>
+        <div class="bottle" id="bottle" onclick="spinBottle()"></div>
 
-        <div class="players-circle">
-            <div class="player p-aziza gold" style="background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
-            <div class="player p-malika pink" style="background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
-            <div class="player p-sevinch pink" style="background-image: url('https://i.pravatar.cc/150?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
-            <div class="player p-gulnoza pink" style="background-image: url('https://i.pravatar.cc/150?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
-            <div class="player p-nilufar pink" style="background-image: url('https://i.pravatar.cc/150?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
-            <div class="player p-fazliddin blue" style="background-image: url('https://i.pravatar.cc/150?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
-            <div class="player p-dildora pink" style="background-image: url('https://i.pravatar.cc/150?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
-            <div class="player p-sardor blue" style="background-image: url('https://i.pravatar.cc/150?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
-            <div class="player p-madina2 gold" style="background-image: url('https://i.pravatar.cc/150?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player p-jasur blue" style="background-image: url('https://i.pravatar.cc/150?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
-            <div class="player p-madina1 pink" style="background-image: url('https://i.pravatar.cc/150?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player p-bekzod blue" style="background-image: url('https://i.pravatar.cc/150?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
-        </div>
+        <!-- JS orqali xatosiz va tekis joylashtiriluvchi o'yinchilar -->
+        <div class="players-container" id="playersContainer"></div>
     </div>
 
     <div class="chat-section">
         <div class="chat-header">
             <span>💬 Chat</span>
-            <span style="font-size: 12px; color: #666;">👥 12/12</span>
+            <span style="font-size: 12px; color: #666;" id="playerCountText">👥 12/12</span>
         </div>
         <div class="chat-messages">
             <div class="chat-item">
@@ -321,6 +309,68 @@
         </div>
     </div>
 </div>
+
+<script>
+    // O'yinchilar Ro'yxati (Data Base'dan keladigan struktura)
+    const players = [
+        { name: "Aziza", img: "https://i.pravatar.cc/150?img=1", badge: 4, type: "gold" },
+        { name: "Malika 👑", img: "https://i.pravatar.cc/150?img=2", badge: 2, type: "pink" },
+        { name: "Sevinch", img: "https://i.pravatar.cc/150?img=3", badge: 1, type: "pink" },
+        { name: "Gulnoza", img: "https://i.pravatar.cc/150?img=4", badge: 1, type: "pink" },
+        { name: "Nilufar", img: "https://i.pravatar.cc/150?img=5", badge: 5, type: "pink" },
+        { name: "Fazliddin", img: "https://i.pravatar.cc/150?img=6", badge: 5, type: "blue" },
+        { name: "Dildora", img: "https://i.pravatar.cc/150?img=7", badge: 5, type: "pink" },
+        { name: "Sardor ✔", img: "https://i.pravatar.cc/150?img=8", badge: 1, type: "blue" },
+        { name: "Madina", img: "https://i.pravatar.cc/150?img=9", badge: 1, type: "gold" },
+        { name: "Jasur ✔", img: "https://i.pravatar.cc/150?img=10", badge: 1, type: "blue" },
+        { name: "Madina", img: "https://i.pravatar.cc/150?img=11", badge: 1, type: "pink" },
+        { name: "Bekzod ✔", img: "https://i.pravatar.cc/150?img=12", badge: 1, type: "blue" }
+    ];
+
+    // O'yinchilarni Trigonometrik (R=155px) usulda joylashtirish
+    function renderPlayers() {
+        const container = document.getElementById("playersContainer");
+        container.innerHTML = "";
+        
+        const total = players.length;
+        const radius = 155; // Stol Aylanasi Radiusi (Har bir o'yinchi uchun aniq ko'k aylana masofasi)
+        const centerOffset = 160 - 26; // Container markazi - Avatar yarim kengligi
+
+        players.forEach((player, index) => {
+            // burchak: tepadan boshlash uchun (-90 daraja o'zgarmas surish berilgan)
+            const angleDeg = (index * (360 / total)) - 90;
+            const angleRad = angleDeg * (Math.PI / 180);
+
+            const x = centerOffset + radius * Math.cos(angleRad);
+            const y = centerOffset + radius * Math.sin(angleRad);
+
+            const playerEl = document.createElement("div");
+            playerEl.className = `player ${player.type}`;
+            playerEl.style.backgroundImage = `url('${player.img}')`;
+            playerEl.style.left = `${x}px`;
+            playerEl.style.top = `${y}px`;
+
+            playerEl.innerHTML = `
+                <span class="badge">${player.badge}</span>
+                <span class="player-name">${player.name}</span>
+            `;
+
+            container.appendChild(playerEl);
+        });
+    }
+
+    // Butilka Aylantirish Animatsiyasi (Spin Mechanic)
+    let currentRotation = 45;
+    function spinBottle() {
+        const bottle = document.getElementById("bottle");
+        const extraDegrees = Math.floor(Math.random() * 360) + 1440; // Kamida 4 marta to'liq aylanadi
+        currentRotation += extraDegrees;
+        bottle.style.transform = `rotate(${currentRotation}deg)`;
+    }
+
+    // Dasturni ishga tushirish
+    renderPlayers();
+</script>
 
 </body>
 </html>
