@@ -332,12 +332,12 @@
         container.innerHTML = "";
         
         const total = players.length;
-        const radius = 145; // O'yinchilar bir-biriga tegib ketmasligi uchun radius optimallashtirildi
+        const radius = 155; // O'yinchilar bir-biriga tegib ketmasligi uchun radius optimallashtirildi
         const avatarSize = 58; 
-        const centerOffset = 175 - (avatarSize / 2); // 350px container markazi
+        const centerOffset = 165 - (avatarSize / 2); // 350px container markazi
 
         players.forEach((player, index) => {
-            const angleDeg = (index * (360 / total)) - 90; // Har 30 darajada aniq taqsimlash
+            const angleDeg = (index * (360 / total)) - 100; // Har 30 darajada aniq taqsimlash
             const angleRad = angleDeg * (Math.PI / 180);
 
             const x = centerOffset + radius * Math.cos(angleRad);
