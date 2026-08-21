@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle - Qisqartirilgan Masofa</title>
+    <title>Spin the Bottle - Fixed Positions</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
-            background-color: #0d0d0d;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,34 +22,27 @@
 
         .game-container {
             width: 100%;
-            max-width: 420px;
-            height: 900px;
+            max-width: 414px;
+            height: 896px;
             background: #231205 url('https://www.transparenttextures.com/patterns/wood-pattern.png');
             background-size: cover;
             display: flex;
             flex-direction: column;
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.9);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             color: #fff;
         }
 
-        /* Top Header Navigation */
+        /* Top Navigation Bar */
         .header-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 16px;
+            padding: 12px 16px;
             font-size: 18px;
             font-weight: 600;
-        }
-
-        .header-nav .title {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 17px;
         }
 
         /* Stats Bar */
@@ -57,47 +50,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2px 14px 8px 14px;
+            padding: 0 14px 10px 14px;
         }
 
         .heart-badge {
             background: linear-gradient(180deg, #ff4e3a, #d62000);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 6px;
             font-weight: bold;
-            font-size: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            font-size: 14px;
         }
 
         .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 4px 10px;
-            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .stat-icon-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Table Playing Area */
+        /* Table Area */
         .table-area {
             flex: 1;
             position: relative;
@@ -107,122 +83,92 @@
         }
 
         .center-circle {
-            width: 240px;
-            height: 240px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
-            border: 2px solid rgba(212, 163, 89, 0.35);
+            border: 2px solid rgba(212, 163, 89, 0.3);
             position: absolute;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
-        }
-
-        .center-arrow {
-            position: absolute;
-            top: 23%;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 16px solid #ffcc00;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-            z-index: 3;
         }
 
         .bottle {
-            width: 48px;
-            height: 140px;
+            width: 42px;
+            height: 125px;
             background: radial-gradient(circle at 30% 30%, #32ad4a, #0f4d1a);
-            border-radius: 24px 24px 10px 10px;
+            border-radius: 20px 20px 8px 8px;
             position: absolute;
             transform: rotate(50deg);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
             border: 1px solid rgba(255,255,255,0.3);
             z-index: 2;
         }
 
         /* Players Container */
         .players-circle {
-            width: 340px;
-            height: 340px;
+            width: 320px;
+            height: 320px;
             position: relative;
-            border-radius: 50%;
         }
 
         .player {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 58px;
-            height: 58px;
-            margin: -29px;
-            transform: rotate(var(--angle)) translate(var(--r, 146px)) rotate(calc(-1 * var(--angle)));
-            border-radius: 16px;
+            width: 52px;
+            height: 52px;
+            margin-top: -26px;
+            margin-left: -26px;
+            border-radius: 14px;
             background-size: cover;
             background-position: center;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            box-shadow: 0 0 12px rgba(233, 30, 99, 0.8);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
             border: 2px solid #ff2a8d;
         }
 
-        /* AZIZA va DILDORAGA QARAB ORASINI QISQARTIRISH (YAQINLASHTIRISH) */
-        .p-aziza     { --angle: -90deg; }  /* Tepada markaz */
-        .p-malika    { --angle: -68deg; }  /* Azizaga yaqinroq qisqartirildi (-60 o'rniga -68) */
-        .p-sevinch   { --angle: -38deg; }  
-        .p-gulnoza   { --angle: -8deg;  }  
-        .p-nilufar   { --angle: 28deg;  }  
-        .p-fazliddin { --angle: 62deg;  }  /* Dildoraga yaqinroq qisqartirildi (60 o'rniga 62) */
-        .p-dildora   { --angle: 90deg;  }  /* Pastda markaz */
-        .p-sardor    { --angle: 118deg; }  /* Dildoraga yaqinroq qisqartirildi (120 o'rniga 118) */
-        .p-madina2   { --angle: 152deg; }  
-        .p-jasur     { --angle: 188deg; }  
-        .p-madina1   { --angle: -142deg; } 
-        .p-bekzod    { --angle: -112deg; } /* Azizaga yaqinroq qisqartirildi (-120 o'rniga -112) */
+        /* HAR BIR O'YINCHI UCHUN ANIQ KOORDINATALAR (Ustma-ust tushishi imkonsiz) */
+        .p-0  { transform: translate(0px, -132px); }          /* Aziza (Tepada o'rtada) */
+        .p-1  { transform: translate(66px, -114px); }         /* Malika */
+        .p-2  { transform: translate(114px, -66px); }         /* Sevinch */
+        .p-3  { transform: translate(132px, 0px); }           /* Gulnoza */
+        .p-4  { transform: translate(114px, 66px); }          /* Nilufar */
+        .p-5  { transform: translate(66px, 114px); }          /* Fazliddin */
+        .p-6  { transform: translate(0px, 132px); }           /* Dildora (Pastda o'rtada) */
+        .p-7  { transform: translate(-66px, 114px); }         /* Sardor */
+        .p-8  { transform: translate(-114px, 66px); }         /* Madina */
+        .p-9  { transform: translate(-132px, 0px); }          /* Jasur */
+        .p-10 { transform: translate(-114px, -66px); }        /* Madina */
+        .p-11 { transform: translate(-66px, -114px); }        /* Bekzod */
 
-        /* Neon hoshiyalar */
-        .player.pink {
-            border-color: #ff33a8;
-            box-shadow: 0 0 12px #ff33a8, inset 0 0 6px #ff33a8;
-        }
-
-        .player.blue {
-            border-color: #00bfff;
-            box-shadow: 0 0 12px #00bfff, inset 0 0 6px #00bfff;
-        }
-
-        .player.gold {
-            border-color: #ffcc00;
-            box-shadow: 0 0 14px #ffcc00, inset 0 0 6px #ffcc00;
-        }
+        .player.pink { border-color: #ff33a8; box-shadow: 0 0 10px #ff33a8; }
+        .player.blue { border-color: #00bfff; box-shadow: 0 0 10px #00bfff; }
+        .player.gold { border-color: #ffcc00; box-shadow: 0 0 10px #ffcc00; }
 
         .player-name {
             position: absolute;
-            bottom: -20px;
-            font-size: 11px;
+            bottom: -18px;
+            font-size: 10px;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,1), 0 0 2px rgba(0,0,0,1);
+            text-shadow: 0 1px 3px #000, 0 0 2px #000;
             white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 2px;
         }
 
         .badge {
             position: absolute;
-            top: -6px;
-            right: -6px;
+            top: -5px;
+            right: -5px;
             background: linear-gradient(135deg, #ff9800, #f57c00);
             color: #fff;
-            font-size: 10px;
-            width: 18px;
-            height: 18px;
+            font-size: 9px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            border: 1.5px solid #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            border: 1px solid #fff;
             z-index: 4;
         }
 
@@ -230,23 +176,22 @@
         .chat-section {
             background: #ffffff;
             color: #111;
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
-            height: 330px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            height: 320px;
             display: flex;
             flex-direction: column;
-            padding: 14px 16px;
+            padding: 12px 16px;
         }
 
         .chat-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
             font-weight: 700;
-            font-size: 15px;
-            color: #222;
+            font-size: 14px;
         }
 
         .chat-messages {
@@ -254,165 +199,120 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding: 12px 0;
+            gap: 10px;
+            padding: 10px 0;
         }
 
         .chat-item {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 8px;
         }
 
         .chat-avatar {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background-size: cover;
-            background-position: center;
             flex-shrink: 0;
         }
 
-        .chat-content {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .chat-username {
-            font-weight: 700;
-            font-size: 12px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
+        .chat-username { font-weight: 700; font-size: 11px; color: #333; }
         .chat-bubble {
-            background: #f4f5f8;
-            padding: 8px 12px;
-            border-radius: 14px;
-            border-top-left-radius: 4px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: fit-content;
-        }
-
-        .chat-time {
-            font-size: 10px;
-            color: #999;
-            margin-left: 6px;
+            background: #f1f2f6;
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 12px;
         }
 
         .chat-input-area {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding-top: 8px;
+            gap: 8px;
         }
 
         .chat-input {
             flex: 1;
             background: #f1f2f6;
             border: 1px solid #e1e2e6;
-            padding: 12px 16px;
-            border-radius: 24px;
+            padding: 10px 14px;
+            border-radius: 20px;
             outline: none;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .send-btn {
             background: #0d0d0d;
             color: #fff;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
 <div class="game-container">
-    <!-- Top Bar -->
     <div class="header-nav">
         <span>✕</span>
-        <div class="title">Spin the Bottle 🍾❤️</div>
+        <div>Spin the Bottle 🍾❤️</div>
         <span>⋮</span>
     </div>
 
-    <!-- Stats Bar -->
     <div class="stats-bar">
         <div class="heart-badge">❤️ 143</div>
-        <div class="stat-item">🎟️ <span>8 d.</span></div>
-        <div class="stat-item">🎯 <span>#5</span><span style="font-size:9px; color:#aaa;">1 hr.</span></div>
-        <div class="stat-icon-btn">⚙️</div>
+        <div class="stat-item">🎟️ 8 d.</div>
+        <div class="stat-item">🎯 #5</div>
+        <div class="stat-item">⚙️</div>
         <div class="stat-item">Table 229 🔄</div>
     </div>
 
-    <!-- Playing Area -->
     <div class="table-area">
         <div class="center-circle"></div>
-        <div class="center-arrow"></div>
         <div class="bottle"></div>
 
-        <!-- O'yinchilar Doirasi -->
         <div class="players-circle">
-            <div class="player p-aziza gold" style="background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
-            <div class="player p-malika pink" style="background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
-            <div class="player p-sevinch pink" style="background-image: url('https://i.pravatar.cc/150?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
-            <div class="player p-gulnoza pink" style="background-image: url('https://i.pravatar.cc/150?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
-            <div class="player p-nilufar pink" style="background-image: url('https://i.pravatar.cc/150?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
-            <div class="player p-fazliddin blue" style="background-image: url('https://i.pravatar.cc/150?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
-            <div class="player p-dildora pink" style="background-image: url('https://i.pravatar.cc/150?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
-            <div class="player p-sardor blue" style="background-image: url('https://i.pravatar.cc/150?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
-            <div class="player p-madina2 gold" style="background-image: url('https://i.pravatar.cc/150?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player p-jasur blue" style="background-image: url('https://i.pravatar.cc/150?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
-            <div class="player p-madina1 pink" style="background-image: url('https://i.pravatar.cc/150?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player p-bekzod blue" style="background-image: url('https://i.pravatar.cc/150?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
+            <div class="player p-0 gold" style="background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
+            <div class="player p-1 pink" style="background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
+            <div class="player p-2 pink" style="background-image: url('https://i.pravatar.cc/150?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
+            <div class="player p-3 pink" style="background-image: url('https://i.pravatar.cc/150?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
+            <div class="player p-4 pink" style="background-image: url('https://i.pravatar.cc/150?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
+            <div class="player p-5 blue" style="background-image: url('https://i.pravatar.cc/150?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
+            <div class="player p-6 pink" style="background-image: url('https://i.pravatar.cc/150?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
+            <div class="player p-7 blue" style="background-image: url('https://i.pravatar.cc/150?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
+            <div class="player p-8 gold" style="background-image: url('https://i.pravatar.cc/150?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
+            <div class="player p-9 blue" style="background-image: url('https://i.pravatar.cc/150?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
+            <div class="player p-10 pink" style="background-image: url('https://i.pravatar.cc/150?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
+            <div class="player p-11 blue" style="background-image: url('https://i.pravatar.cc/150?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
         </div>
     </div>
 
-    <!-- Chat Section -->
     <div class="chat-section">
         <div class="chat-header">
             <span>💬 Chat</span>
-            <span style="font-size: 13px; color: #666;">👥 12/12</span>
+            <span style="font-size: 12px; color: #666;">👥 12/12</span>
         </div>
-
         <div class="chat-messages">
             <div class="chat-item">
                 <div class="chat-avatar" style="background-image: url('https://i.pravatar.cc/150?img=1');"></div>
-                <div class="chat-content">
+                <div>
                     <div class="chat-username">Aziza 👑</div>
-                    <div class="chat-bubble">Salom hammaga! 👋 <span class="chat-time">21:48</span></div>
+                    <div class="chat-bubble">Salom hammaga! 👋</div>
                 </div>
             </div>
-
             <div class="chat-item">
                 <div class="chat-avatar" style="background-image: url('https://i.pravatar.cc/150?img=12');"></div>
-                <div class="chat-content">
+                <div>
                     <div class="chat-username">Bekzod ✔</div>
-                    <div class="chat-bubble">O'yin boshlaymizmi? 🔥 <span class="chat-time">21:48</span></div>
-                </div>
-            </div>
-
-            <div class="chat-item">
-                <div class="chat-avatar" style="background-image: url('https://i.pravatar.cc/150?img=2');"></div>
-                <div class="chat-content">
-                    <div class="chat-username">Malika 👑</div>
-                    <div class="chat-bubble">Lets go 😍 <span class="chat-time">21:49</span></div>
+                    <div class="chat-bubble">O'yin boshlaymizmi? 🔥</div>
                 </div>
             </div>
         </div>
-
         <div class="chat-input-area">
             <input type="text" class="chat-input" placeholder="Xabar yozing...">
             <button class="send-btn">➤</button>
