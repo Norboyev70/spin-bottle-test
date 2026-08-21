@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle - Original Copy</title>
+    <title>Spin the Bottle - Fixed Positions</title>
     <style>
         * {
             box-sizing: border-box;
@@ -107,8 +107,8 @@
         }
 
         .center-circle {
-            width: 240px;
-            height: 240px;
+            width: 260px;
+            height: 260px;
             border-radius: 50%;
             border: 2px solid rgba(212, 163, 89, 0.35);
             position: absolute;
@@ -117,7 +117,7 @@
 
         .center-arrow {
             position: absolute;
-            top: 22%;
+            top: 20%;
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
@@ -139,26 +139,26 @@
             z-index: 2;
         }
 
-        /* O'yinchilar doirasi */
+        /* O'yinchilar doirasi - o'lchami kattalashtirildi */
         .players-circle {
-            width: 320px;
-            height: 320px;
+            width: 350px;
+            height: 350px;
             position: relative;
             border-radius: 50%;
         }
 
-        /* Avatarlar: Kattaroq va burchaklari yumaloqlashtirilgan to'rtburchak */
+        /* Radius kattalashtirildi, oralaridagi masofa ochildi */
         .player {
-            --angle: calc(var(--i) * 30deg - 90deg); /* 12 o'yinchi teng 30 gr */
-            --radius: 142px;
+            --angle: calc(var(--i) * 30deg - 90deg);
+            --radius: 155px; /* Masofa kengaytirildi */
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 62px;  /* Biroq kattalashtirildi */
-            height: 62px;
-            margin: -31px;
+            width: 60px;
+            height: 60px;
+            margin: -30px;
             transform: rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1 * var(--angle)));
-            border-radius: 16px; /* Doira emas, to'rtburchak yumshoq burchakli */
+            border-radius: 16px;
             background-size: cover;
             background-position: center;
             display: flex;
@@ -168,7 +168,7 @@
             border: 2px solid #ff2a8d;
         }
 
-        /* Ranglar va neon hoshiyalar */
+        /* Neon hoshiyalar */
         .player.pink {
             border-color: #ff33a8;
             box-shadow: 0 0 12px #ff33a8, inset 0 0 6px #ff33a8;
@@ -196,7 +196,6 @@
             gap: 2px;
         }
 
-        /* Boshdagi kichik daraja (badge) nishoni */
         .badge {
             position: absolute;
             top: -6px;
@@ -353,7 +352,7 @@
         <div class="center-arrow"></div>
         <div class="bottle"></div>
 
-        <!-- 12 Ta O'yinchi Teng Va To'g'ri Masofada -->
+        <!-- 12 Ta O'yinchi Kengaytirilgan Radiuda -->
         <div class="players-circle">
             <div class="player gold" style="--i: 0; background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
             <div class="player pink" style="--i: 1; background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
