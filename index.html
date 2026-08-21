@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spin the Bottle - World Class Edition</title>
+    <title>Spin the Bottle - Larger Avatars Edition</title>
     <style>
         * {
             box-sizing: border-box;
@@ -87,7 +87,6 @@
             align-items: center;
         }
 
-        /* Yog'och Stol Chegarasi va Oltin Chiziqlar */
         .table-center-ring {
             width: 320px;
             height: 320px;
@@ -113,36 +112,35 @@
             cursor: pointer;
         }
 
-        /* Dynamic Players Container */
         .players-container {
             width: 320px;
             height: 320px;
             position: relative;
         }
 
+        /* KATTALASHTIRILGAN AVATARLAR (62px x 62px) */
         .player {
             position: absolute;
-            width: 52px;
-            height: 52px;
-            border-radius: 16px;
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
             background-size: cover;
             background-position: center;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.7);
-            border: 2px solid #ff2a8d;
-            /* Transform JavaScript orqali dinamik beriladi */
+            box-shadow: 0 5px 16px rgba(0,0,0,0.8);
+            border: 2.5px solid #ff2a8d;
         }
 
-        /* Border Ranglar va Neon Glow */
-        .player.pink { border-color: #ff2a8d; box-shadow: 0 0 12px rgba(255, 42, 141, 0.8); }
-        .player.blue { border-color: #00bfff; box-shadow: 0 0 12px rgba(0, 191, 255, 0.8); }
-        .player.gold { border-color: #ffd700; box-shadow: 0 0 14px rgba(255, 215, 0, 0.9); }
+        /* Neon Glow Effektlari */
+        .player.pink { border-color: #ff2a8d; box-shadow: 0 0 14px rgba(255, 42, 141, 0.85); }
+        .player.blue { border-color: #00bfff; box-shadow: 0 0 14px rgba(0, 191, 255, 0.85); }
+        .player.gold { border-color: #ffd700; box-shadow: 0 0 16px rgba(255, 215, 0, 0.95); }
 
         .player-name {
             position: absolute;
-            bottom: -20px;
+            bottom: -22px;
             font-size: 11px;
             font-weight: 700;
             color: #ffffff;
@@ -150,27 +148,26 @@
             white-space: nowrap;
         }
 
-        /* Sovg'a Badge */
         .badge {
             position: absolute;
-            top: -6px;
-            right: -6px;
+            top: -7px;
+            right: -7px;
             background: linear-gradient(135deg, #ff9800, #f57c00);
             color: #fff;
-            font-size: 10px;
-            width: 18px;
-            height: 18px;
+            font-size: 11px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: 800;
             border: 1.5px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.6);
             z-index: 5;
         }
 
-        /* Live Chat Panel */
+        /* Chat Panel */
         .chat-section {
             background: #ffffff;
             color: #111;
@@ -277,15 +274,13 @@
     <div class="table-area">
         <div class="table-center-ring"></div>
         <div class="bottle" id="bottle" onclick="spinBottle()"></div>
-
-        <!-- JS orqali xatosiz va tekis joylashtiriluvchi o'yinchilar -->
         <div class="players-container" id="playersContainer"></div>
     </div>
 
     <div class="chat-section">
         <div class="chat-header">
             <span>💬 Chat</span>
-            <span style="font-size: 12px; color: #666;" id="playerCountText">👥 12/12</span>
+            <span style="font-size: 12px; color: #666;">👥 12/12</span>
         </div>
         <div class="chat-messages">
             <div class="chat-item">
@@ -311,7 +306,6 @@
 </div>
 
 <script>
-    // O'yinchilar Ro'yxati (Data Base'dan keladigan struktura)
     const players = [
         { name: "Aziza", img: "https://i.pravatar.cc/150?img=1", badge: 4, type: "gold" },
         { name: "Malika 👑", img: "https://i.pravatar.cc/150?img=2", badge: 2, type: "pink" },
@@ -327,17 +321,16 @@
         { name: "Bekzod ✔", img: "https://i.pravatar.cc/150?img=12", badge: 1, type: "blue" }
     ];
 
-    // O'yinchilarni Trigonometrik (R=155px) usulda joylashtirish
     function renderPlayers() {
         const container = document.getElementById("playersContainer");
         container.innerHTML = "";
         
         const total = players.length;
-        const radius = 155; // Stol Aylanasi Radiusi (Har bir o'yinchi uchun aniq ko'k aylana masofasi)
-        const centerOffset = 160 - 26; // Container markazi - Avatar yarim kengligi
+        const radius = 150; // Kengaytirilgan o'yinchilar radiusi
+        const avatarSize = 62; // O'yinchilarning yangi o'lchami
+        const centerOffset = 160 - (avatarSize / 2);
 
         players.forEach((player, index) => {
-            // burchak: tepadan boshlash uchun (-90 daraja o'zgarmas surish berilgan)
             const angleDeg = (index * (360 / total)) - 90;
             const angleRad = angleDeg * (Math.PI / 180);
 
@@ -359,16 +352,14 @@
         });
     }
 
-    // Butilka Aylantirish Animatsiyasi (Spin Mechanic)
     let currentRotation = 45;
     function spinBottle() {
         const bottle = document.getElementById("bottle");
-        const extraDegrees = Math.floor(Math.random() * 360) + 1440; // Kamida 4 marta to'liq aylanadi
+        const extraDegrees = Math.floor(Math.random() * 360) + 1440;
         currentRotation += extraDegrees;
         bottle.style.transform = `rotate(${currentRotation}deg)`;
     }
 
-    // Dasturni ishga tushirish
     renderPlayers();
 </script>
 
