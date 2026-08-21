@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle - Perfect Placement</title>
+    <title>Spin the Bottle - Qisqartirilgan Masofa</title>
     <style>
         * {
             box-sizing: border-box;
@@ -107,8 +107,8 @@
         }
 
         .center-circle {
-            width: 250px;
-            height: 250px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
             border: 2px solid rgba(212, 163, 89, 0.35);
             position: absolute;
@@ -117,7 +117,7 @@
 
         .center-arrow {
             position: absolute;
-            top: 22%;
+            top: 23%;
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
@@ -141,13 +141,12 @@
 
         /* Players Container */
         .players-circle {
-            width: 360px;
-            height: 360px;
+            width: 340px;
+            height: 340px;
             position: relative;
             border-radius: 50%;
         }
 
-        /* Avatarlar - O'lcham va aniq pozitsiyalash */
         .player {
             position: absolute;
             top: 50%;
@@ -155,7 +154,7 @@
             width: 58px;
             height: 58px;
             margin: -29px;
-            transform: rotate(var(--angle)) translate(var(--rx, 152px), var(--ry, 152px)) rotate(calc(-1 * var(--angle)));
+            transform: rotate(var(--angle)) translate(var(--r, 146px)) rotate(calc(-1 * var(--angle)));
             border-radius: 16px;
             background-size: cover;
             background-position: center;
@@ -166,19 +165,19 @@
             border: 2px solid #ff2a8d;
         }
 
-        /* Har bir o'yinchi uchun maxsus burchak (angle) va masofa sozlamalari */
-        .p-aziza     { --angle: -90deg; --rx: 155px; --ry: 155px; } /* Yuqori markaz */
-        .p-malika    { --angle: -52deg; --rx: 150px; --ry: 150px; } /* Azizaga yaqinroq surildi */
-        .p-sevinch   { --angle: -22deg; --rx: 148px; --ry: 148px; }
-        .p-gulnoza   { --angle: 10deg;  --rx: 148px; --ry: 148px; }
-        .p-nilufar   { --angle: 42deg;  --rx: 150px; --ry: 150px; }
-        .p-fazliddin { --angle: 70deg;  --rx: 155px; --ry: 155px; } /* Pastki burchakka surildi */
-        .p-dildora   { --angle: 90deg;  --rx: 155px; --ry: 155px; } /* Pastki markaz */
-        .p-sardor    { --angle: 110deg; --rx: 155px; --ry: 155px; } /* Pastki burchakka surildi */
-        .p-madina2   { --angle: 138deg; --rx: 150px; --ry: 150px; }
-        .p-jasur     { --angle: 170deg; --rx: 148px; --ry: 148px; }
-        .p-madina1   { --angle: -158deg; --rx: 148px; --ry: 148px; }
-        .p-bekzod    { --angle: -128deg; --rx: 150px; --ry: 150px; } /* Azizaga yaqinroq surildi */
+        /* AZIZA va DILDORAGA QARAB ORASINI QISQARTIRISH (YAQINLASHTIRISH) */
+        .p-aziza     { --angle: -90deg; }  /* Tepada markaz */
+        .p-malika    { --angle: -68deg; }  /* Azizaga yaqinroq qisqartirildi (-60 o'rniga -68) */
+        .p-sevinch   { --angle: -38deg; }  
+        .p-gulnoza   { --angle: -8deg;  }  
+        .p-nilufar   { --angle: 28deg;  }  
+        .p-fazliddin { --angle: 62deg;  }  /* Dildoraga yaqinroq qisqartirildi (60 o'rniga 62) */
+        .p-dildora   { --angle: 90deg;  }  /* Pastda markaz */
+        .p-sardor    { --angle: 118deg; }  /* Dildoraga yaqinroq qisqartirildi (120 o'rniga 118) */
+        .p-madina2   { --angle: 152deg; }  
+        .p-jasur     { --angle: 188deg; }  
+        .p-madina1   { --angle: -142deg; } 
+        .p-bekzod    { --angle: -112deg; } /* Azizaga yaqinroq qisqartirildi (-120 o'rniga -112) */
 
         /* Neon hoshiyalar */
         .player.pink {
@@ -364,7 +363,7 @@
         <div class="center-arrow"></div>
         <div class="bottle"></div>
 
-        <!-- O'yinchilar Mukammal Joylashuvi -->
+        <!-- O'yinchilar Doirasi -->
         <div class="players-circle">
             <div class="player p-aziza gold" style="background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
             <div class="player p-malika pink" style="background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
