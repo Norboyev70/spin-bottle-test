@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle - Fixed Positions</title>
+    <title>Spin the Bottle - Perfect Placement</title>
     <style>
         * {
             box-sizing: border-box;
@@ -107,8 +107,8 @@
         }
 
         .center-circle {
-            width: 260px;
-            height: 260px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             border: 2px solid rgba(212, 163, 89, 0.35);
             position: absolute;
@@ -117,7 +117,7 @@
 
         .center-arrow {
             position: absolute;
-            top: 20%;
+            top: 22%;
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
@@ -139,25 +139,23 @@
             z-index: 2;
         }
 
-        /* O'yinchilar doirasi - o'lchami kattalashtirildi */
+        /* Players Container */
         .players-circle {
-            width: 350px;
-            height: 350px;
+            width: 360px;
+            height: 360px;
             position: relative;
             border-radius: 50%;
         }
 
-        /* Radius kattalashtirildi, oralaridagi masofa ochildi */
+        /* Avatarlar - O'lcham va aniq pozitsiyalash */
         .player {
-            --angle: calc(var(--i) * 30deg - 90deg);
-            --radius: 155px; /* Masofa kengaytirildi */
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 60px;
-            height: 60px;
-            margin: -30px;
-            transform: rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1 * var(--angle)));
+            width: 58px;
+            height: 58px;
+            margin: -29px;
+            transform: rotate(var(--angle)) translate(var(--rx, 152px), var(--ry, 152px)) rotate(calc(-1 * var(--angle)));
             border-radius: 16px;
             background-size: cover;
             background-position: center;
@@ -167,6 +165,20 @@
             box-shadow: 0 0 12px rgba(233, 30, 99, 0.8);
             border: 2px solid #ff2a8d;
         }
+
+        /* Har bir o'yinchi uchun maxsus burchak (angle) va masofa sozlamalari */
+        .p-aziza     { --angle: -90deg; --rx: 155px; --ry: 155px; } /* Yuqori markaz */
+        .p-malika    { --angle: -52deg; --rx: 150px; --ry: 150px; } /* Azizaga yaqinroq surildi */
+        .p-sevinch   { --angle: -22deg; --rx: 148px; --ry: 148px; }
+        .p-gulnoza   { --angle: 10deg;  --rx: 148px; --ry: 148px; }
+        .p-nilufar   { --angle: 42deg;  --rx: 150px; --ry: 150px; }
+        .p-fazliddin { --angle: 70deg;  --rx: 155px; --ry: 155px; } /* Pastki burchakka surildi */
+        .p-dildora   { --angle: 90deg;  --rx: 155px; --ry: 155px; } /* Pastki markaz */
+        .p-sardor    { --angle: 110deg; --rx: 155px; --ry: 155px; } /* Pastki burchakka surildi */
+        .p-madina2   { --angle: 138deg; --rx: 150px; --ry: 150px; }
+        .p-jasur     { --angle: 170deg; --rx: 148px; --ry: 148px; }
+        .p-madina1   { --angle: -158deg; --rx: 148px; --ry: 148px; }
+        .p-bekzod    { --angle: -128deg; --rx: 150px; --ry: 150px; } /* Azizaga yaqinroq surildi */
 
         /* Neon hoshiyalar */
         .player.pink {
@@ -352,20 +364,20 @@
         <div class="center-arrow"></div>
         <div class="bottle"></div>
 
-        <!-- 12 Ta O'yinchi Kengaytirilgan Radiuda -->
+        <!-- O'yinchilar Mukammal Joylashuvi -->
         <div class="players-circle">
-            <div class="player gold" style="--i: 0; background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
-            <div class="player pink" style="--i: 1; background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
-            <div class="player pink" style="--i: 2; background-image: url('https://i.pravatar.cc/150?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
-            <div class="player pink" style="--i: 3; background-image: url('https://i.pravatar.cc/150?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
-            <div class="player pink" style="--i: 4; background-image: url('https://i.pravatar.cc/150?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
-            <div class="player blue" style="--i: 5; background-image: url('https://i.pravatar.cc/150?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
-            <div class="player pink" style="--i: 6; background-image: url('https://i.pravatar.cc/150?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
-            <div class="player blue" style="--i: 7; background-image: url('https://i.pravatar.cc/150?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
-            <div class="player gold" style="--i: 8; background-image: url('https://i.pravatar.cc/150?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player blue" style="--i: 9; background-image: url('https://i.pravatar.cc/150?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
-            <div class="player pink" style="--i: 10; background-image: url('https://i.pravatar.cc/150?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player blue" style="--i: 11; background-image: url('https://i.pravatar.cc/150?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
+            <div class="player p-aziza gold" style="background-image: url('https://i.pravatar.cc/150?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
+            <div class="player p-malika pink" style="background-image: url('https://i.pravatar.cc/150?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
+            <div class="player p-sevinch pink" style="background-image: url('https://i.pravatar.cc/150?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
+            <div class="player p-gulnoza pink" style="background-image: url('https://i.pravatar.cc/150?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
+            <div class="player p-nilufar pink" style="background-image: url('https://i.pravatar.cc/150?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
+            <div class="player p-fazliddin blue" style="background-image: url('https://i.pravatar.cc/150?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
+            <div class="player p-dildora pink" style="background-image: url('https://i.pravatar.cc/150?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
+            <div class="player p-sardor blue" style="background-image: url('https://i.pravatar.cc/150?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
+            <div class="player p-madina2 gold" style="background-image: url('https://i.pravatar.cc/150?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
+            <div class="player p-jasur blue" style="background-image: url('https://i.pravatar.cc/150?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
+            <div class="player p-madina1 pink" style="background-image: url('https://i.pravatar.cc/150?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
+            <div class="player p-bekzod blue" style="background-image: url('https://i.pravatar.cc/150?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
         </div>
     </div>
 
