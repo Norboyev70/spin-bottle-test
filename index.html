@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spin the Bottle - Fixed Layout</title>
+    <title>Spin the Bottle</title>
     <style>
         * {
             box-sizing: border-box;
@@ -340,10 +340,10 @@
             let y = centerOffset + radius * Math.sin(angleRad);
 
             if (player.name.includes("Gulnoza")) {
-                x -= 15;
+                x -= 8; // Gulnoza sal o'ngga surildi (-15px o'rniga -8px)
             }
             if (player.name.includes("Sevinch")) {
-                x -= 4; // Sevinch biroz o'ngga qaytarildi (-12px o'rniga -4px qilindi)
+                x -= 12; // Sevinch boyagi holatiga qaytarildi (-12px)
             }
 
             const playerEl = document.createElement("div");
