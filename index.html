@@ -30,7 +30,7 @@
             flex-direction: column;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             color: #fff;
         }
@@ -43,12 +43,6 @@
             padding: 12px 16px;
             font-size: 18px;
             font-weight: 600;
-        }
-
-        .header-nav .title {
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         /* Stats Bar */
@@ -65,7 +59,7 @@
             gap: 4px;
             font-size: 13px;
             font-weight: bold;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
             padding: 4px 8px;
             border-radius: 12px;
         }
@@ -89,54 +83,47 @@
             align-items: center;
         }
 
-        /* Center Circle Pattern */
         .center-circle {
-            width: 260px;
-            height: 260px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
-            border: 2px dashed rgba(255, 215, 0, 0.3);
+            border: 2px dashed rgba(255, 215, 0, 0.4);
             position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .bottle {
-            width: 50px;
-            height: 140px;
+            width: 45px;
+            height: 130px;
             background: linear-gradient(135deg, #1b5e20, #4caf50);
             border-radius: 20px 20px 8px 8px;
             position: absolute;
             transform: rotate(45deg);
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             border: 2px solid rgba(255,255,255,0.3);
+            z-index: 2;
         }
 
-        .bottle::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 15px;
-            width: 20px;
-            height: 20px;
-            background: #1b5e20;
-            border-radius: 3px;
-        }
-
-        /* Players Layout (12 Players) */
+        /* Mukammal teng doiraviy joylashuv mexanizmi */
         .players-circle {
             width: 320px;
             height: 320px;
             position: relative;
+            border-radius: 50%;
         }
 
         .player {
+            --angle: calc(var(--i) * 30deg - 90deg); /* 12 o'yinchi: 360/12 = 30deg */
+            --radius: 145px; /* Markazdan masofasi */
             position: absolute;
-            width: 54px;
-            height: 54px;
+            top: 50%;
+            left: 50%;
+            width: 52px;
+            height: 52px;
+            margin: -26px; /* Element markazlashtirishi */
+            transform: rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1 * var(--angle)));
             border-radius: 50%;
-            border: 2px solid #ff007f;
-            box-shadow: 0 0 10px #ff007f;
+            border: 2.5px solid #ff007f;
+            box-shadow: 0 0 8px #ff007f;
             background-size: cover;
             background-position: center;
             display: flex;
@@ -144,12 +131,17 @@
             align-items: flex-end;
         }
 
+        /* Unikal chegaralar (border rangi va foni) */
+        .player.gold { border-color: #ffd700; box-shadow: 0 0 8px #ffd700; }
+        .player.blue { border-color: #00d2ff; box-shadow: 0 0 8px #00d2ff; }
+        .player.orange { border-color: #ff9200; box-shadow: 0 0 8px #ff9200; }
+
         .player-name {
             position: absolute;
-            bottom: -18px;
+            bottom: -20px;
             font-size: 11px;
             font-weight: bold;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             white-space: nowrap;
         }
 
@@ -167,32 +159,19 @@
             justify-content: center;
             align-items: center;
             font-weight: bold;
+            border: 1px solid #fff;
         }
-
-        /* Positioning 12 players circularly */
-        .p1  { top: 0%; left: 50%; transform: translate(-50%, 0); border-color: #ffd700; box-shadow: 0 0 10px #ffd700; }
-        .p2  { top: 7%; left: 73%; }
-        .p3  { top: 23%; left: 88%; }
-        .p4  { top: 45%; left: 92%; }
-        .p5  { top: 67%; left: 85%; }
-        .p6  { top: 82%; left: 68%; }
-        .p7  { top: 88%; left: 45%; border-color: #e91e63; }
-        .p8  { top: 82%; left: 22%; border-color: #2196f3; box-shadow: 0 0 10px #2196f3; }
-        .p9  { top: 67%; left: 5%;  border-color: #ff9800; }
-        .p10 { top: 45%; left: 0%;  border-color: #2196f3; }
-        .p11 { top: 23%; left: 5%;  }
-        .p12 { top: 7%; left: 20%;  border-color: #2196f3; }
 
         /* Chat Section */
         .chat-section {
             background: #ffffff;
             color: #333;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
             height: 320px;
             display: flex;
             flex-direction: column;
-            padding: 12px 16px;
+            padding: 14px 16px;
         }
 
         .chat-header {
@@ -288,7 +267,7 @@
     <!-- Top Bar -->
     <div class="header-nav">
         <span>✕</span>
-        <div class="title">Spin the Bottle 🍾❤️</div>
+        <div>Spin the Bottle 🍾❤️</div>
         <span>⋮</span>
     </div>
 
@@ -306,19 +285,20 @@
         <div class="center-circle"></div>
         <div class="bottle"></div>
 
+        <!-- O'yinchilar teng masofada (--i tartib raqami yordamida) -->
         <div class="players-circle">
-            <div class="player p1" style="background-image: url('https://i.pravatar.cc/100?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
-            <div class="player p2" style="background-image: url('https://i.pravatar.cc/100?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
-            <div class="player p3" style="background-image: url('https://i.pravatar.cc/100?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
-            <div class="player p4" style="background-image: url('https://i.pravatar.cc/100?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
-            <div class="player p5" style="background-image: url('https://i.pravatar.cc/100?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
-            <div class="player p6" style="background-image: url('https://i.pravatar.cc/100?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
-            <div class="player p7" style="background-image: url('https://i.pravatar.cc/100?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
-            <div class="player p8" style="background-image: url('https://i.pravatar.cc/100?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
-            <div class="player p9" style="background-image: url('https://i.pravatar.cc/100?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player p10" style="background-image: url('https://i.pravatar.cc/100?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
-            <div class="player p11" style="background-image: url('https://i.pravatar.cc/100?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
-            <div class="player p12" style="background-image: url('https://i.pravatar.cc/100?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
+            <div class="player gold" style="--i: 0; background-image: url('https://i.pravatar.cc/100?img=1');"><span class="badge">4</span><span class="player-name">Aziza</span></div>
+            <div class="player" style="--i: 1; background-image: url('https://i.pravatar.cc/100?img=2');"><span class="badge">2</span><span class="player-name">Malika 👑</span></div>
+            <div class="player" style="--i: 2; background-image: url('https://i.pravatar.cc/100?img=3');"><span class="badge">1</span><span class="player-name">Sevinch</span></div>
+            <div class="player" style="--i: 3; background-image: url('https://i.pravatar.cc/100?img=4');"><span class="badge">1</span><span class="player-name">Gulnoza</span></div>
+            <div class="player" style="--i: 4; background-image: url('https://i.pravatar.cc/100?img=5');"><span class="badge">5</span><span class="player-name">Nilufar</span></div>
+            <div class="player blue" style="--i: 5; background-image: url('https://i.pravatar.cc/100?img=6');"><span class="badge">5</span><span class="player-name">Fazliddin</span></div>
+            <div class="player" style="--i: 6; background-image: url('https://i.pravatar.cc/100?img=7');"><span class="badge">5</span><span class="player-name">Dildora</span></div>
+            <div class="player blue" style="--i: 7; background-image: url('https://i.pravatar.cc/100?img=8');"><span class="badge">1</span><span class="player-name">Sardor ✔</span></div>
+            <div class="player orange" style="--i: 8; background-image: url('https://i.pravatar.cc/100?img=9');"><span class="badge">1</span><span class="player-name">Madina</span></div>
+            <div class="player blue" style="--i: 9; background-image: url('https://i.pravatar.cc/100?img=10');"><span class="badge">1</span><span class="player-name">Jasur ✔</span></div>
+            <div class="player" style="--i: 10; background-image: url('https://i.pravatar.cc/100?img=11');"><span class="badge">1</span><span class="player-name">Madina</span></div>
+            <div class="player blue" style="--i: 11; background-image: url('https://i.pravatar.cc/100?img=12');"><span class="badge">1</span><span class="player-name">Bekzod ✔</span></div>
         </div>
     </div>
 
