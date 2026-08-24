@@ -1,1201 +1,162 @@
-/* =========================================================
-   SPIN THE BOTTLE — PREMIUM DESIGN
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
+.game-container {
     width: 100%;
-    height: 100%;
-}
+    max-width: 414px;
+    height: 100vh;
+    max-height: 896px;
 
-body {
-    font-family: Inter, Arial, sans-serif;
-    overflow: hidden;
-    color: #fff;
-
+    /* PREMIUM QORAMTIR YOG'OCH STOL */
     background:
+        /* markazdagi yumshoq yorug'lik */
         radial-gradient(
-            circle at 50% 20%,
-            #3a281d 0%,
-            #1e1510 42%,
-            #0c0907 100%
-        );
-}
-
-
-/* =========================================================
-   APP
-========================================================= */
-
-.app {
-    width: 100%;
-    height: 100dvh;
-
-    display: flex;
-    flex-direction: column;
-
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            rgba(139, 92, 48, .12),
-            transparent 38%
-        );
-}
-
-
-/* =========================================================
-   TOP BAR
-========================================================= */
-
-.topbar {
-    height: 62px;
-    flex: 0 0 62px;
-
-    padding: 0 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(19,14,10,.98),
-            rgba(12,9,7,.96)
-        );
-
-    border-bottom: 1px solid rgba(255,255,255,.06);
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.28);
-
-    z-index: 100;
-}
-
-
-/* USER */
-
-.user-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-avatar {
-    width: 41px;
-    height: 41px;
-
-    padding: 2px;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f5d49b,
-            #c28a4d,
-            #60391e
-        );
-
-    box-shadow:
-        0 3px 10px rgba(0,0,0,.4);
-}
-
-.user-avatar img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 10px;
-
-    display: block;
-}
-
-.user-info strong {
-    display: block;
-    font-size: 13px;
-}
-
-.user-info span {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #9b9188;
-
-    font-size: 9px;
-}
-
-
-/* HEART */
-
-.heart-box {
-    height: 36px;
-
-    padding: 0 13px;
-
-    display: flex;
-    align-items: center;
-    gap: 7px;
-
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.035)
-        );
-
-    border: 1px solid rgba(255,255,255,.06);
-
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.05);
-}
-
-.heart {
-    color: #ff506a;
-
-    font-size: 20px;
-
-    filter:
-        drop-shadow(
-            0 2px 4px rgba(255,50,80,.25)
-        );
-}
-
-.heart-box strong {
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   GAME
-========================================================= */
-
-.game {
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* =========================================================
-   TABLE AREA
-========================================================= */
-
-.table-area {
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 12px;
-}
-
-
-/* =========================================================
-   PREMIUM WOOD TABLE
-========================================================= */
-
-.table {
-    position: relative;
-
-    width: min(70vh, 680px);
-    height: min(70vh, 680px);
-
-    aspect-ratio: 1 / 1;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    overflow: hidden;
-
-    background:
-
-        /* wood grain */
-        repeating-radial-gradient(
-            ellipse at 50% 50%,
-            transparent 0px,
-            transparent 18px,
-            rgba(62,28,10,.10) 19px,
-            transparent 23px
+            ellipse at 50% 43%,
+            rgba(150, 91, 42, 0.34) 0%,
+            rgba(91, 49, 20, 0.24) 35%,
+            rgba(28, 13, 5, 0.72) 78%,
+            rgba(8, 4, 2, 0.98) 100%
         ),
 
-        /* natural wood */
-        radial-gradient(
-            ellipse at 35% 30%,
-            #d09a5c 0%,
-            #b87940 28%,
-            #985b2f 58%,
-            #70401f 100%
+        /* yog'och tolalari */
+        repeating-linear-gradient(
+            8deg,
+            rgba(255, 190, 105, 0.045) 0px,
+            rgba(255, 190, 105, 0.045) 1px,
+            transparent 1px,
+            transparent 7px
+        ),
+
+        repeating-linear-gradient(
+            175deg,
+            rgba(0, 0, 0, 0.10) 0px,
+            rgba(0, 0, 0, 0.10) 2px,
+            transparent 2px,
+            transparent 13px
+        ),
+
+        /* asosiy yog'och */
+        linear-gradient(
+            145deg,
+            #6b3d1d 0%,
+            #4b2812 25%,
+            #351b0c 55%,
+            #211006 100%
         );
 
-    border: 7px solid #553019;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
     box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.95),
+        inset 0 0 80px rgba(0, 0, 0, 0.65);
 
-        0 30px 65px rgba(0,0,0,.65),
+    border-radius: 32px;
+    overflow: hidden;
 
-        0 5px 15px rgba(0,0,0,.35),
-
-        inset 0 4px 8px rgba(255,255,255,.17),
-
-        inset 0 -18px 30px rgba(46,18,5,.45);
+    color: #fff;
+    border: 1px solid rgba(202, 145, 76, 0.20);
 }
 
 
-/* TABLE LIGHT */
-
-.table::before {
+/* STOL USTIDAGI YUMSHOQ YORUG'LIK */
+.game-container::before {
     content: "";
-
     position: absolute;
+    inset: 0;
 
-    inset: 13px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,236,199,.18);
-
-    box-shadow:
-        inset 0 0 45px rgba(53,22,7,.35);
+    background:
+        radial-gradient(
+            circle at 50% 43%,
+            rgba(255, 196, 110, 0.10) 0%,
+            transparent 43%
+        );
 
     pointer-events: none;
+    z-index: 0;
+}
 
+
+/* TASHQI QORAYISH / VIGNETTE */
+.game-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 45%,
+            rgba(0, 0, 0, 0.28) 72%,
+            rgba(0, 0, 0, 0.70) 100%
+        );
+
+    pointer-events: none;
     z-index: 1;
 }
 
 
-/* TABLE TEXTURE */
+/* BARCHA ASOSIY ELEMENTLAR FON USTIDA */
+.header-nav,
+.stats-bar,
+.table-area,
+.chat-section {
+    position: relative;
+    z-index: 5;
+}
 
-.table::after {
-    content: "";
 
-    position: absolute;
-
-    inset: 0;
+/* MARKAZIY STOL ZONASI */
+.table-center-ring {
+    width: 320px;
+    height: 320px;
 
     border-radius: 50%;
 
-    opacity: .22;
-
-    background:
-        repeating-linear-gradient(
-            7deg,
-            transparent 0px,
-            transparent 15px,
-            rgba(55,25,9,.07) 16px,
-            transparent 18px
-        );
-
-    pointer-events: none;
-
-    z-index: 2;
-}
-
-
-/* =========================================================
-   PLAYERS
-========================================================= */
-
-.player {
     position: absolute;
 
-    width: 70px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    transform: translate(-50%, -50%);
-
-    z-index: 20;
-}
-
-
-/* AVATAR PREMIUM FRAME */
-
-.avatar {
-    position: relative;
-
-    width: 56px;
-    height: 56px;
-
-    padding: 3px;
-
-    border-radius: 15px;
+    border: 1px solid rgba(218, 157, 82, 0.18);
 
     background:
-        linear-gradient(
-            145deg,
-            #f5dcad 0%,
-            #bd8750 35%,
-            #75431f 65%,
-            #e0b475 100%
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(173, 103, 43, 0.15) 0%,
+            rgba(100, 52, 20, 0.08) 42%,
+            transparent 75%
         );
 
     box-shadow:
-
-        0 7px 14px rgba(0,0,0,.48),
-
-        inset 0 1px 1px rgba(255,255,255,.55),
-
-        0 0 0 1px rgba(40,18,6,.45);
-}
-
-.avatar::before {
-    content: "";
-
-    position: absolute;
-
-    inset: -3px;
-
-    border-radius: 17px;
-
-    border: 1px solid rgba(255,225,176,.25);
+        inset 0 0 45px rgba(0, 0, 0, 0.55),
+        inset 0 0 8px rgba(255, 185, 91, 0.08),
+        0 0 30px rgba(0, 0, 0, 0.35);
 
     pointer-events: none;
 }
 
-.avatar img {
-    width: 100%;
-    height: 100%;
 
-    display: block;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-}
-
-
-/* PLAYER NAME */
-
-.player strong {
-    max-width: 70px;
-
-    margin-top: 5px;
-
-    overflow: hidden;
-
-    white-space: nowrap;
-
-    text-overflow: ellipsis;
-
-    font-size: 9px;
-
-    font-weight: 600;
-
-    text-shadow:
-        0 2px 5px #000;
-}
-
-
-/* HEART COUNT */
-
-.player small {
-    margin-top: 2px;
-
-    color: #ffd8de;
-
-    font-size: 7px;
-
-    text-shadow:
-        0 1px 4px #000;
-}
-
-
-/* =========================================================
-   PLAYER POSITIONS
-========================================================= */
-
-.player-1 {
-    left: 50%;
-    top: 8%;
-}
-
-.player-2 {
-    left: 71%;
-    top: 13%;
-}
-
-.player-3 {
-    left: 88%;
-    top: 29%;
-}
-
-.player-4 {
-    left: 92%;
-    top: 50%;
-}
-
-.player-5 {
-    left: 88%;
-    top: 71%;
-}
-
-.player-6 {
-    left: 71%;
-    top: 87%;
-}
-
-.player-7 {
-    left: 50%;
-    top: 92%;
-}
-
-.player-8 {
-    left: 29%;
-    top: 87%;
-}
-
-.player-9 {
-    left: 12%;
-    top: 71%;
-}
-
-.player-10 {
-    left: 8%;
-    top: 50%;
-}
-
-.player-11 {
-    left: 12%;
-    top: 29%;
-}
-
-.player-12 {
-    left: 29%;
-    top: 13%;
-}
-
-
-/* =========================================================
-   MODERN GLASS BOTTLE
-========================================================= */
-
-.bottle-button {
+/* MARKAZDA YOG'OCH HALQA EFFEKTI */
+.table-center-ring::before {
+    content: "";
     position: absolute;
 
-    left: 50%;
-    top: 50%;
+    inset: 10px;
 
-    width: 230px;
-    height: 100px;
+    border-radius: 50%;
 
-    transform: translate(-50%, -50%);
-
-    border: 0;
-    outline: 0;
-
-    background: transparent;
-
-    padding: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-
-    z-index: 40;
-}
-
-
-/* BOTTLE */
-
-.bottle {
-    position: relative;
-
-    width: 205px;
-    height: 58px;
-
-    transform-origin: center;
-
-    filter:
-        drop-shadow(
-            0 10px 8px rgba(0,0,0,.58)
-        );
-}
-
-
-/* CAP */
-
-.bottle-cap {
-    position: absolute;
-
-    left: 0;
-    top: 20px;
-
-    width: 14px;
-    height: 18px;
-
-    border-radius: 4px 2px 2px 4px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #493716,
-            #e1c16b,
-            #6b4b1e
-        );
+    border: 1px solid rgba(255, 190, 105, 0.08);
 
     box-shadow:
-        inset 1px 0 rgba(255,255,255,.5);
+        inset 0 0 25px rgba(0, 0, 0, 0.30);
 }
 
 
-/* NECK */
-
-.bottle-neck {
-    position: absolute;
-
-    left: 12px;
-    top: 21px;
-
-    width: 67px;
-    height: 16px;
-
-    border-radius: 5px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(117,184,146,.88),
-            rgba(12,75,48,.97)
-        );
-
-    border-top: 1px solid rgba(255,255,255,.6);
-    border-bottom: 1px solid rgba(0,0,0,.35);
-}
-
-.shine {
-    position: absolute;
-
-    left: 8px;
-    top: 2px;
-
-    width: 5px;
-    height: 11px;
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.65);
-}
-
-
-/* SHOULDER */
-
-.bottle-neck::after {
+/* YANA BIR NOZIK TABIIY HALQA */
+.table-center-ring::after {
     content: "";
 
     position: absolute;
 
-    right: -23px;
-    top: -7px;
-
-    width: 31px;
-    height: 30px;
+    inset: 24px;
 
     border-radius: 50%;
 
-    background:
-        linear-gradient(
-            90deg,
-            #0b4a2f,
-            #63a77d,
-            #145938
-        );
-}
-
-
-/* BODY */
-
-.bottle-body {
-    position: absolute;
-
-    left: 74px;
-    top: 7px;
-
-    width: 116px;
-    height: 44px;
-
-    border-radius: 7px 20px 20px 7px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #6aae83,
-            #1b6945 42%,
-            #073b26
-        );
-
-    border-top: 1px solid rgba(255,255,255,.65);
-
-    border-bottom: 2px solid rgba(0,0,0,.38);
-
-    box-shadow:
-
-        inset 0 4px 7px rgba(255,255,255,.16),
-
-        inset 0 -6px 10px rgba(0,0,0,.32);
-}
-
-
-/* GLASS REFLECTION */
-
-.bottle-light {
-    position: absolute;
-
-    left: 11px;
-    top: 5px;
-
-    width: 7px;
-    height: 32px;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.78),
-            rgba(255,255,255,.08)
-        );
-}
-
-
-/* LABEL */
-
-.bottle-label {
-    position: absolute;
-
-    left: 37px;
-    top: 9px;
-
-    width: 57px;
-    height: 25px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 4px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #f2e2ba,
-            #bfa36e
-        );
-
-    color: #173c29;
-
-    font-size: 8px;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-
-    box-shadow:
-        0 2px 4px rgba(0,0,0,.25);
-}
-
-
-/* =========================================================
-   BOTTLE SPIN
-========================================================= */
-
-.bottle.spinning {
-    animation:
-        spinBottle
-        2.7s
-        cubic-bezier(.12,.72,.18,1)
-        forwards;
-}
-
-@keyframes spinBottle {
-
-    0% {
-        transform: rotate(0deg);
-    }
-
-    25% {
-        transform: rotate(360deg);
-    }
-
-    50% {
-        transform: rotate(720deg);
-    }
-
-    72% {
-        transform: rotate(990deg);
-    }
-
-    88% {
-        transform: rotate(1120deg);
-    }
-
-    100% {
-        transform: rotate(1170deg);
-    }
-}
-
-
-/* =========================================================
-   CHAT
-========================================================= */
-
-.chat {
-    width: 100%;
-
-    height: 30%;
-
-    min-height: 190px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #faf9f8
-        );
-
-    color: #211b17;
-
-    border-radius: 18px 18px 0 0;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 -8px 28px rgba(0,0,0,.3);
-
-    z-index: 60;
-}
-
-
-/* CHAT HEADER */
-
-.chat-header {
-    height: 44px;
-
-    flex-shrink: 0;
-
-    padding: 0 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-bottom: 1px solid #eee8e3;
-}
-
-.chat-header strong {
-    display: block;
-
-    font-size: 12px;
-}
-
-.chat-header span {
-    display: block;
-
-    margin-top: 2px;
-
-    color: #999;
-
-    font-size: 8px;
-}
-
-
-/* MESSAGES */
-
-.messages {
-    flex: 1;
-
-    min-height: 0;
-
-    overflow-y: auto;
-
-    padding: 8px 13px;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 7px;
-}
-
-.message {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 7px;
-}
-
-.message-avatar {
-    width: 29px;
-    height: 29px;
-
-    flex: 0 0 29px;
-
-    overflow: hidden;
-
-    border-radius: 9px;
-}
-
-.message-avatar img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-.message-text {
-    max-width: 76%;
-}
-
-.message-text strong {
-    display: block;
-
-    margin-bottom: 2px;
-
-    color: #a36a38;
-
-    font-size: 9px;
-}
-
-.message-text p {
-    display: inline-block;
-
-    padding: 7px 9px;
-
-    background: #f2efec;
-
-    border-radius: 5px 12px 12px 12px;
-
-    font-size: 10px;
-}
-
-.message.own {
-    flex-direction: row-reverse;
-}
-
-.message.own .message-text {
-    text-align: right;
-}
-
-.message.own .message-text p {
-    background: #f0dfcf;
-
-    border-radius: 12px 5px 12px 12px;
-}
-
-
-/* =========================================================
-   QUICK MESSAGE
-========================================================= */
-
-.quick {
-    height: 34px;
-
-    flex: 0 0 34px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 5px;
-
-    padding: 2px 10px;
-
-    overflow-x: auto;
-}
-
-.quick button {
-    flex-shrink: 0;
-
-    border: 1px solid #e3dcd6;
-
-    background: #faf8f6;
-
-    color: #443a33;
-
-    border-radius: 8px;
-
-    padding: 4px 9px;
-
-    font-size: 10px;
-
-    transition:
-        transform .15s ease,
-        background .15s ease;
-}
-
-.quick button:active {
-    transform: scale(.94);
-
-    background: #f0e7df;
-}
-
-
-/* =========================================================
-   CHAT INPUT
-========================================================= */
-
-.chat-input {
-    height: 48px;
-
-    flex: 0 0 48px;
-
-    display: flex;
-
-    gap: 6px;
-
-    padding: 6px 9px;
-
-    border-top: 1px solid #eee9e5;
-}
-
-.chat-input input {
-    flex: 1;
-
-    min-width: 0;
-
-    outline: none;
-
-    border: 1px solid #e2dbd5;
-
-    border-radius: 10px;
-
-    padding: 0 10px;
-
-    background: #f8f6f4;
-
-    font-size: 11px;
-
-    transition:
-        border .2s ease,
-        box-shadow .2s ease;
-}
-
-.chat-input input:focus {
-    border-color: #bd8b5b;
-
-    box-shadow:
-        0 0 0 3px rgba(189,139,91,.12);
-}
-
-.chat-input button {
-    width: 37px;
-
-    border: 0;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #b97942,
-            #804820
-        );
-
-    color: white;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 3px 8px rgba(90,45,18,.25);
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .topbar {
-        height: 54px;
-        flex-basis: 54px;
-
-        padding: 0 11px;
-    }
-
-    .game {
-        height: calc(100dvh - 54px);
-    }
-
-
-    /* TABLE */
-
-    .table-area {
-        flex: 0 0 auto;
-
-        width: 100%;
-
-        height: min(
-            57dvh,
-            calc(100vw - 10px)
-        );
-
-        min-height: 0;
-
-        padding: 5px;
-    }
-
-    .table {
-        width: min(
-            calc(100vw - 10px),
-            57dvh
-        );
-
-        height: min(
-            calc(100vw - 10px),
-            57dvh
-        );
-
-        border-width: 7px;
-    }
-
-
-    /* PLAYERS */
-
-    .player {
-        width: clamp(46px, 12vw, 58px);
-    }
-
-    .avatar {
-        width: clamp(38px, 11vw, 50px);
-        height: clamp(38px, 11vw, 50px);
-
-        border-radius: 12px;
-    }
-
-    .avatar img {
-        border-radius: 9px;
-    }
-
-    .player strong {
-        max-width: 60px;
-
-        font-size: clamp(6px, 2vw, 9px);
-    }
-
-    .player small {
-        font-size: clamp(5px, 1.7vw, 7px);
-    }
-
-
-    /* BOTTLE */
-
-    .bottle-button {
-        width: 42%;
-        height: 30%;
-    }
-
-    .bottle {
-        transform: scale(
-            clamp(.55, 22vw / 100, .85)
-        );
-    }
-
-    .bottle.spinning {
-        animation:
-            spinBottleMobile
-            2.7s
-            cubic-bezier(.12,.72,.18,1)
-            forwards;
-    }
-
-
-    /* CHAT */
-
-    .chat {
-        width: 100%;
-
-        height: auto;
-
-        min-height: 0;
-
-        flex: 1;
-
-        border-radius: 18px 18px 0 0;
-    }
-
-    .chat-header {
-        height: 40px;
-        flex-basis: 40px;
-    }
-
-    .messages {
-        padding: 6px 10px;
-    }
-
-    .quick {
-        height: 34px;
-    }
-
-    .chat-input {
-        height: 48px;
-    }
-}
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-    .table-area {
-        height: min(
-            54dvh,
-            calc(100vw - 10px)
-        );
-    }
-
-    .table {
-        width: min(
-            calc(100vw - 10px),
-            54dvh
-        );
-
-        height: min(
-            calc(100vw - 10px),
-            54dvh
-        );
-    }
-
-    .avatar {
-        width: 39px;
-        height: 39px;
-    }
-
-    .player strong {
-        font-size: 6px;
-    }
-
-    .player small {
-        font-size: 5px;
-    }
+    border: 1px solid rgba(255, 255, 255, 0.025);
 }
