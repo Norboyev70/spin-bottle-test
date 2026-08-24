@@ -771,105 +771,100 @@ body{
 
         <div class="table-center-ring"></div>
 
-       .bottle {
-    width: 44px;
-    height: 108px;
+        <div
+            class="bottle"
+            id="bottle"
+            onclick="spinBottle()">
+        </div>
 
-    position: absolute;
-    z-index: 20;
+        <div
+            class="players-container"
+            id="playersContainer">
+        </div>
 
-    cursor: pointer;
-
-    /* Konyak butilkasi */
-    background:
-        linear-gradient(
-            90deg,
-            rgba(5, 48, 25, 0.88) 0%,
-            rgba(34, 125, 67, 0.72) 22%,
-            rgba(82, 166, 101, 0.38) 48%,
-            rgba(25, 103, 53, 0.72) 75%,
-            rgba(3, 48, 23, 0.92) 100%
-        );
-
-    border: 1px solid rgba(190, 255, 207, 0.48);
-
-    border-radius:
-        13px 13px 17px 17px;
-
-    box-shadow:
-        0 12px 22px rgba(0, 0, 0, 0.55),
-        inset 5px 0 8px rgba(255, 255, 255, 0.16),
-        inset -5px 0 8px rgba(0, 0, 0, 0.25);
-
-    transform: rotate(45deg);
-
-    transition:
-        transform 3s cubic-bezier(0.15, 0.85, 0.15, 1);
-}
+    </div>
 
 
-/* Konyak butilkasining yelkasi */
+    <div class="chat-section">
 
-.bottle::before {
-    content: "";
-
-    position: absolute;
-
-    top: -13px;
-    left: 9px;
-
-    width: 26px;
-    height: 23px;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(4, 54, 27, 0.92),
-            rgba(68, 145, 78, 0.55),
-            rgba(4, 54, 27, 0.92)
-        );
-
-    border:
-        1px solid rgba(190, 255, 207, 0.38);
-
-    border-radius:
-        8px 8px 4px 4px;
-
-    box-shadow:
-        inset 3px 0 5px rgba(255,255,255,0.15),
-        inset -3px 0 5px rgba(0,0,0,0.3);
-}
+        <div class="chat-header">
+            <span>💬 O'yin chati</span>
+            <span style="font-size:11px;">👥 12/12</span>
+        </div>
 
 
-/* Bo'yin / qopqoq */
+        <div class="chat-messages">
 
-.bottle::after {
-    content: "";
+            <div class="chat-item">
 
-    position: absolute;
+                <div
+                    class="chat-avatar"
+                    style="background-image:url('https://i.pravatar.cc/150?img=1');">
+                </div>
 
-    top: -22px;
-    left: 12px;
+                <div>
 
-    width: 20px;
-    height: 12px;
+                    <div class="chat-username">
+                        Aziza 👑
+                    </div>
 
-    background:
-        linear-gradient(
-            90deg,
-            #183b22,
-            #6d9b67,
-            #183b22
-        );
+                    <div class="chat-bubble">
+                        Salom hammaga! 👋
+                    </div>
 
-    border:
-        1px solid rgba(255,255,255,0.30);
+                </div>
 
-    border-radius: 4px 4px 2px 2px;
+            </div>
 
-    box-shadow:
-        0 2px 4px rgba(0,0,0,0.35);
-}
+
+            <div class="chat-item">
+
+                <div
+                    class="chat-avatar"
+                    style="background-image:url('https://i.pravatar.cc/150?img=12');">
+                </div>
+
+                <div>
+
+                    <div class="chat-username">
+                        Bekzod ✔
+                    </div>
+
+                    <div class="chat-bubble">
+                        O'yinni boshlaymizmi? 🔥
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="chat-input-area">
+
+            <input
+                type="text"
+                class="chat-input"
+                placeholder="Xabar yozing..."
+            >
+
+            <button class="send-btn">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const players = [
+
+    {
         name:"Aziza",
         img:"https://i.pravatar.cc/150?img=1",
         badge:4,
