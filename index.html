@@ -1,670 +1,744 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spin the Bottle - Wooden Table</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            user-select: none;
-        }
-
-        body {
-            background: #17100a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* =====================================================
-           OCHIQ PREMIUM OAK YOG'OCH STOL
-        ===================================================== */
-
-        .game-container {
-            width: 100%;
-            max-width: 414px;
-            height: 100vh;
-            max-height: 896px;
-
-            background:
-                /* markaziy yorug'lik */
-                radial-gradient(
-                    ellipse at 50% 42%,
-                    rgba(255, 220, 166, 0.45) 0%,
-                    rgba(222, 172, 111, 0.25) 38%,
-                    rgba(151, 91, 45, 0.12) 65%,
-                    transparent 88%
-                ),
-
-                /* tabiiy yog'och tolalari */
-                repeating-linear-gradient(
-                    7deg,
-                    rgba(91, 49, 20, 0.09) 0px,
-                    rgba(91, 49, 20, 0.09) 2px,
-                    transparent 2px,
-                    transparent 10px
-                ),
-
-                repeating-linear-gradient(
-                    172deg,
-                    rgba(255, 226, 179, 0.10) 0px,
-                    rgba(255, 226, 179, 0.10) 1px,
-                    transparent 1px,
-                    transparent 15px
-                ),
-
-                /* asosiy OCHIQ OAK */
-                linear-gradient(
-                    145deg,
-                    #d7a56b 0%,
-                    #c38b52 28%,
-                    #b87940 55%,
-                    #9a6032 78%,
-                    #75441f 100%
-                );
-
-            display: flex;
-            flex-direction: column;
-            position: relative;
-
-            box-shadow:
-                0 25px 55px rgba(0, 0, 0, 0.65),
-                inset 0 0 70px rgba(72, 36, 13, 0.25);
-
-            border-radius: 32px;
-            overflow: hidden;
-
-            color: #fff;
-            border: 1px solid rgba(255, 220, 170, 0.35);
-        }
-
-        /* Stol ustidagi yumshoq yorug'lik */
-        .game-container::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-
-            background:
-                radial-gradient(
-                    circle at 50% 40%,
-                    rgba(255, 239, 205, 0.20),
-                    transparent 55%
-                );
-
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Tabiiy chekka soya */
-        .game-container::after {
-            content: "";
-            position: absolute;
-            inset: 0;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Spin the Bottle - Oak Table</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    user-select:none;
+}
+
+body{
+    background:#17100a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   ASOSIY OCHIQ OAK STOL
+========================================================= */
+
+.game-container{
+    width:100%;
+    max-width:414px;
+    height:100vh;
+    max-height:896px;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 42%,
+            rgba(255,220,166,.45) 0%,
+            rgba(222,172,111,.25) 38%,
+            rgba(151,91,45,.12) 65%,
+            transparent 88%
+        ),
+
+        repeating-linear-gradient(
+            7deg,
+            rgba(91,49,20,.09) 0px,
+            rgba(91,49,20,.09) 2px,
+            transparent 2px,
+            transparent 10px
+        ),
+
+        repeating-linear-gradient(
+            172deg,
+            rgba(255,226,179,.10) 0px,
+            rgba(255,226,179,.10) 1px,
+            transparent 1px,
+            transparent 15px
+        ),
+
+        linear-gradient(
+            145deg,
+            #d7a56b 0%,
+            #c38b52 28%,
+            #b87940 55%,
+            #9a6032 78%,
+            #75441f 100%
+        );
+
+    display:flex;
+    flex-direction:column;
+    position:relative;
+
+    overflow:hidden;
+    border-radius:32px;
+
+    color:#fff;
 
-            background:
-                radial-gradient(
-                    ellipse at center,
-                    transparent 48%,
-                    rgba(82, 43, 17, 0.08) 70%,
-                    rgba(47, 23, 8, 0.30) 100%
-                );
+    border:1px solid rgba(255,220,170,.35);
 
-            pointer-events: none;
-            z-index: 1;
-        }
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.65),
+        inset 0 0 70px rgba(72,36,13,.25);
+}
 
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
+/* Yumshoq yorug'lik */
+
+.game-container::before{
+    content:"";
+    position:absolute;
+    inset:0;
 
-        .header-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,239,205,.20),
+            transparent 55%
+        );
 
-            padding: 18px 20px 10px 20px;
+    pointer-events:none;
+    z-index:0;
+}
 
-            font-size: 16px;
-            font-weight: 600;
 
-            color: #3d2513;
+/* Tashqi soya */
 
-            background: rgba(255, 235, 204, 0.18);
+.game-container::after{
+    content:"";
+    position:absolute;
+    inset:0;
 
-            backdrop-filter: blur(4px);
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 48%,
+            rgba(82,43,17,.08) 70%,
+            rgba(47,23,8,.30) 100%
+        );
 
-            position: relative;
-            z-index: 10;
+    pointer-events:none;
+    z-index:1;
+}
 
-            border-bottom: 1px solid rgba(92, 49, 19, 0.12);
-        }
 
-        .header-title {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+/* =========================================================
+   HEADER
+========================================================= */
 
-            font-size: 15px;
-            font-weight: 800;
+.header-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-            color: #4b2b14;
+    padding:18px 20px 10px;
 
-            text-shadow:
-                0 1px 1px rgba(255,255,255,0.35);
-        }
+    font-size:16px;
+    font-weight:600;
 
+    color:#3d2513;
 
-        /* =====================================================
-           STATS
-        ===================================================== */
+    background:rgba(255,235,204,.18);
 
-        .stats-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    backdrop-filter:blur(4px);
 
-            padding: 8px 16px 12px 16px;
+    position:relative;
+    z-index:10;
 
-            background: rgba(92, 48, 18, 0.10);
+    border-bottom:1px solid rgba(92,49,19,.12);
+}
 
-            position: relative;
-            z-index: 10;
-        }
+.header-title{
+    display:flex;
+    align-items:center;
+    gap:6px;
 
-        .heart-badge {
-            background: linear-gradient(
-                135deg,
-                #ef5350,
-                #c62828
-            );
+    font-size:15px;
+    font-weight:800;
 
-            padding: 5px 12px;
+    color:#4b2b14;
 
-            border-radius: 20px;
+    text-shadow:
+        0 1px 1px rgba(255,255,255,.35);
+}
 
-            display: flex;
-            align-items: center;
 
-            gap: 6px;
+/* =========================================================
+   STATS
+========================================================= */
 
-            font-weight: 700;
-            font-size: 12px;
+.stats-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-            color: #fff;
+    padding:8px 16px 12px;
 
-            box-shadow:
-                0 4px 10px rgba(70, 25, 5, 0.35);
+    background:rgba(92,48,18,.10);
 
-            border: 1px solid rgba(255,255,255,0.25);
-        }
+    position:relative;
+    z-index:10;
+}
 
-        .stat-item {
-            font-size: 11px;
-            font-weight: 700;
+.heart-badge{
+    background:linear-gradient(
+        135deg,
+        #ef5350,
+        #c62828
+    );
 
-            color: #4b2b14;
+    padding:5px 12px;
 
-            background: rgba(255, 235, 204, 0.42);
+    border-radius:20px;
 
-            padding: 5px 10px;
+    display:flex;
+    align-items:center;
 
-            border-radius: 12px;
+    gap:6px;
 
-            border: 1px solid rgba(92, 49, 19, 0.13);
+    font-weight:700;
+    font-size:12px;
 
-            box-shadow:
-                inset 0 1px rgba(255,255,255,0.35);
-        }
+    color:#fff;
 
+    box-shadow:
+        0 4px 10px rgba(70,25,5,.35);
 
-        /* =====================================================
-           TABLE AREA
-        ===================================================== */
+    border:1px solid rgba(255,255,255,.25);
+}
 
-        .table-area {
-            flex: 1;
+.stat-item{
+    font-size:11px;
+    font-weight:700;
 
-            position: relative;
+    color:#4b2b14;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    background:rgba(255,235,204,.42);
 
-            z-index: 5;
-        }
+    padding:5px 10px;
 
+    border-radius:12px;
 
-        /* =====================================================
-           MARKAZIY YOG'OCH HALQA
-        ===================================================== */
+    border:1px solid rgba(92,49,19,.13);
 
-        .table-center-ring {
-            width: 330px;
-            height: 330px;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.35);
+}
 
-            border-radius: 50%;
 
-            border:
-                2px solid rgba(113, 64, 25, 0.20);
+/* =========================================================
+   TABLE
+========================================================= */
 
-            position: absolute;
+.table-area{
+    flex:1;
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(255, 230, 188, 0.15) 0%,
-                    rgba(182, 117, 58, 0.08) 55%,
-                    transparent 80%
-                );
+    position:relative;
 
-            box-shadow:
-                inset 0 0 35px rgba(87, 42, 12, 0.25),
-                0 0 18px rgba(91, 48, 17, 0.20);
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-            pointer-events: none;
-        }
+    z-index:5;
+}
 
-        .table-center-ring::before {
-            content: "";
 
-            position: absolute;
+/* =========================================================
+   MARKAZIY NAQSH
+========================================================= */
 
-            inset: 10px;
+.table-center-ring{
+    width:330px;
+    height:330px;
 
-            border-radius: 50%;
+    border-radius:50%;
 
-            border:
-                1px solid rgba(101, 54, 20, 0.14);
+    position:absolute;
 
-            box-shadow:
-                inset 0 0 18px rgba(76, 35, 10, 0.12);
-        }
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,230,188,.15) 0%,
+            rgba(182,117,58,.08) 55%,
+            transparent 80%
+        );
 
-        .table-center-ring::after {
-            content: "";
+    border:
+        2px solid rgba(113,64,25,.20);
 
-            position: absolute;
+    box-shadow:
+        inset 0 0 35px rgba(87,42,12,.25),
+        0 0 18px rgba(91,48,17,.20);
 
-            inset: 23px;
+    pointer-events:none;
+}
 
-            border-radius: 50%;
 
-            border:
-                1px solid rgba(255, 230, 190, 0.13);
-        }
+/* Tashqi naqsh halqasi */
 
+.table-center-ring::before{
+    content:"";
 
-        /* =====================================================
-           BOTTLE
-        ===================================================== */
+    position:absolute;
 
-        .bottle {
-            width: 36px;
-            height: 110px;
+    inset:12px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #2e7d32,
-                    #0a330e
-                );
+    border-radius:50%;
 
-            border-radius: 16px 16px 6px 6px;
+    border:
+        1px solid rgba(88,48,18,.25);
 
-            position: absolute;
+    box-shadow:
+        inset 0 0 15px rgba(80,40,12,.12);
+}
 
-            transform: rotate(45deg);
 
-            box-shadow:
-                0 12px 24px rgba(0, 0, 0, 0.55),
-                inset 2px 2px 4px rgba(255,255,255,0.4);
+/* Ichki naqsh */
 
-            border:
-                1px solid rgba(255,255,255,0.25);
+.table-center-ring::after{
+    content:"";
 
-            z-index: 20;
+    position:absolute;
 
-            transition:
-                transform 3s cubic-bezier(0.15, 0.85, 0.15, 1);
+    inset:28px;
 
-            cursor: pointer;
-        }
+    border-radius:50%;
 
-        .bottle::after {
-            content: '';
+    border:
+        1px solid rgba(255,235,198,.20);
 
-            position: absolute;
+    box-shadow:
+        inset 0 0 12px rgba(88,45,15,.10);
+}
 
-            top: 25%;
-            left: 50%;
 
-            transform: translateX(-50%);
+/* =========================================================
+   KOMPAS / GEOMETRIK NAQSH
+   N E S W YO'Q
+========================================================= */
 
-            width: 75%;
-            height: 28%;
+.table-area::before{
+    content:"";
 
-            background: rgba(255,255,255,0.1);
+    position:absolute;
 
-            border-radius: 3px;
+    width:205px;
+    height:205px;
 
-            border:
-                1px solid rgba(255,255,255,0.15);
-        }
+    left:50%;
+    top:50%;
 
+    transform:translate(-50%,-50%) rotate(45deg);
 
-        /* =====================================================
-           PLAYERS
-        ===================================================== */
+    border:
+        1.5px solid rgba(82,43,15,.24);
 
-        .players-container {
-            width: 350px;
-            height: 350px;
+    border-radius:50%;
 
-            position: relative;
-        }
+    box-shadow:
+        0 0 0 8px rgba(255,226,180,.035),
+        0 0 0 18px rgba(88,45,15,.055);
 
-        .player {
-            position: absolute;
+    pointer-events:none;
 
-            width: 56px;
-            height: 56px;
+    z-index:1;
+}
 
-            border-radius: 18px;
 
-            background-size: cover;
-            background-position: center;
+/* Markaziy 4 tomonlama geometrik shakl */
 
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
+.table-area::after{
+    content:"";
 
-            box-shadow:
-                0 6px 14px rgba(58, 29, 9, 0.45);
+    position:absolute;
 
-            border:
-                2px solid rgba(255,255,255,0.45);
+    width:118px;
+    height:118px;
 
-            z-index: 10;
-        }
+    left:50%;
+    top:50%;
 
-        .player.pink {
-            border-color: #ff4081;
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg);
 
-            box-shadow:
-                0 0 10px rgba(255,64,129,0.35);
-        }
+    border:
+        2px solid rgba(77,40,13,.28);
 
-        .player.blue {
-            border-color: #00bcd4;
+    border-radius:16px;
 
-            box-shadow:
-                0 0 10px rgba(0,188,212,0.35);
-        }
+    box-shadow:
+        inset 0 0 0 7px rgba(255,225,180,.035),
+        inset 0 0 18px rgba(70,35,10,.12);
 
-        .player.gold {
-            border-color: #d79b00;
+    pointer-events:none;
 
-            box-shadow:
-                0 0 10px rgba(215,155,0,0.35);
-        }
+    z-index:2;
+}
 
-        .player-name {
-            position: absolute;
 
-            bottom: -19px;
-            left: 50%;
+/* Naqshning markaziy belgisi */
 
-            transform: translateX(-50%);
+.bottle{
+    width:36px;
+    height:110px;
 
-            font-size: 10px;
-            font-weight: 700;
+    background:
+        linear-gradient(
+            135deg,
+            #2e7d32,
+            #0a330e
+        );
 
-            color: #fff;
+    border-radius:16px 16px 6px 6px;
 
-            text-shadow:
-                0 1px 3px rgba(0,0,0,0.9);
+    position:absolute;
 
-            white-space: nowrap;
+    transform:rotate(45deg);
 
-            max-width: 80px;
+    box-shadow:
+        0 12px 24px rgba(0,0,0,.55),
+        inset 2px 2px 4px rgba(255,255,255,.4);
 
-            overflow: hidden;
-            text-overflow: ellipsis;
+    border:
+        1px solid rgba(255,255,255,.25);
 
-            background: transparent;
+    z-index:20;
 
-            padding: 0;
+    transition:
+        transform 3s cubic-bezier(.15,.85,.15,1);
 
-            z-index: 15;
+    cursor:pointer;
+}
 
-            cursor: pointer;
-        }
+.bottle::after{
+    content:"";
 
-        .badge {
-            position: absolute;
+    position:absolute;
 
-            top: -5px;
-            right: -5px;
+    top:25%;
+    left:50%;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff9800,
-                    #ed6c02
-                );
+    transform:translateX(-50%);
 
-            color: #fff;
+    width:75%;
+    height:28%;
 
-            font-size: 9.5px;
+    background:rgba(255,255,255,.1);
 
-            width: 18px;
-            height: 18px;
+    border-radius:3px;
 
-            border-radius: 50%;
+    border:
+        1px solid rgba(255,255,255,.15);
+}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
-            font-weight: 800;
+/* =========================================================
+   PLAYERS
+========================================================= */
 
-            border:
-                1.5px solid #5a3216;
+.players-container{
+    width:350px;
+    height:350px;
 
-            box-shadow:
-                0 2px 4px rgba(0,0,0,0.35);
+    position:relative;
 
-            z-index: 20;
-        }
+    z-index:10;
+}
 
+.player{
+    position:absolute;
 
-        /* =====================================================
-           CHAT
-        ===================================================== */
+    width:56px;
+    height:56px;
 
-        .chat-section {
-            background:
-                rgba(27, 20, 16, 0.96);
+    border-radius:18px;
 
-            color: #fff;
+    background-size:cover;
+    background-position:center;
 
-            border-top-left-radius: 28px;
-            border-top-right-radius: 28px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
 
-            height: 290px;
+    box-shadow:
+        0 6px 14px rgba(58,29,9,.45);
 
-            display: flex;
-            flex-direction: column;
+    border:
+        2px solid rgba(255,255,255,.45);
 
-            padding: 16px 18px;
+    z-index:10;
+}
 
-            box-shadow:
-                0 -10px 30px rgba(45, 21, 7, 0.45);
+.player.pink{
+    border-color:#ff4081;
 
-            backdrop-filter: blur(12px);
+    box-shadow:
+        0 0 10px rgba(255,64,129,.35);
+}
 
-            border-top:
-                1px solid rgba(255,255,255,0.10);
+.player.blue{
+    border-color:#00bcd4;
 
-            z-index: 30;
-        }
+    box-shadow:
+        0 0 10px rgba(0,188,212,.35);
+}
 
-        .chat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+.player.gold{
+    border-color:#d79b00;
 
-            padding-bottom: 10px;
+    box-shadow:
+        0 0 10px rgba(215,155,0,.35);
+}
 
-            border-bottom:
-                1px solid rgba(255,255,255,0.06);
+.player-name{
+    position:absolute;
 
-            font-weight: 600;
-            font-size: 13px;
+    bottom:-19px;
+    left:50%;
 
-            color: rgba(255,255,255,0.7);
-        }
+    transform:translateX(-50%);
 
-        .chat-messages {
-            flex: 1;
+    font-size:10px;
+    font-weight:700;
 
-            overflow-y: auto;
+    color:#fff;
 
-            display: flex;
-            flex-direction: column;
+    text-shadow:
+        0 1px 3px rgba(0,0,0,.9);
 
-            gap: 12px;
+    white-space:nowrap;
 
-            padding: 12px 0;
-        }
+    max-width:80px;
 
-        .chat-item {
-            display: flex;
-            align-items: flex-start;
+    overflow:hidden;
+    text-overflow:ellipsis;
 
-            gap: 10px;
-        }
+    z-index:15;
+}
 
-        .chat-avatar {
-            width: 32px;
-            height: 32px;
+.badge{
+    position:absolute;
 
-            border-radius: 10px;
+    top:-5px;
+    right:-5px;
 
-            background-size: cover;
+    background:
+        linear-gradient(
+            135deg,
+            #ff9800,
+            #ed6c02
+        );
 
-            flex-shrink: 0;
-        }
+    color:#fff;
 
-        .chat-username {
-            font-weight: 700;
-            font-size: 11px;
+    font-size:9.5px;
 
-            color: rgba(255,255,255,0.6);
+    width:18px;
+    height:18px;
 
-            margin-bottom: 2px;
-        }
+    border-radius:50%;
 
-        .chat-bubble {
-            background:
-                rgba(255,255,255,0.06);
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-            padding: 8px 12px;
+    font-weight:800;
 
-            border-radius:
-                4px 14px 14px 14px;
+    border:
+        1.5px solid #5a3216;
 
-            font-size: 12px;
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.35);
 
-            color: rgba(255,255,255,0.9);
+    z-index:20;
+}
 
-            border:
-                1px solid rgba(255,255,255,0.04);
 
-            line-height: 1.3;
-        }
+/* =========================================================
+   CHAT
+========================================================= */
 
-        .chat-input-area {
-            display: flex;
-            align-items: center;
+.chat-section{
+    background:
+        rgba(27,20,16,.96);
 
-            gap: 10px;
+    color:#fff;
 
-            padding-top: 8px;
-        }
+    border-top-left-radius:28px;
+    border-top-right-radius:28px;
 
-        .chat-input {
-            flex: 1;
+    height:290px;
 
-            background:
-                rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
 
-            border:
-                1px solid rgba(255,255,255,0.1);
+    padding:16px 18px;
 
-            padding: 10px 16px;
+    box-shadow:
+        0 -10px 30px rgba(45,21,7,.45);
 
-            border-radius: 20px;
+    backdrop-filter:blur(12px);
 
-            outline: none;
+    border-top:
+        1px solid rgba(255,255,255,.10);
 
-            font-size: 12px;
+    z-index:30;
+}
 
-            color: #fff;
-        }
+.chat-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-        .chat-input::placeholder {
-            color: rgba(255,255,255,0.3);
-        }
+    padding-bottom:10px;
 
-        .send-btn {
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff,
-                    #d1d1d1
-                );
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
 
-            color: #000;
+    font-weight:600;
+    font-size:13px;
 
-            border: none;
+    color:rgba(255,255,255,.7);
+}
 
-            width: 36px;
-            height: 36px;
+.chat-messages{
+    flex:1;
 
-            border-radius: 50%;
+    overflow-y:auto;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    display:flex;
+    flex-direction:column;
 
-            cursor: pointer;
+    gap:12px;
 
-            font-weight: bold;
-            font-size: 12px;
-        }
-    </style>
+    padding:12px 0;
+}
+
+.chat-item{
+    display:flex;
+    align-items:flex-start;
+
+    gap:10px;
+}
+
+.chat-avatar{
+    width:32px;
+    height:32px;
+
+    border-radius:10px;
+
+    background-size:cover;
+
+    flex-shrink:0;
+}
+
+.chat-username{
+    font-weight:700;
+    font-size:11px;
+
+    color:rgba(255,255,255,.6);
+
+    margin-bottom:2px;
+}
+
+.chat-bubble{
+    background:
+        rgba(255,255,255,.06);
+
+    padding:8px 12px;
+
+    border-radius:
+        4px 14px 14px 14px;
+
+    font-size:12px;
+
+    color:rgba(255,255,255,.9);
+
+    border:
+        1px solid rgba(255,255,255,.04);
+
+    line-height:1.3;
+}
+
+.chat-input-area{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding-top:8px;
+}
+
+.chat-input{
+    flex:1;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    padding:10px 16px;
+
+    border-radius:20px;
+
+    outline:none;
+
+    font-size:12px;
+
+    color:#fff;
+}
+
+.chat-input::placeholder{
+    color:rgba(255,255,255,.3);
+}
+
+.send-btn{
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #d1d1d1
+        );
+
+    color:#000;
+
+    border:none;
+
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    font-weight:bold;
+    font-size:12px;
+}
+
+</style>
 </head>
+
 
 <body>
 
 <div class="game-container">
 
     <div class="header-nav">
-        <span style="cursor: pointer;">✕</span>
+        <span style="cursor:pointer;">✕</span>
 
         <div class="header-title">
             Spin the Bottle 🍾
         </div>
 
-        <span style="cursor: pointer;">⋮</span>
+        <span style="cursor:pointer;">⋮</span>
     </div>
 
 
@@ -682,11 +756,11 @@
             🎯 #
         </div>
 
-        <div class="stat-item" style="cursor: pointer;">
+        <div class="stat-item">
             ⚙️
         </div>
 
-        <div class="stat-item" style="cursor: pointer;">
+        <div class="stat-item">
             Table 229 🔄
         </div>
 
@@ -715,7 +789,7 @@
 
         <div class="chat-header">
             <span>💬 O'yin chati</span>
-            <span style="font-size: 11px;">👥 12/12</span>
+            <span style="font-size:11px;">👥 12/12</span>
         </div>
 
 
@@ -725,7 +799,7 @@
 
                 <div
                     class="chat-avatar"
-                    style="background-image: url('https://i.pravatar.cc/150?img=1');">
+                    style="background-image:url('https://i.pravatar.cc/150?img=1');">
                 </div>
 
                 <div>
@@ -747,7 +821,7 @@
 
                 <div
                     class="chat-avatar"
-                    style="background-image: url('https://i.pravatar.cc/150?img=12');">
+                    style="background-image:url('https://i.pravatar.cc/150?img=12');">
                 </div>
 
                 <div>
@@ -788,206 +862,204 @@
 
 <script>
 
-    const players = [
+const players = [
 
-        {
-            name: "Aziza",
-            img: "https://i.pravatar.cc/150?img=1",
-            badge: 4,
-            type: "gold"
-        },
+    {
+        name:"Aziza",
+        img:"https://i.pravatar.cc/150?img=1",
+        badge:4,
+        type:"gold"
+    },
 
-        {
-            name: "Malika 👑",
-            img: "https://i.pravatar.cc/150?img=2",
-            badge: 2,
-            type: "pink"
-        },
+    {
+        name:"Malika 👑",
+        img:"https://i.pravatar.cc/150?img=2",
+        badge:2,
+        type:"pink"
+    },
 
-        {
-            name: "Sevinchbekova",
-            img: "https://i.pravatar.cc/150?img=3",
-            badge: 1,
-            type: "pink"
-        },
+    {
+        name:"Sevinchbekova",
+        img:"https://i.pravatar.cc/150?img=3",
+        badge:1,
+        type:"pink"
+    },
 
-        {
-            name: "Gulnoza",
-            img: "https://i.pravatar.cc/150?img=4",
-            badge: 1,
-            type: "pink"
-        },
+    {
+        name:"Gulnoza",
+        img:"https://i.pravatar.cc/150?img=4",
+        badge:1,
+        type:"pink"
+    },
 
-        {
-            name: "Nilufar",
-            img: "https://i.pravatar.cc/150?img=5",
-            badge: 5,
-            type: "pink"
-        },
+    {
+        name:"Nilufar",
+        img:"https://i.pravatar.cc/150?img=5",
+        badge:5,
+        type:"pink"
+    },
 
-        {
-            name: "Fazliddin",
-            img: "https://i.pravatar.cc/150?img=6",
-            badge: 5,
-            type: "blue"
-        },
+    {
+        name:"Fazliddin",
+        img:"https://i.pravatar.cc/150?img=6",
+        badge:5,
+        type:"blue"
+    },
 
-        {
-            name: "Dildora",
-            img: "https://i.pravatar.cc/150?img=7",
-            badge: 5,
-            type: "pink"
-        },
+    {
+        name:"Dildora",
+        img:"https://i.pravatar.cc/150?img=7",
+        badge:5,
+        type:"pink"
+    },
 
-        {
-            name: "Sardorbek ✔",
-            img: "https://i.pravatar.cc/150?img=8",
-            badge: 1,
-            type: "blue"
-        },
+    {
+        name:"Sardorbek ✔",
+        img:"https://i.pravatar.cc/150?img=8",
+        badge:1,
+        type:"blue"
+    },
 
-        {
-            name: "Madina",
-            img: "https://i.pravatar.cc/150?img=9",
-            badge: 1,
-            type: "gold"
-        },
+    {
+        name:"Madina",
+        img:"https://i.pravatar.cc/150?img=9",
+        badge:1,
+        type:"gold"
+    },
 
-        {
-            name: "Jasurbek ✔",
-            img: "https://i.pravatar.cc/150?img=10",
-            badge: 1,
-            type: "blue"
-        },
+    {
+        name:"Jasurbek ✔",
+        img:"https://i.pravatar.cc/150?img=10",
+        badge:1,
+        type:"blue"
+    },
 
-        {
-            name: "Madina",
-            img: "https://i.pravatar.cc/150?img=11",
-            badge: 1,
-            type: "pink"
-        },
+    {
+        name:"Madina",
+        img:"https://i.pravatar.cc/150?img=11",
+        badge:1,
+        type:"pink"
+    },
 
-        {
-            name: "Bekzod ✔",
-            img: "https://i.pravatar.cc/150?img=12",
-            badge: 1,
-            type: "blue"
+    {
+        name:"Bekzod ✔",
+        img:"https://i.pravatar.cc/150?img=12",
+        badge:1,
+        type:"blue"
+    }
+
+];
+
+
+function renderPlayers(){
+
+    const container =
+        document.getElementById("playersContainer");
+
+    container.innerHTML="";
+
+    const total=players.length;
+
+    const radius=150;
+
+    const avatarSize=56;
+
+    const centerOffset=
+        165-(avatarSize/2);
+
+
+    players.forEach((player,index)=>{
+
+        const angleDeg=
+            (index*(360/total))-360;
+
+        const angleRad=
+            angleDeg*(Math.PI/180);
+
+
+        let x=
+            centerOffset+
+            radius*Math.cos(angleRad)+12;
+
+        let y=
+            centerOffset+
+            radius*Math.sin(angleRad);
+
+
+        if(player.name.includes("Gulnoza")){
+            x-=8;
         }
 
-    ];
+        if(player.name.includes("Sevinch")){
+            x-=12;
+        }
 
 
-    function renderPlayers() {
-
-        const container =
-            document.getElementById("playersContainer");
-
-        container.innerHTML = "";
-
-        const total = players.length;
-
-        const radius = 150;
-
-        const avatarSize = 56;
-
-        const centerOffset =
-            165 - (avatarSize / 2);
+        const playerEl=
+            document.createElement("div");
 
 
-        players.forEach((player, index) => {
-
-            const angleDeg =
-                (index * (360 / total)) - 360;
-
-            const angleRad =
-                angleDeg * (Math.PI / 180);
+        playerEl.className=
+            `player ${player.type}`;
 
 
-            let x =
-                centerOffset +
-                radius * Math.cos(angleRad) +
-                12;
-
-            let y =
-                centerOffset +
-                radius * Math.sin(angleRad);
+        playerEl.style.backgroundImage=
+            `url('${player.img}')`;
 
 
-            if (player.name.includes("Gulnoza")) {
-                x -= 8;
-            }
+        playerEl.style.left=
+            `${x}px`;
 
 
-            if (player.name.includes("Sevinch")) {
-                x -= 12;
-            }
+        playerEl.style.top=
+            `${y}px`;
 
 
-            const playerEl =
-                document.createElement("div");
+        playerEl.innerHTML=`
+
+            <span class="badge">
+                ${player.badge}
+            </span>
+
+            <span
+                class="player-name"
+                title="${player.name}">
+                ${player.name}
+            </span>
+
+        `;
 
 
-            playerEl.className =
-                `player ${player.type}`;
+        container.appendChild(playerEl);
+
+    });
+
+}
 
 
-            playerEl.style.backgroundImage =
-                `url('${player.img}')`;
+let currentRotation=45;
 
 
-            playerEl.style.left =
-                `${x}px`;
+function spinBottle(){
+
+    const bottle=
+        document.getElementById("bottle");
 
 
-            playerEl.style.top =
-                `${y}px`;
+    const extraDegrees=
+        Math.floor(Math.random()*360)+1440;
 
 
-            playerEl.innerHTML = `
-
-                <span class="badge">
-                    ${player.badge}
-                </span>
-
-                <span
-                    class="player-name"
-                    title="${player.name}">
-                    ${player.name}
-                </span>
-
-            `;
+    currentRotation+=extraDegrees;
 
 
-            container.appendChild(playerEl);
+    bottle.style.transform=
+        `rotate(${currentRotation}deg)`;
 
-        });
-
-    }
-
-
-    let currentRotation = 45;
+}
 
 
-    function spinBottle() {
-
-        const bottle =
-            document.getElementById("bottle");
-
-
-        const extraDegrees =
-            Math.floor(Math.random() * 360) + 1440;
-
-
-        currentRotation += extraDegrees;
-
-
-        bottle.style.transform =
-            `rotate(${currentRotation}deg)`;
-
-    }
-
-
-    renderPlayers();
+renderPlayers();
 
 </script>
 
