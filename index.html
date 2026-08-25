@@ -23,11 +23,6 @@ body{
     min-height:100vh;
 }
 
-
-/* =========================================================
-   ASOSIY OCHIQ OAK STOL
-========================================================= */
-
 .game-container{
     width:100%;
     max-width:414px;
@@ -42,23 +37,20 @@ body{
             rgba(151,91,45,.12) 65%,
             transparent 88%
         ),
-
         repeating-linear-gradient(
             7deg,
-            rgba(91,49,20,.09) 0px,
-            rgba(91,49,20,.09) 2px,
+            rgba(91,49,20,.05) 0px,
+            rgba(91,49,20,.05) 2px,
             transparent 2px,
-            transparent 10px
+            transparent 14px
         ),
-
         repeating-linear-gradient(
-            172deg,
-            rgba(255,226,179,.10) 0px,
-            rgba(255,226,179,.10) 1px,
+            9deg,
+            rgba(255,226,179,.05) 0px,
+            rgba(255,226,179,.05) 1px,
             transparent 1px,
-            transparent 15px
+            transparent 18px
         ),
-
         linear-gradient(
             145deg,
             #d7a56b 0%,
@@ -71,82 +63,56 @@ body{
     display:flex;
     flex-direction:column;
     position:relative;
-
     overflow:hidden;
     border-radius:32px;
-
     color:#fff;
-
     border:1px solid rgba(255,220,170,.35);
-
     box-shadow:
         0 25px 55px rgba(0,0,0,.65),
         inset 0 0 70px rgba(72,36,13,.25);
 }
 
-
-/* Yumshoq yorug'lik */
-
 .game-container::before{
     content:"";
     position:absolute;
     inset:0;
-
     background:
         radial-gradient(
             circle at 50% 40%,
             rgba(255,239,205,.20),
             transparent 55%
         );
-
     pointer-events:none;
     z-index:0;
 }
-
-
-/* Tashqi soya */
 
 .game-container::after{
     content:"";
     position:absolute;
     inset:0;
-
     background:
         radial-gradient(
             ellipse at center,
-            transparent 48%,
-            rgba(82,43,17,.08) 70%,
-            rgba(47,23,8,.30) 100%
+            transparent 55%,
+            rgba(82,43,17,.05) 78%,
+            rgba(47,23,8,.16) 100%
         );
-
     pointer-events:none;
     z-index:1;
 }
-
-
-/* =========================================================
-   HEADER
-========================================================= */
 
 .header-nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding:18px 20px 10px;
-
     font-size:16px;
     font-weight:600;
-
     color:#3d2513;
-
     background:rgba(255,235,204,.18);
-
     backdrop-filter:blur(4px);
-
     position:relative;
     z-index:10;
-
     border-bottom:1px solid rgba(92,49,19,.12);
 }
 
@@ -154,437 +120,172 @@ body{
     display:flex;
     align-items:center;
     gap:6px;
-
     font-size:15px;
     font-weight:800;
-
     color:#4b2b14;
-
-    text-shadow:
-        0 1px 1px rgba(255,255,255,.35);
+    text-shadow:0 1px 1px rgba(255,255,255,.35);
 }
-
-
-/* =========================================================
-   STATS
-========================================================= */
 
 .stats-bar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding:8px 16px 12px;
-
     background:rgba(92,48,18,.10);
-
     position:relative;
     z-index:10;
 }
 
 .heart-badge{
-    background:linear-gradient(
-        135deg,
-        #ef5350,
-        #c62828
-    );
-
+    background:linear-gradient(135deg, #ef5350, #c62828);
     padding:5px 12px;
-
     border-radius:20px;
-
     display:flex;
     align-items:center;
-
     gap:6px;
-
     font-weight:700;
     font-size:12px;
-
     color:#fff;
-
-    box-shadow:
-        0 4px 10px rgba(70,25,5,.35);
-
+    box-shadow:0 4px 10px rgba(70,25,5,.35);
     border:1px solid rgba(255,255,255,.25);
 }
 
 .stat-item{
     font-size:11px;
     font-weight:700;
-
     color:#4b2b14;
-
     background:rgba(255,235,204,.42);
-
     padding:5px 10px;
-
     border-radius:12px;
-
     border:1px solid rgba(92,49,19,.13);
-
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.35);
+    box-shadow:inset 0 1px rgba(255,255,255,.35);
 }
-
-
-/* =========================================================
-   TABLE
-========================================================= */
 
 .table-area{
     flex:1;
-
     position:relative;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     z-index:5;
 }
 
-
-/* =========================================================
-   MARKAZIY NAQSH
-========================================================= */
-
-.table-center-ring{
-    width:330px;
-    height:330px;
-
-    border-radius:50%;
-
+.rope-medallion{
+    width:230px;
+    height:230px;
     position:absolute;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,230,188,.15) 0%,
-            rgba(182,117,58,.08) 55%,
-            transparent 80%
-        );
-
-    border:
-        2px solid rgba(113,64,25,.20);
-
-    box-shadow:
-        inset 0 0 35px rgba(87,42,12,.25),
-        0 0 18px rgba(91,48,17,.20);
-
     pointer-events:none;
 }
-
-
-/* Tashqi naqsh halqasi */
-
-.table-center-ring::before{
-    content:"";
-
-    position:absolute;
-
-    inset:12px;
-
-    border-radius:50%;
-
-    border:
-        1px solid rgba(88,48,18,.25);
-
-    box-shadow:
-        inset 0 0 15px rgba(80,40,12,.12);
-}
-
-
-/* Ichki naqsh */
-
-.table-center-ring::after{
-    content:"";
-
-    position:absolute;
-
-    inset:28px;
-
-    border-radius:50%;
-
-    border:
-        1px solid rgba(255,235,198,.20);
-
-    box-shadow:
-        inset 0 0 12px rgba(88,45,15,.10);
-}
-
-
-/* =========================================================
-   KOMPAS / GEOMETRIK NAQSH
-   N E S W YO'Q
-========================================================= */
-
-.table-area::before{
-    content:"";
-
-    position:absolute;
-
-    width:205px;
-    height:205px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%) rotate(45deg);
-
-    border:
-        1.5px solid rgba(82,43,15,.24);
-
-    border-radius:50%;
-
-    box-shadow:
-        0 0 0 8px rgba(255,226,180,.035),
-        0 0 0 18px rgba(88,45,15,.055);
-
-    pointer-events:none;
-
-    z-index:1;
-}
-
-
-/* Markaziy 4 tomonlama geometrik shakl */
-
-.table-area::after{
-    content:"";
-
-    position:absolute;
-
-    width:118px;
-    height:118px;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(45deg);
-
-    border:
-        2px solid rgba(77,40,13,.28);
-
-    border-radius:16px;
-
-    box-shadow:
-        inset 0 0 0 7px rgba(255,225,180,.035),
-        inset 0 0 18px rgba(70,35,10,.12);
-
-    pointer-events:none;
-
-    z-index:2;
-}
-
-
-/* Naqshning markaziy belgisi */
 
 .bottle{
-    width:36px;
-    height:110px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2e7d32,
-            #0a330e
-        );
-
-    border-radius:16px 16px 6px 6px;
-
+    width:34px;
+    height:109px;
     position:absolute;
-
     transform:rotate(45deg);
-
-    box-shadow:
-        0 12px 24px rgba(0,0,0,.55),
-        inset 2px 2px 4px rgba(255,255,255,.4);
-
-    border:
-        1px solid rgba(255,255,255,.25);
-
+    filter:drop-shadow(0 10px 14px rgba(45,22,7,.5));
     z-index:20;
-
-    transition:
-        transform 3s cubic-bezier(.15,.85,.15,1);
-
+    transition:transform 3s cubic-bezier(.15,.85,.15,1);
     cursor:pointer;
 }
 
-.bottle::after{
-    content:"";
-
+.spin-label{
     position:absolute;
-
-    top:25%;
     left:50%;
-
-    transform:translateX(-50%);
-
-    width:75%;
-    height:28%;
-
-    background:rgba(255,255,255,.1);
-
-    border-radius:3px;
-
-    border:
-        1px solid rgba(255,255,255,.15);
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:3px;
+    color:rgba(75,43,20,.16);
+    pointer-events:none;
+    z-index:4;
 }
-
-
-/* =========================================================
-   PLAYERS
-========================================================= */
 
 .players-container{
     width:350px;
     height:350px;
-
     position:relative;
-
     z-index:10;
 }
 
 .player{
     position:absolute;
-
     width:56px;
     height:56px;
-
     border-radius:18px;
-
     background-size:cover;
     background-position:center;
-
     display:flex;
     justify-content:center;
     align-items:flex-end;
-
-    box-shadow:
-        0 6px 14px rgba(58,29,9,.45);
-
-    border:
-        2px solid rgba(255,255,255,.45);
-
+    box-shadow:0 6px 14px rgba(58,29,9,.45);
+    border:2px solid rgba(255,255,255,.45);
     z-index:10;
 }
 
-.player.pink{
-    border-color:#ff4081;
+.player.pink{ border-color:#ff4081; box-shadow:0 0 10px rgba(255,64,129,.35); }
+.player.blue{ border-color:#00bcd4; box-shadow:0 0 10px rgba(0,188,212,.35); }
+.player.gold{ border-color:#d79b00; box-shadow:0 0 10px rgba(215,155,0,.35); }
 
+.player.winner{
+    animation: winnerPulse 1s ease-in-out infinite;
     box-shadow:
-        0 0 10px rgba(255,64,129,.35);
+        0 0 0 4px rgba(255,215,0,.55),
+        0 0 22px rgba(255,215,0,.75);
+    z-index: 25;
 }
 
-.player.blue{
-    border-color:#00bcd4;
-
-    box-shadow:
-        0 0 10px rgba(0,188,212,.35);
-}
-
-.player.gold{
-    border-color:#d79b00;
-
-    box-shadow:
-        0 0 10px rgba(215,155,0,.35);
+@keyframes winnerPulse{
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
 }
 
 .player-name{
     position:absolute;
-
     bottom:-19px;
     left:50%;
-
     transform:translateX(-50%);
-
     font-size:10px;
     font-weight:700;
-
     color:#fff;
-
-    text-shadow:
-        0 1px 3px rgba(0,0,0,.9);
-
+    text-shadow:0 1px 3px rgba(0,0,0,.9);
     white-space:nowrap;
-
     max-width:80px;
-
     overflow:hidden;
     text-overflow:ellipsis;
-
     z-index:15;
 }
 
 .badge{
     position:absolute;
-
     top:-5px;
     right:-5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff9800,
-            #ed6c02
-        );
-
+    background:linear-gradient(135deg, #ff9800, #ed6c02);
     color:#fff;
-
     font-size:9.5px;
-
     width:18px;
     height:18px;
-
     border-radius:50%;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     font-weight:800;
-
-    border:
-        1.5px solid #5a3216;
-
-    box-shadow:
-        0 2px 4px rgba(0,0,0,.35);
-
+    border:1.5px solid #5a3216;
+    box-shadow:0 2px 4px rgba(0,0,0,.35);
     z-index:20;
 }
 
-
-/* =========================================================
-   CHAT
-========================================================= */
-
 .chat-section{
-    background:
-        rgba(27,20,16,.96);
-
-    color:#fff;
-
+    background:#ffffff;
+    color:#111;
     border-top-left-radius:28px;
     border-top-right-radius:28px;
-
     height:290px;
-
     display:flex;
     flex-direction:column;
-
     padding:16px 18px;
-
-    box-shadow:
-        0 -10px 30px rgba(45,21,7,.45);
-
-    backdrop-filter:blur(12px);
-
-    border-top:
-        1px solid rgba(255,255,255,.10);
-
+    box-shadow:0 -10px 30px rgba(45,21,7,.45);
+    border-top:1px solid rgba(0,0,0,.08);
     z-index:30;
 }
 
@@ -592,135 +293,84 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding-bottom:10px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
-
+    border-bottom:1px solid rgba(0,0,0,.08);
     font-weight:600;
     font-size:13px;
-
-    color:rgba(255,255,255,.7);
+    color:rgba(0,0,0,.7);
 }
 
 .chat-messages{
     flex:1;
-
     overflow-y:auto;
-
     display:flex;
     flex-direction:column;
-
     gap:12px;
-
     padding:12px 0;
 }
 
-.chat-item{
-    display:flex;
-    align-items:flex-start;
-
-    gap:10px;
-}
+.chat-item{ display:flex; align-items:flex-start; gap:10px; }
 
 .chat-avatar{
     width:32px;
     height:32px;
-
     border-radius:10px;
-
     background-size:cover;
-
     flex-shrink:0;
 }
 
 .chat-username{
     font-weight:700;
     font-size:11px;
-
-    color:rgba(255,255,255,.6);
-
+    color:rgba(0,0,0,.55);
     margin-bottom:2px;
 }
 
 .chat-bubble{
-    background:
-        rgba(255,255,255,.06);
-
+    background:rgba(0,0,0,.04);
     padding:8px 12px;
-
-    border-radius:
-        4px 14px 14px 14px;
-
+    border-radius:4px 14px 14px 14px;
     font-size:12px;
-
-    color:rgba(255,255,255,.9);
-
-    border:
-        1px solid rgba(255,255,255,.04);
-
+    color:#111;
+    border:1px solid rgba(0,0,0,.06);
     line-height:1.3;
 }
 
-.chat-input-area{
-    display:flex;
-    align-items:center;
-
-    gap:10px;
-
-    padding-top:8px;
-}
+.chat-input-area{ display:flex; align-items:center; gap:10px; padding-top:8px; }
 
 .chat-input{
     flex:1;
-
-    background:
-        rgba(255,255,255,.05);
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
+    background:rgba(0,0,0,.04);
+    border:1px solid rgba(0,0,0,.12);
     padding:10px 16px;
-
     border-radius:20px;
-
     outline:none;
-
     font-size:12px;
-
-    color:#fff;
+    color:#111;
 }
 
-.chat-input::placeholder{
-    color:rgba(255,255,255,.3);
-}
+.chat-input::placeholder{ color:rgba(0,0,0,.35); }
 
 .send-btn{
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #d1d1d1
-        );
-
-    color:#000;
-
+    background:linear-gradient(135deg, #2b2b2b, #000);
+    color:#fff;
     border:none;
-
     width:36px;
     height:36px;
-
     border-radius:50%;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     cursor:pointer;
-
     font-weight:bold;
     font-size:12px;
+}
+
+@media (max-width: 380px) {
+    .game-container{ border-radius:0; }
+    .rope-medallion{ width:200px; height:200px; }
+    .players-container{ width:310px; height:310px; }
+    .player{ width:52px; height:52px; }
 }
 
 </style>
@@ -733,17 +383,39 @@ body{
 
     <div class="header-nav">
         <span style="cursor:pointer;" onclick="closeGame()">✕</span>
-        <div class="header-title">Spin the Bottle 🍾</div>
+
+        <div class="header-title">
+            Spin the Bottle 🍾
+        </div>
+
         <span style="cursor:pointer;">⋮</span>
     </div>
 
+
     <div class="stats-bar">
-        <div class="heart-badge">❤️ 10,000</div>
-        <div class="stat-item">🎟️ 8 d.</div>
-        <div class="stat-item">🎯 #</div>
-        <div class="stat-item">⚙️</div>
-        <div class="stat-item">Table 229 🔄</div>
+
+        <div class="heart-badge">
+            ❤️ 10,000
+        </div>
+
+        <div class="stat-item">
+            🎟️ 8 d.
+        </div>
+
+        <div class="stat-item">
+            🎯 #
+        </div>
+
+        <div class="stat-item">
+            ⚙️
+        </div>
+
+        <div class="stat-item">
+            Table 229 🔄
+        </div>
+
     </div>
+
 
     <div class="table-area">
 
@@ -755,15 +427,25 @@ body{
                     <stop offset="100%" stop-color="rgba(182,117,58,0)"/>
                 </radialGradient>
             </defs>
+
             <circle cx="120" cy="120" r="112" fill="url(#medFill)"/>
+
             <circle cx="120" cy="120" r="112" fill="none" stroke="rgba(88,48,18,.30)" stroke-width="6"/>
+
             <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(88,48,18,.22)" stroke-width="1.5"/>
+
             <circle cx="120" cy="120" r="46" fill="rgba(255,235,198,.16)" stroke="rgba(255,235,198,.30)" stroke-width="1"/>
         </svg>
 
         <div class="spin-label">UZB</div>
 
-        <svg class="bottle" id="bottle" onclick="spinBottle()" viewBox="0 0 100 320" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            class="bottle"
+            id="bottle"
+            onclick="spinBottle()"
+            viewBox="0 0 100 320"
+            xmlns="http://www.w3.org/2000/svg">
+
             <defs>
                 <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%"  stop-color="#021508"/>
@@ -778,6 +460,7 @@ body{
                     <stop offset="90%" stop-color="#083a14"/>
                     <stop offset="100%" stop-color="#021508"/>
                 </linearGradient>
+
                 <linearGradient id="glassGradDark" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%"  stop-color="#010c04"/>
                     <stop offset="15%" stop-color="#062c0e"/>
@@ -787,50 +470,143 @@ body{
                 </linearGradient>
             </defs>
 
-            <path fill="url(#glassGrad)" fill-opacity="0.94"
-                d="M38,0 L62,0 L62,14 Q63,16 63,20 L63,96 Q63,116 78,128 Q94,141 94,166 L94,292 Q94,306 79,310 Q65,314 50,314 Q35,314 21,310 Q6,306 6,292 L6,166 Q6,141 22,128 Q37,116 37,96 L37,20 Q37,16 38,14 Z"/>
+            <path
+                fill="url(#glassGrad)"
+                fill-opacity="0.94"
+                d="M38,0
+                   L62,0
+                   L62,14
+                   Q63,16 63,20
+                   L63,96
+                   Q63,116 78,128
+                   Q94,141 94,166
+                   L94,292
+                   Q94,306 79,310
+                   Q65,314 50,314
+                   Q35,314 21,310
+                   Q6,306 6,292
+                   L6,166
+                   Q6,141 22,128
+                   Q37,116 37,96
+                   L37,20
+                   Q37,16 38,14
+                   Z"
+            />
 
             <rect x="38" y="0" width="24" height="6" fill="url(#glassGradDark)"/>
+
             <ellipse cx="34" cy="185" rx="7" ry="70" fill="rgba(255,255,255,0.42)" opacity="0.5"/>
+
             <path d="M28,60 L28,300" stroke="rgba(255,255,255,0.55)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+
             <path d="M80,130 Q88,200 86,296" stroke="rgba(0,0,0,0.35)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
 
-            <path fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1.5"
-                d="M38,0 L62,0 L62,14 Q63,16 63,20 L63,96 Q63,116 78,128 Q94,141 94,166 L94,292 Q94,306 79,310 Q65,314 50,314 Q35,314 21,310 Q6,306 6,292 L6,166 Q6,141 22,128 Q37,116 37,96 L37,20 Q37,16 38,14 Z"/>
+            <path
+                fill="none"
+                stroke="rgba(0,0,0,0.35)"
+                stroke-width="1.5"
+                d="M38,0
+                   L62,0
+                   L62,14
+                   Q63,16 63,20
+                   L63,96
+                   Q63,116 78,128
+                   Q94,141 94,166
+                   L94,292
+                   Q94,306 79,310
+                   Q65,314 50,314
+                   Q35,314 21,310
+                   Q6,306 6,292
+                   L6,166
+                   Q6,141 22,128
+                   Q37,116 37,96
+                   L37,20
+                   Q37,16 38,14
+                   Z"
+            />
 
             <ellipse cx="50" cy="314" rx="38" ry="5" fill="rgba(0,0,0,0.25)"/>
         </svg>
 
-        <div class="players-container" id="playersContainer"></div>
+        <div
+            class="players-container"
+            id="playersContainer">
+        </div>
 
     </div>
 
+
     <div class="chat-section">
+
         <div class="chat-header">
             <span>💬 O'yin chati</span>
         </div>
 
+
         <div class="chat-messages" id="chatMessages">
+
             <div class="chat-item">
-                <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=1');"></div>
-                <div>
-                    <div class="chat-username">Aziza 👑</div>
-                    <div class="chat-bubble">Salom hammaga! 👋</div>
+
+                <div
+                    class="chat-avatar"
+                    style="background-image:url('https://i.pravatar.cc/150?img=1');">
                 </div>
+
+                <div>
+
+                    <div class="chat-username">
+                        Aziza 👑
+                    </div>
+
+                    <div class="chat-bubble">
+                        Salom hammaga! 👋
+                    </div>
+
+                </div>
+
             </div>
+
+
             <div class="chat-item">
-                <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=12');"></div>
-                <div>
-                    <div class="chat-username">Bekzod ✔</div>
-                    <div class="chat-bubble">O'yinni boshlaymizmi? 🔥</div>
+
+                <div
+                    class="chat-avatar"
+                    style="background-image:url('https://i.pravatar.cc/150?img=12');">
                 </div>
+
+                <div>
+
+                    <div class="chat-username">
+                        Bekzod ✔
+                    </div>
+
+                    <div class="chat-bubble">
+                        O'yinni boshlaymizmi? 🔥
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
 
+
         <div class="chat-input-area">
-            <input id="chatInput" type="text" class="chat-input" placeholder="Xabar yozing..." onkeydown="if(event.key==='Enter') sendMessage();">
-            <button class="send-btn" onclick="sendMessage()">➤</button>
+
+            <input
+                id="chatInput"
+                type="text"
+                class="chat-input"
+                placeholder="Xabar yozing..."
+                onkeydown="if(event.key==='Enter') sendMessage();"
+            >
+
+            <button class="send-btn" onclick="sendMessage()">
+                ➤
+            </button>
+
         </div>
+
     </div>
 
 </div>
@@ -1006,6 +782,9 @@ function renderPlayers(){
         `;
 
 
+        playerEl.dataset.angle =
+            (((angleDeg % 360) + 360) % 360).toFixed(2);
+
         container.appendChild(playerEl);
 
     });
@@ -1014,28 +793,84 @@ function renderPlayers(){
 
 
 let currentRotation=45;
+let isSpinning=false;
 
 
 function spinBottle(){
 
+    if(isSpinning) return;
+    isSpinning=true;
+
     const bottle=
         document.getElementById("bottle");
 
+    document.querySelectorAll(".player.winner")
+        .forEach(el => el.classList.remove("winner"));
 
     const extraDegrees=
         Math.floor(Math.random()*360)+1440;
 
-
     currentRotation+=extraDegrees;
-
 
     bottle.style.transform=
         `rotate(${currentRotation}deg)`;
+
+    setTimeout(() => {
+        isSpinning=false;
+
+        const neckAngle = ((270 + currentRotation) % 360 + 360) % 360;
+
+        let closestEl = null;
+        let closestDiff = 361;
+
+        document.querySelectorAll(".player").forEach(el => {
+            const a = parseFloat(el.dataset.angle);
+            let diff = Math.abs(a - neckAngle);
+            if (diff > 180) diff = 360 - diff;
+            if (diff < closestDiff) {
+                closestDiff = diff;
+                closestEl = el;
+            }
+        });
+
+        if (closestEl) {
+            closestEl.classList.add("winner");
+        }
+    }, 3100);
 
 }
 
 
 renderPlayers();
+
+function closeGame(){
+    if(confirm("O'yindan chiqmoqchimisiz?")){
+        document.body.innerHTML =
+            "<div style='color:#fff;font-size:16px;text-align:center;margin-top:40vh;'>O'yindan chiqildi</div>";
+    }
+}
+
+function sendMessage(){
+    const input = document.getElementById("chatInput");
+    const text = input.value.trim();
+    if(!text) return;
+
+    const messages = document.getElementById("chatMessages");
+
+    const item = document.createElement("div");
+    item.className = "chat-item";
+    item.innerHTML = `
+        <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=13');"></div>
+        <div>
+            <div class="chat-username">Siz</div>
+            <div class="chat-bubble">${text.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
+        </div>
+    `;
+
+    messages.appendChild(item);
+    messages.scrollTop = messages.scrollHeight;
+    input.value = "";
+}
 
 </script>
 
