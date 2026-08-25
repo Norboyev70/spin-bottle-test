@@ -732,129 +732,105 @@ body{
 <div class="game-container">
 
     <div class="header-nav">
-        <span style="cursor:pointer;">✕</span>
-
-        <div class="header-title">
-            Spin the Bottle 🍾
-        </div>
-
+        <span style="cursor:pointer;" onclick="closeGame()">✕</span>
+        <div class="header-title">Spin the Bottle 🍾</div>
         <span style="cursor:pointer;">⋮</span>
     </div>
 
-
     <div class="stats-bar">
-
-        <div class="heart-badge">
-            ❤️ 10,000
-        </div>
-
-        <div class="stat-item">
-            🎟️ 8 d.
-        </div>
-
-        <div class="stat-item">
-            🎯 #
-        </div>
-
-        <div class="stat-item">
-            ⚙️
-        </div>
-
-        <div class="stat-item">
-            Table 229 🔄
-        </div>
-
+        <div class="heart-badge">❤️ 10,000</div>
+        <div class="stat-item">🎟️ 8 d.</div>
+        <div class="stat-item">🎯 #</div>
+        <div class="stat-item">⚙️</div>
+        <div class="stat-item">Table 229 🔄</div>
     </div>
-
 
     <div class="table-area">
 
-        <div class="table-center-ring"></div>
+        <svg class="rope-medallion" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="medFill" cx="50%" cy="45%" r="60%">
+                    <stop offset="0%" stop-color="rgba(255,230,188,.22)"/>
+                    <stop offset="60%" stop-color="rgba(182,117,58,.10)"/>
+                    <stop offset="100%" stop-color="rgba(182,117,58,0)"/>
+                </radialGradient>
+            </defs>
+            <circle cx="120" cy="120" r="112" fill="url(#medFill)"/>
+            <circle cx="120" cy="120" r="112" fill="none" stroke="rgba(88,48,18,.30)" stroke-width="6"/>
+            <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(88,48,18,.22)" stroke-width="1.5"/>
+            <circle cx="120" cy="120" r="46" fill="rgba(255,235,198,.16)" stroke="rgba(255,235,198,.30)" stroke-width="1"/>
+        </svg>
 
-        <div
-            class="bottle"
-            id="bottle"
-            onclick="spinBottle()">
-        </div>
+        <div class="spin-label">UZB</div>
 
-        <div
-            class="players-container"
-            id="playersContainer">
-        </div>
+        <svg class="bottle" id="bottle" onclick="spinBottle()" viewBox="0 0 100 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"  stop-color="#021508"/>
+                    <stop offset="10%" stop-color="#083a14"/>
+                    <stop offset="22%" stop-color="#0f5c1e"/>
+                    <stop offset="34%" stop-color="#1f9330"/>
+                    <stop offset="44%" stop-color="#4bc457"/>
+                    <stop offset="50%" stop-color="#7fe887"/>
+                    <stop offset="56%" stop-color="#4bc457"/>
+                    <stop offset="66%" stop-color="#1f9330"/>
+                    <stop offset="78%" stop-color="#0f5c1e"/>
+                    <stop offset="90%" stop-color="#083a14"/>
+                    <stop offset="100%" stop-color="#021508"/>
+                </linearGradient>
+                <linearGradient id="glassGradDark" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"  stop-color="#010c04"/>
+                    <stop offset="15%" stop-color="#062c0e"/>
+                    <stop offset="50%" stop-color="#0b4315"/>
+                    <stop offset="85%" stop-color="#062c0e"/>
+                    <stop offset="100%" stop-color="#010c04"/>
+                </linearGradient>
+            </defs>
+
+            <path fill="url(#glassGrad)" fill-opacity="0.94"
+                d="M38,0 L62,0 L62,14 Q63,16 63,20 L63,96 Q63,116 78,128 Q94,141 94,166 L94,292 Q94,306 79,310 Q65,314 50,314 Q35,314 21,310 Q6,306 6,292 L6,166 Q6,141 22,128 Q37,116 37,96 L37,20 Q37,16 38,14 Z"/>
+
+            <rect x="38" y="0" width="24" height="6" fill="url(#glassGradDark)"/>
+            <ellipse cx="34" cy="185" rx="7" ry="70" fill="rgba(255,255,255,0.42)" opacity="0.5"/>
+            <path d="M28,60 L28,300" stroke="rgba(255,255,255,0.55)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M80,130 Q88,200 86,296" stroke="rgba(0,0,0,0.35)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+            <path fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1.5"
+                d="M38,0 L62,0 L62,14 Q63,16 63,20 L63,96 Q63,116 78,128 Q94,141 94,166 L94,292 Q94,306 79,310 Q65,314 50,314 Q35,314 21,310 Q6,306 6,292 L6,166 Q6,141 22,128 Q37,116 37,96 L37,20 Q37,16 38,14 Z"/>
+
+            <ellipse cx="50" cy="314" rx="38" ry="5" fill="rgba(0,0,0,0.25)"/>
+        </svg>
+
+        <div class="players-container" id="playersContainer"></div>
 
     </div>
 
-
     <div class="chat-section">
-
         <div class="chat-header">
             <span>💬 O'yin chati</span>
-            <span style="font-size:11px;">👥 12/12</span>
         </div>
 
-
-        <div class="chat-messages">
-
+        <div class="chat-messages" id="chatMessages">
             <div class="chat-item">
-
-                <div
-                    class="chat-avatar"
-                    style="background-image:url('https://i.pravatar.cc/150?img=1');">
-                </div>
-
+                <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=1');"></div>
                 <div>
-
-                    <div class="chat-username">
-                        Aziza 👑
-                    </div>
-
-                    <div class="chat-bubble">
-                        Salom hammaga! 👋
-                    </div>
-
+                    <div class="chat-username">Aziza 👑</div>
+                    <div class="chat-bubble">Salom hammaga! 👋</div>
                 </div>
-
             </div>
-
-
             <div class="chat-item">
-
-                <div
-                    class="chat-avatar"
-                    style="background-image:url('https://i.pravatar.cc/150?img=12');">
-                </div>
-
+                <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=12');"></div>
                 <div>
-
-                    <div class="chat-username">
-                        Bekzod ✔
-                    </div>
-
-                    <div class="chat-bubble">
-                        O'yinni boshlaymizmi? 🔥
-                    </div>
-
+                    <div class="chat-username">Bekzod ✔</div>
+                    <div class="chat-bubble">O'yinni boshlaymizmi? 🔥</div>
                 </div>
-
             </div>
-
         </div>
-
 
         <div class="chat-input-area">
-
-            <input
-                type="text"
-                class="chat-input"
-                placeholder="Xabar yozing..."
-            >
-
-            <button class="send-btn">
-                ➤
-            </button>
-
+            <input id="chatInput" type="text" class="chat-input" placeholder="Xabar yozing..." onkeydown="if(event.key==='Enter') sendMessage();">
+            <button class="send-btn" onclick="sendMessage()">➤</button>
         </div>
-
     </div>
 
 </div>
