@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Spin the Bottle - Global Edition</title>
+<title>Spin the Bottle - Opposite Gender Logic</title>
 <style>
 *{
     box-sizing:border-box;
@@ -206,29 +206,33 @@ body{
     display:flex;
     align-items:center;
     gap:3px;
-    background:rgba(18, 12, 8, 0.88);
-    padding:2px 5px;
+    background:rgba(18, 12, 8, 0.92);
+    padding:2px 6px;
     border-radius:8px;
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.12);
     white-space:nowrap;
     z-index:15;
+    max-width: 68px;
 }
 
-/* BAYROQ O'LCHAMI KICHRAYTIRILDI VA BOSIQ QILINGAN */
 .player-flag {
     font-size:8.5px;
     line-height:1;
-    opacity:0.85;
+    opacity:0.9;
+    flex-shrink: 0;
 }
 
 .player-name{
     font-size:9px;
     font-weight:600;
     color:#e5d5c5;
-    max-width:55px;
+    max-width:45px;
     overflow:hidden;
-    text-overflow:ellipsis;
+    white-space:nowrap;
     line-height:1.1;
+    text-overflow: clip;
+    -webkit-mask-image: linear-gradient(to right, #000 70%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 70%, transparent 100%);
 }
 
 .chat-section{
@@ -502,15 +506,16 @@ body{
 </div>
 
 <script>
+// Har bir o'yinchiga gender (jinsi) qo'shildi: 'male' yoki 'female'
 const players = [
-    { name:"Siz", flag:"🇺🇿", img:"https://i.pravatar.cc/150?img=13", isMe: true },
-    { name:"Elena", flag:"🇺🇸", img:"https://i.pravatar.cc/150?img=1" },
-    { name:"Lucas", flag:"🇩🇪", img:"https://i.pravatar.cc/150?img=12" },
-    { name:"Sora", flag:"🇯🇵", img:"https://i.pravatar.cc/150?img=5" },
-    { name:"Mateo", flag:"🇪🇸", img:"https://i.pravatar.cc/150?img=6" },
-    { name:"Chloe", flag:"🇫🇷", img:"https://i.pravatar.cc/150?img=9" },
-    { name:"Ali", flag:"🇦🇪", img:"https://i.pravatar.cc/150?img=11" },
-    { name:"Anna", flag:"🇬🇧", img:"https://i.pravatar.cc/150?img=16" }
+    { id: 1, name:"Muhammadali", gender:"male", flag:"🇺🇿", img:"https://i.pravatar.cc/150?img=13", isMe: true },
+    { id: 2, name:"Elizabeth-Jane", gender:"female", flag:"🇺🇸", img:"https://i.pravatar.cc/150?img=1" },
+    { id: 3, name:"Maximilian", gender:"male", flag:"🇩🇪", img:"https://i.pravatar.cc/150?img=12" },
+    { id: 4, name:"Sora", gender:"female", flag:"🇯🇵", img:"https://i.pravatar.cc/150?img=5" },
+    { id: 5, name:"Alejandro", gender:"male", flag:"🇪🇸", img:"https://i.pravatar.cc/150?img=6" },
+    { id: 6, name:"Chloe", gender:"female", flag:"🇫🇷", img:"https://i.pravatar.cc/150?img=9" },
+    { id: 7, name:"Abdurahmon", gender:"male", flag:"🇦🇪", img:"https://i.pravatar.cc/150?img=11" },
+    { id: 8, name:"Anna", gender:"female", flag:"🇬🇧", img:"https://i.pravatar.cc/150?img=16" }
 ];
 
 function renderPlayers(){
@@ -536,6 +541,8 @@ function renderPlayers(){
         playerEl.style.backgroundImage = `url('${player.img}')`;
         playerEl.style.left = `${x}px`;
         playerEl.style.top = `${y}px`;
+        playerEl.dataset.id = player.id;
+        playerEl.dataset.gender = player.gender;
 
         if (player.isMe) {
             playerEl.onclick = openFlagModal;
@@ -543,7 +550,7 @@ function renderPlayers(){
         }
 
         playerEl.innerHTML = `
-            <div class="player-name-box">
+            <div class="player-name-box" title="${player.name}">
                 <span class="player-flag">${player.flag}</span>
                 <span class="player-name">${player.name}</span>
             </div>
@@ -585,33 +592,43 @@ function spinBottle(){
     tableArea.classList.add("spinning");
     document.querySelectorAll(".player.winner").forEach(el => el.classList.remove("winner"));
 
-    const extraDegrees = Math.floor(Math.random() * 360) + 1440;
-    currentRotation += extraDegrees;
+    // Shishani aylantirgan o'yinchi (Hozircha o'zimiz "isMe")
+    const me = players.find(p => p.isMe);
+    const myGender = me ? me.gender : 'male';
+
+    // Faqat qarama-qarshi jinsdagi o'yinchilar ro'yxati
+    const targetPlayers = players.filter(p => p.gender !== myGender);
+
+    if(targetPlayers.length === 0) {
+        isSpinning = false;
+        tableArea.classList.remove("spinning");
+        return;
+    }
+
+    // Qarama-qarshi jinsdagilardan tasodifiy bittasi tanlanadi
+    const randomTarget = targetPlayers[Math.floor(Math.random() * targetPlayers.length)];
+    const targetEl = document.querySelector(`.player[data-id="${randomTarget.id}"]`);
+    
+    // Tanlangan o'yinchining burchagi
+    const targetAngle = parseFloat(targetEl.dataset.angle);
+
+    // Shisha og'zi aynan shu o'yinchiga qarashi uchun aniq burchakni hisoblash
+    const targetNeckAngle = (targetAngle + 90) % 360;
+    const currentModulo = currentRotation % 360;
+    
+    let diff = targetNeckAngle - currentModulo;
+    if (diff < 0) diff += 360;
+
+    // Kamida 4 marta to'liq aylanadi (1440 deg) + aniq qarama-qarshi o'yinchi burchagiga to'xtaydi
+    const finalRotation = currentRotation + 1440 + diff;
+    currentRotation = finalRotation;
 
     bottle.style.transform = `rotate(${currentRotation}deg)`;
 
     setTimeout(() => {
         isSpinning = false;
         tableArea.classList.remove("spinning");
-
-        const neckAngle = (((currentRotation - 90) % 360) + 360) % 360;
-
-        let closestEl = null;
-        let closestDiff = 361;
-
-        document.querySelectorAll(".player").forEach(el => {
-            const a = parseFloat(el.dataset.angle);
-            let diff = Math.abs(a - neckAngle);
-            if (diff > 180) diff = 360 - diff;
-            if (diff < closestDiff) {
-                closestDiff = diff;
-                closestEl = el;
-            }
-        });
-
-        if (closestEl) {
-            closestEl.classList.add("winner");
-        }
+        targetEl.classList.add("winner");
     }, 3200);
 }
 
