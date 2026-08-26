@@ -172,7 +172,6 @@ body{
     pointer-events:none;
 }
 
-/* SHISHA POZITSIYASI VA ROTATSIYA */
 .bottle{
     width:34px;
     height:109px;
@@ -417,7 +416,7 @@ body{
 
         <div class="spin-label">UZB</div>
 
-        <!-- SHISHA VA YOZUV UZUVIYLIGI TUZATILDI -->
+        <!-- 3D SILINDRSIMON VA EGILGAN YOZUVLI SHISHA -->
         <svg class="bottle" id="bottle" onclick="spinBottle()" viewBox="0 0 100 320" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -444,10 +443,17 @@ body{
                     <stop offset="100%" stop-color="#3a2a12"/>
                 </linearGradient>
 
-                <linearGradient id="labelGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#fbf3dd"/>
-                    <stop offset="100%" stop-color="#e2c98f"/>
+                <!-- DUMALOQ SHISHAGA 3D ETIKETKA EFFEKTI -->
+                <linearGradient id="labelGradCylinder" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#bda069"/>
+                    <stop offset="20%" stop-color="#ebd8ad"/>
+                    <stop offset="50%" stop-color="#fff8e7"/>
+                    <stop offset="80%" stop-color="#ebd8ad"/>
+                    <stop offset="100%" stop-color="#bda069"/>
                 </linearGradient>
+
+                <!-- YOZUV EGILISHI UCHUN YOLAKCHA (PATH) -->
+                <path id="curvePath" d="M 12 215 Q 50 228 88 215" />
             </defs>
 
             <path fill="url(#glassGrad)" fill-opacity="0.94" d="M32,0 L68,0 L68,14 Q69,16 69,20 L69,64 Q69,86 82,100 Q96,116 96,140 L96,292 Q96,306 79,310 Q65,314 50,314 Q35,314 21,310 Q4,306 4,292 L4,140 Q4,116 18,100 Q31,86 31,64 L31,20 Q31,16 32,14 Z" />
@@ -455,15 +461,20 @@ body{
             <rect x="30" y="17" width="40" height="3" fill="rgba(0,0,0,0.25)"/>
             <path d="M80,130 Q88,200 86,296" stroke="rgba(0,0,0,0.35)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
             
-            <!-- Shisha etiketkasi -->
-            <rect x="12" y="150" width="76" height="140" rx="6" fill="url(#labelGrad2)" stroke="rgba(0,0,0,0.18)" stroke-width="1.2"/>
-            <line x1="20" y1="162" x2="80" y2="162" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
-            
-            <!-- SHISHADAGI AYLANASIGA VA MARKAZLASHGAN YOZUV -->
-            <text x="50" y="220" text-anchor="middle" font-size="9" font-weight="900" letter-spacing="1" fill="#5a3c14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" transform="rotate(90 50 220)">SPIN THE BOTTLE</text>
-            
-            <line x1="20" y1="278" x2="80" y2="278" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
-            
+            <!-- EGILGAN SHISHA ETIKETKASI -->
+            <path d="M 8 150 Q 50 160 92 150 L 92 280 Q 50 292 8 280 Z" fill="url(#labelGradCylinder)" stroke="rgba(0,0,0,0.2)" stroke-width="1"/>
+
+            <!-- ETIKETKA CHEGARALARIDAGI EGRI CHIZIQLAR -->
+            <path d="M 14 160 Q 50 170 86 160" stroke="rgba(90,60,20,0.35)" stroke-width="1" fill="none"/>
+            <path d="M 14 270 Q 50 280 86 270" stroke="rgba(90,60,20,0.35)" stroke-width="1" fill="none"/>
+
+            <!-- SHISHA ENI BO'YLAB EGILGAN MATN -->
+            <text font-size="8.5" font-weight="900" fill="#4a2e0b" letter-spacing="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
+                <textPath href="#curvePath" startOffset="50%" text-anchor="middle">
+                    SPIN THE BOTTLE
+                </textPath>
+            </text>
+
             <ellipse cx="26" cy="60" rx="4" ry="30" fill="rgba(255,255,255,0.35)" opacity="0.55"/>
             <ellipse cx="24" cy="230" rx="3" ry="22" fill="rgba(255,255,255,0.28)" opacity="0.5"/>
             <path fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1.5" d="M32,0 L68,0 L68,14 Q69,16 69,20 L69,64 Q69,86 82,100 Q96,116 96,140 L96,292 Q96,306 79,310 Q65,314 50,314 Q35,314 21,310 Q4,306 4,292 L4,140 Q4,116 18,100 Q31,86 31,64 L31,20 Q31,16 32,14 Z" />
