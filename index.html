@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Spin the Bottle - Classic Wood Table</title>
+<title>Spin the Bottle - Oak Table</title>
 <style>
 *{
     box-sizing:border-box;
@@ -13,12 +13,13 @@
     user-select:none;
 }
 body{
-    background:#0d0805;
+    background:#17100a;
     display:flex;
     justify-content:center;
     align-items:center;
     min-height:100vh;
 }
+
 .game-container{
     width:100%;
     max-width:414px;
@@ -26,33 +27,33 @@ body{
     max-height:896px;
     background:
         radial-gradient(
-            circle at 50% 40%,
-            rgba(180,115,60,.4) 0%,
-            rgba(110,60,25,.3) 40%,
-            rgba(40,20,8,.8) 80%,
-            rgba(15,8,3,.95) 100%
+            ellipse at 50% 42%,
+            rgba(255,220,166,.45) 0%,
+            rgba(222,172,111,.25) 38%,
+            rgba(151,91,45,.12) 65%,
+            transparent 88%
         ),
         repeating-linear-gradient(
-            8deg,
-            rgba(0,0,0,.08) 0px,
-            rgba(0,0,0,.08) 2px,
+            7deg,
+            rgba(91,49,20,.05) 0px,
+            rgba(91,49,20,.05) 2px,
             transparent 2px,
-            transparent 12px
+            transparent 14px
         ),
         repeating-linear-gradient(
-            172deg,
-            rgba(255,200,140,.04) 0px,
-            rgba(255,200,140,.04) 1px,
+            9deg,
+            rgba(255,226,179,.05) 0px,
+            rgba(255,226,179,.05) 1px,
             transparent 1px,
-            transparent 16px
+            transparent 18px
         ),
         linear-gradient(
-            150deg,
-            #aa6c38 0%,
-            #8c5225 30%,
-            #6e3b15 60%,
-            #4a240a 85%,
-            #2a1203 100%
+            145deg,
+            #d7a56b 0%,
+            #c38b52 28%,
+            #b87940 55%,
+            #9a6032 78%,
+            #75441f 100%
         );
     display:flex;
     flex-direction:column;
@@ -60,24 +61,41 @@ body{
     overflow:hidden;
     border-radius:32px;
     color:#fff;
-    border:1px solid rgba(255,190,120,.25);
+    border:1px solid rgba(255,220,170,.35);
     box-shadow:
-        0 25px 55px rgba(0,0,0,.85),
-        inset 0 0 80px rgba(0,0,0,.6);
+        0 25px 55px rgba(0,0,0,.65),
+        inset 0 0 70px rgba(72,36,13,.25);
 }
+
 .game-container::before{
     content:"";
     position:absolute;
     inset:0;
     background:
         radial-gradient(
-            circle at 50% 38%,
-            rgba(255,225,180,.15),
-            transparent 50%
+            circle at 50% 40%,
+            rgba(255,239,205,.20),
+            transparent 55%
         );
     pointer-events:none;
     z-index:0;
 }
+
+.game-container::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 55%,
+            rgba(82,43,17,.05) 78%,
+            rgba(47,23,8,.16) 100%
+        );
+    pointer-events:none;
+    z-index:1;
+}
+
 .header-nav{
     display:flex;
     justify-content:space-between;
@@ -85,31 +103,34 @@ body{
     padding:18px 20px 10px;
     font-size:16px;
     font-weight:600;
-    color:#f5e0c8;
-    background:rgba(20,10,4,.35);
-    backdrop-filter:blur(6px);
+    color:#3d2513;
+    background:rgba(255,235,204,.18);
+    backdrop-filter:blur(4px);
     position:relative;
     z-index:10;
-    border-bottom:1px solid rgba(255,200,140,.12);
+    border-bottom:1px solid rgba(92,49,19,.12);
 }
+
 .header-title{
     display:flex;
     align-items:center;
     gap:6px;
     font-size:15px;
     font-weight:800;
-    color:#fcecdb;
-    text-shadow:0 1px 3px rgba(0,0,0,.8);
+    color:#4b2b14;
+    text-shadow:0 1px 1px rgba(255,255,255,.35);
 }
+
 .stats-bar{
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:8px 16px 12px;
-    background:rgba(10,5,2,.2);
+    background:rgba(92,48,18,.10);
     position:relative;
     z-index:10;
 }
+
 .heart-badge{
     background:linear-gradient(135deg, #ef5350, #c62828);
     padding:5px 12px;
@@ -120,19 +141,21 @@ body{
     font-weight:700;
     font-size:12px;
     color:#fff;
-    box-shadow:0 4px 10px rgba(0,0,0,.5);
+    box-shadow:0 4px 10px rgba(70,25,5,.35);
     border:1px solid rgba(255,255,255,.25);
 }
+
 .stat-item{
     font-size:11px;
     font-weight:700;
-    color:#fcecdb;
-    background:rgba(0,0,0,.3);
+    color:#4b2b14;
+    background:rgba(255,235,204,.42);
     padding:5px 10px;
     border-radius:12px;
-    border:1px solid rgba(255,200,140,.15);
-    box-shadow:inset 0 1px rgba(255,255,255,.1);
+    border:1px solid rgba(92,49,19,.13);
+    box-shadow:inset 0 1px rgba(255,255,255,.35);
 }
+
 .table-area{
     flex:1;
     position:relative;
@@ -141,23 +164,24 @@ body{
     align-items:center;
     z-index:5;
 }
+
 .rope-medallion{
-    width:220px;
-    height:220px;
+    width:230px;
+    height:230px;
     position:absolute;
     pointer-events:none;
 }
 
-/* SHISHA POZITSIYASI VA MARKAZLASHTIRISH */
+/* SHISHA POZITSIYASI VA TRANSFORM-ORIGIN TUZATILDI */
 .bottle{
-    width:28px;
-    height:90px;
+    width:34px;
+    height:109px;
     position:absolute;
-    left:calc(50% - 14px);
-    top:calc(50% - 45px);
+    left:calc(50% - 17px);
+    top:calc(50% - 54.5px);
     transform-origin:50% 50%;
     transform:rotate(0deg);
-    filter:drop-shadow(0 8px 12px rgba(0,0,0,.7));
+    filter:drop-shadow(0 10px 14px rgba(45,22,7,.5));
     z-index:20;
     transition:transform 3s cubic-bezier(.15,.85,.15,1);
     cursor:pointer;
@@ -168,48 +192,54 @@ body{
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    font-size:14px;
+    font-size:15px;
     font-weight:800;
     letter-spacing:3px;
-    color:rgba(255,220,180,.12);
+    color:rgba(75,43,20,.16);
     pointer-events:none;
     z-index:4;
 }
+
 .players-container{
-    width:350px;
-    height:350px;
+    width:340px;
+    height:340px;
     position:relative;
     z-index:10;
 }
+
 .player{
     position:absolute;
-    width:56px;
-    height:56px;
+    width:52px;
+    height:52px;
     border-radius:18px;
     background-size:cover;
     background-position:center;
     display:flex;
     justify-content:center;
     align-items:flex-end;
-    box-shadow:0 6px 14px rgba(0,0,0,.6);
+    box-shadow:0 6px 14px rgba(58,29,9,.45);
     border:2px solid rgba(255,255,255,.45);
     z-index:10;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .player.pink{ border-color:#ff4081; box-shadow:0 0 10px rgba(255,64,129,.35); }
 .player.blue{ border-color:#00bcd4; box-shadow:0 0 10px rgba(0,188,212,.35); }
 .player.gold{ border-color:#d79b00; box-shadow:0 0 10px rgba(215,155,0,.35); }
+
 .player.winner{
     animation: winnerPulse 1s ease-in-out infinite;
     box-shadow:
-        0 0 0 4px rgba(255,215,0,.75),
-        0 0 25px rgba(255,215,0,.9);
-    z-index: 25;
+        0 0 0 4px rgba(255,215,0,.85),
+        0 0 25px rgba(255,215,0,.95);
+    z-index:25;
 }
+
 @keyframes winnerPulse{
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.12); }
 }
+
 .player-name{
     position:absolute;
     bottom:-19px;
@@ -220,11 +250,12 @@ body{
     color:#fff;
     text-shadow:0 1px 3px rgba(0,0,0,.9);
     white-space:nowrap;
-    max-width:80px;
+    max-width:75px;
     overflow:hidden;
     text-overflow:ellipsis;
     z-index:15;
 }
+
 .badge{
     position:absolute;
     top:-5px;
@@ -239,10 +270,11 @@ body{
     justify-content:center;
     align-items:center;
     font-weight:800;
-    border:1.5px solid #3d210b;
-    box-shadow:0 2px 4px rgba(0,0,0,.5);
+    border:1.5px solid #5a3216;
+    box-shadow:0 2px 4px rgba(0,0,0,.35);
     z-index:20;
 }
+
 .chat-section{
     background:#ffffff;
     color:#111;
@@ -252,10 +284,11 @@ body{
     display:flex;
     flex-direction:column;
     padding:16px 18px;
-    box-shadow:0 -10px 30px rgba(0,0,0,.6);
+    box-shadow:0 -10px 30px rgba(45,21,7,.45);
     border-top:1px solid rgba(0,0,0,.08);
     z-index:30;
 }
+
 .chat-header{
     display:flex;
     justify-content:space-between;
@@ -266,6 +299,7 @@ body{
     font-size:13px;
     color:rgba(0,0,0,.7);
 }
+
 .chat-messages{
     flex:1;
     overflow-y:auto;
@@ -274,7 +308,9 @@ body{
     gap:12px;
     padding:12px 0;
 }
+
 .chat-item{ display:flex; align-items:flex-start; gap:10px; }
+
 .chat-avatar{
     width:32px;
     height:32px;
@@ -282,12 +318,14 @@ body{
     background-size:cover;
     flex-shrink:0;
 }
+
 .chat-username{
     font-weight:700;
     font-size:11px;
     color:rgba(0,0,0,.55);
     margin-bottom:2px;
 }
+
 .chat-bubble{
     background:rgba(0,0,0,.04);
     padding:8px 12px;
@@ -297,7 +335,14 @@ body{
     border:1px solid rgba(0,0,0,.06);
     line-height:1.3;
 }
-.chat-input-area{ display:flex; align-items:center; gap:10px; padding-top:8px; }
+
+.chat-input-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding-top:8px;
+}
+
 .chat-input{
     flex:1;
     background:rgba(0,0,0,.04);
@@ -308,7 +353,9 @@ body{
     font-size:12px;
     color:#111;
 }
+
 .chat-input::placeholder{ color:rgba(0,0,0,.35); }
+
 .send-btn{
     background:linear-gradient(135deg, #2b2b2b, #000);
     color:#fff;
@@ -323,17 +370,20 @@ body{
     font-weight:bold;
     font-size:12px;
 }
+
 @media (max-width: 380px) {
     .game-container{ border-radius:0; }
-    .rope-medallion{ width:190px; height:190px; }
-    .players-container{ width:310px; height:310px; }
-    .player{ width:52px; height:52px; }
+    .rope-medallion{ width:200px; height:200px; }
+    .players-container{ width:290px; height:290px; }
+    .player{ width:46px; height:46px; }
 }
 </style>
 </head>
+
 <body>
 
 <div class="game-container">
+
     <div class="header-nav">
         <span style="cursor:pointer;" onclick="closeGame()">✕</span>
         <div class="header-title">
@@ -343,81 +393,74 @@ body{
     </div>
 
     <div class="stats-bar">
-        <div class="heart-badge">
-            ❤️ 10,000
-        </div>
-        <div class="stat-item">
-            🎟️ 8 d.
-        </div>
-        <div class="stat-item">
-            🎯 #
-        </div>
-        <div class="stat-item">
-            ⚙️
-        </div>
-        <div class="stat-item">
-            Table 229 🔄
-        </div>
+        <div class="heart-badge">❤️ 10,000</div>
+        <div class="stat-item">🎟️ 8 d.</div>
+        <div class="stat-item">🎯 #</div>
+        <div class="stat-item">⚙️</div>
+        <div class="stat-item">Table 229 🔄</div>
     </div>
 
     <div class="table-area">
         <svg class="rope-medallion" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <radialGradient id="medFill" cx="50%" cy="45%" r="60%">
-                    <stop offset="0%" stop-color="rgba(255,210,160,.18)"/>
-                    <stop offset="70%" stop-color="rgba(120,60,20,.12)"/>
-                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                    <stop offset="0%" stop-color="rgba(255,230,188,.22)"/>
+                    <stop offset="60%" stop-color="rgba(182,117,58,.10)"/>
+                    <stop offset="100%" stop-color="rgba(182,117,58,0)"/>
                 </radialGradient>
             </defs>
             <circle cx="120" cy="120" r="112" fill="url(#medFill)"/>
-            <circle cx="120" cy="120" r="112" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="5"/>
-            <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(255,200,140,.20)" stroke-width="1.5"/>
-            <circle cx="120" cy="120" r="46" fill="rgba(0,0,0,.12)" stroke="rgba(255,200,140,.25)" stroke-width="1"/>
+            <circle cx="120" cy="120" r="112" fill="none" stroke="rgba(88,48,18,.30)" stroke-width="6"/>
+            <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(88,48,18,.22)" stroke-width="1.5"/>
+            <circle cx="120" cy="120" r="46" fill="rgba(255,235,198,.16)" stroke="rgba(255,235,198,.30)" stroke-width="1"/>
         </svg>
 
         <div class="spin-label">UZB</div>
 
-        <!-- SHISHA SVG -->
-        <svg
-            class="bottle"
-            id="bottle"
-            onclick="spinBottle()"
-            viewBox="0 0 100 320"
-            xmlns="http://www.w3.org/2000/svg">
+        <svg class="bottle" id="bottle" onclick="spinBottle()" viewBox="0 0 100 320" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"  stop-color="#010d05"/>
-                    <stop offset="12%" stop-color="#062b0e"/>
-                    <stop offset="25%" stop-color="#0f521b"/>
-                    <stop offset="42%" stop-color="#2ebd43"/>
-                    <stop offset="50%" stop-color="#8bf59a"/>
-                    <stop offset="58%" stop-color="#2ebd43"/>
-                    <stop offset="75%" stop-color="#0f521b"/>
-                    <stop offset="88%" stop-color="#062b0e"/>
-                    <stop offset="100%" stop-color="#010d05"/>
+                    <stop offset="0%"  stop-color="#021508"/>
+                    <stop offset="10%" stop-color="#083a14"/>
+                    <stop offset="22%" stop-color="#0f5c1e"/>
+                    <stop offset="34%" stop-color="#1f9330"/>
+                    <stop offset="44%" stop-color="#4bc457"/>
+                    <stop offset="50%" stop-color="#7fe887"/>
+                    <stop offset="56%" stop-color="#4bc457"/>
+                    <stop offset="66%" stop-color="#1f9330"/>
+                    <stop offset="78%" stop-color="#0f5c1e"/>
+                    <stop offset="90%" stop-color="#083a14"/>
+                    <stop offset="100%" stop-color="#021508"/>
                 </linearGradient>
-                <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"  stop-color="#111"/>
-                    <stop offset="50%" stop-color="#444"/>
-                    <stop offset="100%" stop-color="#000"/>
+
+                <linearGradient id="foilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"  stop-color="#3a2a12"/>
+                    <stop offset="20%" stop-color="#8a6a2e"/>
+                    <stop offset="35%" stop-color="#d4b45e"/>
+                    <stop offset="50%" stop-color="#f0dc9a"/>
+                    <stop offset="65%" stop-color="#d4b45e"/>
+                    <stop offset="80%" stop-color="#8a6a2e"/>
+                    <stop offset="100%" stop-color="#3a2a12"/>
+                </linearGradient>
+
+                <linearGradient id="labelGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fbf3dd"/>
+                    <stop offset="100%" stop-color="#e2c98f"/>
                 </linearGradient>
             </defs>
 
-            <path
-                fill="url(#glassGrad)"
-                fill-opacity="0.96"
-                d="M38,0 L62,0 L62,16 Q63,18 63,22 L63,90 Q63,112 78,126 Q94,140 94,166 L94,292 Q94,308 79,312 Q65,316 50,316 Q35,316 21,312 Q6,308 6,292 L6,166 Q6,140 22,126 Q37,112 37,90 L37,22 Q37,18 38,16 Z"
-            />
-            <rect x="37" y="0" width="26" height="8" rx="2" fill="url(#capGrad)"/>
-            <ellipse cx="32" cy="185" rx="5" ry="65" fill="rgba(255,255,255,0.45)" opacity="0.6"/>
-            <path d="M25,60 L25,295" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
-            <path d="M80,130 Q88,200 86,296" stroke="rgba(0,0,0,0.4)" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.5"/>
-            <path
-                fill="none"
-                stroke="rgba(0,0,0,0.4)"
-                stroke-width="2"
-                d="M38,0 L62,0 L62,16 Q63,18 63,22 L63,90 Q63,112 78,126 Q94,140 94,166 L94,292 Q94,308 79,312 Q65,316 50,316 Q35,316 21,312 Q6,308 6,292 L6,166 Q6,140 22,126 Q37,112 37,90 L37,22 Q37,18 38,16 Z"
-            />
+            <path fill="url(#glassGrad)" fill-opacity="0.94" d="M32,0 L68,0 L68,14 Q69,16 69,20 L69,64 Q69,86 82,100 Q96,116 96,140 L96,292 Q96,306 79,310 Q65,314 50,314 Q35,314 21,310 Q4,306 4,292 L4,140 Q4,116 18,100 Q31,86 31,64 L31,20 Q31,16 32,14 Z" />
+            <path d="M32,0 L68,0 L68,14 Q69,16 69,20 L31,20 Q31,16 32,14 Z" fill="url(#foilGrad)"/>
+            <rect x="30" y="17" width="40" height="3" fill="rgba(0,0,0,0.25)"/>
+            <path d="M80,130 Q88,200 86,296" stroke="rgba(0,0,0,0.35)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <rect x="8" y="150" width="84" height="150" rx="4" fill="url(#labelGrad2)" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+            <line x1="16" y1="164" x2="84" y2="164" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
+            <text x="50" y="225" text-anchor="middle" font-size="9.5" font-weight="900" letter-spacing="0.5" fill="#5a3c14" font-family="Georgia, serif" transform="rotate(90 50 225)">SPIN THE BOTTLE</text>
+            <line x1="16" y1="286" x2="84" y2="286" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
+            <ellipse cx="26" cy="60" rx="4" ry="30" fill="rgba(255,255,255,0.35)" opacity="0.55"/>
+            <ellipse cx="24" cy="230" rx="3" ry="22" fill="rgba(255,255,255,0.28)" opacity="0.5"/>
+            <path fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1.5" d="M32,0 L68,0 L68,14 Q69,16 69,20 L69,64 Q69,86 82,100 Q96,116 96,140 L96,292 Q96,306 79,310 Q65,314 50,314 Q35,314 21,310 Q4,306 4,292 L4,140 Q4,116 18,100 Q31,86 31,64 L31,20 Q31,16 32,14 Z" />
+            <ellipse cx="50" cy="314" rx="38" ry="5" fill="rgba(0,0,0,0.25)"/>
         </svg>
 
         <div class="players-container" id="playersContainer"></div>
@@ -444,16 +487,11 @@ body{
             </div>
         </div>
         <div class="chat-input-area">
-            <input
-                id="chatInput"
-                type="text"
-                class="chat-input"
-                placeholder="Xabar yozing..."
-                onkeydown="if(event.key==='Enter') sendMessage();"
-            >
+            <input id="chatInput" type="text" class="chat-input" placeholder="Xabar yozing..." onkeydown="if(event.key==='Enter') sendMessage();">
             <button class="send-btn" onclick="sendMessage()">➤</button>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -475,18 +513,21 @@ const players = [
 function renderPlayers(){
     const container = document.getElementById("playersContainer");
     if(!container) return;
-    container.innerHTML="";
-    
+    container.innerHTML = "";
+
     const total = players.length;
-    const radius = 140; 
-    const centerOffset = 175 - 28; 
+    const containerWidth = container.offsetWidth || 340;
+    const avatarSize = 52;
+    const radius = (containerWidth / 2) - (avatarSize / 2) - 5; 
+    const center = containerWidth / 2;
 
     players.forEach((player, index) => {
+        // Shisha tepadagi 0 gradusdan boshlanadi
         const angleDeg = (index * (360 / total)) - 90; 
         const angleRad = angleDeg * (Math.PI / 180);
 
-        const x = centerOffset + radius * Math.cos(angleRad);
-        const y = centerOffset + radius * Math.sin(angleRad);
+        const x = center + radius * Math.cos(angleRad) - (avatarSize / 2);
+        const y = center + radius * Math.sin(angleRad) - (avatarSize / 2);
 
         const playerEl = document.createElement("div");
         playerEl.className = `player ${player.type}`;
@@ -498,7 +539,8 @@ function renderPlayers(){
             <span class="badge">${player.badge}</span>
             <span class="player-name" title="${player.name}">${player.name}</span>
         `;
-        
+
+        // 0..360 oralig'idagi aniq burchak
         let normalizedAngle = ((angleDeg % 360) + 360) % 360;
         playerEl.dataset.angle = normalizedAngle.toFixed(2);
         container.appendChild(playerEl);
@@ -511,18 +553,21 @@ let isSpinning = false;
 function spinBottle(){
     if(isSpinning) return;
     isSpinning = true;
+
     const bottle = document.getElementById("bottle");
-    
     document.querySelectorAll(".player.winner").forEach(el => el.classList.remove("winner"));
 
-    const extraDegrees = Math.floor(Math.random() * 360) + 1440;
+    const extraDegrees = Math.floor(Math.random() * 360) + 1440; // Kamida 4 marta to'liq aylanadi
     currentRotation += extraDegrees;
+
     bottle.style.transform = `rotate(${currentRotation}deg)`;
 
     setTimeout(() => {
         isSpinning = false;
-        
-        const neckAngle = ((currentRotation - 90) % 360 + 360) % 360;
+
+        // SVG qopqog'i tepaga (-90 deg) qagaran, burchak hisobini moslashtiramiz
+        const neckAngle = (((currentRotation - 90) % 360) + 360) % 360;
+
         let closestEl = null;
         let closestDiff = 361;
 
@@ -547,23 +592,29 @@ function sendMessage(){
     const text = input.value.trim();
     if(!text) return;
 
-    const chatMessages = document.getElementById("chatMessages");
+    const messages = document.getElementById("chatMessages");
     const item = document.createElement("div");
     item.className = "chat-item";
+
+    const safeText = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
     item.innerHTML = `
-        <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=33');"></div>
+        <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/150?img=13');"></div>
         <div>
             <div class="chat-username" style="color:#2e7d32;">Siz</div>
-            <div class="chat-bubble">${text}</div>
+            <div class="chat-bubble">${safeText}</div>
         </div>
     `;
-    chatMessages.appendChild(item);
+
+    messages.appendChild(item);
+    messages.scrollTop = messages.scrollHeight;
     input.value = "";
-    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 function closeGame(){
-    alert("O'yindan chiqilmoqda...");
+    if(confirm("O'yindan chiqmoqchimisiz?")){
+        document.body.innerHTML = "<div style='color:#fff;font-size:18px;text-align:center;margin-top:40vh;font-weight:bold;'>O'yindan chiqildi</div>";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
