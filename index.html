@@ -172,7 +172,7 @@ body{
     pointer-events:none;
 }
 
-/* SHISHA POZITSIYASI VA TRANSFORM-ORIGIN TUZATILDI */
+/* SHISHA POZITSIYASI VA ROTATSIYA */
 .bottle{
     width:34px;
     height:109px;
@@ -417,6 +417,7 @@ body{
 
         <div class="spin-label">UZB</div>
 
+        <!-- SHISHA VA YOZUV UZUVIYLIGI TUZATILDI -->
         <svg class="bottle" id="bottle" onclick="spinBottle()" viewBox="0 0 100 320" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -453,10 +454,16 @@ body{
             <path d="M32,0 L68,0 L68,14 Q69,16 69,20 L31,20 Q31,16 32,14 Z" fill="url(#foilGrad)"/>
             <rect x="30" y="17" width="40" height="3" fill="rgba(0,0,0,0.25)"/>
             <path d="M80,130 Q88,200 86,296" stroke="rgba(0,0,0,0.35)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
-            <rect x="8" y="150" width="84" height="150" rx="4" fill="url(#labelGrad2)" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
-            <line x1="16" y1="164" x2="84" y2="164" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
-            <text x="50" y="225" text-anchor="middle" font-size="9.5" font-weight="900" letter-spacing="0.5" fill="#5a3c14" font-family="Georgia, serif" transform="rotate(90 50 225)">SPIN THE BOTTLE</text>
-            <line x1="16" y1="286" x2="84" y2="286" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
+            
+            <!-- Shisha etiketkasi -->
+            <rect x="12" y="150" width="76" height="140" rx="6" fill="url(#labelGrad2)" stroke="rgba(0,0,0,0.18)" stroke-width="1.2"/>
+            <line x1="20" y1="162" x2="80" y2="162" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
+            
+            <!-- SHISHADAGI AYLANASIGA VA MARKAZLASHGAN YOZUV -->
+            <text x="50" y="220" text-anchor="middle" font-size="9" font-weight="900" letter-spacing="1" fill="#5a3c14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" transform="rotate(90 50 220)">SPIN THE BOTTLE</text>
+            
+            <line x1="20" y1="278" x2="80" y2="278" stroke="rgba(90,60,20,0.35)" stroke-width="1"/>
+            
             <ellipse cx="26" cy="60" rx="4" ry="30" fill="rgba(255,255,255,0.35)" opacity="0.55"/>
             <ellipse cx="24" cy="230" rx="3" ry="22" fill="rgba(255,255,255,0.28)" opacity="0.5"/>
             <path fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1.5" d="M32,0 L68,0 L68,14 Q69,16 69,20 L69,64 Q69,86 82,100 Q96,116 96,140 L96,292 Q96,306 79,310 Q65,314 50,314 Q35,314 21,310 Q4,306 4,292 L4,140 Q4,116 18,100 Q31,86 31,64 L31,20 Q31,16 32,14 Z" />
@@ -522,7 +529,6 @@ function renderPlayers(){
     const center = containerWidth / 2;
 
     players.forEach((player, index) => {
-        // Shisha tepadagi 0 gradusdan boshlanadi
         const angleDeg = (index * (360 / total)) - 90; 
         const angleRad = angleDeg * (Math.PI / 180);
 
@@ -540,7 +546,6 @@ function renderPlayers(){
             <span class="player-name" title="${player.name}">${player.name}</span>
         `;
 
-        // 0..360 oralig'idagi aniq burchak
         let normalizedAngle = ((angleDeg % 360) + 360) % 360;
         playerEl.dataset.angle = normalizedAngle.toFixed(2);
         container.appendChild(playerEl);
@@ -557,7 +562,7 @@ function spinBottle(){
     const bottle = document.getElementById("bottle");
     document.querySelectorAll(".player.winner").forEach(el => el.classList.remove("winner"));
 
-    const extraDegrees = Math.floor(Math.random() * 360) + 1440; // Kamida 4 marta to'liq aylanadi
+    const extraDegrees = Math.floor(Math.random() * 360) + 1440;
     currentRotation += extraDegrees;
 
     bottle.style.transform = `rotate(${currentRotation}deg)`;
@@ -565,7 +570,6 @@ function spinBottle(){
     setTimeout(() => {
         isSpinning = false;
 
-        // SVG qopqog'i tepaga (-90 deg) qagaran, burchak hisobini moslashtiramiz
         const neckAngle = (((currentRotation - 90) % 360) + 360) % 360;
 
         let closestEl = null;
