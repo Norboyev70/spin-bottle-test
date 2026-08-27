@@ -124,10 +124,10 @@
             line-height: 1.1;
         }
 
-        /* MARKAZDAGI NAQSH VA BUTILKA */
+        /* MARKAZDAGI NAQSH VA BUTILKA (PASTROQQA SURILDI) */
         .wood-carving {
             position: absolute;
-            top: 50%;
+            top: 54%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 180px;
@@ -152,7 +152,7 @@
 
         .bottle-wrapper {
             position: absolute;
-            top: 50%;
+            top: 54%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
             width: 110px;
@@ -163,10 +163,10 @@
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
-        /* 12 TA O'YINCHI KONTEYNERI */
+        /* 12 TA O'YINCHI DOIRASI (PASTROQQA SURILDI: top: 54%) */
         .players-circle {
             position: absolute;
-            top: 50%;
+            top: 54%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 360px;
@@ -183,7 +183,7 @@
             pointer-events: auto;
         }
 
-        /* KATTALASHTIRILGAN AVATARLAR (55px) */
+        /* AVATARLAR (55px) */
         .avatar-frame {
             position: relative;
             width: 55px;
@@ -473,10 +473,10 @@
         { name: "Dinara, 18", badge: 2, gold: false, flag: "🇰🇿", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
         { name: "Sardor", badge: 3, gold: false, flag: "🇹🇷", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
         { name: "Madina", badge: 4, gold: false, flag: "🇺🇦", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
-        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬🇧", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
+        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬BW", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
         { name: "Norboyev⁷⁰", badge: 6, gold: false, flag: "🇩🇪", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
         { name: "Isomiddin", badge: 7, gold: false, flag: "🇰🇬", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jasur", badge: 8, gold: false, flag: "🇹JB", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jasur", badge: 8, gold: false, flag: "🇹🇯", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
         { name: "Laylo", badge: 9, gold: false, flag: "🇯🇵", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
         { name: "Malika", badge: 10, gold: false, flag: "🇬🇪", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
         { name: "Jahongir", badge: 11, gold: false, flag: "🇦🇿", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
@@ -492,14 +492,10 @@
         let x = 180 + radius * Math.cos(angle);
         let y = 180 + radius * Math.sin(angle);
 
-        // Barcha aytgan maxsus surishlaringiz:
-        
-        // 2 (Dinara) va 12 (Aziza) -> Yuqoriga
+        // Surish sozlamalari saqlangan:
         if (player.badge === 2 || player.badge === 12) {
             y -= 14;
         }
-
-        // 3 (Sardor) va 11 (Jahongir) -> Burchak bo'ylab yuqoriga
         if (player.badge === 3) {
             x += 8;
             y -= 10;
@@ -508,8 +504,6 @@
             x -= 8;
             y -= 10;
         }
-
-        // 5 (Ramzon) va 9 (Laylo) -> Burchak bo'ylab pastga
         if (player.badge === 5) {
             x += 8;
             y += 10;
@@ -518,8 +512,6 @@
             x -= 8;
             y += 10;
         }
-
-        // 6 (Norboyev) va 8 (Jasur) -> Pastroqqa
         if (player.badge === 6 || player.badge === 8) {
             y += 14;
         }
