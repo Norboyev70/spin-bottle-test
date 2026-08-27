@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin the Bottle Copy</title>
+    <title>Spin the Bottle (12 Players)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,9 +33,9 @@
             box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
 
-        /* YUQORI DANGAL HEADER (APP BAR) */
+        /* YUQORI APP BAR */
         .app-header {
-            height: 50px;
+            height: 48px;
             background: #171922;
             display: flex;
             align-items: center;
@@ -49,7 +49,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
         }
 
@@ -65,7 +65,6 @@
             position: relative;
             height: 54%;
             width: 100%;
-            /* Haqiqiy yog'och tekstura simulyatsiyasi */
             background: 
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 70%),
                 repeating-radial-gradient(circle at 50% 50%, #d88135 0, #d88135 15px, #d0772d 16px, #c86e24 30px);
@@ -74,7 +73,7 @@
             overflow: hidden;
         }
 
-        /* YUQORI MONITORING BAR (STOL USTDAGI STATISTIKA) */
+        /* YUQORI MONITORING BAR */
         .table-top-bar {
             position: absolute;
             top: 10px;
@@ -90,29 +89,29 @@
         .top-icons-left {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .icon-btn {
             background: rgba(220, 110, 35, 0.5);
             border: 1px solid rgba(255, 200, 150, 0.3);
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .heart-badge {
             background: rgba(210, 60, 20, 0.85);
             color: #fff;
-            padding: 4px 10px;
+            padding: 4px 8px;
             border-radius: 15px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -125,14 +124,14 @@
             line-height: 1.1;
         }
 
-        /* MARKAZDAGI YOG'OCH NAQSH VA BUTILKA */
+        /* MARKAZDAGI NAQSH VA BUTILKA */
         .wood-carving {
             position: absolute;
-            top: 42%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 210px;
-            height: 210px;
+            width: 190px;
+            height: 190px;
             background: radial-gradient(circle, #e28e40 0%, #bd671a 70%, #9e500c 100%);
             border-radius: 50%;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.4), 0 4px 10px rgba(0,0,0,0.2);
@@ -142,56 +141,57 @@
             pointer-events: none;
         }
 
-        /* Suno'iy gultoj barglar simulyatsiyasi */
         .wood-carving::before {
             content: '';
             position: absolute;
-            width: 170px;
-            height: 170px;
+            width: 150px;
+            height: 150px;
             border: 2px dashed rgba(80, 30, 0, 0.3);
             border-radius: 50%;
         }
 
         .bottle-wrapper {
             position: absolute;
-            top: 42%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
-            width: 120px;
-            height: 40px;
+            width: 110px;
+            height: 36px;
             z-index: 15;
             cursor: pointer;
             filter: drop-shadow(2px 8px 6px rgba(0, 0, 0, 0.45));
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
-        .spins-label {
+        /* 12 TA O'YINCHI KONTEYNERI */
+        .players-circle {
             position: absolute;
-            top: 56%;
-            left: 36%;
-            color: rgba(255,255,255,0.7);
-            font-size: 11px;
-            text-align: center;
-            line-height: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 330px;
+            height: 330px;
+            pointer-events: none;
         }
 
-        /* O'YINCHILAR AVATARI */
         .player-node {
             position: absolute;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
+            pointer-events: auto;
         }
 
         .avatar-frame {
             position: relative;
-            width: 62px;
-            height: 62px;
-            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
             border: 1px solid rgba(0,0,0,0.5);
+            background: #111;
         }
 
         .avatar-frame img {
@@ -206,30 +206,25 @@
             right: 2px;
             background: #e63946;
             color: #fff;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: bold;
-            padding: 1px 4px;
-            border-radius: 8px;
+            padding: 1px 3px;
+            border-radius: 6px;
         }
 
         .gold-border {
             border: 2px solid #f4c430;
-            box-shadow: 0 0 10px rgba(244, 196, 48, 0.6);
+            box-shadow: 0 0 8px rgba(244, 196, 48, 0.6);
         }
 
         .player-name {
-            margin-top: 3px;
+            margin-top: 2px;
             color: #fff;
-            font-size: 10px;
+            font-size: 9px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
             font-weight: 500;
+            white-space: nowrap;
         }
-
-        /* O'yinchi joylashuvlari (Rasmdagi kabi) */
-        .p-dinara { top: 32%; left: 12%; }
-        .p-isomiddin { top: 62%; left: 22%; }
-        .p-norboyev { top: 64%; left: 42%; }
-        .p-ramazon { top: 62%; right: 10%; }
 
         /* PASTI CHAT BO'LIMI */
         .chat-section {
@@ -247,7 +242,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             padding-right: 4px;
         }
 
@@ -258,8 +253,8 @@
         }
 
         .chat-avatar {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 6px;
             object-fit: cover;
         }
@@ -273,10 +268,10 @@
         .chat-bubble {
             background: #ffffff;
             color: #111;
-            padding: 6px 12px;
-            border-radius: 12px;
+            padding: 5px 10px;
+            border-radius: 10px;
             border-top-left-radius: 2px;
-            font-size: 13px;
+            font-size: 12px;
             max-width: 240px;
         }
 
@@ -288,13 +283,13 @@
 
         .show-trans {
             color: #718096;
-            font-size: 10px;
+            font-size: 9.5px;
             margin-top: 2px;
             margin-left: 2px;
             cursor: pointer;
         }
 
-        /* O'NG CHETDAGI MUSIQA TUGMALARI */
+        /* O'NG TARAFI MUSIQA TUGMALARI */
         .floating-action-btns {
             position: absolute;
             right: 12px;
@@ -306,8 +301,8 @@
         }
 
         .fab-btn {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             background: #232733;
             border: 1px solid #323847;
             border-radius: 50%;
@@ -324,9 +319,9 @@
             align-items: center;
             gap: 8px;
             background: #1d212c;
-            padding: 6px 12px;
+            padding: 5px 12px;
             border-radius: 25px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .chat-input-bar input {
@@ -335,7 +330,7 @@
             border: none;
             outline: none;
             color: #fff;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .chat-input-bar input::placeholder {
@@ -345,15 +340,15 @@
         .send-orange-btn {
             background: #f97316;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
         }
     </style>
 </head>
@@ -363,7 +358,7 @@
 
     <!-- HEADER -->
     <div class="app-header">
-        <span style="font-size: 20px;">✕</span>
+        <span style="font-size: 18px;">✕</span>
         <div class="header-title">
             Spin the Bottle 🍾❤️
         </div>
@@ -373,7 +368,7 @@
         </div>
     </div>
 
-    <!-- STOL HUQUQI -->
+    <!-- STOL HUQUDI -->
     <div class="game-area">
         <div class="table-top-bar">
             <div class="top-icons-left">
@@ -400,41 +395,11 @@
             </svg>
         </div>
 
-        <div class="spins-label">Spins<br>the bottle<br>↙</div>
-
-        <!-- O'YINCHILAR (Ayni rasmdagilar) -->
-        <div class="player-node p-dinara">
-            <div class="avatar-frame">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Dinara">
-                <span class="badge-num">3</span>
-            </div>
-            <span class="player-name">Dinara, 18</span>
-        </div>
-
-        <div class="player-node p-isomiddin">
-            <div class="avatar-frame">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Isomiddin">
-            </div>
-            <span class="player-name">Isomiddin</span>
-        </div>
-
-        <div class="player-node p-norboyev">
-            <div class="avatar-frame">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Norboyev">
-            </div>
-            <span class="player-name">Norboyev⁷⁰</span>
-        </div>
-
-        <div class="player-node p-ramazon">
-            <div class="avatar-frame gold-border">
-                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" alt="Ramazon">
-                <span class="badge-num">3</span>
-            </div>
-            <span class="player-name">رمzon ⁷⁰ , 18</span>
-        </div>
+        <!-- 12 TA O'YINCHI O'RINLARI -->
+        <div class="players-circle" id="playersCircle"></div>
     </div>
 
-    <!-- PASTI CHAT HUQUDI -->
+    <!-- CHAT SECTION -->
     <div class="chat-section">
         
         <div class="floating-action-btns">
@@ -497,6 +462,51 @@
 </div>
 
 <script>
+    // 12 ta o'yinchi ma'lumotlari
+    const players = [
+        { name: "Dinara, 18", badge: 3, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
+        { name: "Sardor", badge: null, gold: false, img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
+        { name: "Madina", badge: 1, gold: false, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
+        { name: "رمzon ⁷⁰, 18", badge: 3, gold: true, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
+        { name: "Norboyev⁷⁰", badge: null, gold: false, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
+        { name: "Isomiddin", badge: null, gold: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jasur", badge: 5, gold: false, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Laylo", badge: null, gold: false, img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
+        { name: "Malika", badge: 2, gold: false, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jahongir", badge: null, gold: false, img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
+        { name: "Aziza", badge: null, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
+        { name: "Bobur", badge: 1, gold: false, img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" }
+    ];
+
+    const container = document.getElementById('playersCircle');
+    const total = players.length;
+    const radius = 135; // Stol markazidan masofa
+
+    players.forEach((player, i) => {
+        // Aylanani 12 ta teng bo'lakka bo'lish (-90 gradus tepadan boshlash uchun)
+        const angle = (i * (360 / total) - 90) * (Math.PI / 180);
+        const x = 165 + radius * Math.cos(angle);
+        const y = 165 + radius * Math.sin(angle);
+
+        const node = document.createElement('div');
+        node.className = 'player-node';
+        node.style.left = `${x}px`;
+        node.style.top = `${y}px`;
+        node.style.transform = 'translate(-50%, -50%)';
+
+        const badgeHTML = player.badge ? `<span class="badge-num">${player.badge}</span>` : '';
+        const borderClass = player.gold ? 'gold-border' : '';
+
+        node.innerHTML = `
+            <div class="avatar-frame ${borderClass}">
+                <img src="${player.img}" alt="${player.name}">
+                ${badgeHTML}
+            </div>
+            <span class="player-name">${player.name}</span>
+        `;
+        container.appendChild(node);
+    });
+
     let angle = -15;
     function spin() {
         angle += 1440 + Math.floor(Math.random() * 360);
