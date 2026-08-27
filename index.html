@@ -163,14 +163,14 @@
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
-        /* 12 TA O'YINCHI KONTEYNERI (KATTAROQ AVATARLAR) */
+        /* 12 TA O'YINCHI KONTEYNERI */
         .players-circle {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 360px; /* Biroz kengaytirildi */
-            height: 360px; /* Biroz kengaytirildi */
+            width: 360px;
+            height: 360px;
             pointer-events: none;
         }
 
@@ -183,7 +183,7 @@
             pointer-events: auto;
         }
 
-        /* AVATAR HAJMI YANA KATTALASHDI (55px) */
+        /* KATTALASHTIRILGAN AVATARLAR (55px) */
         .avatar-frame {
             position: relative;
             width: 55px;
@@ -215,18 +215,18 @@
         }
 
         .gold-border {
-            border: 2.5px solid #f4c430; /* Ramza biroz qalinroq */
+            border: 2.5px solid #f4c430;
             box-shadow: 0 0 10px rgba(244, 196, 48, 0.7);
         }
 
-        /* NIK VA BAYROQ JOYLANISHI */
+        /* NIK VA BAYROQ */
         .player-info {
             margin-top: 3px;
             display: flex;
             align-items: center;
             gap: 3px;
             color: #fff;
-            font-size: 10px; /* Shrift o'lchami o'zgarmadi */
+            font-size: 10px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
             font-weight: 500;
             white-space: nowrap;
@@ -468,7 +468,6 @@
 </div>
 
 <script>
-    // 12 ta o'yinchi - Soat strelkasi bo'ylab 1 dan 12 gacha joylashtirildi
     const players = [
         { name: "Bobur", badge: 1, gold: false, flag: "🇺🇿", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" },
         { name: "Dinara, 18", badge: 2, gold: false, flag: "🇰🇿", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
@@ -477,7 +476,7 @@
         { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬🇧", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
         { name: "Norboyev⁷⁰", badge: 6, gold: false, flag: "🇩🇪", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
         { name: "Isomiddin", badge: 7, gold: false, flag: "🇰🇬", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jasur", badge: 8, gold: false, flag: "🇹🇯", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jasur", badge: 8, gold: false, flag: "🇹JB", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
         { name: "Laylo", badge: 9, gold: false, flag: "🇯🇵", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
         { name: "Malika", badge: 10, gold: false, flag: "🇬🇪", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
         { name: "Jahongir", badge: 11, gold: false, flag: "🇦🇿", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
@@ -486,14 +485,44 @@
 
     const container = document.getElementById('playersCircle');
     const total = players.length;
-    
-    // Radiusi biroz kengaytirildi (142px) - O'yinchilar bir-birini to'smasligi uchun
     const radius = 142; 
 
     players.forEach((player, i) => {
         const angle = (i * (360 / total) - 90) * (Math.PI / 180);
-        const x = 180 + radius * Math.cos(angle);
-        const y = 180 + radius * Math.sin(angle);
+        let x = 180 + radius * Math.cos(angle);
+        let y = 180 + radius * Math.sin(angle);
+
+        // Barcha aytgan maxsus surishlaringiz:
+        
+        // 2 (Dinara) va 12 (Aziza) -> Yuqoriga
+        if (player.badge === 2 || player.badge === 12) {
+            y -= 14;
+        }
+
+        // 3 (Sardor) va 11 (Jahongir) -> Burchak bo'ylab yuqoriga
+        if (player.badge === 3) {
+            x += 8;
+            y -= 10;
+        }
+        if (player.badge === 11) {
+            x -= 8;
+            y -= 10;
+        }
+
+        // 5 (Ramzon) va 9 (Laylo) -> Burchak bo'ylab pastga
+        if (player.badge === 5) {
+            x += 8;
+            y += 10;
+        }
+        if (player.badge === 9) {
+            x -= 8;
+            y += 10;
+        }
+
+        // 6 (Norboyev) va 8 (Jasur) -> Pastroqqa
+        if (player.badge === 6 || player.badge === 8) {
+            y += 14;
+        }
 
         const node = document.createElement('div');
         node.className = 'player-node';
