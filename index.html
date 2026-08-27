@@ -26,6 +26,7 @@
             position: relative;
             width: 420px;
             height: 750px;
+            max-height: 98vh; /* Ekranga to'liq sig'ishi uchun */
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -84,10 +85,10 @@
             font-size: 13px;
         }
 
-        /* MARKAZIY NAQSH (TEPAROQ SURILDI - 30%) */
+        /* MARKAZIY NAQSH (PASTROQQAGA TUSHIRILDI - 36%) */
         .table-center {
             position: absolute;
-            top: 30%;
+            top: 36%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
@@ -105,10 +106,10 @@
             height: 220px;
         }
 
-        /* O'YINCHILAR JOYLASHUVI (TEPAROQ SURILDI - 30%) */
+        /* O'YINCHILAR JOYLASHUVI (36%) */
         .players-container {
             position: absolute;
-            top: 30%;
+            top: 36%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 320px;
@@ -166,10 +167,10 @@
             line-height: 1;
         }
 
-        /* SHISHA (BUTILKA) (TEPAROQ SURILDI - 30%) */
+        /* SHISHA (BUTILKA) (36%) */
         .bottle {
             position: absolute;
-            top: 30%;
+            top: 36%;
             left: 50%;
             margin-top: -57px;
             margin-left: -21px;
@@ -186,13 +187,13 @@
             height: 100%;
         }
 
-        /* CHAT BO'LIMI (PASTKI YARMI) */
+        /* CHAT BO'LIMI (BO'YI KICHIKLASHTIRILDI - 35%) */
         .chat-container {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 45%;
+            height: 35%;
             background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 2, 0.85) 25%, rgba(10, 5, 2, 0.95) 100%);
             display: flex;
             flex-direction: column;
@@ -206,7 +207,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             padding-right: 5px;
             margin-bottom: 8px;
         }
@@ -224,7 +225,7 @@
             align-items: flex-start;
             gap: 6px;
             background: rgba(0, 0, 0, 0.4);
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 8px;
             border-left: 3px solid #d4a373;
             max-width: 90%;
@@ -276,14 +277,14 @@
             background: #a66f3b;
             border: none;
             color: #fff;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 14px;
+            font-size: 13px;
             transition: background 0.2s;
         }
 
@@ -456,4 +457,3 @@
 </script>
 
 </body>
-</html>
