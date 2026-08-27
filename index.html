@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin Bottle Game Table with Chat</title>
+    <title>Spin Bottle Game Table</title>
     <style>
         * {
             box-sizing: border-box;
@@ -32,7 +32,7 @@
             align-items: center;
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
 
-            /* YOG'OCH STOL */
+            /* YOG'OCH STOL FONI */
             background: 
                 repeating-linear-gradient(
                     90deg,
@@ -84,10 +84,10 @@
             font-size: 13px;
         }
 
-        /* MARKAZIY NAQSH (XIRA KOMPAS YULDUZI) */
+        /* MARKAZIY NAQSH (TEPAROQ SURILDI - 30%) */
         .table-center {
             position: absolute;
-            top: 40%;
+            top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
@@ -105,10 +105,10 @@
             height: 220px;
         }
 
-        /* O'YINCHILAR JOYLASHUVI */
+        /* O'YINCHILAR JOYLASHUVI (TEPAROQ SURILDI - 30%) */
         .players-container {
             position: absolute;
-            top: 40%;
+            top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 320px;
@@ -166,10 +166,10 @@
             line-height: 1;
         }
 
-        /* SHISHA (BUTILKA) */
+        /* SHISHA (BUTILKA) (TEPAROQ SURILDI - 30%) */
         .bottle {
             position: absolute;
-            top: 40%;
+            top: 30%;
             left: 50%;
             margin-top: -57px;
             margin-left: -21px;
@@ -192,8 +192,8 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 38%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 2, 0.85) 30%, rgba(10, 5, 2, 0.95) 100%);
+            height: 45%;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 2, 0.85) 25%, rgba(10, 5, 2, 0.95) 100%);
             display: flex;
             flex-direction: column;
             padding: 10px 15px;
@@ -211,7 +211,6 @@
             margin-bottom: 8px;
         }
 
-        /* Scrollbar dizayni */
         .chat-messages::-webkit-scrollbar {
             width: 4px;
         }
@@ -250,7 +249,6 @@
             word-break: break-word;
         }
 
-        /* Input bo'limi */
         .chat-input-area {
             display: flex;
             align-items: center;
@@ -348,7 +346,7 @@
         </svg>
     </div>
 
-    <!-- CHAT SECTION (PASTKI TARAF) -->
+    <!-- CHAT SECTION -->
     <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
             <div class="chat-msg">
@@ -421,7 +419,6 @@
         document.getElementById('bottle').style.transform = `rotate(${currentRotation}deg)`;
     }
 
-    /* CHAT FUNKSIYALARI */
     function sendMessage() {
         const input = document.getElementById('chatInput');
         const text = input.value.trim();
