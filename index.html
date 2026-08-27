@@ -3,456 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin Bottle Game Table</title>
+    <title>Spin the Bottle Copy</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             user-select: none;
         }
 
         body {
-            background-color: #111;
+            background-color: #0b0d12;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        /* O'YIN EKRANI */
-        .game-screen {
+        /* EKRAN KONTEYNERI */
+        .app-screen {
             position: relative;
-            width: 420px;
-            height: 750px;
-            max-height: 98vh; /* Ekranga to'liq sig'ishi uchun */
-            overflow: hidden;
+            width: 390px;
+            height: 780px;
+            background: #1d1f27;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-
-            /* YOG'OCH STOL FONI */
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 28px,
-                    rgba(65, 30, 10, 0.15) 28px,
-                    rgba(65, 30, 10, 0.15) 30px
-                ),
-                radial-gradient(circle, #cc935c 0%, #a66f3b 60%, #7d4d23 100%);
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
 
-        /* YUQORI PANEL */
-        .top-bar {
+        /* YUQORI DANGAL HEADER (APP BAR) */
+        .app-header {
+            height: 50px;
+            background: #171922;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            color: #fff;
+            z-index: 30;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 18px;
+        }
+
+        /* O'YIN HUDUDI (YOG'OCH STOL) */
+        .game-area {
+            position: relative;
+            height: 54%;
+            width: 100%;
+            /* Haqiqiy yog'och tekstura simulyatsiyasi */
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 70%),
+                repeating-radial-gradient(circle at 50% 50%, #d88135 0, #d88135 15px, #d0772d 16px, #c86e24 30px);
+            background-blend-mode: overlay;
+            background-color: #cb7427;
+            overflow: hidden;
+        }
+
+        /* YUQORI MONITORING BAR (STOL USTDAGI STATISTIKA) */
+        .table-top-bar {
             position: absolute;
-            top: 15px;
+            top: 10px;
             left: 0;
             width: 100%;
-            padding: 0 15px;
+            padding: 0 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 20;
         }
 
-        .stat-badge {
-            background: rgba(139, 26, 26, 0.85);
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
+        .top-icons-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .flag-badge {
-            background: rgba(40, 40, 40, 0.85);
+        .icon-btn {
+            background: rgba(220, 110, 35, 0.5);
+            border: 1px solid rgba(255, 200, 150, 0.3);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .table-num {
-            background: rgba(40, 25, 15, 0.85);
-            color: #d4a373;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-weight: bold;
             font-size: 13px;
         }
 
-        /* MARKAZIY NAQSH (PASTROQQAGA TUSHIRILDI - 36%) */
-        .table-center {
+        .heart-badge {
+            background: rgba(210, 60, 20, 0.85);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .table-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 10px;
+            text-align: right;
+            line-height: 1.1;
+        }
+
+        /* MARKAZDAGI YOG'OCH NAQSH VA BUTILKA */
+        .wood-carving {
             position: absolute;
-            top: 36%;
+            top: 42%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
+            width: 210px;
+            height: 210px;
+            background: radial-gradient(circle, #e28e40 0%, #bd671a 70%, #9e500c 100%);
+            border-radius: 50%;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.4), 0 4px 10px rgba(0,0,0,0.2);
             display: flex;
             justify-content: center;
             align-items: center;
             pointer-events: none;
-            opacity: 0.25;
         }
 
-        .compass-star {
+        /* Suno'iy gultoj barglar simulyatsiyasi */
+        .wood-carving::before {
+            content: '';
             position: absolute;
-            width: 220px;
-            height: 220px;
-        }
-
-        /* O'YINCHILAR JOYLASHUVI (36%) */
-        .players-container {
-            position: absolute;
-            top: 36%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 320px;
-            height: 320px;
+            width: 170px;
+            height: 170px;
+            border: 2px dashed rgba(80, 30, 0, 0.3);
             border-radius: 50%;
         }
 
-        .player {
+        .bottle-wrapper {
             position: absolute;
-            transform: translate(-50%, -50%);
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            width: 120px;
+            height: 40px;
+            z-index: 15;
+            cursor: pointer;
+            filter: drop-shadow(2px 8px 6px rgba(0, 0, 0, 0.45));
+            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+
+        .spins-label {
+            position: absolute;
+            top: 56%;
+            left: 36%;
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        /* O'YINCHILAR AVATARI */
+        .player-node {
+            position: absolute;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
         }
 
-        .avatar-box {
+        .avatar-frame {
             position: relative;
-            width: 48px;
-            height: 48px;
+            width: 62px;
+            height: 62px;
             border-radius: 12px;
             overflow: hidden;
-            border: 2px solid #5a3a1e;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            background: #222;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,0,0,0.5);
         }
 
-        .avatar-box img {
+        .avatar-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .player.active .avatar-box {
-            border: 2.5px solid #4de94c;
-            box-shadow: 0 0 12px #4de94c, inset 0 0 5px #4de94c;
-        }
-
-        .player-info {
-            margin-top: 3px;
-            background: rgba(0, 0, 0, 0.65);
-            padding: 2px 8px;
-            border-radius: 8px;
+        .badge-num {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #e63946;
             color: #fff;
-            font-size: 10.5px;
-            font-weight: 600;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 8px;
         }
 
-        .player-info .flag-icon {
-            font-size: 11px;
-            line-height: 1;
+        .gold-border {
+            border: 2px solid #f4c430;
+            box-shadow: 0 0 10px rgba(244, 196, 48, 0.6);
         }
 
-        /* SHISHA (BUTILKA) (36%) */
-        .bottle {
-            position: absolute;
-            top: 36%;
-            left: 50%;
-            margin-top: -57px;
-            margin-left: -21px;
-            width: 42px;
-            height: 115px;
-            z-index: 15;
-            cursor: pointer;
-            transition: transform 3s cubic-bezier(0.15, 0.85, 0.35, 1);
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+        .player-name {
+            margin-top: 3px;
+            color: #fff;
+            font-size: 10px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            font-weight: 500;
         }
 
-        .bottle svg {
-            width: 100%;
-            height: 100%;
-        }
+        /* O'yinchi joylashuvlari (Rasmdagi kabi) */
+        .p-dinara { top: 32%; left: 12%; }
+        .p-isomiddin { top: 62%; left: 22%; }
+        .p-norboyev { top: 64%; left: 42%; }
+        .p-ramazon { top: 62%; right: 10%; }
 
-        /* CHAT BO'LIMI (BO'YI KICHIKLASHTIRILDI - 35%) */
-        .chat-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 35%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 2, 0.85) 25%, rgba(10, 5, 2, 0.95) 100%);
+        /* PASTI CHAT BO'LIMI */
+        .chat-section {
+            flex: 1;
+            background: #14161d;
             display: flex;
             flex-direction: column;
-            padding: 10px 15px;
-            z-index: 25;
-            backdrop-filter: blur(4px);
+            justify-content: space-between;
+            padding: 10px;
+            position: relative;
         }
 
-        .chat-messages {
+        .chat-feed {
             flex: 1;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            padding-right: 5px;
-            margin-bottom: 8px;
+            gap: 10px;
+            padding-right: 4px;
         }
 
-        .chat-messages::-webkit-scrollbar {
-            width: 4px;
-        }
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(212, 163, 115, 0.4);
-            border-radius: 4px;
-        }
-
-        .chat-msg {
+        .chat-row {
             display: flex;
             align-items: flex-start;
-            gap: 6px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 4px 8px;
-            border-radius: 8px;
-            border-left: 3px solid #d4a373;
-            max-width: 90%;
-            animation: fadeIn 0.3s ease;
+            gap: 8px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+        .chat-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: cover;
         }
 
-        .chat-msg .user-name {
-            font-size: 11px;
-            font-weight: bold;
-            color: #e0a96d;
-            white-space: nowrap;
+        .chat-bubble-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .chat-msg .text {
-            font-size: 11.5px;
-            color: #ddd;
-            word-break: break-word;
+        .chat-bubble {
+            background: #ffffff;
+            color: #111;
+            padding: 6px 12px;
+            border-radius: 12px;
+            border-top-left-radius: 2px;
+            font-size: 13px;
+            max-width: 240px;
         }
 
-        .chat-input-area {
+        .chat-bubble .sender {
+            color: #2b6cb0;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .show-trans {
+            color: #718096;
+            font-size: 10px;
+            margin-top: 2px;
+            margin-left: 2px;
+            cursor: pointer;
+        }
+
+        /* O'NG CHETDAGI MUSIQA TUGMALARI */
+        .floating-action-btns {
+            position: absolute;
+            right: 12px;
+            top: -20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 25;
+        }
+
+        .fab-btn {
+            width: 36px;
+            height: 36px;
+            background: #232733;
+            border: 1px solid #323847;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #a0aec0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* INPUT PANELI */
+        .chat-input-bar {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(30, 20, 10, 0.8);
-            border: 1px solid rgba(212, 163, 115, 0.3);
-            border-radius: 20px;
-            padding: 4px 6px 4px 14px;
+            background: #1d212c;
+            padding: 6px 12px;
+            border-radius: 25px;
+            margin-top: 6px;
         }
 
-        .chat-input-area input {
+        .chat-input-bar input {
             flex: 1;
             background: transparent;
             border: none;
             outline: none;
             color: #fff;
-            font-size: 12px;
+            font-size: 13px;
         }
 
-        .chat-input-area input::placeholder {
-            color: #888;
+        .chat-input-bar input::placeholder {
+            color: #5a6578;
         }
 
-        .send-btn {
-            background: #a66f3b;
+        .send-orange-btn {
+            background: #f97316;
             border: none;
-            color: #fff;
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            cursor: pointer;
+            color: #fff;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 13px;
-            transition: background 0.2s;
-        }
-
-        .send-btn:hover {
-            background: #cc935c;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-<div class="game-screen">
+<div class="app-screen">
 
-    <!-- YUQORI BAR -->
-    <div class="top-bar">
-        <div class="stat-badge">❤️ 10,000</div>
-        <div class="flag-badge">🎟️ 8</div>
-        <div class="table-num">TABLE #229</div>
+    <!-- HEADER -->
+    <div class="app-header">
+        <span style="font-size: 20px;">✕</span>
+        <div class="header-title">
+            Spin the Bottle 🍾❤️
+        </div>
+        <div class="header-icons">
+            <span>⌵</span>
+            <span>⋮</span>
+        </div>
     </div>
 
-    <!-- MARKAZDAGI NAQSH -->
-    <div class="table-center">
-        <svg class="compass-star" viewBox="0 0 200 200">
-            <g fill="none" stroke="#250f04" stroke-width="1.2">
-                <polygon points="100,5 106,94 100,100 94,94" fill="#3a1905" />
-                <polygon points="100,195 106,106 100,100 94,106" fill="#3a1905" />
-                <polygon points="195,100 106,106 100,100 106,94" fill="#3a1905" />
-                <polygon points="5,100 94,106 100,100 94,94" fill="#3a1905" />
-
-                <polygon points="167,33 104,93 100,100 107,96" fill="#2c1203" />
-                <polygon points="33,167 96,107 100,100 93,104" fill="#2c1203" />
-                <polygon points="167,167 107,104 100,100 104,107" fill="#2c1203" />
-                <polygon points="33,33 93,96 100,100 96,93" fill="#2c1203" />
-
-                <g fill="#1a0901">
-                    <polygon points="135,22 102,96 100,100" />
-                    <polygon points="178,65 104,98 100,100" />
-                    <polygon points="178,135 104,102 100,100" />
-                    <polygon points="135,178 102,104 100,100" />
-                    <polygon points="65,178 98,104 100,100" />
-                    <polygon points="22,135 96,102 100,100" />
-                    <polygon points="22,65 96,98 100,100" />
-                    <polygon points="65,22 98,96 100,100" />
-                </g>
-            </g>
-            <circle cx="100" cy="100" r="4" fill="#150600" />
-        </svg>
-    </div>
-
-    <!-- O'YINCHILAR -->
-    <div class="players-container" id="playersContainer"></div>
-
-    <!-- BUTILKA -->
-    <div class="bottle" id="bottle" onclick="spinBottle()">
-        <svg viewBox="0 0 50 140">
-            <path d="M 18,5 L 32,5 L 32,25 L 42,45 L 42,125 C 42,135 8,135 8,125 L 8,45 L 18,25 Z" fill="#2e5d32" stroke="#1b3b1e" stroke-width="2"/>
-            <rect x="10" y="60" width="30" height="35" rx="3" fill="#cfb997" stroke="#8c785c" stroke-width="1"/>
-            <text x="25" y="77" font-size="7" fill="#333" text-anchor="middle" font-weight="bold">SPIN THE</text>
-            <text x="25" y="86" font-size="7" fill="#333" text-anchor="middle" font-weight="bold">BOTTLE</text>
-            <rect x="17" y="2" width="16" height="5" fill="#b5832a" rx="1"/>
-        </svg>
-    </div>
-
-    <!-- CHAT SECTION -->
-    <div class="chat-container">
-        <div class="chat-messages" id="chatMessages">
-            <div class="chat-msg">
-                <span class="user-name">🇺🇿 Muhammad:</span>
-                <span class="text">Salom hammaga! 👋</span>
+    <!-- STOL HUQUQI -->
+    <div class="game-area">
+        <div class="table-top-bar">
+            <div class="top-icons-left">
+                <div class="heart-badge">❤️ 62</div>
+                <div class="icon-btn">🎟️</div>
+                <div class="icon-btn">🎯</div>
+                <div class="icon-btn">🏆</div>
             </div>
-            <div class="chat-msg">
-                <span class="user-name">🇮🇹 Sofia:</span>
-                <span class="text">Ciao! Who spins next? 🍾</span>
-            </div>
-            <div class="chat-msg">
-                <span class="user-name">🇧🇷 Lucas:</span>
-                <span class="text">Let's go guys!! 🔥</span>
+            <div class="top-icons-left">
+                <div class="icon-btn">☰</div>
+                <div class="icon-btn">⚙️</div>
+                <div class="table-info">Table<br><b>246</b></div>
             </div>
         </div>
-        <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Xabar yozing..." onkeypress="handleKeyPress(event)">
-            <button class="send-btn" onclick="sendMessage()">➤</button>
+
+        <!-- MARKAZIY NAQSH -->
+        <div class="wood-carving"></div>
+
+        <!-- BUTILKA -->
+        <div class="bottle-wrapper" id="bottle" onclick="spin()">
+            <svg viewBox="0 0 140 50">
+                <path d="M 10,20 L 30,20 L 45,10 L 120,10 C 130,10 135,15 135,25 C 135,35 130,40 120,40 L 45,40 L 30,30 L 10,30 Z" fill="#2d6a4f" stroke="#1b4332" stroke-width="2"/>
+                <rect x="5" y="18" width="8" height="14" rx="2" fill="#d4a373"/>
+            </svg>
         </div>
+
+        <div class="spins-label">Spins<br>the bottle<br>↙</div>
+
+        <!-- O'YINCHILAR (Ayni rasmdagilar) -->
+        <div class="player-node p-dinara">
+            <div class="avatar-frame">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Dinara">
+                <span class="badge-num">3</span>
+            </div>
+            <span class="player-name">Dinara, 18</span>
+        </div>
+
+        <div class="player-node p-isomiddin">
+            <div class="avatar-frame">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Isomiddin">
+            </div>
+            <span class="player-name">Isomiddin</span>
+        </div>
+
+        <div class="player-node p-norboyev">
+            <div class="avatar-frame">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Norboyev">
+            </div>
+            <span class="player-name">Norboyev⁷⁰</span>
+        </div>
+
+        <div class="player-node p-ramazon">
+            <div class="avatar-frame gold-border">
+                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" alt="Ramazon">
+                <span class="badge-num">3</span>
+            </div>
+            <span class="player-name">رمzon ⁷⁰ , 18</span>
+        </div>
+    </div>
+
+    <!-- PASTI CHAT HUQUDI -->
+    <div class="chat-section">
+        
+        <div class="floating-action-btns">
+            <div class="fab-btn">📹</div>
+            <div class="fab-btn">🎵</div>
+        </div>
+
+        <div class="chat-feed" id="chatFeed">
+            
+            <div class="chat-row">
+                <img class="chat-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80">
+                <div class="chat-bubble-container">
+                    <div class="chat-bubble">
+                        <span class="sender">Isomiddin:</span> Dinara, daa jinniman
+                    </div>
+                    <span class="show-trans">Show translation</span>
+                </div>
+            </div>
+
+            <div class="chat-row">
+                <img class="chat-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80">
+                <div class="chat-bubble-container">
+                    <div class="chat-bubble">
+                        <span class="sender">Isomiddin:</span> Dinara, ha yoki yu
+                    </div>
+                    <span class="show-trans">Show translation</span>
+                </div>
+            </div>
+
+            <div class="chat-row">
+                <img class="chat-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80">
+                <div class="chat-bubble-container">
+                    <div class="chat-bubble">
+                        <span class="sender" style="color: #d63384;">Dinara:</span> Nmaa
+                    </div>
+                    <span class="show-trans">Show translation</span>
+                </div>
+            </div>
+
+            <div class="chat-row">
+                <img class="chat-avatar" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80">
+                <div class="chat-bubble-container">
+                    <div class="chat-bubble">
+                        <span class="sender" style="color: #4c51bf;">رمzon ⁷⁰:</span> Isomiddin, ?
+                    </div>
+                    <span class="show-trans">Show translation</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- INPUT -->
+        <div class="chat-input-bar">
+            <input type="text" placeholder="Write a message here...">
+            <button class="send-orange-btn">➤</button>
+        </div>
+
     </div>
 
 </div>
 
 <script>
-    const playersData = [
-        { name: "Muhammad", flag: "🇺🇿", img: "https://i.pravatar.cc/100?img=11" },
-        { name: "Elizabeth", flag: "🇺🇸", img: "https://i.pravatar.cc/100?img=5" },
-        { name: "Maximilian", flag: "🇩🇪", img: "https://i.pravatar.cc/100?img=12" },
-        { name: "Sora", flag: "🇯🇵", img: "https://i.pravatar.cc/100?img=9" },
-        { name: "Alejandro", flag: "🇪🇸", img: "https://i.pravatar.cc/100?img=68" },
-        { name: "Chloe", flag: "🇫🇷", img: "https://i.pravatar.cc/100?img=47" },
-        { name: "Abdurahmon", flag: "🇦🇪", img: "https://i.pravatar.cc/100?img=57" },
-        { name: "Anna", flag: "🇬🇧", img: "https://i.pravatar.cc/100?img=38" },
-        { name: "Lucas", flag: "🇧🇷", img: "https://i.pravatar.cc/100?img=14", active: true },
-        { name: "Sofia", flag: "🇮🇹", img: "https://i.pravatar.cc/100?img=26", active: true },
-        { name: "Dmitry", flag: "🇰🇿", img: "https://i.pravatar.cc/100?img=3" },
-        { name: "Zara", flag: "🇹🇷", img: "https://i.pravatar.cc/100?img=20" }
-    ];
-
-    const container = document.getElementById('playersContainer');
-    const totalPlayers = playersData.length;
-    const radius = 148;
-
-    playersData.forEach((player, index) => {
-        const angle = (index * (360 / totalPlayers) - 90) * (Math.PI / 180);
-        const x = 160 + radius * Math.cos(angle);
-        const y = 160 + radius * Math.sin(angle);
-
-        const playerEl = document.createElement('div');
-        playerEl.className = `player ${player.active ? 'active' : ''}`;
-        playerEl.style.left = `${x}px`;
-        playerEl.style.top = `${y}px`;
-
-        playerEl.innerHTML = `
-            <div class="avatar-box">
-                <img src="${player.img}" alt="${player.name}">
-            </div>
-            <div class="player-info">
-                <span class="flag-icon">${player.flag}</span>
-                <span>${player.name}</span>
-            </div>
-        `;
-        container.appendChild(playerEl);
-    });
-
-    let currentRotation = 0;
-    function spinBottle() {
-        const randomDegree = Math.floor(1800 + Math.random() * 360);
-        currentRotation += randomDegree;
-        document.getElementById('bottle').style.transform = `rotate(${currentRotation}deg)`;
-    }
-
-    function sendMessage() {
-        const input = document.getElementById('chatInput');
-        const text = input.value.trim();
-        if (text !== "") {
-            const chatBox = document.getElementById('chatMessages');
-            const newMsg = document.createElement('div');
-            newMsg.className = 'chat-msg';
-            newMsg.innerHTML = `
-                <span class="user-name">🇺🇿 Siz:</span>
-                <span class="text">${escapeHtml(text)}</span>
-            `;
-            chatBox.appendChild(newMsg);
-            input.value = "";
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    }
-
-    function handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    }
-
-    function escapeHtml(string) {
-        return String(string).replace(/[&<>"']/g, function (s) {
-            return {
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#39;"
-            }[s];
-        });
+    let angle = -15;
+    function spin() {
+        angle += 1440 + Math.floor(Math.random() * 360);
+        document.getElementById('bottle').style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
     }
 </script>
 
