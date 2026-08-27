@@ -21,7 +21,6 @@
             min-height: 100vh;
         }
 
-        /* EKRAN KONTEYNERI */
         .app-screen {
             position: relative;
             width: 390px;
@@ -33,7 +32,6 @@
             box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
 
-        /* YUQORI APP BAR */
         .app-header {
             height: 48px;
             background: #171922;
@@ -60,20 +58,18 @@
             font-size: 18px;
         }
 
-        /* O'YIN HUDUDI */
         .game-area {
             position: relative;
             height: 54%;
             width: 100%;
-            background: 
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 75%),
-                repeating-radial-gradient(circle at 50% 50%, #f4a261 0, #f4a261 15px, #e99451 16px, #de8640 30px);
-            background-blend-mode: overlay;
-            background-color: #e59850;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 75%),
+                repeating-radial-gradient(circle at 50% 50%, #e8b98a 0, #e8b98a 15px, #e0ad7c 16px, #d7a171 30px);
+            background-blend-mode: soft-light;
+            background-color: #e0ad7c;
             overflow: hidden;
         }
 
-        /* YUQORI MONITORING BAR */
         .table-top-bar {
             position: absolute;
             top: 10px;
@@ -124,60 +120,30 @@
             line-height: 1.1;
         }
 
-        /* YANGILANGAN MARKAZDAGI NAQSH (YIN-YANG VA OLTIN O'YMA NAQSH) */
         .wood-carving {
             position: absolute;
             top: 54%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 210px;
-            height: 210px;
-            background: 
-                radial-gradient(circle, rgba(212, 147, 75, 0.9) 0%, rgba(138, 77, 26, 0.95) 45%, rgba(61, 31, 8, 1) 100%),
-                repeating-conic-gradient(from 0deg, #d4934b 0deg 15deg, #a15d21 15deg 30deg);
-            border-radius: 50%;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 260px;
+            height: 260px;
             pointer-events: none;
-            border: 4px solid #b87b31;
+            opacity: 0.4;
         }
 
-        .wood-carving::before {
-            content: '';
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border: 3px solid #f4c430;
-            border-radius: 50%;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 8px rgba(244, 196, 48, 0.4);
-        }
-
-        .wood-carving::after {
-            content: '';
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            border: 2px dashed rgba(255, 230, 180, 0.6);
-            border-radius: 50%;
-        }
-
-        /* YANGILANGAN SHAFOF VA ENLI SHISHA */
         .bottle-wrapper {
             position: absolute;
             top: 54%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
-            width: 125px; /* Eni kengaytirildi */
-            height: 65px; /* Bo'yi moslashtirildi */
+            width: 115px;
+            height: 58px;
             z-index: 15;
             cursor: pointer;
             filter: drop-shadow(0px 10px 12px rgba(0, 0, 0, 0.6));
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
-        /* 12 TA O'YINCHI DOIRASI */
         .players-circle {
             position: absolute;
             top: 54%;
@@ -244,7 +210,6 @@
             white-space: nowrap;
         }
 
-        /* PASTI CHAT BO'LIMI */
         .chat-section {
             flex: 1;
             background: #14161d;
@@ -310,7 +275,7 @@
         .floating-action-btns {
             position: absolute;
             right: 12px;
-            top: -20px;
+            top: 6px;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -328,6 +293,13 @@
             align-items: center;
             color: #a0aec0;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .fab-btn.youtube-btn {
+            background: #ff0000;
+            border-color: #cc0000;
+            color: #fff;
+            font-size: 13px;
         }
 
         .chat-input-bar {
@@ -372,7 +344,6 @@
 
 <div class="app-screen">
 
-    <!-- HEADER -->
     <div class="app-header">
         <span style="font-size: 18px;">✕</span>
         <div class="header-title">
@@ -384,7 +355,6 @@
         </div>
     </div>
 
-    <!-- STOL HUDUDI -->
     <div class="game-area">
         <div class="table-top-bar">
             <div class="top-icons-left">
@@ -400,53 +370,38 @@
             </div>
         </div>
 
-        <!-- MARKAZIY YANGI NAQSH -->
-        <div class="wood-carving"></div>
+        <div class="wood-carving" id="woodCarving"></div>
 
-        <!-- SHAFOF VA ENLI SHISHA -->
         <div class="bottle-wrapper" id="bottle" onclick="spin()">
             <svg viewBox="0 0 160 70" width="100%" height="100%">
                 <defs>
                     <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="rgba(255, 255, 255, 0.7)" />
-                        <stop offset="20%" stop-color="rgba(240, 240, 255, 0.3)" />
-                        <stop offset="50%" stop-color="rgba(200, 220, 255, 0.15)" />
-                        <stop offset="80%" stop-color="rgba(240, 240, 255, 0.35)" />
-                        <stop offset="100%" stop-color="rgba(255, 255, 255, 0.8)" />
-                    </linearGradient>
-                    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="rgba(212, 130, 50, 0.85)" />
-                        <stop offset="100%" stop-color="rgba(140, 65, 10, 0.9)" />
+                        <stop offset="0%" stop-color="rgba(30, 230, 90, 0.8)" />
+                        <stop offset="20%" stop-color="rgba(0, 190, 55, 0.55)" />
+                        <stop offset="50%" stop-color="rgba(0, 165, 45, 0.35)" />
+                        <stop offset="80%" stop-color="rgba(0, 190, 55, 0.6)" />
+                        <stop offset="100%" stop-color="rgba(20, 220, 80, 0.85)" />
                     </linearGradient>
                 </defs>
-                <!-- Shisha korpusi -->
-                <path d="M 8,35 L 28,35 C 32,35 38,20 52,12 L 140,12 C 152,12 155,20 155,35 C 155,50 152,58 140,58 L 52,58 C 38,50 32,35 28,35 Z" 
-                      fill="url(#glassGrad)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="1.8"/>
-                <!-- Ichidagi suyuqlik -->
-                <path d="M 52,18 L 138,18 C 146,18 149,24 149,35 C 149,46 146,52 138,52 L 52,52 C 43,46 38,35 36,35 C 38,35 43,24 52,18 Z" 
-                      fill="url(#liquidGrad)"/>
-                <!-- Probka va bo'yinchasi -->
-                <rect x="2" y="28" width="8" height="14" rx="2" fill="#c28e5a" stroke="#5c3a18" stroke-width="1"/>
-                <!-- Shisha yaltirashi (Highlight) -->
-                <path d="M 55,15 L 135,15" stroke="rgba(255, 255, 255, 0.9)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M 55,20 L 130,20" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" stroke-linecap="round"/>
+                <path d="M 10,28 L 42,28 C 50,28 54,16 66,13 L 140,13 C 151,13 154,22 154,35 C 154,48 151,57 140,57 L 66,57 C 54,54 50,42 42,42 L 10,42 Z"
+                      fill="url(#glassGrad)" stroke="rgba(15, 170, 65, 0.95)" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M 60,13 L 135,13" stroke="rgba(220, 255, 225, 0.9)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 60,18 L 130,18" stroke="rgba(220, 255, 225, 0.4)" stroke-width="1" stroke-linecap="round"/>
             </svg>
         </div>
 
-        <!-- 12 TA O'YINCHI O'RINLARI -->
         <div class="players-circle" id="playersCircle"></div>
     </div>
 
-    <!-- PASTI CHAT BO'LIMI -->
     <div class="chat-section">
-        
+
         <div class="floating-action-btns">
-            <div class="fab-btn">📹</div>
+            <div class="fab-btn youtube-btn">▶</div>
             <div class="fab-btn">🎵</div>
         </div>
 
         <div class="chat-feed" id="chatFeed">
-            
+
             <div class="chat-row">
                 <img class="chat-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80">
                 <div class="chat-bubble-container">
@@ -489,7 +444,6 @@
 
         </div>
 
-        <!-- INPUT -->
         <div class="chat-input-bar">
             <input type="text" placeholder="Write a message here...">
             <button class="send-orange-btn">➤</button>
@@ -517,7 +471,7 @@
 
     const container = document.getElementById('playersCircle');
     const total = players.length;
-    const radius = 142; 
+    const radius = 142;
 
     players.forEach((player, i) => {
         const angle = (i * (360 / total) - 90) * (Math.PI / 180);
@@ -557,6 +511,31 @@
         angle += 1440 + Math.floor(Math.random() * 360);
         document.getElementById('bottle').style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
     }
+
+    (function drawWoodCarving() {
+        const size = 260;
+        const cx = size / 2, cy = size / 2;
+        const petalCount = 16;
+        const outerR = 120;
+        const innerR = 40;
+        let petals = '';
+        for (let i = 0; i < petalCount; i++) {
+            const a = (i * 360 / petalCount);
+            petals += `<path d="M ${cx} ${cy} 
+                L ${cx} ${cy - innerR} 
+                Q ${cx + 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - outerR} 
+                Q ${cx - 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - innerR} Z"
+                fill="${i % 2 === 0 ? 'rgba(240,205,170,0.5)' : 'rgba(215,170,125,0.4)'}"
+                stroke="rgba(200,150,100,0.3)" stroke-width="0.5"
+                transform="rotate(${a} ${cx} ${cy})"/>`;
+        }
+        const svg = `<svg viewBox="0 0 ${size} ${size}" width="100%" height="100%">
+            <circle cx="${cx}" cy="${cy}" r="${outerR + 8}" fill="rgba(232,190,150,0.15)"/>
+            ${petals}
+            <circle cx="${cx}" cy="${cy}" r="${innerR - 4}" fill="rgba(240,205,170,0.35)" stroke="rgba(200,150,100,0.3)" stroke-width="1"/>
+        </svg>`;
+        document.getElementById('woodCarving').innerHTML = svg;
+    })();
 </script>
 
 </body>
