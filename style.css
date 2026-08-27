@@ -130,46 +130,58 @@ body {
 }
 
 
-/* Stol ustidagi yorug'lik */
-
-.game-container::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at 50% 42%,
-            rgba(255, 244, 220, 0.22),
-            transparent 58%
-        );
-
-    pointer-events: none;
-
-    z-index: 0;
+/* STOL HUDUDI - To'qroq va xira chiziqlar bilan */
+.game-area {
+    position: relative;
+    height: 54%;
+    width: 100%;
+    /* Yorqinlik kamaytirilib, chiziqlar shaffofligi (opacity) pasaytirildi */
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 80%),
+        repeating-radial-gradient(circle at 50% 50%, #4a2810 0, #4a2810 12px, #3b1f0c 13px, #3b1f0c 28px);
+    background-color: #2d1607;
+    overflow: hidden;
 }
 
-
-/* Tashqi tabiiy soya */
-
-.game-container::after {
-    content: "";
-
+/* MARKAZDAGI NAQSH - To'q yog'och va yumshoq chiziqlar */
+.wood-carving {
     position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 45%,
-            rgba(70, 35, 12, 0.08) 70%,
-            rgba(48, 23, 8, 0.28) 100%
-        );
-
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    background: 
+        radial-gradient(circle, #4a2a12 0%, #2a1405 70%, #170a02 100%),
+        repeating-conic-gradient(from 0deg, rgba(80, 45, 20, 0.3) 0deg 15deg, rgba(40, 20, 8, 0.3) 15deg 30deg);
+    border-radius: 50%;
+    /* Xiralashtirish va yumshoq soyalar */
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.9), 0 10px 25px rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     pointer-events: none;
+    border: 3px solid rgba(140, 90, 45, 0.4);
+    filter: blur(0.4px); /* Chiziqlarga engil xiralik beradi */
+}
 
-    z-index: 1;
+.wood-carving::before {
+    content: '';
+    position: absolute;
+    width: 155px;
+    height: 155px;
+    border: 2px solid rgba(180, 120, 60, 0.25);
+    border-radius: 50%;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+}
+
+.wood-carving::after {
+    content: '';
+    position: absolute;
+    width: 95px;
+    height: 95px;
+    border: 1px dashed rgba(180, 120, 60, 0.2);
+    border-radius: 50%;
 }
 
 
