@@ -183,7 +183,6 @@
             pointer-events: auto;
         }
 
-        /* AVATAR HAJMI SAL KATTALASHDI (50px) */
         .avatar-frame {
             position: relative;
             width: 50px;
@@ -207,10 +206,11 @@
             right: 2px;
             background: #e63946;
             color: #fff;
-            font-size: 8.5px;
+            font-size: 9px;
             font-weight: bold;
             padding: 1px 4px;
             border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .gold-border {
@@ -463,28 +463,28 @@
 </div>
 
 <script>
+    // 12 ta o'yinchi - Soat strelkasi bo'ylab 1 dan 12 gacha ketma-ket joylashtirildi
     const players = [
-        { name: "Dinara, 18", badge: 3, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
-        { name: "Sardor", badge: null, gold: false, img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
-        { name: "Madina", badge: 1, gold: false, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
-        { name: "رمzon ⁷⁰, 18", badge: 3, gold: true, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
-        { name: "Norboyev⁷⁰", badge: null, gold: false, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
-        { name: "Isomiddin", badge: null, gold: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jasur", badge: 5, gold: false, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Laylo", badge: null, gold: false, img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
-        { name: "Malika", badge: 2, gold: false, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jahongir", badge: null, gold: false, img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
-        { name: "Aziza", badge: null, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
-        { name: "Bobur", badge: 1, gold: false, img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" }
+        { name: "Bobur", badge: 1, gold: false, img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" },
+        { name: "Dinara, 18", badge: 2, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
+        { name: "Sardor", badge: 3, gold: false, img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
+        { name: "Madina", badge: 4, gold: false, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
+        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
+        { name: "Norboyev⁷⁰", badge: 6, gold: false, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
+        { name: "Isomiddin", badge: 7, gold: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jasur", badge: 8, gold: false, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Laylo", badge: 9, gold: false, img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
+        { name: "Malika", badge: 10, gold: false, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jahongir", badge: 11, gold: false, img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
+        { name: "Aziza", badge: 12, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" }
     ];
 
     const container = document.getElementById('playersCircle');
     const total = players.length;
-    
-    // Radiusi biroz kengaytirildi (138px) - O'yinchilar bir-birini to'smasligi uchun
     const radius = 138; 
 
     players.forEach((player, i) => {
+        // Soat strelkasi bo'ylab 12:00 dan boshlab joylashtirish (-90 deg)
         const angle = (i * (360 / total) - 90) * (Math.PI / 180);
         const x = 175 + radius * Math.cos(angle);
         const y = 175 + radius * Math.sin(angle);
@@ -495,13 +495,12 @@
         node.style.top = `${y}px`;
         node.style.transform = 'translate(-50%, -50%)';
 
-        const badgeHTML = player.badge ? `<span class="badge-num">${player.badge}</span>` : '';
         const borderClass = player.gold ? 'gold-border' : '';
 
         node.innerHTML = `
             <div class="avatar-frame ${borderClass}">
                 <img src="${player.img}" alt="${player.name}">
-                ${badgeHTML}
+                <span class="badge-num">${player.badge}</span>
             </div>
             <span class="player-name">${player.name}</span>
         `;
