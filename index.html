@@ -32,7 +32,7 @@
             align-items: center;
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
 
-            /* YOG'OCH STOL BUTUN EKRANNI TUSHIRIB QOPLAYDI (Ochiqroq va chiziqli yog'och) */
+            /* YOG'OCH STOL (Foni saqlandi va ochiqroq) */
             background: 
                 repeating-linear-gradient(
                     90deg,
@@ -84,7 +84,7 @@
             font-size: 13px;
         }
 
-        /* MARKAZIY ZONA (CHIZIQLAR VA NAQSH) */
+        /* MARKAZIY ZONA (HIRAROQ/BILINAR-BILINMAS CHIZIQLAR VA NAQSH) */
         .table-center {
             position: absolute;
             top: 50%;
@@ -96,15 +96,16 @@
             justify-content: center;
             align-items: center;
             pointer-events: none;
+            opacity: 0.25; /* Barcha chiziqlar va yulduzni bilinar-bilinmas (xira) qilish */
         }
 
-        /* TASHQI KATTA AYLANALAR (CHIZIQLAR) */
+        /* TASHQI KATTA AYLANALAR (XIRA CHIZIQLAR) */
         .outer-ring-1 {
             position: absolute;
             width: 390px;
             height: 390px;
             border-radius: 50%;
-            border: 2px solid rgba(60, 25, 5, 0.6);
+            border: 1.5px solid rgba(40, 15, 0, 0.8);
         }
 
         .outer-ring-2 {
@@ -112,7 +113,7 @@
             width: 380px;
             height: 380px;
             border-radius: 50%;
-            border: 1.5px solid rgba(60, 25, 5, 0.5);
+            border: 1px solid rgba(40, 15, 0, 0.7);
         }
 
         /* ICHKI CHIZIQLAR */
@@ -121,7 +122,7 @@
             width: 290px;
             height: 290px;
             border-radius: 50%;
-            border: 2px solid rgba(60, 25, 5, 0.55);
+            border: 1.5px solid rgba(40, 15, 0, 0.8);
         }
 
         .inner-ring-2 {
@@ -129,7 +130,7 @@
             width: 230px;
             height: 230px;
             border-radius: 50%;
-            border: 1.5px solid rgba(60, 25, 5, 0.45);
+            border: 1px solid rgba(40, 15, 0, 0.7);
         }
 
         /* YULDUZ NAQSHI */
@@ -137,7 +138,6 @@
             position: absolute;
             width: 220px;
             height: 220px;
-            opacity: 0.85;
         }
 
         /* O'YINCHILAR JOYLASHUVI */
@@ -151,17 +151,7 @@
             border-radius: 50%;
         }
 
-        .avatar-ring-line {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 295px;
-            height: 295px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(60, 25, 5, 0.4);
-            pointer-events: none;
-        }
+        /* NOTE: O'yinchilar atrofidagi aylana chiziq (.avatar-ring-line) butunlay olib tashlandi */
 
         .player {
             position: absolute;
@@ -196,21 +186,21 @@
 
         .player-info {
             margin-top: 3px;
-            background: rgba(0, 0, 0, 0.55);
-            padding: 1px 6px;
+            background: rgba(0, 0, 0, 0.65);
+            padding: 2px 8px;
             border-radius: 8px;
             color: #fff;
             font-size: 10.5px;
             font-weight: 600;
             white-space: nowrap;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .player-info span.country {
-            color: #aaa;
-            font-size: 9px;
-            margin-right: 2px;
-            text-transform: uppercase;
+        .player-info .flag-icon {
+            font-size: 11px;
+            line-height: 1;
         }
 
         /* SHISHA (BUTILKA) */
@@ -245,7 +235,7 @@
         <div class="table-num">TABLE #229</div>
     </div>
 
-    <!-- MARKAZDAGI CHIZIQLAR VA KOMPAS NAQSHI -->
+    <!-- MARKAZDAGI HIRAROQ CHIZIQLAR VA NAQSH -->
     <div class="table-center">
         <div class="outer-ring-1"></div>
         <div class="outer-ring-2"></div>
@@ -279,8 +269,6 @@
         </svg>
     </div>
 
-    <div class="avatar-ring-line"></div>
-
     <!-- O'YINCHILAR -->
     <div class="players-container" id="playersContainer"></div>
 
@@ -298,19 +286,20 @@
 </div>
 
 <script>
+    // Nik yonida chiqariladigan haqiqiy bayroq emojilari qo'shildi
     const playersData = [
-        { name: "Muhammad", country: "uz", img: "https://i.pravatar.cc/100?img=11" },
-        { name: "Elizabeth", country: "us", img: "https://i.pravatar.cc/100?img=5" },
-        { name: "Maximilian", country: "de", img: "https://i.pravatar.cc/100?img=12" },
-        { name: "Sora", country: "jp", img: "https://i.pravatar.cc/100?img=9" },
-        { name: "Alejandro", country: "es", img: "https://i.pravatar.cc/100?img=68" },
-        { name: "Chloe", country: "fr", img: "https://i.pravatar.cc/100?img=47" },
-        { name: "Abdurahmon", country: "ae", img: "https://i.pravatar.cc/100?img=57" },
-        { name: "Anna", country: "gb", img: "https://i.pravatar.cc/100?img=38" },
-        { name: "Lucas", country: "br", img: "https://i.pravatar.cc/100?img=14", active: true },
-        { name: "Sofia", country: "it", img: "https://i.pravatar.cc/100?img=26", active: true },
-        { name: "Dmitry", country: "kz", img: "https://i.pravatar.cc/100?img=3" },
-        { name: "Zara", country: "tr", img: "https://i.pravatar.cc/100?img=20" }
+        { name: "Muhammad", flag: "🇺🇿", img: "https://i.pravatar.cc/100?img=11" },
+        { name: "Elizabeth", flag: "🇺🇸", img: "https://i.pravatar.cc/100?img=5" },
+        { name: "Maximilian", flag: "🇩🇪", img: "https://i.pravatar.cc/100?img=12" },
+        { name: "Sora", flag: "🇯🇵", img: "https://i.pravatar.cc/100?img=9" },
+        { name: "Alejandro", flag: "🇪🇸", img: "https://i.pravatar.cc/100?img=68" },
+        { name: "Chloe", flag: "🇫🇷", img: "https://i.pravatar.cc/100?img=47" },
+        { name: "Abdurahmon", flag: "🇦🇪", img: "https://i.pravatar.cc/100?img=57" },
+        { name: "Anna", flag: "🇬🇧", img: "https://i.pravatar.cc/100?img=38" },
+        { name: "Lucas", flag: "🇧🇷", img: "https://i.pravatar.cc/100?img=14", active: true },
+        { name: "Sofia", flag: "🇮🇹", img: "https://i.pravatar.cc/100?img=26", active: true },
+        { name: "Dmitry", flag: "🇰🇿", img: "https://i.pravatar.cc/100?img=3" },
+        { name: "Zara", flag: "🇹🇷", img: "https://i.pravatar.cc/100?img=20" }
     ];
 
     const container = document.getElementById('playersContainer');
@@ -332,7 +321,8 @@
                 <img src="${player.img}" alt="${player.name}">
             </div>
             <div class="player-info">
-                <span class="country">${player.country}</span>${player.name}
+                <span class="flag-icon">${player.flag}</span>
+                <span>${player.name}</span>
             </div>
         `;
         container.appendChild(playerEl);
