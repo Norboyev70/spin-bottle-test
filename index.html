@@ -12,7 +12,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             user-select: none;
         }
-
         body {
             background-color: #0b0d12;
             display: flex;
@@ -20,7 +19,6 @@
             align-items: center;
             min-height: 100vh;
         }
-
         .app-screen {
             position: relative;
             width: 390px;
@@ -31,7 +29,6 @@
             overflow: hidden;
             box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
-
         .app-header {
             height: 48px;
             background: #171922;
@@ -42,7 +39,6 @@
             color: #fff;
             z-index: 30;
         }
-
         .header-title {
             display: flex;
             align-items: center;
@@ -50,14 +46,6 @@
             font-size: 17px;
             font-weight: 600;
         }
-
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 18px;
-        }
-
         .game-area {
             position: relative;
             height: 54%;
@@ -69,57 +57,6 @@
             background-color: #e0ad7c;
             overflow: hidden;
         }
-
-        .table-top-bar {
-            position: absolute;
-            top: 10px;
-            left: 0;
-            width: 100%;
-            padding: 0 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 20;
-        }
-
-        .top-icons-left {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .icon-btn {
-            background: rgba(220, 110, 35, 0.5);
-            border: 1px solid rgba(255, 200, 150, 0.3);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 12px;
-        }
-
-        .heart-badge {
-            background: rgba(210, 60, 20, 0.85);
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .table-info {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 10px;
-            text-align: right;
-            line-height: 1.1;
-        }
-
         .wood-carving {
             position: absolute;
             top: 54%;
@@ -130,12 +67,12 @@
             pointer-events: none;
             opacity: 0.4;
         }
-
         .bottle-wrapper {
             position: absolute;
             top: 54%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
+            transform-origin: 50% 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
             width: 115px;
             height: 58px;
             z-index: 15;
@@ -143,7 +80,6 @@
             filter: drop-shadow(0px 10px 12px rgba(0, 0, 0, 0.6));
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
-
         .players-circle {
             position: absolute;
             top: 54%;
@@ -153,7 +89,6 @@
             height: 360px;
             pointer-events: none;
         }
-
         .player-node {
             position: absolute;
             display: flex;
@@ -161,25 +96,24 @@
             align-items: center;
             z-index: 10;
             pointer-events: auto;
+            transition: all 0.5s ease;
+            cursor: pointer;
         }
-
         .avatar-frame {
             position: relative;
-            width: 55px;
-            height: 55px;
+            width: 52px;
+            height: 52px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.45);
             border: 1px solid rgba(0,0,0,0.6);
             background: #111;
         }
-
         .avatar-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .badge-num {
             position: absolute;
             top: 2px;
@@ -190,14 +124,11 @@
             font-weight: bold;
             padding: 1px 4px;
             border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-
-        .gold-border {
-            border: 2.5px solid #f4c430;
-            box-shadow: 0 0 10px rgba(244, 196, 48, 0.7);
+        .active-turn {
+            border: 2.5px solid #00ff88 !important;
+            box-shadow: 0 0 12px #00ff88 !important;
         }
-
         .player-info {
             margin-top: 3px;
             display: flex;
@@ -207,111 +138,176 @@
             font-size: 10px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
             font-weight: 500;
-            white-space: nowrap;
         }
 
+        /* Center Stage Styles */
+        .center-stage {
+            position: absolute;
+            top: 54%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            z-index: 25;
+            background: rgba(20, 22, 30, 0.94);
+            padding: 12px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            min-width: 240px;
+        }
+        .center-avatars {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .center-player-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            position: relative;
+        }
+        .center-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            object-fit: cover;
+        }
+        .center-name {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            max-width: 65px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .choice-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #111;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            border: 1px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .action-prompt {
+            color: #f97316;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .action-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        .btn-action {
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            cursor: pointer;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .btn-kiss { background: linear-gradient(45deg, #ff416c, #ff4b2b); }
+        .btn-reject { background: linear-gradient(45deg, #4b6cb7, #182848); }
+
+        /* Chat section */
         .chat-section {
             flex: 1;
             background: #14161d;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 10px;
-            position: relative;
+            padding: 8px 10px;
         }
-
+        .chat-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #232733;
+            padding-bottom: 4px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #718096;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+        .tab-btn.active {
+            color: #f97316;
+            border-bottom: 2px solid #f97316;
+        }
         .chat-feed {
             flex: 1;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding-right: 4px;
+            gap: 6px;
         }
-
         .chat-row {
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            gap: 6px;
+            cursor: pointer;
         }
-
         .chat-avatar {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 6px;
             object-fit: cover;
         }
-
-        .chat-bubble-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
         .chat-bubble {
             background: #ffffff;
             color: #111;
-            padding: 5px 10px;
-            border-radius: 10px;
-            border-top-left-radius: 2px;
-            font-size: 12px;
-            max-width: 240px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            max-width: 250px;
         }
-
         .chat-bubble .sender {
             color: #2b6cb0;
             font-weight: 600;
             margin-right: 4px;
         }
-
-        .show-trans {
-            color: #718096;
-            font-size: 9.5px;
-            margin-top: 2px;
-            margin-left: 2px;
-            cursor: pointer;
+        .system-bubble {
+            background: rgba(249, 115, 22, 0.15) !important;
+            color: #fbd38d !important;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            width: 100%;
+            text-align: center;
+            font-style: italic;
         }
-
-        .floating-action-btns {
-            position: absolute;
-            right: 12px;
-            top: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 25;
-        }
-
-        .fab-btn {
-            width: 34px;
-            height: 34px;
-            background: #232733;
-            border: 1px solid #323847;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #a0aec0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .fab-btn.youtube-btn {
-            background: #ff0000;
-            border-color: #cc0000;
-            color: #fff;
-            font-size: 13px;
-        }
-
         .chat-input-bar {
             display: flex;
             align-items: center;
             gap: 8px;
             background: #1d212c;
-            padding: 5px 12px;
-            border-radius: 25px;
-            margin-top: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
         }
-
         .chat-input-bar input {
             flex: 1;
             background: transparent;
@@ -320,223 +316,327 @@
             color: #fff;
             font-size: 12px;
         }
-
-        .chat-input-bar input::placeholder {
-            color: #5a6578;
-        }
-
-        .send-orange-btn {
+        .send-btn {
             background: #f97316;
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
-            font-size: 11px;
         }
     </style>
 </head>
 <body>
-
 <div class="app-screen">
-
     <div class="app-header">
         <span style="font-size: 18px;">✕</span>
-        <div class="header-title">
-            Spin the Bottle 🍾❤️
-        </div>
-        <div class="header-icons">
-            <span>⌵</span>
-            <span>⋮</span>
-        </div>
+        <div class="header-title">Spin the Bottle 🍾❤️</div>
+        <div style="font-size: 16px;">⋮</div>
     </div>
 
     <div class="game-area">
-        <div class="table-top-bar">
-            <div class="top-icons-left">
-                <div class="heart-badge">❤️ 62</div>
-                <div class="icon-btn">🎟️</div>
-                <div class="icon-btn">🎯</div>
-                <div class="icon-btn">🏆</div>
-            </div>
-            <div class="top-icons-left">
-                <div class="icon-btn">☰</div>
-                <div class="icon-btn">⚙️</div>
-                <div class="table-info">Table<br><b>246</b></div>
-            </div>
-        </div>
-
         <div class="wood-carving" id="woodCarving"></div>
-
+        
         <div class="bottle-wrapper" id="bottle" onclick="spin()">
             <svg viewBox="0 0 160 70" width="100%" height="100%">
                 <defs>
                     <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stop-color="rgba(30, 230, 90, 0.8)" />
-                        <stop offset="20%" stop-color="rgba(0, 190, 55, 0.55)" />
-                        <stop offset="50%" stop-color="rgba(0, 165, 45, 0.35)" />
-                        <stop offset="80%" stop-color="rgba(0, 190, 55, 0.6)" />
                         <stop offset="100%" stop-color="rgba(20, 220, 80, 0.85)" />
                     </linearGradient>
                 </defs>
                 <path d="M 10,28 L 42,28 C 50,28 54,16 66,13 L 140,13 C 151,13 154,22 154,35 C 154,48 151,57 140,57 L 66,57 C 54,54 50,42 42,42 L 10,42 Z"
-                      fill="url(#glassGrad)" stroke="rgba(15, 170, 65, 0.95)" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M 60,13 L 135,13" stroke="rgba(220, 255, 225, 0.9)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M 60,18 L 130,18" stroke="rgba(220, 255, 225, 0.4)" stroke-width="1" stroke-linecap="round"/>
+                      fill="url(#glassGrad)" stroke="rgba(15, 170, 65, 0.95)" stroke-width="2.2"/>
             </svg>
         </div>
 
         <div class="players-circle" id="playersCircle"></div>
+
+        <!-- Center Stage with Individual Choices -->
+        <div class="center-stage" id="centerStage">
+            <div class="center-avatars">
+                <div class="center-player-box">
+                    <img id="c1Img" class="center-img" src="" alt="">
+                    <span id="c1Name" class="center-name"></span>
+                    <div id="c1Choice" class="choice-badge"></div>
+                </div>
+                <span style="font-size: 18px; color: #aaa;">VS</span>
+                <div class="center-player-box">
+                    <img id="c2Img" class="center-img" src="" alt="">
+                    <span id="c2Name" class="center-name"></span>
+                    <div id="c2Choice" class="choice-badge"></div>
+                </div>
+            </div>
+            <div class="action-prompt" id="actionPrompt"></div>
+            <div class="action-controls" id="actionControls">
+                <button class="btn-action btn-kiss" onclick="makeChoice('kiss')">💋</button>
+                <button class="btn-action btn-reject" onclick="makeChoice('reject')">✖</button>
+            </div>
+        </div>
     </div>
 
     <div class="chat-section">
-
-        <div class="floating-action-btns">
-            <div class="fab-btn youtube-btn">▶</div>
-            <div class="fab-btn">🎵</div>
+        <div class="chat-tabs">
+            <button class="tab-btn active" onclick="switchTab('general', event)">💬 Stol Chati</button>
+            <button class="tab-btn" id="dmTabBtn" onclick="switchTab('dm', event)">🔒 Shaxsiy Chat</button>
         </div>
 
-        <div class="chat-feed" id="chatFeed">
-
-            <div class="chat-row">
-                <img class="chat-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80">
-                <div class="chat-bubble-container">
-                    <div class="chat-bubble">
-                        <span class="sender">Isomiddin:</span> Dinara, daa jinniman
-                    </div>
-                    <span class="show-trans">Show translation</span>
-                </div>
-            </div>
-
-            <div class="chat-row">
-                <img class="chat-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80">
-                <div class="chat-bubble-container">
-                    <div class="chat-bubble">
-                        <span class="sender">Isomiddin:</span> Dinara, ha yoki yu
-                    </div>
-                    <span class="show-trans">Show translation</span>
-                </div>
-            </div>
-
-            <div class="chat-row">
-                <img class="chat-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80">
-                <div class="chat-bubble-container">
-                    <div class="chat-bubble">
-                        <span class="sender" style="color: #d63384;">Dinara:</span> Nmaa
-                    </div>
-                    <span class="show-trans">Show translation</span>
-                </div>
-            </div>
-
-            <div class="chat-row">
-                <img class="chat-avatar" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80">
-                <div class="chat-bubble-container">
-                    <div class="chat-bubble">
-                        <span class="sender" style="color: #4c51bf;">رمzon ⁷⁰:</span> Isomiddin, ?
-                    </div>
-                    <span class="show-trans">Show translation</span>
-                </div>
-            </div>
-
-        </div>
+        <div class="chat-feed" id="chatFeed"></div>
 
         <div class="chat-input-bar">
-            <input type="text" placeholder="Write a message here...">
-            <button class="send-orange-btn">➤</button>
+            <input type="text" id="chatInput" placeholder="Xabar yozing..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">➤</button>
         </div>
-
     </div>
-
 </div>
 
 <script>
     const players = [
-        { name: "Bobur", badge: 1, gold: false, flag: "🇺🇿", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" },
-        { name: "Dinara, 18", badge: 2, gold: false, flag: "🇰🇿", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
-        { name: "Sardor", badge: 3, gold: false, flag: "🇹🇷", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
-        { name: "Madina", badge: 4, gold: false, flag: "🇺🇦", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
-        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬🇧", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
-        { name: "Norboyev⁷⁰", badge: 6, gold: false, flag: "🇩🇪", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
-        { name: "Isomiddin", badge: 7, gold: false, flag: "🇰🇬", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jasur", badge: 8, gold: false, flag: "🇹🇯", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Laylo", badge: 9, gold: false, flag: "🇯🇵", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
-        { name: "Malika", badge: 10, gold: false, flag: "🇬🇪", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jahongir", badge: 11, gold: false, flag: "🇦🇿", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
-        { name: "Aziza", badge: 12, gold: false, flag: "🇷🇺", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" }
+        { name: "Bobur", badge: 1, gender: "M", flag: "🇺🇿", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" },
+        { name: "Dinara", badge: 2, gender: "F", flag: "🇰🇿", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
+        { name: "Sardor", badge: 3, gender: "M", flag: "🇹🇷", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
+        { name: "Madina", badge: 4, gender: "F", flag: "🇺🇦", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
+        { name: "رمzon", badge: 5, gender: "M", flag: "🇬🇧", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
+        { name: "Norboyev", badge: 6, gender: "M", flag: "🇩🇪", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
+        { name: "Isomiddin", badge: 7, gender: "M", flag: "🇰🇬", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jasur", badge: 8, gender: "M", flag: "🇹🇯", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Laylo", badge: 9, gender: "F", flag: "🇯🇵", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
+        { name: "Malika", badge: 10, gender: "F", flag: "🇬🇪", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jahongir", badge: 11, gender: "M", flag: "🇦🇿", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
+        { name: "Aziza", badge: 12, gender: "F", flag: "🇷🇺", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" }
     ];
 
     const container = document.getElementById('playersCircle');
     const total = players.length;
     const radius = 142;
+    let currentPlayerIndex = 0;
+    let selectedTargetIndex = null;
+    let isSpinning = false;
+    let currentRotation = 0;
+    let currentTab = 'general';
 
-    players.forEach((player, i) => {
-        const angle = (i * (360 / total) - 90) * (Math.PI / 180);
-        let x = 180 + radius * Math.cos(angle);
-        let y = 180 + radius * Math.sin(angle);
+    // Tanlovlar holati
+    let activeMatch = { p1: null, p2: null, p1Choice: null, p2Choice: null, turnStep: 1 };
 
-        if (player.badge === 2 || player.badge === 12) y -= 14;
-        if (player.badge === 3) { x += 8; y -= 10; }
-        if (player.badge === 11) { x -= 8; y -= 10; }
-        if (player.badge === 5) { x += 8; y += 10; }
-        if (player.badge === 9) { x -= 8; y += 10; }
-        if (player.badge === 6 || player.badge === 8) y += 14;
+    function renderPlayers() {
+        container.innerHTML = '';
+        players.forEach((player, i) => {
+            const angle = (i * (360 / total) - 90) * (Math.PI / 180);
+            let x = 180 + radius * Math.cos(angle);
+            let y = 180 + radius * Math.sin(angle);
 
-        const node = document.createElement('div');
-        node.className = 'player-node';
-        node.style.left = `${x}px`;
-        node.style.top = `${y}px`;
-        node.style.transform = 'translate(-50%, -50%)';
+            if (player.badge === 2 || player.badge === 12) y -= 14;
+            if (player.badge === 3) { x += 8; y -= 10; }
+            if (player.badge === 11) { x -= 8; y -= 10; }
+            if (player.badge === 5) { x += 8; y += 10; }
+            if (player.badge === 9) { x -= 8; y += 10; }
+            if (player.badge === 6 || player.badge === 8) y += 14;
 
-        const borderClass = player.gold ? 'gold-border' : '';
+            const node = document.createElement('div');
+            node.className = 'player-node';
+            node.style.left = `${x}px`;
+            node.style.top = `${y}px`;
+            node.style.transform = 'translate(-50%, -50%)';
+            node.onclick = () => replyToUser(player.name);
 
-        node.innerHTML = `
-            <div class="avatar-frame ${borderClass}">
-                <img src="${player.img}" alt="${player.name}">
-                <span class="badge-num">${player.badge}</span>
-            </div>
-            <div class="player-info">
-                <span>${player.flag}</span>
-                <span>${player.name}</span>
+            let borderClass = i === currentPlayerIndex ? 'active-turn' : '';
+
+            node.innerHTML = `
+                <div class="avatar-frame ${borderClass}">
+                    <img src="${player.img}" alt="${player.name}">
+                    <span class="badge-num">${player.badge}</span>
+                </div>
+                <div class="player-info">
+                    <span>${player.flag}</span>
+                    <span>${player.name}</span>
+                </div>
+            `;
+            container.appendChild(node);
+        });
+    }
+
+    renderPlayers();
+
+    function spin() {
+        if (isSpinning) return;
+        isSpinning = true;
+
+        const activePlayer = players[currentPlayerIndex];
+
+        const validTargets = [];
+        players.forEach((p, index) => {
+            if (p.gender !== activePlayer.gender) {
+                validTargets.push(index);
+            }
+        });
+
+        selectedTargetIndex = validTargets[Math.floor(Math.random() * validTargets.length)];
+
+        const targetAngle = (selectedTargetIndex * (360 / total)) + 90;
+        const fullSpins = 1440;
+        const currentMod = currentRotation % 360;
+        let diff = (targetAngle - currentMod) % 360;
+        if (diff < 0) diff += 360;
+
+        currentRotation += fullSpins + diff;
+
+        document.getElementById('bottle').style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+
+        setTimeout(() => {
+            showCenterStage(activePlayer, players[selectedTargetIndex]);
+        }, 3100);
+    }
+
+    function showCenterStage(p1, p2) {
+        activeMatch.p1 = p1;
+        activeMatch.p2 = p2;
+        activeMatch.p1Choice = null;
+        activeMatch.p2Choice = null;
+        activeMatch.turnStep = 1;
+
+        document.getElementById('c1Img').src = p1.img;
+        document.getElementById('c1Name').innerText = `${p1.flag} ${p1.name}`;
+        document.getElementById('c1Choice').style.display = 'none';
+
+        document.getElementById('c2Img').src = p2.img;
+        document.getElementById('c2Name').innerText = `${p2.flag} ${p2.name}`;
+        document.getElementById('c2Choice').style.display = 'none';
+
+        document.getElementById('actionPrompt').innerText = `${p1.name}, qaror qiling:`;
+        document.getElementById('actionControls').style.display = 'flex';
+        document.getElementById('centerStage').style.display = 'flex';
+    }
+
+    function makeChoice(type) {
+        const icon = type === 'kiss' ? '💋' : '✖️';
+
+        if (activeMatch.turnStep === 1) {
+            // 1-o'yinchi qarori
+            activeMatch.p1Choice = type;
+            const c1Badge = document.getElementById('c1Choice');
+            c1Badge.innerText = icon;
+            c1Badge.style.display = 'flex';
+
+            // Navbat 2-o'yinchiga o'tadi
+            activeMatch.turnStep = 2;
+            document.getElementById('actionPrompt').innerText = `${activeMatch.p2.name}, qaror qiling:`;
+
+        } else if (activeMatch.turnStep === 2) {
+            // 2-o'yinchi qarori
+            activeMatch.p2Choice = type;
+            const c2Badge = document.getElementById('c2Choice');
+            c2Badge.innerText = icon;
+            c2Badge.style.display = 'flex';
+
+            document.getElementById('actionControls').style.display = 'none';
+
+            // Natijani aniqlash va chatga yozish
+            let resultText = "";
+            if (activeMatch.p1Choice === 'kiss' && activeMatch.p2Choice === 'kiss') {
+                resultText = `🎉 ${activeMatch.p1.name} 💋 va ${activeMatch.p2.name} 💋 — Juftlik o'pishdi! ❤️`;
+            } else if (activeMatch.p1Choice === 'reject' || activeMatch.p2Choice === 'reject') {
+                resultText = `💔 ${activeMatch.p1.name} (${activeMatch.p1Choice === 'kiss' ? '💋' : '✖️'}) va ${activeMatch.p2.name} (${activeMatch.p2Choice === 'kiss' ? '💋' : '✖️'}) — Rad etildi!`;
+            } else {
+                resultText = `🤝 ${activeMatch.p1.name} va ${activeMatch.p2.name} natijasi qayd etildi.`;
+            }
+
+            document.getElementById('actionPrompt').innerText = activeMatch.p1Choice === 'kiss' && activeMatch.p2Choice === 'kiss' ? "💋 Muvaffaqiyatli!" : "💔 Rad etildi!";
+
+            sendSystemMessage(resultText);
+
+            // 2 soniyadan so'ng stolni yopish va keyingi o'yinchiga o'tish
+            setTimeout(() => {
+                document.getElementById('centerStage').style.display = 'none';
+                isSpinning = false;
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+                renderPlayers();
+            }, 2000);
+        }
+    }
+
+    function sendSystemMessage(text) {
+        const feed = document.getElementById('chatFeed');
+        const row = document.createElement('div');
+        row.className = 'chat-row';
+        row.innerHTML = `
+            <div class="chat-bubble system-bubble" style="width: 100%;">
+                ${text}
             </div>
         `;
-        container.appendChild(node);
-    });
+        feed.appendChild(row);
+        feed.scrollTop = feed.scrollHeight;
+    }
 
-    let angle = -15;
-    function spin() {
-        angle += 1440 + Math.floor(Math.random() * 360);
-        document.getElementById('bottle').style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+    function replyToUser(name) {
+        const input = document.getElementById('chatInput');
+        input.value = `@${name} `;
+        input.focus();
+        document.getElementById('dmTabBtn').innerText = `🔒 DM (${name})`;
+    }
+
+    function switchTab(tab, e) {
+        currentTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (e) e.target.classList.add('active');
+        document.getElementById('chatFeed').innerHTML = '';
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const feed = document.getElementById('chatFeed');
+        const sender = players[currentPlayerIndex];
+
+        const row = document.createElement('div');
+        row.className = 'chat-row';
+        row.onclick = () => replyToUser(sender.name);
+
+        const isDM = currentTab === 'dm' ? '<b style="color:#f97316;">[DM]</b> ' : '';
+
+        row.innerHTML = `
+            <img class="chat-avatar" src="${sender.img}">
+            <div class="chat-bubble">
+                <span class="sender">${isDM}${sender.name}:</span> ${text}
+            </div>
+        `;
+        feed.appendChild(row);
+        input.value = '';
+        feed.scrollTop = feed.scrollHeight;
+    }
+
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') sendMessage();
     }
 
     (function drawWoodCarving() {
         const size = 260;
         const cx = size / 2, cy = size / 2;
         const petalCount = 16;
-        const outerR = 120;
-        const innerR = 40;
+        const outerR = 120, innerR = 40;
+
         let petals = '';
         for (let i = 0; i < petalCount; i++) {
             const a = (i * 360 / petalCount);
             petals += `<path d="M ${cx} ${cy} 
-                L ${cx} ${cy - innerR} 
-                Q ${cx + 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - outerR} 
-                Q ${cx - 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - innerR} Z"
+                 L ${cx} ${cy - innerR} 
+                 Q ${cx + 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - outerR} 
+                 Q ${cx - 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - innerR} Z"
                 fill="${i % 2 === 0 ? 'rgba(240,205,170,0.5)' : 'rgba(215,170,125,0.4)'}"
                 stroke="rgba(200,150,100,0.3)" stroke-width="0.5"
                 transform="rotate(${a} ${cx} ${cy})"/>`;
         }
+
         const svg = `<svg viewBox="0 0 ${size} ${size}" width="100%" height="100%">
             <circle cx="${cx}" cy="${cy}" r="${outerR + 8}" fill="rgba(232,190,150,0.15)"/>
             ${petals}
             <circle cx="${cx}" cy="${cy}" r="${innerR - 4}" fill="rgba(240,205,170,0.35)" stroke="rgba(200,150,100,0.3)" stroke-width="1"/>
         </svg>`;
+
         document.getElementById('woodCarving').innerHTML = svg;
     })();
 </script>
-
 </body>
 </html>
