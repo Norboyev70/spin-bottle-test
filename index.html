@@ -1,371 +1,331 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Spin the Bottle - Full Wood Table</title>
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    user-select: none;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Bottle Game Table</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
 
-body {
-    background: #080504;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+        body {
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-.game-container {
-    width: 100%;
-    max-width: 414px;
-    height: 100vh;
-    max-height: 896px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    border-radius: 28px;
-    color: #fff;
-    box-shadow: 0 25px 55px rgba(0,0,0,.85);
-    /* BUTUN FONGA YOG'OCH TEKSTURA */
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.08) 0px,
-            rgba(255, 255, 255, 0.03) 2px,
-            rgba(0, 0, 0, 0.05) 5px,
-            rgba(0, 0, 0, 0.12) 10px
-        ),
-        linear-gradient(180deg, #7c4822 0%, #633616 50%, #4a270e 100%);
-}
+        /* O'yin ekrani konteyneri */
+        .game-screen {
+            position: relative;
+            width: 420px;
+            height: 750px;
+            background: #111;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
 
-/* HEADER & STATS */
-.stats-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 16px 10px;
-    position: relative;
-    z-index: 10;
-}
+        /* Yuqori panel (Bar) */
+        .top-bar {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+        }
 
-.heart-badge {
-    background: #932c2c;
-    padding: 6px 14px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 700;
-    font-size: 13px;
-    color: #fff;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 2px 5px rgba(0,0,0,0.4);
-}
+        .stat-badge {
+            background: rgba(139, 26, 26, 0.85);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
 
-.stat-item {
-    font-size: 12px;
-    font-weight: 700;
-    color: #e3c4a8;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 6px 14px;
-    border-radius: 14px;
-    backdrop-filter: blur(4px);
-    box-shadow: inset 0 1px 2px rgba(255,255,255,0.05);
-}
+        .flag-badge {
+            background: rgba(40, 40, 40, 0.85);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-/* STOL MAYDONI */
-.table-area {
-    flex: 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 5;
-    overflow: hidden;
-}
+        .table-num {
+            background: rgba(40, 25, 15, 0.85);
+            color: #d4a373;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
 
-/* STOLDAGI O'YMA AYLANA VA KOMPAS NAQSHLARI */
-.uzb-table-design {
-    position: absolute;
-    width: 330px;
-    height: 330px;
-    border-radius: 50%;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        /* YOG'OCH STOL */
+        .poker-table {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            /* Yog'och teksturasi */
+            background: radial-gradient(circle, #ab7343 0%, #76441a 70%, #4a260a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.ring-outer {
-    position: absolute;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 2px solid rgba(40, 18, 5, 0.65);
-    box-shadow: inset 0 0 4px rgba(0,0,0,0.5), 0 1px 1px rgba(255,255,255,0.1);
-}
+        /* O'RTAGA TUSHIRILGAN KICHIK KOMPAS NAQSHI VA AYLANA */
+        .table-center-design {
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            /* Ortiqcha chiziqlar olib tashlandi - faqat 1 ta yupqa chegaralash chizig'i */
+            border: 2px solid rgba(45, 20, 5, 0.45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
 
-.ring-middle {
-    position: absolute;
-    width: 82%; height: 82%;
-    border-radius: 50%;
-    border: 2px solid rgba(40, 18, 5, 0.6);
-    box-shadow: inset 0 0 3px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.08);
-}
+        /* KICHIK, TO'LIQ 16 QIRRALI YULDUZ */
+        .compass-star {
+            width: 150px;
+            height: 150px;
+            opacity: 0.75;
+        }
 
-.ring-inner {
-    position: absolute;
-    width: 64%; height: 64%;
-    border-radius: 50%;
-    border: 2px solid rgba(40, 18, 5, 0.6);
-}
+        /* O'YINCHILAR DOIRASI (AVATARLAR JOYLASHDIRISH UCHUN) */
+        .players-container {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+        }
 
-.compass {
-    position: absolute;
-    width: 48%; height: 48%;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* AVATAR DOKASINI VIZUAL AYLANA CHIZIG'I (Faqat bitta yupqa) */
+        .avatar-ring-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 295px;
+            height: 295px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(55, 25, 8, 0.4);
+            pointer-events: none;
+        }
 
-.star {
-    position: absolute;
-    width: 100%; height: 100%;
-}
+        /* O'YINCHI KARTOSHKASI (AVATAR) */
+        .player {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
 
-.star::before, .star::after {
-    content: "";
-    position: absolute;
-    left: 50%; top: 50%;
-    transform-origin: center;
-    background: linear-gradient(to right, transparent 0%, rgba(35, 15, 4, 0.75) 49%, transparent 50%);
-    clip-path: polygon(50% 0%, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0% 50%, 43% 43%);
-}
+        .avatar-box {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #5a3a1e;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            background: #222;
+        }
 
-.star::before { width: 100%; height: 100%; transform: translate(-50%, -50%); }
-.star::after { width: 100%; height: 100%; transform: translate(-50%, -50%) rotate(45deg); }
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-/* BUTILKA SHISHASI */
-.bottle {
-    width: 36px;
-    height: 110px;
-    position: absolute;
-    left: calc(50% - 18px);
-    top: calc(50% - 55px);
-    transform-origin: 50% 50%;
-    transform: rotate(0deg);
-    filter: drop-shadow(0 12px 16px rgba(0,0,0,0.75));
-    z-index: 20;
-    transition: transform 3.2s cubic-bezier(.1,.85,.15,1);
-    cursor: pointer;
-}
+        /* Faol o'yinchi atrofi yashil yonishi */
+        .player.active .avatar-box {
+            border: 2.5px solid #4de94c;
+            box-shadow: 0 0 12px #4de94c, inset 0 0 5px #4de94c;
+        }
 
-/* O'YINCHILAR RO'YXATI */
-.players-container {
-    width: 360px;
-    height: 360px;
-    position: relative;
-    z-index: 10;
-}
+        .player-info {
+            margin-top: 3px;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 1px 6px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 600;
+            white-space: nowrap;
+            text-align: center;
+        }
 
-.player {
-    position: absolute;
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.6);
-    border: 2px solid #a6844c;
-    z-index: 10;
-    transition: transform 0.2s ease;
-    cursor: pointer;
-}
+        .player-info span.country {
+            color: #aaa;
+            font-size: 9px;
+            margin-right: 2px;
+            text-transform: uppercase;
+        }
 
-.player.active-glow {
-    border-color: #55ff77;
-    box-shadow: 0 0 12px #39c958;
-}
+        /* SHISHA (BUTILKA) */
+        .bottle {
+            position: absolute;
+            width: 40px;
+            height: 110px;
+            z-index: 15;
+            cursor: pointer;
+            transition: transform 3s cubic-bezier(0.15, 0.85, 0.35, 1);
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+        }
 
-.player.is-me {
-    border-color: #ffffff;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-}
-
-.player-name-box {
-    position: absolute;
-    bottom: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    white-space: nowrap;
-    z-index: 15;
-}
-
-.player-flag {
-    font-size: 9px;
-    font-weight: 700;
-    color: #e0c8b3;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-}
-
-.player-name {
-    font-size: 9px;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-}
-</style>
+        .bottle svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="game-container">
+<div class="game-screen">
 
-    <div class="stats-bar">
-        <div class="heart-badge">❤️ 10,000</div>
-        <div class="stat-item">🎟️ 8</div>
-        <div class="stat-item">TABLE #229</div>
+    <!-- YUQORI BOSH QISM -->
+    <div class="top-bar">
+        <div class="stat-badge">❤️ 10,000</div>
+        <div class="flag-badge">🎟️ 8</div>
+        <div class="table-num">TABLE #229</div>
     </div>
 
-    <div class="table-area">
-        
-        <div class="uzb-table-design">
-            <div class="ring-outer"></div>
-            <div class="ring-middle"></div>
-            <div class="ring-inner"></div>
-            <div class="compass">
-                <div class="star"></div>
-            </div>
+    <!-- MAIN WOODEN TABLE -->
+    <div class="poker-table">
+
+        <!-- KICHIK, TO'LIQ KOMPAS YULDUZI VA FAOQAT 1 TA MARKAZIY AYLANA CHIZIG'I -->
+        <div class="table-center-design">
+            <svg class="compass-star" viewBox="0 0 200 200">
+                <g fill="none" stroke="#250f04" stroke-width="1.2">
+                    <!-- 4 Asosiy katta qirra -->
+                    <polygon points="100,10 106,94 100,100 94,94" fill="#3a1905" />
+                    <polygon points="100,190 106,106 100,100 94,106" fill="#3a1905" />
+                    <polygon points="190,100 106,106 100,100 106,94" fill="#3a1905" />
+                    <polygon points="10,100 94,106 100,100 94,94" fill="#3a1905" />
+
+                    <!-- 4 O'rta qirra -->
+                    <polygon points="163,37 104,93 100,100 107,96" fill="#2c1203" />
+                    <polygon points="37,163 96,107 100,100 93,104" fill="#2c1203" />
+                    <polygon points="163,163 107,104 100,100 104,107" fill="#2c1203" />
+                    <polygon points="37,37 93,96 100,100 96,93" fill="#2c1203" />
+
+                    <!-- 8 Kichik oraliq qirralar -->
+                    <g fill="#1a0901">
+                        <polygon points="135,22 102,96 100,100" />
+                        <polygon points="178,65 104,98 100,100" />
+                        <polygon points="178,135 104,102 100,100" />
+                        <polygon points="135,178 102,104 100,100" />
+                        <polygon points="65,178 98,104 100,100" />
+                        <polygon points="22,135 96,102 100,100" />
+                        <polygon points="22,65 96,98 100,100" />
+                        <polygon points="65,22 98,96 100,100" />
+                    </g>
+                </g>
+                <circle cx="100" cy="100" r="3.5" fill="#150600" />
+            </svg>
         </div>
 
-        <svg class="bottle" id="bottle" onclick="spinBottle()" viewBox="0 0 100 320" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#072b11"/>
-                    <stop offset="30%" stop-color="#185c29"/>
-                    <stop offset="60%" stop-color="#2c8a42"/>
-                    <stop offset="85%" stop-color="#185c29"/>
-                    <stop offset="100%" stop-color="#072b11"/>
-                </linearGradient>
-                <linearGradient id="labelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ab9461"/>
-                    <stop offset="50%" stop-color="#ebd8ad"/>
-                    <stop offset="100%" stop-color="#ab9461"/>
-                </linearGradient>
-            </defs>
-            <path fill="url(#glassGrad)" fill-opacity="0.98" d="M32,0 L68,0 L68,14 Q69,16 69,20 L69,64 Q69,86 82,100 Q96,116 96,140 L96,292 Q96,306 79,310 Q65,314 50,314 Q35,314 21,310 Q4,306 4,292 L4,140 Q4,116 18,100 Q31,86 31,64 L31,20 Q31,16 32,14 Z" />
-            <rect x="14" y="150" width="72" height="135" rx="4" fill="url(#labelGrad)" stroke="rgba(0,0,0,0.3)" stroke-width="1"/>
-            <text x="50" y="205" text-anchor="middle" font-size="10" font-weight="800" fill="#2d1c07" letter-spacing="1">SPIN THE</text>
-            <text x="50" y="228" text-anchor="middle" font-size="12" font-weight="800" fill="#2d1c07" letter-spacing="1.2">BOTTLE</text>
-            <ellipse cx="26" cy="60" rx="3" ry="28" fill="rgba(255,255,255,0.2)"/>
-        </svg>
+        <!-- AVATARLAR TURADIGAN AYLANA CHIZIQ (Ortiqcha tashqi chiziqlar olib tashlangan) -->
+        <div class="avatar-ring-line"></div>
 
-        <div class="players-container" id="playersContainer"></div>
+        <!-- O'YINCHILAR RO'YXATI (Aylana bo'ylab joylashtirish) -->
+        <div class="players-container" id="playersContainer">
+            <!-- JavaScript orqali avtomat joylashtiriladi -->
+        </div>
+
+        <!-- SHISHA (BUTILKA) -->
+        <div class="bottle" id="bottle" onclick="spinBottle()">
+            <svg viewBox="0 0 50 140">
+                <!-- Shisha korpusi -->
+                <path d="M 18,5 L 32,5 L 32,25 L 42,45 L 42,125 C 42,135 8,135 8,125 L 8,45 L 18,25 Z" fill="#2e5d32" stroke="#1b3b1e" stroke-width="2"/>
+                <!-- Shisha yorlig'i (Etiqetka) -->
+                <rect x="10" y="60" width="30" height="35" rx="3" fill="#cfb997" stroke="#8c785c" stroke-width="1"/>
+                <text x="25" y="77" font-size="7" fill="#333" text-anchor="middle" font-weight="bold">SPIN THE</text>
+                <text x="25" y="86" font-size="7" fill="#333" text-anchor="middle" font-weight="bold">BOTTLE</text>
+                <!-- Qopqoq -->
+                <rect x="17" y="2" width="16" height="5" fill="#b5832a" rx="1"/>
+            </svg>
+        </div>
+
     </div>
-
 </div>
 
 <script>
-const players = [
-    { id: 1, name:"Muhammad", flag:"uz", img:"https://i.pravatar.cc/150?img=13", isMe: true },
-    { id: 2, name:"Elizabeth", flag:"us", img:"https://i.pravatar.cc/150?img=1", isMe: true },
-    { id: 3, name:"Maximilian", flag:"de", img:"https://i.pravatar.cc/150?img=12" },
-    { id: 4, name:"Sora", flag:"jp", img:"https://i.pravatar.cc/150?img=5" },
-    { id: 5, name:"Alejandro", flag:"es", img:"https://i.pravatar.cc/150?img=6" },
-    { id: 6, name:"Chloe", flag:"fr", img:"https://i.pravatar.cc/150?img=9" },
-    { id: 7, name:"Abdurahmon", flag:"ae", img:"https://i.pravatar.cc/150?img=11" },
-    { id: 8, name:"Anna", flag:"gb", img:"https://i.pravatar.cc/150?img=16" },
-    { id: 9, name:"Lucas", flag:"br", img:"https://i.pravatar.cc/150?img=8", active: true },
-    { id: 10, name:"Sofia", flag:"it", img:"https://i.pravatar.cc/150?img=2", active: true },
-    { id: 11, name:"Dmitry", flag:"kz", img:"https://i.pravatar.cc/150?img=15" },
-    { id: 12, name:"Zara", flag:"tr", img:"https://i.pravatar.cc/150?img=10" }
-];
+    // O'yinchilar ma'lumotlari
+    const playersData = [
+        { name: "Muhammad", country: "uz", img: "https://i.pravatar.cc/100?img=11" },
+        { name: "Elizabeth", country: "us", img: "https://i.pravatar.cc/100?img=5" },
+        { name: "Maximilian", country: "de", img: "https://i.pravatar.cc/100?img=12" },
+        { name: "Sora", country: "jp", img: "https://i.pravatar.cc/100?img=9" },
+        { name: "Alejandro", country: "es", img: "https://i.pravatar.cc/100?img=68" },
+        { name: "Chloe", country: "fr", img: "https://i.pravatar.cc/100?img=47" },
+        { name: "Abdurahmon", country: "ae", img: "https://i.pravatar.cc/100?img=57" },
+        { name: "Anna", country: "gb", img: "https://i.pravatar.cc/100?img=38" },
+        { name: "Lucas", country: "br", img: "https://i.pravatar.cc/100?img=14", active: true },
+        { name: "Sofia", country: "it", img: "https://i.pravatar.cc/100?img=26", active: true },
+        { name: "Dmitry", country: "kz", img: "https://i.pravatar.cc/100?img=3" },
+        { name: "Zara", country: "tr", img: "https://i.pravatar.cc/100?img=20" }
+    ];
 
-function renderPlayers(){
-    const container = document.getElementById("playersContainer");
-    if(!container) return;
-    container.innerHTML = "";
+    const container = document.getElementById('playersContainer');
+    const totalPlayers = playersData.length;
+    const radius = 148; // Avatarlar joylashish radiusi
 
-    const total = players.length;
-    const containerWidth = container.offsetWidth || 360;
-    const avatarSize = 46;
-    const radius = (containerWidth / 2) - (avatarSize / 2) - 6; 
-    const center = containerWidth / 2;
+    // Avatarlarni aylana shaklida aniq joylash
+    playersData.forEach((player, index) => {
+        const angle = (index * (360 / totalPlayers) - 90) * (Math.PI / 180);
+        const x = 160 + radius * Math.cos(angle);
+        const y = 160 + radius * Math.sin(angle);
 
-    players.forEach((player, index) => {
-        const angleDeg = (index * (360 / total)) - 90; 
-        const angleRad = angleDeg * (Math.PI / 180);
-
-        const x = center + radius * Math.cos(angleRad) - (avatarSize / 2);
-        const y = center + radius * Math.sin(angleRad) - (avatarSize / 2);
-
-        const playerEl = document.createElement("div");
-        
-        let classNames = "player";
-        if (player.active) classNames += " active-glow";
-        if (player.isMe) classNames += " is-me";
-        
-        playerEl.className = classNames;
-        playerEl.style.backgroundImage = `url('${player.img}')`;
+        const playerEl = document.createElement('div');
+        playerEl.className = `player ${player.active ? 'active' : ''}`;
         playerEl.style.left = `${x}px`;
         playerEl.style.top = `${y}px`;
-        playerEl.dataset.id = player.id;
 
         playerEl.innerHTML = `
-            <div class="player-name-box">
-                <span class="player-flag">${player.flag}</span>
-                <span class="player-name">${player.name}</span>
+            <div class="avatar-box">
+                <img src="${player.img}" alt="${player.name}">
+            </div>
+            <div class="player-info">
+                <span class="country">${player.country}</span>${player.name}
             </div>
         `;
-
-        let normalizedAngle = ((angleDeg % 360) + 360) % 360;
-        playerEl.dataset.angle = normalizedAngle.toFixed(2);
         container.appendChild(playerEl);
     });
-}
 
-let currentRotation = 0;
-let isSpinning = false;
-
-function spinBottle(){
-    if(isSpinning) return;
-    isSpinning = true;
-
-    const bottle = document.getElementById("bottle");
-
-    const randomIndex = Math.floor(Math.random() * players.length);
-    const targetPlayer = players[randomIndex];
-    const targetEl = document.querySelector(`.player[data-id="${targetPlayer.id}"]`);
-    
-    const targetAngle = parseFloat(targetEl.dataset.angle);
-    const targetNeckAngle = (targetAngle + 90) % 360;
-    const currentModulo = currentRotation % 360;
-    
-    let diff = targetNeckAngle - currentModulo;
-    if (diff < 0) diff += 360;
-
-    currentRotation = currentRotation + 1440 + diff;
-    bottle.style.transform = `rotate(${currentRotation}deg)`;
-
-    setTimeout(() => {
-        isSpinning = false;
-    }, 3200);
-}
-
-document.addEventListener("DOMContentLoaded", renderPlayers);
+    // Shishani aylantirish funksiyasi
+    let currentRotation = 0;
+    function spinBottle() {
+        const randomDegree = Math.floor(1800 + Math.random() * 360);
+        currentRotation += randomDegree;
+        document.getElementById('bottle').style.transform = `rotate(${currentRotation}deg)`;
+    }
 </script>
 
 </body>
