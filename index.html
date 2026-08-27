@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin Bottle Game Table</title>
+    <title>Spin Bottle Game Table with Chat</title>
     <style>
         * {
             box-sizing: border-box;
@@ -87,7 +87,7 @@
         /* MARKAZIY NAQSH (XIRA KOMPAS YULDUZI) */
         .table-center {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
@@ -105,10 +105,10 @@
             height: 220px;
         }
 
-        /* O'YINCHILAR JOYLASHUVI (Aylana chiziqlarsiz) */
+        /* O'YINCHILAR JOYLASHUVI */
         .players-container {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 320px;
@@ -169,7 +169,7 @@
         /* SHISHA (BUTILKA) */
         .bottle {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             margin-top: -57px;
             margin-left: -21px;
@@ -184,6 +184,113 @@
         .bottle svg {
             width: 100%;
             height: 100%;
+        }
+
+        /* CHAT BO'LIMI (PASTKI YARMI) */
+        .chat-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 38%;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 2, 0.85) 30%, rgba(10, 5, 2, 0.95) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 10px 15px;
+            z-index: 25;
+            backdrop-filter: blur(4px);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-right: 5px;
+            margin-bottom: 8px;
+        }
+
+        /* Scrollbar dizayni */
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(212, 163, 115, 0.4);
+            border-radius: 4px;
+        }
+
+        .chat-msg {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px 10px;
+            border-radius: 8px;
+            border-left: 3px solid #d4a373;
+            max-width: 90%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg .user-name {
+            font-size: 11px;
+            font-weight: bold;
+            color: #e0a96d;
+            white-space: nowrap;
+        }
+
+        .chat-msg .text {
+            font-size: 11.5px;
+            color: #ddd;
+            word-break: break-word;
+        }
+
+        /* Input bo'limi */
+        .chat-input-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(30, 20, 10, 0.8);
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            border-radius: 20px;
+            padding: 4px 6px 4px 14px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .chat-input-area input::placeholder {
+            color: #888;
+        }
+
+        .send-btn {
+            background: #a66f3b;
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .send-btn:hover {
+            background: #cc935c;
         }
     </style>
 </head>
@@ -241,6 +348,28 @@
         </svg>
     </div>
 
+    <!-- CHAT SECTION (PASTKI TARAF) -->
+    <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg">
+                <span class="user-name">🇺🇿 Muhammad:</span>
+                <span class="text">Salom hammaga! 👋</span>
+            </div>
+            <div class="chat-msg">
+                <span class="user-name">🇮🇹 Sofia:</span>
+                <span class="text">Ciao! Who spins next? 🍾</span>
+            </div>
+            <div class="chat-msg">
+                <span class="user-name">🇧🇷 Lucas:</span>
+                <span class="text">Let's go guys!! 🔥</span>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Xabar yozing..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -290,6 +419,42 @@
         const randomDegree = Math.floor(1800 + Math.random() * 360);
         currentRotation += randomDegree;
         document.getElementById('bottle').style.transform = `rotate(${currentRotation}deg)`;
+    }
+
+    /* CHAT FUNKSIYALARI */
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if (text !== "") {
+            const chatBox = document.getElementById('chatMessages');
+            const newMsg = document.createElement('div');
+            newMsg.className = 'chat-msg';
+            newMsg.innerHTML = `
+                <span class="user-name">🇺🇿 Siz:</span>
+                <span class="text">${escapeHtml(text)}</span>
+            `;
+            chatBox.appendChild(newMsg);
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function escapeHtml(string) {
+        return String(string).replace(/[&<>"']/g, function (s) {
+            return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            }[s];
+        });
     }
 </script>
 
