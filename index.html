@@ -487,9 +487,34 @@
         let x = 175 + radius * Math.cos(angle);
         let y = 175 + radius * Math.sin(angle);
 
-        // 2 (Dinara) va 12 (Aziza) raqamli o'yinchilarni biroz teparoq surish (-14px offset)
+        // 1. Dinara (2) va Aziza (12) -> Teparoqqa
         if (player.badge === 2 || player.badge === 12) {
             y -= 14;
+        }
+
+        // 2. Sardor (3) va Jahongir (11) -> Burchak bo'ylab yuqoriga
+        if (player.badge === 3) {
+            x += 8;
+            y -= 10;
+        }
+        if (player.badge === 11) {
+            x -= 8;
+            y -= 10;
+        }
+
+        // 3. Ramzon (5) va Laylo (9) -> Burchak bo'ylab pastga
+        if (player.badge === 5) {
+            x += 8;
+            y += 10;
+        }
+        if (player.badge === 9) {
+            x -= 8;
+            y += 10;
+        }
+
+        // 4. Norboyev (6) va Jasur (8) -> Pastroqqa
+        if (player.badge === 6 || player.badge === 8) {
+            y += 14;
         }
 
         const node = document.createElement('div');
