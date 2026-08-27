@@ -60,7 +60,7 @@
             font-size: 18px;
         }
 
-        /* O'YIN HUDUDI (OCH YOG'OCH STOL) */
+        /* O'YIN HUDUDI */
         .game-area {
             position: relative;
             height: 54%;
@@ -124,46 +124,60 @@
             line-height: 1.1;
         }
 
-        /* MARKAZDAGI NAQSH VA BUTILKA (PASTROQQA SURILDI) */
+        /* YANGILANGAN MARKAZDAGI NAQSH (YIN-YANG VA OLTIN O'YMA NAQSH) */
         .wood-carving {
             position: absolute;
             top: 54%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, #f8b272 0%, #e18d41 70%, #c47228 100%);
+            width: 210px;
+            height: 210px;
+            background: 
+                radial-gradient(circle, rgba(212, 147, 75, 0.9) 0%, rgba(138, 77, 26, 0.95) 45%, rgba(61, 31, 8, 1) 100%),
+                repeating-conic-gradient(from 0deg, #d4934b 0deg 15deg, #a15d21 15deg 30deg);
             border-radius: 50%;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
             align-items: center;
             pointer-events: none;
+            border: 4px solid #b87b31;
         }
 
         .wood-carving::before {
             content: '';
             position: absolute;
-            width: 140px;
-            height: 140px;
-            border: 2px dashed rgba(120, 50, 0, 0.25);
+            width: 150px;
+            height: 150px;
+            border: 3px solid #f4c430;
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 8px rgba(244, 196, 48, 0.4);
+        }
+
+        .wood-carving::after {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border: 2px dashed rgba(255, 230, 180, 0.6);
             border-radius: 50%;
         }
 
+        /* YANGILANGAN SHAFOF VA ENLI SHISHA */
         .bottle-wrapper {
             position: absolute;
             top: 54%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
-            width: 110px;
-            height: 36px;
+            width: 125px; /* Eni kengaytirildi */
+            height: 65px; /* Bo'yi moslashtirildi */
             z-index: 15;
             cursor: pointer;
-            filter: drop-shadow(2px 8px 6px rgba(0, 0, 0, 0.45));
+            filter: drop-shadow(0px 10px 12px rgba(0, 0, 0, 0.6));
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
-        /* 12 TA O'YINCHI DOIRASI (PASTROQQA SURILDI: top: 54%) */
+        /* 12 TA O'YINCHI DOIRASI */
         .players-circle {
             position: absolute;
             top: 54%;
@@ -183,7 +197,6 @@
             pointer-events: auto;
         }
 
-        /* AVATARLAR (55px) */
         .avatar-frame {
             position: relative;
             width: 55px;
@@ -219,7 +232,6 @@
             box-shadow: 0 0 10px rgba(244, 196, 48, 0.7);
         }
 
-        /* NIK VA BAYROQ */
         .player-info {
             margin-top: 3px;
             display: flex;
@@ -295,7 +307,6 @@
             cursor: pointer;
         }
 
-        /* O'NG TARAFI MUSIQA TUGMALARI */
         .floating-action-btns {
             position: absolute;
             right: 12px;
@@ -319,7 +330,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* INPUT PANELI */
         .chat-input-bar {
             display: flex;
             align-items: center;
@@ -390,14 +400,36 @@
             </div>
         </div>
 
-        <!-- MARKAZIY NAQSH -->
+        <!-- MARKAZIY YANGI NAQSH -->
         <div class="wood-carving"></div>
 
-        <!-- BUTILKA -->
+        <!-- SHAFOF VA ENLI SHISHA -->
         <div class="bottle-wrapper" id="bottle" onclick="spin()">
-            <svg viewBox="0 0 140 50">
-                <path d="M 10,20 L 30,20 L 45,10 L 120,10 C 130,10 135,15 135,25 C 135,35 130,40 120,40 L 45,40 L 30,30 L 10,30 Z" fill="#2d6a4f" stroke="#1b4332" stroke-width="2"/>
-                <rect x="5" y="18" width="8" height="14" rx="2" fill="#d4a373"/>
+            <svg viewBox="0 0 160 70" width="100%" height="100%">
+                <defs>
+                    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="rgba(255, 255, 255, 0.7)" />
+                        <stop offset="20%" stop-color="rgba(240, 240, 255, 0.3)" />
+                        <stop offset="50%" stop-color="rgba(200, 220, 255, 0.15)" />
+                        <stop offset="80%" stop-color="rgba(240, 240, 255, 0.35)" />
+                        <stop offset="100%" stop-color="rgba(255, 255, 255, 0.8)" />
+                    </linearGradient>
+                    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="rgba(212, 130, 50, 0.85)" />
+                        <stop offset="100%" stop-color="rgba(140, 65, 10, 0.9)" />
+                    </linearGradient>
+                </defs>
+                <!-- Shisha korpusi -->
+                <path d="M 8,35 L 28,35 C 32,35 38,20 52,12 L 140,12 C 152,12 155,20 155,35 C 155,50 152,58 140,58 L 52,58 C 38,50 32,35 28,35 Z" 
+                      fill="url(#glassGrad)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="1.8"/>
+                <!-- Ichidagi suyuqlik -->
+                <path d="M 52,18 L 138,18 C 146,18 149,24 149,35 C 149,46 146,52 138,52 L 52,52 C 43,46 38,35 36,35 C 38,35 43,24 52,18 Z" 
+                      fill="url(#liquidGrad)"/>
+                <!-- Probka va bo'yinchasi -->
+                <rect x="2" y="28" width="8" height="14" rx="2" fill="#c28e5a" stroke="#5c3a18" stroke-width="1"/>
+                <!-- Shisha yaltirashi (Highlight) -->
+                <path d="M 55,15 L 135,15" stroke="rgba(255, 255, 255, 0.9)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 55,20 L 130,20" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" stroke-linecap="round"/>
             </svg>
         </div>
 
@@ -473,7 +505,7 @@
         { name: "Dinara, 18", badge: 2, gold: false, flag: "🇰🇿", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
         { name: "Sardor", badge: 3, gold: false, flag: "🇹🇷", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
         { name: "Madina", badge: 4, gold: false, flag: "🇺🇦", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
-        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬BW", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
+        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬🇧", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
         { name: "Norboyev⁷⁰", badge: 6, gold: false, flag: "🇩🇪", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
         { name: "Isomiddin", badge: 7, gold: false, flag: "🇰🇬", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
         { name: "Jasur", badge: 8, gold: false, flag: "🇹🇯", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
@@ -492,29 +524,12 @@
         let x = 180 + radius * Math.cos(angle);
         let y = 180 + radius * Math.sin(angle);
 
-        // Surish sozlamalari saqlangan:
-        if (player.badge === 2 || player.badge === 12) {
-            y -= 14;
-        }
-        if (player.badge === 3) {
-            x += 8;
-            y -= 10;
-        }
-        if (player.badge === 11) {
-            x -= 8;
-            y -= 10;
-        }
-        if (player.badge === 5) {
-            x += 8;
-            y += 10;
-        }
-        if (player.badge === 9) {
-            x -= 8;
-            y += 10;
-        }
-        if (player.badge === 6 || player.badge === 8) {
-            y += 14;
-        }
+        if (player.badge === 2 || player.badge === 12) y -= 14;
+        if (player.badge === 3) { x += 8; y -= 10; }
+        if (player.badge === 11) { x -= 8; y -= 10; }
+        if (player.badge === 5) { x += 8; y += 10; }
+        if (player.badge === 9) { x -= 8; y += 10; }
+        if (player.badge === 6 || player.badge === 8) y += 14;
 
         const node = document.createElement('div');
         node.className = 'player-node';
