@@ -163,14 +163,14 @@
             transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
-        /* 12 TA O'YINCHI KONTEYNERI */
+        /* 12 TA O'YINCHI KONTEYNERI (KATTAROQ AVATARLAR) */
         .players-circle {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 350px;
-            height: 350px;
+            width: 360px; /* Biroz kengaytirildi */
+            height: 360px; /* Biroz kengaytirildi */
             pointer-events: none;
         }
 
@@ -183,13 +183,14 @@
             pointer-events: auto;
         }
 
+        /* AVATAR HAJMI YANA KATTALASHDI (55px) */
         .avatar-frame {
             position: relative;
-            width: 50px;
-            height: 50px;
-            border-radius: 11px;
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 7px rgba(0,0,0,0.45);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.45);
             border: 1px solid rgba(0,0,0,0.6);
             background: #111;
         }
@@ -206,7 +207,7 @@
             right: 2px;
             background: #e63946;
             color: #fff;
-            font-size: 9px;
+            font-size: 9.5px;
             font-weight: bold;
             padding: 1px 4px;
             border-radius: 6px;
@@ -214,14 +215,18 @@
         }
 
         .gold-border {
-            border: 2px solid #f4c430;
-            box-shadow: 0 0 9px rgba(244, 196, 48, 0.65);
+            border: 2.5px solid #f4c430; /* Ramza biroz qalinroq */
+            box-shadow: 0 0 10px rgba(244, 196, 48, 0.7);
         }
 
-        .player-name {
-            margin-top: 2px;
+        /* NIK VA BAYROQ JOYLANISHI */
+        .player-info {
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
             color: #fff;
-            font-size: 9.5px;
+            font-size: 10px; /* Shrift o'lchami o'zgarmadi */
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
             font-weight: 500;
             white-space: nowrap;
@@ -400,7 +405,7 @@
         <div class="players-circle" id="playersCircle"></div>
     </div>
 
-    <!-- CHAT SECTION -->
+    <!-- PASTI CHAT BO'LIMI -->
     <div class="chat-section">
         
         <div class="floating-action-btns">
@@ -463,59 +468,32 @@
 </div>
 
 <script>
+    // 12 ta o'yinchi - Soat strelkasi bo'ylab 1 dan 12 gacha joylashtirildi
     const players = [
-        { name: "Bobur", badge: 1, gold: false, img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" },
-        { name: "Dinara, 18", badge: 2, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
-        { name: "Sardor", badge: 3, gold: false, img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
-        { name: "Madina", badge: 4, gold: false, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
-        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
-        { name: "Norboyev⁷⁰", badge: 6, gold: false, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
-        { name: "Isomiddin", badge: 7, gold: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jasur", badge: 8, gold: false, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
-        { name: "Laylo", badge: 9, gold: false, img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
-        { name: "Malika", badge: 10, gold: false, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
-        { name: "Jahongir", badge: 11, gold: false, img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
-        { name: "Aziza", badge: 12, gold: false, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" }
+        { name: "Bobur", badge: 1, gold: false, flag: "🇺🇿", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" },
+        { name: "Dinara, 18", badge: 2, gold: false, flag: "🇰🇿", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
+        { name: "Sardor", badge: 3, gold: false, flag: "🇹🇷", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" },
+        { name: "Madina", badge: 4, gold: false, flag: "🇺🇦", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" },
+        { name: "رمzon ⁷⁰, 18", badge: 5, gold: true, flag: "🇬🇧", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" },
+        { name: "Norboyev⁷⁰", badge: 6, gold: false, flag: "🇩🇪", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" },
+        { name: "Isomiddin", badge: 7, gold: false, flag: "🇰🇬", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jasur", badge: 8, gold: false, flag: "🇹🇯", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
+        { name: "Laylo", badge: 9, gold: false, flag: "🇯🇵", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80" },
+        { name: "Malika", badge: 10, gold: false, flag: "🇬🇪", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" },
+        { name: "Jahongir", badge: 11, gold: false, flag: "🇦🇿", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&q=80" },
+        { name: "Aziza", badge: 12, gold: false, flag: "🇷🇺", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" }
     ];
 
     const container = document.getElementById('playersCircle');
     const total = players.length;
-    const radius = 138; 
+    
+    // Radiusi biroz kengaytirildi (142px) - O'yinchilar bir-birini to'smasligi uchun
+    const radius = 142; 
 
     players.forEach((player, i) => {
         const angle = (i * (360 / total) - 90) * (Math.PI / 180);
-        let x = 175 + radius * Math.cos(angle);
-        let y = 175 + radius * Math.sin(angle);
-
-        // 1. Dinara (2) va Aziza (12) -> Teparoqqa
-        if (player.badge === 2 || player.badge === 12) {
-            y -= 14;
-        }
-
-        // 2. Sardor (3) va Jahongir (11) -> Burchak bo'ylab yuqoriga
-        if (player.badge === 3) {
-            x += 8;
-            y -= 10;
-        }
-        if (player.badge === 11) {
-            x -= 8;
-            y -= 10;
-        }
-
-        // 3. Ramzon (5) va Laylo (9) -> Burchak bo'ylab pastga
-        if (player.badge === 5) {
-            x += 8;
-            y += 10;
-        }
-        if (player.badge === 9) {
-            x -= 8;
-            y += 10;
-        }
-
-        // 4. Norboyev (6) va Jasur (8) -> Pastroqqa
-        if (player.badge === 6 || player.badge === 8) {
-            y += 14;
-        }
+        const x = 180 + radius * Math.cos(angle);
+        const y = 180 + radius * Math.sin(angle);
 
         const node = document.createElement('div');
         node.className = 'player-node';
@@ -530,7 +508,10 @@
                 <img src="${player.img}" alt="${player.name}">
                 <span class="badge-num">${player.badge}</span>
             </div>
-            <span class="player-name">${player.name}</span>
+            <div class="player-info">
+                <span>${player.flag}</span>
+                <span>${player.name}</span>
+            </div>
         `;
         container.appendChild(node);
     });
