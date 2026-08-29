@@ -99,7 +99,6 @@
             transition: all 0.5s ease;
             cursor: pointer;
         }
-        /* Avatar o'lchami 58px ga oshirildi */
         .avatar-frame {
             position: relative;
             width: 58px;
@@ -141,7 +140,6 @@
             font-weight: 600;
         }
 
-        /* Center Stage */
         .center-stage {
             position: absolute;
             top: 50%;
@@ -203,14 +201,9 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             text-transform: lowercase;
         }
-        .btn-kiss { 
-            background: #22c55e; 
-        }
-        .btn-reject { 
-            background: #ef4444; 
-        }
+        .btn-kiss { background: #22c55e; }
+        .btn-reject { background: #ef4444; }
 
-        /* Chat section */
         .chat-section {
             flex: 1;
             background: #14161d;
@@ -393,6 +386,16 @@
             const angle = (i * (360 / total) - 90) * (Math.PI / 180);
             let x = centerOffset + radiusX * Math.cos(angle);
             let y = centerOffset + radiusY * Math.sin(angle);
+
+            // 12 (i===11) va 2 (i===1) bo'lgan o'yinchilarni tepaga surish
+            if (player.badge === 12 || player.badge === 2) {
+                y -= 14;
+            }
+            
+            // 8 va 6 bo'lgan o'yinchilarni pastga surish
+            if (player.badge === 8 || player.badge === 6) {
+                y += 14;
+            }
 
             const node = document.createElement('div');
             node.className = 'player-node';
