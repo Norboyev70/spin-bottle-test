@@ -155,7 +155,7 @@
         .center-avatars {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 24px;
         }
         .center-player-box {
             display: flex;
@@ -323,7 +323,6 @@
                     <img id="c1Img" class="center-img" src="" alt="">
                     <span id="c1Name" class="center-name"></span>
                 </div>
-                <span style="font-size: 18px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">VS</span>
                 <div class="center-player-box">
                     <img id="c2Img" class="center-img" src="" alt="">
                     <span id="c2Name" class="center-name"></span>
@@ -387,12 +386,10 @@
             let x = centerOffset + radiusX * Math.cos(angle);
             let y = centerOffset + radiusY * Math.sin(angle);
 
-            // 12 (i===11) va 2 (i===1) bo'lgan o'yinchilarni tepaga surish
             if (player.badge === 12 || player.badge === 2) {
                 y -= 14;
             }
             
-            // 8 va 6 bo'lgan o'yinchilarni pastga surish
             if (player.badge === 8 || player.badge === 6) {
                 y += 14;
             }
