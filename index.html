@@ -190,7 +190,8 @@
         }
         .btn-action {
             border: none;
-            padding: 8px 16px;
+            height: 42px; /* Bo'yi balandlashtirildi */
+            width: 80px;  /* Eni kichiklashtirildi */
             border-radius: 20px;
             display: flex;
             justify-content: center;
@@ -200,10 +201,13 @@
             cursor: pointer;
             color: #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            text-transform: lowercase;
         }
-        .btn-kiss { background: #22c55e; }
-        .btn-reject { background: #ef4444; }
+        .btn-kiss { 
+            background: #22c55e; 
+        }
+        .btn-reject { 
+            background: #ef4444; 
+        }
 
         .chat-section {
             flex: 1;
@@ -330,8 +334,8 @@
                 </div>
             </div>
             <div class="action-controls" id="actionControls">
-                <button class="btn-action btn-kiss" onclick="makeChoice('kiss')">kiss</button>
-                <button class="btn-action btn-reject" onclick="makeChoice('refuse')">refuse</button>
+                <button class="btn-action btn-kiss" onclick="makeChoice('kiss')">Kiss</button>
+                <button class="btn-action btn-reject" onclick="makeChoice('refuse')">Refuse</button>
             </div>
         </div>
     </div>
