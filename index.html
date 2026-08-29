@@ -48,7 +48,7 @@
         }
         .game-area {
             position: relative;
-            height: 54%;
+            height: 460px;
             width: 100%;
             background:
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 75%),
@@ -59,34 +59,34 @@
         }
         .wood-carving {
             position: absolute;
-            top: 54%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 260px;
-            height: 260px;
+            width: 300px;
+            height: 300px;
             pointer-events: none;
-            opacity: 0.4;
+            opacity: 0.35;
         }
         .bottle-wrapper {
             position: absolute;
-            top: 54%;
+            top: 50%;
             left: 50%;
             transform-origin: 50% 50%;
             transform: translate(-50%, -50%) rotate(0deg);
-            width: 115px;
-            height: 58px;
+            width: 110px;
+            height: 55px;
             z-index: 15;
             cursor: pointer;
             filter: drop-shadow(0px 10px 12px rgba(0, 0, 0, 0.6));
-            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
+            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.3s ease;
         }
         .players-circle {
             position: absolute;
-            top: 54%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 360px;
-            height: 360px;
+            width: 390px;
+            height: 390px;
             pointer-events: none;
         }
         .player-node {
@@ -99,14 +99,15 @@
             transition: all 0.5s ease;
             cursor: pointer;
         }
+        /* Avatar o'lchami 58px ga oshirildi */
         .avatar-frame {
             position: relative;
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.45);
-            border: 1px solid rgba(0,0,0,0.6);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.55);
+            border: 2px solid rgba(255,255,255,0.5);
             background: #111;
         }
         .avatar-frame img {
@@ -122,46 +123,41 @@
             color: #fff;
             font-size: 9.5px;
             font-weight: bold;
-            padding: 1px 4px;
-            border-radius: 6px;
+            padding: 1px 5px;
+            border-radius: 7px;
         }
         .active-turn {
             border: 2.5px solid #00ff88 !important;
-            box-shadow: 0 0 12px #00ff88 !important;
+            box-shadow: 0 0 14px #00ff88 !important;
         }
         .player-info {
-            margin-top: 3px;
+            margin-top: 2px;
             display: flex;
             align-items: center;
             gap: 3px;
             color: #fff;
-            font-size: 10px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-            font-weight: 500;
+            font-size: 10.5px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.95);
+            font-weight: 600;
         }
 
-        /* Center Stage Styles */
+        /* Center Stage */
         .center-stage {
             position: absolute;
-            top: 54%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: none;
             flex-direction: column;
             align-items: center;
             z-index: 25;
-            background: rgba(20, 22, 30, 0.94);
-            padding: 12px 18px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(6px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            padding: 10px;
             min-width: 240px;
         }
         .center-avatars {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
         .center-player-box {
             display: flex;
@@ -171,65 +167,48 @@
             position: relative;
         }
         .center-img {
-            width: 48px;
-            height: 48px;
+            width: 62px;
+            height: 62px;
             border-radius: 50%;
             border: 2px solid #fff;
             object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
         }
         .center-name {
             color: #fff;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-            max-width: 65px;
+            max-width: 70px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .choice-badge {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background: #111;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 12px;
-            border: 1px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            display: none;
-        }
-        .action-prompt {
-            color: #f97316;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 8px;
-            text-align: center;
-        }
         .action-controls {
             display: flex;
-            gap: 15px;
-            margin-top: 8px;
+            gap: 12px;
+            margin-top: 12px;
         }
         .btn-action {
             border: none;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
+            padding: 8px 16px;
+            border-radius: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
             color: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            text-transform: lowercase;
         }
-        .btn-kiss { background: linear-gradient(45deg, #ff416c, #ff4b2b); }
-        .btn-reject { background: linear-gradient(45deg, #4b6cb7, #182848); }
+        .btn-kiss { 
+            background: #22c55e; 
+        }
+        .btn-reject { 
+            background: #ef4444; 
+        }
 
         /* Chat section */
         .chat-section {
@@ -292,14 +271,6 @@
             font-weight: 600;
             margin-right: 4px;
         }
-        .system-bubble {
-            background: rgba(249, 115, 22, 0.15) !important;
-            color: #fbd38d !important;
-            border: 1px solid rgba(249, 115, 22, 0.3);
-            width: 100%;
-            text-align: center;
-            font-style: italic;
-        }
         .chat-input-bar {
             display: flex;
             align-items: center;
@@ -353,25 +324,21 @@
 
         <div class="players-circle" id="playersCircle"></div>
 
-        <!-- Center Stage with Individual Choices -->
         <div class="center-stage" id="centerStage">
             <div class="center-avatars">
                 <div class="center-player-box">
                     <img id="c1Img" class="center-img" src="" alt="">
                     <span id="c1Name" class="center-name"></span>
-                    <div id="c1Choice" class="choice-badge"></div>
                 </div>
-                <span style="font-size: 18px; color: #aaa;">VS</span>
+                <span style="font-size: 18px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">VS</span>
                 <div class="center-player-box">
                     <img id="c2Img" class="center-img" src="" alt="">
                     <span id="c2Name" class="center-name"></span>
-                    <div id="c2Choice" class="choice-badge"></div>
                 </div>
             </div>
-            <div class="action-prompt" id="actionPrompt"></div>
             <div class="action-controls" id="actionControls">
-                <button class="btn-action btn-kiss" onclick="makeChoice('kiss')">💋</button>
-                <button class="btn-action btn-reject" onclick="makeChoice('reject')">✖</button>
+                <button class="btn-action btn-kiss" onclick="makeChoice('kiss')">kiss</button>
+                <button class="btn-action btn-reject" onclick="makeChoice('refuse')">refuse</button>
             </div>
         </div>
     </div>
@@ -409,29 +376,23 @@
 
     const container = document.getElementById('playersCircle');
     const total = players.length;
-    const radius = 142;
+    const radiusX = 152; 
+    const radiusY = 165; 
+    const centerOffset = 195;
     let currentPlayerIndex = 0;
     let selectedTargetIndex = null;
     let isSpinning = false;
     let currentRotation = 0;
     let currentTab = 'general';
 
-    // Tanlovlar holati
     let activeMatch = { p1: null, p2: null, p1Choice: null, p2Choice: null, turnStep: 1 };
 
     function renderPlayers() {
         container.innerHTML = '';
         players.forEach((player, i) => {
             const angle = (i * (360 / total) - 90) * (Math.PI / 180);
-            let x = 180 + radius * Math.cos(angle);
-            let y = 180 + radius * Math.sin(angle);
-
-            if (player.badge === 2 || player.badge === 12) y -= 14;
-            if (player.badge === 3) { x += 8; y -= 10; }
-            if (player.badge === 11) { x -= 8; y -= 10; }
-            if (player.badge === 5) { x += 8; y += 10; }
-            if (player.badge === 9) { x -= 8; y += 10; }
-            if (player.badge === 6 || player.badge === 8) y += 14;
+            let x = centerOffset + radiusX * Math.cos(angle);
+            let y = centerOffset + radiusY * Math.sin(angle);
 
             const node = document.createElement('div');
             node.className = 'player-node';
@@ -495,77 +456,35 @@
         activeMatch.p2Choice = null;
         activeMatch.turnStep = 1;
 
+        document.getElementById('bottle').style.display = 'none';
+
         document.getElementById('c1Img').src = p1.img;
         document.getElementById('c1Name').innerText = `${p1.flag} ${p1.name}`;
-        document.getElementById('c1Choice').style.display = 'none';
 
         document.getElementById('c2Img').src = p2.img;
         document.getElementById('c2Name').innerText = `${p2.flag} ${p2.name}`;
-        document.getElementById('c2Choice').style.display = 'none';
 
-        document.getElementById('actionPrompt').innerText = `${p1.name}, qaror qiling:`;
         document.getElementById('actionControls').style.display = 'flex';
         document.getElementById('centerStage').style.display = 'flex';
     }
 
     function makeChoice(type) {
-        const icon = type === 'kiss' ? '💋' : '✖️';
-
         if (activeMatch.turnStep === 1) {
-            // 1-o'yinchi qarori
             activeMatch.p1Choice = type;
-            const c1Badge = document.getElementById('c1Choice');
-            c1Badge.innerText = icon;
-            c1Badge.style.display = 'flex';
-
-            // Navbat 2-o'yinchiga o'tadi
             activeMatch.turnStep = 2;
-            document.getElementById('actionPrompt').innerText = `${activeMatch.p2.name}, qaror qiling:`;
 
         } else if (activeMatch.turnStep === 2) {
-            // 2-o'yinchi qarori
             activeMatch.p2Choice = type;
-            const c2Badge = document.getElementById('c2Choice');
-            c2Badge.innerText = icon;
-            c2Badge.style.display = 'flex';
-
             document.getElementById('actionControls').style.display = 'none';
 
-            // Natijani aniqlash va chatga yozish
-            let resultText = "";
-            if (activeMatch.p1Choice === 'kiss' && activeMatch.p2Choice === 'kiss') {
-                resultText = `🎉 ${activeMatch.p1.name} 💋 va ${activeMatch.p2.name} 💋 — Juftlik o'pishdi! ❤️`;
-            } else if (activeMatch.p1Choice === 'reject' || activeMatch.p2Choice === 'reject') {
-                resultText = `💔 ${activeMatch.p1.name} (${activeMatch.p1Choice === 'kiss' ? '💋' : '✖️'}) va ${activeMatch.p2.name} (${activeMatch.p2Choice === 'kiss' ? '💋' : '✖️'}) — Rad etildi!`;
-            } else {
-                resultText = `🤝 ${activeMatch.p1.name} va ${activeMatch.p2.name} natijasi qayd etildi.`;
-            }
-
-            document.getElementById('actionPrompt').innerText = activeMatch.p1Choice === 'kiss' && activeMatch.p2Choice === 'kiss' ? "💋 Muvaffaqiyatli!" : "💔 Rad etildi!";
-
-            sendSystemMessage(resultText);
-
-            // 2 soniyadan so'ng stolni yopish va keyingi o'yinchiga o'tish
             setTimeout(() => {
                 document.getElementById('centerStage').style.display = 'none';
+                document.getElementById('bottle').style.display = 'block';
                 isSpinning = false;
                 currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
                 renderPlayers();
-            }, 2000);
+            }, 1000);
         }
-    }
-
-    function sendSystemMessage(text) {
-        const feed = document.getElementById('chatFeed');
-        const row = document.createElement('div');
-        row.className = 'chat-row';
-        row.innerHTML = `
-            <div class="chat-bubble system-bubble" style="width: 100%;">
-                ${text}
-            </div>
-        `;
-        feed.appendChild(row);
-        feed.scrollTop = feed.scrollHeight;
     }
 
     function replyToUser(name) {
@@ -612,18 +531,18 @@
     }
 
     (function drawWoodCarving() {
-        const size = 260;
+        const size = 300;
         const cx = size / 2, cy = size / 2;
         const petalCount = 16;
-        const outerR = 120, innerR = 40;
+        const outerR = 140, innerR = 42;
 
         let petals = '';
         for (let i = 0; i < petalCount; i++) {
             const a = (i * 360 / petalCount);
             petals += `<path d="M ${cx} ${cy} 
                  L ${cx} ${cy - innerR} 
-                 Q ${cx + 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - outerR} 
-                 Q ${cx - 14} ${cy - (innerR + outerR) / 2} ${cx} ${cy - innerR} Z"
+                 Q ${cx + 16} ${cy - (innerR + outerR) / 2} ${cx} ${cy - outerR} 
+                 Q ${cx - 16} ${cy - (innerR + outerR) / 2} ${cx} ${cy - innerR} Z"
                 fill="${i % 2 === 0 ? 'rgba(240,205,170,0.5)' : 'rgba(215,170,125,0.4)'}"
                 stroke="rgba(200,150,100,0.3)" stroke-width="0.5"
                 transform="rotate(${a} ${cx} ${cy})"/>`;
